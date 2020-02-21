@@ -1,0 +1,169 @@
+
+      /* inicio base */
+
+    #logo {
+    height: 70px;
+    padding-rigth: 30px;
+    }
+
+    body {
+        background: #0C2939;
+        padding: 30px;
+        padding-left: 30px;
+        padding-rigth: 30px;
+
+    }
+
+    #global {
+       position: relative;
+       padding: 40px 0;
+       color: white;
+    }
+
+     #flash {
+       position: relative;
+       padding: 10px 0;
+       color: white;
+    }
+
+    table {
+     padding: 20px 0;
+     position: relative;
+     border: 10px solid #dddddd;
+
+    }
+
+    td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    background-color: white;
+    }
+
+    tr:nth-child(even) {
+    background-color: white;
+    }
+
+    .botao{
+     float:right;
+    }
+
+     .frase_botao{
+     float:right;
+    }
+
+    .descadastro{
+     padding: 60px 0;
+     color: white;
+     text-align:center;
+    }
+
+    .pagination-page-info {
+    padding: .6em;
+    padding-left: 0;
+    width: 40em;
+    margin: .5em;
+    margin-left: 0;
+    font-size: 12px;
+    color: white;
+    }
+
+    .pagination-page-info b {
+    color: black;
+    background: #6aa6ed;
+    padding-left: 2px;
+    padding: .1em .25em;
+    font-size: 150%;
+    color: white;
+    }
+
+    /* inicio footer */
+
+    .footer {
+    position: relative;
+    background: #0C2939;
+    color: white;
+    bottom:0;
+    left:0%;
+    }
+
+      /* fim footer */
+      /* fim base */
+
+      /* inicio barra lateral */
+    .barra{
+        grid-area: barra;
+        background-color: #333;
+        height: 100%;
+        width: 300px;
+        position: relative;   /*(position:absolute, position:relative, ou position:fixed) */
+        transition: all .2s linear;
+    }
+
+      /* fim barra lateral */
+
+
+     /* inicio do menu dinâmico */
+
+    .item input{
+      display: none;
+    }
+
+   .item label{
+   margin = 0;
+   padding: 20px;
+   display: block;
+   text-decoration: none;
+   background-color: #434343;
+   cursor: pointer;
+   color: #fff;
+   }
+
+   .item label:hover{
+     background-color: blue;
+   }
+
+   .item ul{
+      width: 100%;
+      List-style: none;
+      overflow: hidden;
+      max-height: 0;
+   }
+
+   .item ul li a{
+   display: block;
+   margin: 10px;
+   padding: 10px;
+   background-color: #434343;
+   text-decoration: none;
+   cursor: pointer;
+   color: #fff;
+   border-bottom: solid 2px #434343;
+   }
+
+   .item input:checked ~ ul{
+        height: auto;
+        max-height: 200px;
+        transform: all;
+   }
+
+   /* fim menu dinâmico */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

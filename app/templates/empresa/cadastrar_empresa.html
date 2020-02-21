@@ -1,0 +1,172 @@
+{% extends 'base/base.html' %}
+{% block header %}
+
+<br>
+<div class="bloco">
+
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="card">
+            <div class="card-header">
+                Adicionar Empresa
+            </div>
+            <h4>Dados da Empresa</h4>
+            <div class="row">
+                <label class="control-label col-2 text-right">Empresa</label>
+                <div class="col-10">
+                    {{form.empresa(class="form-control")}} {{form.errors.empresa}}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <label class="control-label col-2 text-right">Natureza Jurídica</label>
+                <div class="col-6">
+                    {{form.natureza_juridica(class="form-control")}} {{form.errors.natureza_juridica}}
+                </div>
+
+
+                <label class="control-label col-1 text-right">Porte</label>
+                <div class="col-3">
+                    {{form.porte(class="form-control")}} {{form.errors.porte}}
+                </div>
+            </div>
+
+
+            <h4>Localização</h4>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Endereço</label>
+                    <div class="col-10">
+                        {{form.endereco(class="form-control")}} {{form.errors.endereco}}
+                    </div>
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <div class="row">
+                        <label class="control-label col-2 text-right">Cidade</label>
+                        <div class="col-3">
+                            {{form.cidade(class="form-control")}} {{form.errors.cidade}}
+                        </div>
+
+                        <label class="control-label col-1 text-right">Bairro</label>
+                        <div class="col-3">
+                            {{form.bairro(class="form-control")}} {{form.errors.bairro}}
+                        </div>
+
+                        <label class="control-label col-1 text-right">Estado</label>
+                        <div class="col-2">
+                            {{form.estado(class="form-control")}} {{form.errors.estado}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <h4>Dados Financeiros</h4>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Capital Social</label>
+                    <div class="col-4">
+                        {{form.capital_social(class="form-control")}} {{form.errors.capital_social}}
+                    </div>
+
+                    <label class="control-label col-1 text-right">NIRE</label>
+                    <div class="col-5">
+                        {{form.nire(class="form-control")}} {{form.errors.nire}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">CNPJ</label>
+                    <div class="col-4">
+                        {{form.cnpj(class="form-control")}} {{form.errors.cnpj}}
+                    </div>
+
+                    <label class="control-label col-1 text-right">I/E</label>
+                    <div class="col-4">
+                        {{form.inscricao_estadual(class="form-control")}} {{form.errors.inscricao_estadual}}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">CCM</label>
+                    <div class="col-4">
+                        {{form.ccm(class="form-control")}} {{form.errors.ccm}}
+                    </div>
+
+                    <label class="control-label col-1 text-right">Tributacao</label>
+                    <div class="col-4">
+                        {{form.tributacao(class="form-control")}} {{form.errors.tributacao}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">CNAE</label>
+                    <div class="col-4">
+                        {{form.cnae_principal(class="form-control")}} {{form.errors.cnae_principal}}
+                    </div>
+
+                    <label class="control-label col-1 text-right">CNAE</label>
+                    <div class="col-4">
+                        {{form.cnae_secundaria(class="form-control")}} {{form.errors.cnae_secundaria}}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Dia Faturamento</label>
+                    <div class="col-2">
+                        {{form.dia_faturamento(class="form-control")}} {{form.errors.dia_faturamento}}
+                    </div>
+
+                    <label class="control-label col-2 text-right">Folha Pagamento</label>
+                    <div class="col-2">
+                        {{form.folha_pagamento(class="form-control")}} {{form.errors.folha_pagamento}}
+                    </div>
+
+                    <label class="control-label col-2 text-right">Certificado Digital</label>
+                    <div class="col-2">
+                        {{form.certificado_digital(class="form-control")}} {{form.errors.certificado_digital}}
+                    </div>
+                </div>
+            </div>
+
+            <h4>Observações</h4>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6 offset-sm-2">
+                         {{form. observacoes(class="form-control")}} {{form.errors. observacoes}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+             <div class="col-10"></div>
+            <div class="col-2">
+                <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
+                <button class="btn btn-primary"  type="submit">Salvar</button>
+            </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+{% block header %}
+
+
+{% if result %}
+{{ pagination.info }}
+<table class = "table">
+    <tbody>
+    <tr>
+        <th>Username</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Criado em</th>
+        <th>Atualizado em</th>
+        <th>Grupo</th>
+        <th>Ação</th>
+    </tr>
+
+
+    {% if group == 'Administrador' %}
+        {% for row in result %}
+        <tr>
+            <td> {{ row[1] }}</td>
+            <td> {{ row[2] }}</td>
+            <td> {{ row[3] }}</td>
+            <td> {{ row[4] }}</td>
+            <td> {{ row[5] }}</td>
+            <td> {{ row[6] }}</td>
+            <td><a href="{{ url_for('edita_usuario', id = row[0]) }}">Editar</a>
+            <a href="{{ url_for('exclui_usuario', id = row[0]) }}">Excluir</a></td>
+        </tr>
+        {% endfor %}
+
+    {% else %}
+        <tr>
+            <td> {{ result[1] }}</td>
+            <td> {{ result[2] }}</td>
+            <td> {{ result[3] }}</td>
+            <td> {{ result[4] }}</td>
+            <td> {{ result[5] }}</td>
+            <td> {{ result[6] }}</td>
+            <td><a href="{{ url_for('edita_usuario', id = result[0]) }}">Editar</a>
+        </tr>
+
+    {% endif %}
+
+{% endif %}
+</tbody>
+</table>
+
+
+
+  <div class="botao">
+      <button type="button"><a href="{{ url_for('index') }}" ><font color=black>voltar</font></a></button>
+  </div>
+
+{{ pagination.links }}
+
+
+
+{% endblock %}

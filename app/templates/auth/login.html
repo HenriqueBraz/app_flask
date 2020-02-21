@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+
+{% block header %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="flash" font-size="50" id="flash">{{  message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="container" id="global">
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="row">
+            <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Username</label>
+                    {{form.username(class="form-control")}}
+                    {{form.errors.username}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Password</label>
+                    {{form.password(class="form-control")}}
+                    {{form.errors.password}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+             <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <button class="login100-form-btn" type="submit">Login</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
+
+

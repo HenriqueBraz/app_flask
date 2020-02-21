@@ -1,0 +1,52 @@
+{% block content %}
+ <div class="barra">
+    <nav2>
+        <br>
+        <div class="item">
+            <input type="checkbox" id="check0">
+            <label for="check1"><a href="{{ url_for('usuarios') }}" ><font color=white><div class="link">Listar Usuários</div></font></a></label>
+        </div>
+        <br>
+        <div class="item">
+            <input type="checkbox" id="check1">
+                <label for="check1" >Empresas</label>
+                <ul>
+                    <li><a href="{{ url_for('listar_clientes') }}">Listar Empresas</a></li>
+                    <li><a href="{{ url_for('cadastrar_cliente') }}">Cadastrar Empresa</a></li>
+                </ul>
+        </div>
+         <div class="item">
+            <input type="checkbox" id="check2">
+                <label for="check2" >Porte da Empresa</label>
+                <ul>
+                    <li><a href="#">xxxxxxxxx</a></li>
+                    <li><a href="#">xxxxxxxxx</a></li>
+                </ul>
+        </div>
+         <div class="item">
+            <input type="checkbox" id="check3">
+                <label for="check3" >Natureza Jurídica</label>
+                <ul>
+                    <li><a href="#">xxxxxxxxx</a></li>
+                    <li><a href="#">xxxxxxxxx</a></li>
+                </ul>
+        </div>
+         <div class="item">
+            <input type="checkbox" id="check4">
+                <label for="check4" >Dinâmica Código</label>
+                <ul>
+                    <li><a href="#">xxxxxxxxx</a></li>
+                    <li><a href="#">xxxxxxxxx</a></li>
+                </ul>
+        </div>
+         <div class="item">
+            <input type="checkbox" id="check5">
+                <label for="check5" >Dinâmica Portes</label>
+                <ul>
+                    <li><a href="#">xxxxxxxxx</a></li>
+                    <li><a href="#">xxxxxxxxx</a></li>
+                </ul>
+        </div>
+    </nav2>
+</div>
+{% endblock  %}

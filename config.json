@@ -1,0 +1,20 @@
+{
+
+  "SECRET_KEY" : "a616f69fdfc0d33c3733749143c072d9",
+
+  "mysql": {
+      "host": "sigma.blisk.solutions",
+      "port": 9906,
+      "user": "root",
+      "schema": "novo_rumo",
+      "bank_pass": "mt14GWE04L6Csjuk"
+
+   },
+    "mongo": {
+      "uri": "mongodb://root:QaCZtEgjId7i1toX@sigma.blisk.solutions:9917",
+      "client": "blisk_incorp",
+      "collection": ["emails","api"]
+   }
+
+}
+

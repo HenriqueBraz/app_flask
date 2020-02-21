@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Novo Rumo</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"/>
+
+    <!--CSS Customizado-->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
+</head>
+
+
+
+<body>
+<form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+</form>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+    <a class="navbar-brand" href="#">
+          <img id="logo" src="{{ url_for('static', filename='images/icon/casa.png') }}" alt="Novo Rumo"> {{pagina}}
+        </a>
+    <ul>
+    {% if g.user %}
+      <li>{{"Logado como: "}}{{g.user[0]}}</li>
+      <li><a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+      <li><a href="{{ url_for('register') }}">Cadastre-se</a>
+      <li><a href="{{ url_for('login') }}">Login</a>
+    {% endif %}
+     </li>
+    </ul>
+</nav>
+
+ {% for message in get_flashed_messages() %}
+    <div class="flash" id="flash">{{ teste }}</div>
+  {% endfor %}
+
+<section class="content">
+  <header>
+
+    {% block header %}{% endblock %}
+
+  </header>
+
+  {% block content %}{% endblock %}
+
+</section>
+<footer class="footer navbar-fixed-bottom">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; KGRNet 2020</span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
+
+

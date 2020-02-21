@@ -1,0 +1,83 @@
+{% extends 'base/base.html' %}
+{% block header %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="flash" id="flash">{{  message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="descadastro">
+     <table class = "table"><tbody>
+
+    {% if flag %}
+        {% if result %}
+            <h1>O seguinte usuário será excluído:</h1><br><br>
+
+        {% else %}
+            <h1></h1><br><br>
+
+        {% endif %}
+
+        <tr>
+            <th>Username</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Criado em</th>
+            <th>Atualizado em</th>
+            <th>Grupo</th>
+        </tr>
+
+        <tr>
+            <td> {{ result[1] }}</td>
+            <td> {{ result[2] }}</td>
+            <td> {{ result[3] }}</td>
+            <td> {{ result[4] }}</td>
+            <td> {{ result[5] }}</td>
+            <td> {{ result[6] }}</td>
+        </tr>
+
+        </tbody></table>
+
+        <div class ="frase_botao">
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <button type="button"><a href="{{ url_for('usuarios') }}" ><font color=black>voltar</font></a></button>
+            <input type="submit" name="submit_button" value="Excluir usuário">
+        </form>
+        </div>
+
+        {% else %}
+         <h1></h1><br><br>
+        <tr>
+            <th>Username</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Criado em</th>
+            <th>Atualizado em</th>
+            <th>Grupo</th>
+        </tr>
+        <tr>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+        </tr>
+        </tbody></table>
+         <div class ="frase_botao">
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <button type="button"><a href="{{ url_for('usuarios') }}" ><font color=black>voltar</font></a></button>
+        </form>
+        </div>
+        {% endif %}
+
+
+</div>
+
+
+{% endblock %}
