@@ -14,7 +14,7 @@ with open('config.json') as f:
 JWTManager(app)
 
 from .views import usuario_view, auth_view, index_view, empresa_view
-from .models import usuario_model
+from .models import usuario_model, empresa_model
 
 DEBUG = True
 app.config['SECRET_KEY'] = conf["SECRET_KEY"]

@@ -29,15 +29,14 @@ class EmpresaModel(object):
         self.cur.close()
         self.con.close()
 
-    def insert_empresa(self, id_natureza_juridica, id_porte_empresa, id_responsavel, dataResponsavel, empresa, endereco,
+    def insert_empresa(self, id_natureza_juridica, id_porte_empresa, id_responsavel, empresa, endereco,
                        bairro, cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, cnaeSecundaria,
-                       tributacao, diaFaturamento, folhaPagamento, certificadoDigital, observacoes, created, updated,
-                       status):
+                       tributacao, diaFaturamento, folhaPagamento, certificadoDigital, observacoes):
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
             sql_data = (
-                id_natureza_juridica, id_porte_empresa, id_responsavel, dataResponsavel, empresa, endereco, bairro,
+                id_natureza_juridica, id_porte_empresa, id_responsavel, data, empresa, endereco, bairro,
                 cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, cnaeSecundaria, tributacao, diaFaturamento,
                 folhaPagamento, certificadoDigital, observacoes, data, data, 'Ativo')
             sql = "INSERT INTO empresas ( id_natureza_juridica, id_porte_empresa, id_responsavel, dataResponsavel, " \
@@ -47,7 +46,8 @@ class EmpresaModel(object):
                   "%s, %s, %s, %s, %s, %s, %s, %s)"
             self.cur.execute(sql, sql_data)
             self.con.commit()
-            return logging.info('empresa cadastrada com sucesso')
+            logging.info('empresa cadastrada com sucesso')
+            return True
 
         except Exception as e:
-            logging.error('Erro em EmpresaModel, método insert_user: ' + str(e) + '\n')
+            logging.error('Erro em EmpresaModel, método insert_empresa: ' + str(e) + '\n')
