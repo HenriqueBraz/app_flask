@@ -2,12 +2,12 @@
 
 {% block header %}
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="flash" id="flash">{{  message }}</div>
-            {% endfor %}
-        {% endif %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash" id="flash">{{  message }}</div>
+{% endfor %}
+{% endif %}
 {% endwith %}
 
 <div class="container" id="global">
@@ -15,7 +15,7 @@
         {{ form.csrf_token }}
         <div class="row">
             <div class="col-lg-4"></div>
-                <div class="col-lg-4">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label>Username</label>
                     {{form.username(class="form-control")}}
@@ -23,9 +23,9 @@
                 </div>
             </div>
         </div>
-           <div class="row">
+        <div class="row">
             <div class="col-lg-4"></div>
-                <div class="col-lg-4">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label>Nome</label>
                     {{form.nome(class="form-control")}}
@@ -33,9 +33,9 @@
                 </div>
             </div>
         </div>
-           <div class="row">
+        <div class="row">
             <div class="col-lg-4"></div>
-                <div class="col-lg-4">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label>Email</label>
                     {{form.email(class="form-control")}}
@@ -45,7 +45,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4"></div>
-                <div class="col-lg-4">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label>Senha</label>
                     {{form.password(class="form-control")}}
@@ -55,7 +55,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4"></div>
-                <div class="col-lg-4">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label>Repita a senha</label>
                     {{form.confirm(class="form-control")}}
@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="row">
-             <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
             <div class="col-lg-4">
                 <button type="button"><a href="{{ url_for('login') }}" ><font color=black>voltar</font></a></button>
                 <button class="login100-form-btn"  type="submit">Registar</button>
