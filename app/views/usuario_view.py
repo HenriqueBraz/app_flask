@@ -1,16 +1,10 @@
 from flask_paginate import get_page_parameter, Pagination
 from werkzeug.security import check_password_hash, generate_password_hash
-from werkzeug.utils import redirect
 from app import app
 from app.forms.user_forms import edit_forms
 from app.models.model import UsuarioModel
-from flask import render_template, session, request, flash, url_for
+from flask import render_template, session, request, flash
 
-
-@app.route("/")
-def rotas():
-    #return render_template("rotas.html")
-    return redirect(url_for('login'))
 
 
 @app.route("/usuario", methods=["GET"])

@@ -31,23 +31,23 @@ class UsuarioModel(object):
 
     def get_users(self):
         try:
-            self.cur.execute("SELECT u.id, u.username, u.nome,u.email, u.created, u.updated, g.grupo FROM usuario u LEFT JOIN grupos g ON u.id = g.id_usuario WHERE u.status = 'Ativo'  limit 20 offset 0;")
+            self.cur.execute("SELECT u.id, u.username, u.nome,u.email, u.created, u.updated, g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario WHERE u.status = 'Ativo'  limit 20 offset 0;")
             result = self.cur.fetchall()
             return result
         except Exception as e:
-            logging.error('Erro em Usuario_Model, método users: ' + str(e) + '\n')
+            logging.error('Erro em Usuario_Model, método get_users: ' + str(e) + '\n')
 
     def get_user(self, id):
         try:
-            self.cur.execute("SELECT u.id, u.username, u.nome,u.email, u.created, u.updated, g.grupo FROM usuario u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE u.id = '{}' and u.status = 'Ativo';".format(id))
+            self.cur.execute("SELECT u.id, u.username, u.nome,u.email, u.created, u.updated, g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE u.id = '{}' and u.status = 'Ativo';".format(id))
             result = self.cur.fetchone()
             return result
         except Exception as e:
-            logging.error('Erro em Usuario_Model, método user: ' + str(e) + '\n')
+            logging.error('Erro em Usuario_Model, método get_user: ' + str(e) + '\n')
 
     def find_username(self, username):
         try:
-            self.cur.execute("SELECT id FROM usuario WHERE username = '{}';".format(username))
+            self.cur.execute("SELECT id FROM usuarios WHERE username = '{}';".format(username))
             result = self.cur.fetchone()
             return result
         except Exception as e:
@@ -56,7 +56,7 @@ class UsuarioModel(object):
     def find_all_username(self, username):
         try:
             self.cur.execute(
-                "SELECT u.*, g.grupo FROM usuario u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE u.username = '{}';".format(username))
+                "SELECT u.*, g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE u.username = '{}';".format(username))
             result = self.cur.fetchone()
             return result
         except Exception as e:
@@ -65,21 +65,21 @@ class UsuarioModel(object):
     def find_one_id(self, user_id):
         try:
             self.cur.execute(
-                "SELECT u.username, u.nome, u.email, u.passwd,  g.grupo FROM usuario u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE  u.id = '{}';".format(user_id))
+                "SELECT u.username, u.nome, u.email, u.passwd,  g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE  u.id = '{}';".format(user_id))
             result = self.cur.fetchone()
             return result
         except Exception as e:
-            logging.error('Erro em Usuario_Model, método find_all_username: ' + str(e) + '\n')
+            logging.error('Erro em Usuario_Model, método find_one_id: ' + str(e) + '\n')
 
     def insert_user(self, username, password, name, email):
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
             sql_data = (username, password, name, email, 'Não', data, data, 'Ativo')
-            sql = "INSERT INTO usuario (username, passwd , nome, email, developer, created, updated, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO usuarios (username, passwd , nome, email, developer, created, updated, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
             self.cur.execute(sql, sql_data)
             self.con.commit()
-            self.cur.execute("SELECT id FROM usuario WHERE username = '{}';".format(username))
+            self.cur.execute("SELECT id FROM usuarios WHERE username = '{}';".format(username))
             id_usuario = self.cur.fetchone()
             sql_data = (id_usuario, 'Usuario')
             sql = "INSERT INTO grupos (id_usuario, grupo) VALUES ( %s, %s )"
@@ -94,7 +94,7 @@ class UsuarioModel(object):
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
-            self.cur.execute("UPDATE usuario SET  username = '{}', nome = '{}',  email = '{}', passwd = '{}' WHERE id = {}".format(username, name, email, password, id))
+            self.cur.execute("UPDATE usuarios SET  username = '{}', nome = '{}',  email = '{}', passwd = '{}' WHERE id = {}".format(username, name, email, password, id))
             self.con.commit()
             self.cur.execute("UPDATE grupos SET  grupo = '{}'  WHERE id_usuario = {}".format(group, id))
             self.con.commit()
@@ -105,9 +105,9 @@ class UsuarioModel(object):
 
     def update_status_user(self, id):
         try:
-            self.cur.execute("UPDATE usuario SET status = 'Inativo' WHERE id = {}".format(id))
+            self.cur.execute("UPDATE usuarios SET status = 'Inativo' WHERE id = {}".format(id))
             self.con.commit()
             return True
 
         except Exception as e:
-            logging.error('Erro em UsuarioModel, método delete_user ' + str(e) + '\n')
+            logging.error('Erro em UsuarioModel, método update_status_user ' + str(e) + '\n')

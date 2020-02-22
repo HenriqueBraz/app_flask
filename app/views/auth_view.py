@@ -32,11 +32,10 @@ def register():
     return render_template('auth/register.html', form=form, pagina=' Cadastro')
 
 
-
-
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if session.get('username'):
+        print(session.get)
         return redirect(url_for('index'))
 
     else:
@@ -65,6 +64,7 @@ def login():
         return render_template('auth/login.html', content_type='application/json', form=form, pagina='')
 
 
+
 @bp.before_app_request
 def load_logged_in_user():
     db = UsuarioModel()
@@ -74,6 +74,7 @@ def load_logged_in_user():
 
     else:
         g.user = db.find_one_id(user_id)
+
 
 
 @app.route('/logout')
