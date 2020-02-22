@@ -148,7 +148,9 @@
 
    /* fim menu dinâmico */
 
-
+   .bloco{
+       border: 10px solid #dddddd;
+   }
 
 
 

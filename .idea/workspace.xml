@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/forms/company_forms/list_company-form.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/empresa_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/auth/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/auth/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/auth/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/empresa/cadastrar_empresa.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/empresa/cadastrar_empresa.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/empresa/listar_empresa.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/empresa/listar_empresa.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms/client_forms/client_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/company_forms/register_company_form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/usuario_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/auth_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/auth_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/empresa_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/empresa_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/usuario_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/usuario_view.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +25,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>

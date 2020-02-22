@@ -1,12 +1,12 @@
 from app import app
 from flask import render_template, request
-from app.forms.client_forms import client_form
-from app.models.model import UsuarioModel
+from app.forms.company_forms import register_company_form
+from app.models.usuario_model import UsuarioModel
 
 
 @app.route('/cadastrar_cliente', methods=["GET", "POST"])
 def cadastrar_cliente():
-    form = client_form.ClientRegisterForm()
+    form = register_company_form.ClientRegisterForm()
     if form.validate_on_submit():
         db = UsuarioModel()
         empresa = request.form['empresa']
@@ -36,6 +36,6 @@ def cadastrar_cliente():
 
 @app.route('/listar_clientes', methods=["GET"])
 def listar_clientes():
-    form = client_form.ClientListForm()
+    form = register_company_form.ClientListForm()
     return render_template('empresa/listar_empresa.html', content_type='application/json', form=form,
                            pagina='Listar Cliente')

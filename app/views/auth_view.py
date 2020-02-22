@@ -4,7 +4,7 @@ from werkzeug.utils import redirect
 from app import app
 from app.forms.auth_forms import login_form, register_form
 from flask import render_template, request, url_for, flash, session, Blueprint, g
-from app.models.model import UsuarioModel
+from app.models.usuario_model import UsuarioModel
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
