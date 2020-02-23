@@ -19,12 +19,12 @@ def usuarios():
     pagination = Pagination(page=page, total=len(users), search=search, record_name='users', per_page=1,  css_framework='bootstrap4')
     group = session.get('group')
     if group == "Administrador":
-        return render_template('usuario/listar_usuarios.html', result=users, group=group, pagina='Novo Rumo - Listar Usuários', pagination=pagination)
+        return render_template('usuario/listar_usuarios.html', result=users, group=group, pagina='Listar Usuários', pagination=pagination)
     else:
         user_id = session.get('user_id')
         user = db.get_user(user_id)
         print(user)
-        return render_template('usuario/listar_usuarios.html', result=user, group=group,pagina='Novo Rumo - Listar Usuários', pagination=pagination)
+        return render_template('usuario/listar_usuarios.html', result=user, group=group,pagina='Listar Usuários', pagination=pagination)
 
 
 @app.route("/edita_usuario/<int:id>", methods=["GET", "POST"])
@@ -92,7 +92,7 @@ def edita_usuario(id):
                 else:
                     flash('Erro ao realizar as alterações, contate o administrador do sistema.')
 
-    return render_template('usuario/editar_usuario.html', form=form, pagina='Novo Rumo - Editar Usuário')
+    return render_template('usuario/editar_usuario.html', form=form, pagina='Editar Usuário')
 
 
 @app.route("/exclui_usuario/<int:id>", methods=["GET", "POST"])
@@ -100,7 +100,6 @@ def exclui_usuario(id):
     db = UsuarioModel()
     result = db.get_user(id)
     flag = 1
-    print(result)
     if request.method == 'POST':
         if request.form['submit_button'] == 'Excluir usuário':
             if result:
@@ -108,4 +107,4 @@ def exclui_usuario(id):
                     flash('usuário excluído com sucesso!')
                     flag = 0
 
-    return render_template('usuario/excluir_usuario.html', pagina='Novo Rumo - Excluir Usuário', result=result, flag=flag)
+    return render_template('usuario/excluir_usuario.html', pagina='Excluir Usuário', result=result, flag=flag)

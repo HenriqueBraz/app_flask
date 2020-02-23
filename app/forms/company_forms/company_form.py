@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, TextAreaField, SubmitField, validators
+from wtforms import StringField, SelectField, TextAreaField, validators
 from wtforms.fields import DecimalField
 from wtforms.validators import DataRequired
 
@@ -55,7 +55,7 @@ class ClientRegisterForm(FlaskForm):
                                   ('rr', 'Roraima'),
                                   ('sc', 'Santa Catarina'), ('sp', 'São Paulo'),
                                   ('se', 'Sergipe'), ('to', 'Tocantins')])
-    capital_social = DecimalField(places=2, validators=[DataRequired()], render_kw={"placeholder": 'Capital Social'})
+    capital_social = DecimalField(places=0, validators=[DataRequired()], render_kw={"placeholder": 'Capital Social'})
     nire = StringField("nire", validators=[DataRequired()], render_kw={"placeholder": 'NIRE'})
     cnpj = StringField("cnpj", validators=[DataRequired()], render_kw={"placeholder": 'CNPJ'})
     inscricao_estadual = StringField("inscricao_estadual", validators=[DataRequired()],
@@ -80,4 +80,3 @@ class ClientRegisterForm(FlaskForm):
     certificado_digital = SelectField("folha_pagamento", validators=[DataRequired()],
                                       choices=[('sim', 'Sim'), ('nao', 'Não')])
     observacoes = TextAreaField(u'observacoes', [validators.length(min=0, max=200)])
-    submit = SubmitField('Submit')

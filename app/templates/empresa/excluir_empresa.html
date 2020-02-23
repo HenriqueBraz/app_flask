@@ -14,7 +14,7 @@
 
     {% if flag %}
         {% if result %}
-            <h1>O seguinte usuário será excluído:</h1><br><br>
+            <h1>A seguinte empresa será excluída:</h1><br><br>
 
         {% else %}
             <h1></h1><br><br>
@@ -22,21 +22,19 @@
         {% endif %}
 
         <tr>
-            <th>Username</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Criado em</th>
-            <th>Atualizado em</th>
-            <th>Grupo</th>
+            <th>Empresa</th>
+            <th>Data Cadastro</th>
+            <th>Responsável</th>
+            <th>Endereço</th>
+            <th>Localidade</th>
         </tr>
 
         <tr>
             <td> {{ result[1] }} </td>
             <td> {{ result[2] }} </td>
             <td> {{ result[3] }} </td>
-            <td> {{ result[4] }} </td>
-            <td> {{ result[5] }} </td>
-            <td> {{ result[6] }} </td>
+            <td> {{ result[4] }}, {{ result[5] }}, {{ result[6] }} </td>
+            <td> {{ result[7] }} </td>
         </tr>
 
         </tbody></table>
@@ -44,23 +42,22 @@
         <div class ="frase_botao">
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('usuarios') }}" ><font color=white>voltar</font></a></button>
-            <input class="btn btn-primary" type="submit" name="submit_button" value="Excluir usuário">
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_empresas') }}" ><font color=white>voltar</font></a></button>
+            <input class="btn btn-primary" type="submit" name="submit_button" value="Excluir empresa">
         </form>
         </div>
 
         {% else %}
          <h1></h1><br><br>
         <tr>
-            <th>Username</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Criado em</th>
-            <th>Atualizado em</th>
-            <th>Grupo</th>
+            <th>Empresa</th>
+            <th>Data Cadastro</th>
+            <th>Responsável</th>
+            <th>Endereço</th>
+            <th>Localidade</th>
         </tr>
+
         <tr>
-            <td> {{''}}</td>
             <td> {{''}}</td>
             <td> {{''}}</td>
             <td> {{''}}</td>
@@ -71,7 +68,7 @@
          <div class ="frase_botao">
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('usuarios') }}" ><font color=white>voltar</font></a></button>
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_empresas') }}" ><font color=white>voltar</font></a></button>
         </form>
         </div>
         {% endif %}
