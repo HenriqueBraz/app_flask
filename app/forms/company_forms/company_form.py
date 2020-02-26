@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired
 
 
 class ClientRegisterForm(FlaskForm):
-    empresa = StringField("empresa", validators=[DataRequired()], render_kw={"placeholder": 'Empresa'})
+    empresa = StringField("cliente", validators=[DataRequired()], render_kw={"placeholder": 'Empresa'})
     natureza_juridica = SelectField("natureza_juridica", render_kw={'readonly': True}, validators=[DataRequired()],
                                     choices=[('selecione', ' - selecione - '), ('1', '201-1 - Empresa Pública'),
                                              ('2', '203-8 - Sociedade de Economia Mista'),

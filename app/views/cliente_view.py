@@ -2,14 +2,14 @@ from werkzeug.utils import redirect
 from app import app
 from flask import render_template, request, session, flash, url_for
 from app.forms.company_forms import company_form
-from app.models.empresa_model import EmpresaModel
+from app.models.cliente_model import ClienteModel
 
 
-@app.route('/cadastrar_empresa', methods=["GET", "POST"])
-def cadastrar_empresa():
+@app.route('/cadastrar_cliente', methods=["GET", "POST"])
+def cadastrar_cliente():
     form = company_form.ClientRegisterForm()
     if form.validate_on_submit():
-        db = EmpresaModel()
+        db = ClienteModel()
         empresa = request.form['empresa']
         natureza_juridica = request.form['natureza_juridica']
         porte = request.form['porte']
@@ -35,24 +35,25 @@ def cadastrar_empresa():
                              tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes):
             message = 'Empresa cadastrada com sucesso!'
             flash(message)
-            return redirect(url_for('cadastrar_empresa', form=form))
+            return redirect(url_for('cadastrar_cliente', form=form))
 
         else:
-            flash('Houve um erro ao inserir a empresa, contate o administrador do sistema')
+            flash('Houve um erro ao inserir a cliente, contate o administrador do sistema')
 
-    return render_template('empresa/cadastrar_empresa.html', form=form, pagina='')
-
-
-@app.route('/listar_empresas', methods=["GET"])
-def listar_empresas():
-    db = EmpresaModel()
-    lista_empresas = db.get_companies()
-    return render_template('empresa/listar_empresas.html', result=lista_empresas, pagina='Listar Empresas')
+    return render_template('cliente/cadastrar_cliente.html', form=form, pagina='')
 
 
-@app.route('/editar_empresa/<int:id>', methods=["GET", "POST"])
-def editar_empresa(id):
-    db = EmpresaModel()
+@app.route('/listar_clientes',  methods=["GET"])
+def listar_clientes():
+    db = ClienteModel()
+    lista_clientes = db.get_companies()
+    print(lista_clientes)
+    return render_template('cliente/listar_clientes.html', result=lista_clientes, pagina='Listar Clientes')
+
+
+@app.route('/editar_cliente/<int:id>', methods=["GET", "POST"])
+def editar_cliente(id):
+    db = ClienteModel()
     result = db.find_one_id(id)
     form = company_form.ClientRegisterForm(
 
@@ -103,20 +104,22 @@ def editar_empresa(id):
         else:
             flash('Erro ao realizar as alterações, contate o administrador do sistema.')
 
-    return render_template('empresa/editar_empresa.html', form=form, pagina='')
+    return render_template('cliente/editar_cliente.html', form=form, pagina='')
 
 
-@app.route('/excluir_empresa/<int:id>"', methods=["GET", "POST"])
-def excluir_empresa(id):
-    db = EmpresaModel()
+@app.route('/excluir_cliente/<int:id>"', methods=["GET", "POST"])
+def excluir_cliente(id):
+    db = ClienteModel()
     result = db.get_company(id)
+    print(id)
+    print(result)
     flag = 1
     if request.method == 'POST':
         if request.form['submit_button'] == 'Excluir empresa':
             if result:
                 if db.update_status_company(result[0]):
-                    flash('empresa excluída com sucesso!')
+                    flash('cliente excluído com sucesso!')
                     flag = 0
 
 
-    return render_template('empresa/excluir_empresa.html', pagina='Excluir Empresa', result=result, flag=flag)
+    return render_template('cliente/excluir_cliente.html', pagina='Excluir Cliente', result=result, flag=flag)

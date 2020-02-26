@@ -42,7 +42,7 @@
         <div class ="frase_botao">
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_empresas') }}" ><font color=white>voltar</font></a></button>
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
             <input class="btn btn-primary" type="submit" name="submit_button" value="Excluir empresa">
         </form>
         </div>
@@ -68,7 +68,7 @@
          <div class ="frase_botao">
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_empresas') }}" ><font color=white>voltar</font></a></button>
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
         </form>
         </div>
         {% endif %}
