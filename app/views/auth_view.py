@@ -35,7 +35,6 @@ def register():
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if session.get('username'):
-        print(session.get)
         return redirect(url_for('index'))
 
     else:

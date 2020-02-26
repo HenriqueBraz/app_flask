@@ -1,9 +1,9 @@
 {% extends 'base/base.html' %}
 {% block header %}
 
-
-<table class = "table">
-    <tbody>
+<br>
+<table id="table_id" class="display">
+    <thead>
     <tr>
         <th>Empresa</th>
         <th>Data Cadastro</th>
@@ -12,32 +12,38 @@
         <th>Localidade</th>
         <th>Ação</th>
     </tr>
-
-        {% for row in result %}
-        <tr>
-            <td> {{ row[1] }}</td>
-            <td> {{ row[2] }}</td>
-            <td> {{ row[3] }}</td>
-            <td> {{ row[4] }}, {{ row[5] }}, {{ row[6] }} </td>
-            <td> {{ row[7] }}</td>
-            <td><a href="{{ url_for('editar_empresa', id = row[0]) }}">Editar</a>
+    </thead>
+    <tbody>
+    {% for row in result %}
+    <tr>
+        <td> {{ row[1] }}</td>
+        <td> {{ row[2] }}</td>
+        <td> {{ row[3] }}</td>
+        <td> {{ row[4] }}, {{ row[5] }}, {{ row[6] }} </td>
+        <td> {{ row[7] }}</td>
+        <td><a href="{{ url_for('editar_empresa', id = row[0]) }}">Editar</a>
             <a href="{{ url_for('excluir_empresa', id = row[0]) }}">Excluir</a></td>
-        </tr>
-        {% endfor %}
-
-</tbody>
+    </tr>
+    {% endfor %}
+    </tbody>
 </table>
 
-
+<br><br>
 <div class="form-group">
-                <div class="row">
-                    <div class="col-10"></div>
-                    <div class="col-2">
-                        <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
-                        <button class="btn btn-primary"  type="submit">Salvar</button>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-10"></div>
+        <div class="col-2">
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
+            <button class="btn btn-primary"  type="submit">Salvar</button>
+        </div>
+    </div>
+</div>
 
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type=text/javascript src="{{url_for('static', filename='js/scripts.js') }}"></script>
+
+<br><br><br><br><br><br><br><br><br><br>
 
 {% endblock %}

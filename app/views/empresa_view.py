@@ -47,7 +47,7 @@ def cadastrar_empresa():
 def listar_empresas():
     db = EmpresaModel()
     lista_empresas = db.get_companies()
-    return render_template('empresa/listar_empresas.html', result=lista_empresas, pagina='Listar Empresa')
+    return render_template('empresa/listar_empresas.html', result=lista_empresas, pagina='Listar Empresas')
 
 
 @app.route('/editar_empresa/<int:id>', methods=["GET", "POST"])

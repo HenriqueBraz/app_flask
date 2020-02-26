@@ -17,4 +17,10 @@ def index():
 
 
 
+@app.route('/teste')
+def teste():
+    return render_template('teste.html')
+
+
+
 

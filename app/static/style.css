@@ -26,11 +26,10 @@
        color: white;
     }
 
-    table {
+     display {
      padding: 20px 0;
      position: relative;
      border: 10px solid #dddddd;
-
     }
 
     td, th {
@@ -151,6 +150,42 @@
    .bloco{
        border: 10px solid #dddddd;
    }
+
+    /* inicio style paginação */
+
+   #table_id_info{
+   color: white;
+   }
+
+   #table_id_length{
+     color: white;
+   }
+
+    #table_id_filter{
+     color: white;
+   }
+
+   #table_id_previous{
+     color: white;
+   }
+
+   #table_id_next{
+     color: white;
+   }
+
+   #table_id_paginate{
+     color: white;
+   }
+
+   paginate_button{
+     color: white;
+   }
+
+   /* fim style paginação */
+
+
+
+
 
 
 

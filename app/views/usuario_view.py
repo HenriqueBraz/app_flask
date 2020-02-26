@@ -7,7 +7,7 @@ from flask import render_template, session, request, flash
 
 
 
-@app.route("/usuario", methods=["GET"])
+@app.route("/listar_usuarios", methods=["GET"])
 def usuarios():
     db = UsuarioModel()
     users = db.get_users()

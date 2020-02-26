@@ -1,11 +1,10 @@
 {% extends 'base/base.html' %}
 {% block header %}
 
-
+<br>
 {% if result %}
-{{ pagination.info }}
-<table class = "table">
-    <tbody>
+<table id="table_id" class="display">
+    <thead>
     <tr>
         <th>Username</th>
         <th>Nome</th>
@@ -15,8 +14,8 @@
         <th>Grupo</th>
         <th>Ação</th>
     </tr>
-
-
+    </thead>
+    <tbody>
     {% if group == 'Administrador' %}
         {% for row in result %}
         <tr>
@@ -49,12 +48,17 @@
 </table>
 
 
-
+<br><br>
   <div class="botao">
       <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
   </div>
 
-{{ pagination.links }}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type=text/javascript src="{{url_for('static', filename='js/scripts.js') }}"></script>
+
+
 
 <br><br><br><br>
 <br><br><br>
