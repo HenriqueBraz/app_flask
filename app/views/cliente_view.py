@@ -1,8 +1,17 @@
-from werkzeug.utils import redirect
-from app import app
+from werkzeug.utils import redirect, secure_filename
+from flask_bootstrap import Bootstrap
+from app import app, ALLOWED_EXTENSIONS
 from flask import render_template, request, session, flash, url_for
 from app.forms.company_forms import company_form
 from app.models.cliente_model import ClienteModel
+
+Bootstrap(app)
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 
 @app.route('/cadastrar_cliente', methods=["GET", "POST"])
@@ -36,6 +45,7 @@ def cadastrar_cliente():
         if db.insert_company(natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado,
                              capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
                              tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome, telefone, email):
+
             message = 'Empresa cadastrada com sucesso!'
             flash(message)
             return redirect(url_for('cadastrar_cliente', form=form))
@@ -57,7 +67,6 @@ def listar_clientes():
 def editar_cliente(id):
     db = ClienteModel()
     result = db.find_one_id(id)
-    print(result)
     form = company_form.ClientRegisterForm(
 
         empresa=result[5],

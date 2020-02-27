@@ -84,15 +84,15 @@
                         {{form.telefone(class="form-control")}} {{form.errors.telefone}}
                     </div>
                 </div>
-                   <br>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="control-label col-2 text-right">Email</label>
-                            <div class="col-3">
-                                {{form.email(class="form-control")}} {{form.errors.email}}
-                            </div>
+                <br>
+                <div class="form-group">
+                    <div class="row">
+                        <label class="control-label col-2 text-right">Email</label>
+                        <div class="col-3">
+                            {{form.email(class="form-control")}} {{form.errors.email}}
                         </div>
                     </div>
+                </div>
             </div>
             </br>
 
@@ -181,7 +181,7 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-6 offset-sm-2">
-                        {{form. observacoes(class="form-control")}} {{form.errors. observacoes}}
+                        {{form.observacoes(class="form-control")}} {{form.errors. observacoes}}
                     </div>
                 </div>
             </div>
@@ -193,6 +193,19 @@
                         <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
                         <button class="btn btn-primary"  type="submit">Salvar</button>
                     </div>
+                </div>
+            </div>
+
+            <h4>Anexos</h4>
+            <div class="form-group">
+                <div class="row">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-6 offset-sm-2">
+                                <label><input type="file" id="file"  accept="application/pdf"  name="image[]" multiple="multiple"></label>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -239,6 +252,20 @@ $(function () {
 
       $('#botao').trigger('click');
 });
+
+
+$('#botao').trigger('click') {
+
+      var file = document.getElementById("file").value;
+      var entry = {
+        file : file.value
+      };
+
+      console.log(entry);
+};
+
+
+
 </script>
 {% endif %}
 

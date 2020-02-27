@@ -5,8 +5,15 @@ from flask_jwt_extended import JWTManager
 import flask_heroku
 
 
+UPLOAD_FOLDER = 'app/uploads'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
+
+
 
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 with open('config.json') as f:
     conf = json.load(f)

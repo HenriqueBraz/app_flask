@@ -1,11 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, TextAreaField, validators,  ValidationError
+from wtforms import StringField, SelectField, TextAreaField, validators, ValidationError
 from wtforms.fields import DecimalField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Email
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 import phonenumbers
-
-
 
 
 def validate_phone(message='Invalid phone number.', region=None):
@@ -76,8 +75,9 @@ class ClientRegisterForm(FlaskForm):
                                   ('rr', 'Roraima'),
                                   ('sc', 'Santa Catarina'), ('sp', 'São Paulo'),
                                   ('se', 'Sergipe'), ('to', 'Tocantins')])
-    nome = StringField("nome", validators=[DataRequired()],  render_kw={"placeholder": 'Nome'})
-    telefone = StringField("telefone", validators=[validate_phone(region='BR')], render_kw={"placeholder": '(dd)ddddd-dddd'})
+    nome = StringField("nome", validators=[DataRequired()], render_kw={"placeholder": 'Nome'})
+    telefone = StringField("telefone", validators=[validate_phone(region='BR')],
+                           render_kw={"placeholder": '(dd)ddddd-dddd'})
     email = EmailField("email", validators=[Email(), DataRequired()], render_kw={"placeholder": 'Email'})
     capital_social = DecimalField(places=0, validators=[DataRequired()], render_kw={"placeholder": 'Capital Social'})
     nire = StringField("nire", validators=[DataRequired()], render_kw={"placeholder": 'NIRE'})
@@ -104,3 +104,5 @@ class ClientRegisterForm(FlaskForm):
     certificado_digital = SelectField("folha_pagamento", validators=[DataRequired()],
                                       choices=[('sim', 'Sim'), ('nao', 'Não')])
     observacoes = TextAreaField(u'observacoes', [validators.length(min=0, max=200)])
+
+

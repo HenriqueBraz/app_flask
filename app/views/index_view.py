@@ -9,6 +9,10 @@ def rotas():
     #return render_template("rotas.html")
     return redirect(url_for('login'))
 
+@app.route("/favicon.ico")
+def favicon():
+    return redirect(url_for('login'))
+
 
 @app.route('/index', methods=["GET"])
 def index():
