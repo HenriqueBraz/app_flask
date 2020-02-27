@@ -31,7 +31,7 @@ class UsuarioModel(object):
 
     def get_users(self):
         try:
-            self.cur.execute("SELECT u.id, u.username, u.nome,u.email, u.created, u.updated, g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario WHERE u.status = 'Ativo'  limit 20 offset 0;")
+            self.cur.execute("SELECT u.id, u.username, u.nome,u.email, u.created, u.updated, g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario WHERE u.status = 'Ativo';")
             result = self.cur.fetchall()
             return result
         except Exception as e:
@@ -55,8 +55,7 @@ class UsuarioModel(object):
 
     def find_all_username(self, username):
         try:
-            self.cur.execute(
-                "SELECT u.*, g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE u.username = '{}';".format(username))
+            self.cur.execute("SELECT u.*, g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE u.username = '{}';".format(username))
             result = self.cur.fetchone()
             return result
         except Exception as e:

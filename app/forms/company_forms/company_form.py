@@ -1,7 +1,28 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, TextAreaField, validators
+from wtforms import StringField, SelectField, TextAreaField, validators,  ValidationError
 from wtforms.fields import DecimalField
-from wtforms.validators import DataRequired
+from wtforms.fields.html5 import EmailField
+from wtforms.validators import DataRequired, Email
+import phonenumbers
+
+
+
+
+def validate_phone(message='Invalid phone number.', region=None):
+    """ This validates the phone number using the phonenumbers package.
+    Make sure to select a default region in order to validate numbers
+    that do not follow the international format.
+    """
+
+    def _validate_phone(form, field):
+        try:
+            input_number = phonenumbers.parse(field.data, region)
+            if not (phonenumbers.is_valid_number(input_number)):
+                raise ValidationError(message)
+        except:
+            raise ValidationError(message)
+
+    return _validate_phone
 
 
 class ClientRegisterForm(FlaskForm):
@@ -55,6 +76,9 @@ class ClientRegisterForm(FlaskForm):
                                   ('rr', 'Roraima'),
                                   ('sc', 'Santa Catarina'), ('sp', 'São Paulo'),
                                   ('se', 'Sergipe'), ('to', 'Tocantins')])
+    nome = StringField("nome", validators=[DataRequired()],  render_kw={"placeholder": 'Nome'})
+    telefone = StringField("telefone", validators=[validate_phone(region='BR')], render_kw={"placeholder": '(dd)ddddd-dddd'})
+    email = EmailField("email", validators=[Email(), DataRequired()], render_kw={"placeholder": 'Email'})
     capital_social = DecimalField(places=0, validators=[DataRequired()], render_kw={"placeholder": 'Capital Social'})
     nire = StringField("nire", validators=[DataRequired()], render_kw={"placeholder": 'NIRE'})
     cnpj = StringField("cnpj", validators=[DataRequired()], render_kw={"placeholder": 'CNPJ'})

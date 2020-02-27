@@ -3,15 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/forms/company_forms/company_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/company_forms/company_form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/empresa_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/cliente_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/empresa/cadastrar_empresa.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/empresa/editar_empresa.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/editar_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/empresa/excluir_empresa.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/excluir_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/empresa/listar_empresas.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/empresa_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/cliente_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/cliente_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/usuario_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/usuario_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/editar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/editar_cliente.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/cliente_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente_view.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

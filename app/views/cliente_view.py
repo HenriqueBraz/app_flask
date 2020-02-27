@@ -17,6 +17,9 @@ def cadastrar_cliente():
         cidade = request.form['cidade']
         bairro = request.form['bairro']
         estado = request.form['estado']
+        nome = request.form['nome']
+        telefone = request.form['telefone']
+        email = request.form['email']
         capital_social = request.form['capital_social']
         nire = request.form['nire']
         cnpj = request.form['cnpj']
@@ -32,7 +35,7 @@ def cadastrar_cliente():
         id_responsavel = session.get('user_id')
         if db.insert_company(natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado,
                              capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
-                             tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes):
+                             tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome, telefone, email):
             message = 'Empresa cadastrada com sucesso!'
             flash(message)
             return redirect(url_for('cadastrar_cliente', form=form))
@@ -47,7 +50,6 @@ def cadastrar_cliente():
 def listar_clientes():
     db = ClienteModel()
     lista_clientes = db.get_companies()
-    print(lista_clientes)
     return render_template('cliente/listar_clientes.html', result=lista_clientes, pagina='Listar Clientes')
 
 
@@ -55,6 +57,7 @@ def listar_clientes():
 def editar_cliente(id):
     db = ClienteModel()
     result = db.find_one_id(id)
+    print(result)
     form = company_form.ClientRegisterForm(
 
         empresa=result[5],
@@ -76,6 +79,9 @@ def editar_cliente(id):
         folha_pagamento=result[19],
         certificado_digital=result[20],
         observacoes=result[21],
+        nome=result[25],
+        telefone=result[26],
+        email=result[27]
     )
     if form.validate_on_submit():
         empresa = request.form['empresa']
@@ -98,7 +104,10 @@ def editar_cliente(id):
         certificado_digital = request.form['certificado_digital']
         observacoes = request.form['observacoes']
         id_responsavel = session.get('user_id')
-        if db.update_company(empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire, cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria, dia_faturamento, folha_pagamento, certificado_digital, observacoes, id_responsavel, id):
+        nome = request.form['nome']
+        telefone = request.form['telefone']
+        email = request.form['email']
+        if db.update_company(empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire, cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria, dia_faturamento, folha_pagamento, certificado_digital, observacoes, id_responsavel, id, nome, telefone, email):
             flash('Alterações salvas com sucesso!')
 
         else:
@@ -111,8 +120,6 @@ def editar_cliente(id):
 def excluir_cliente(id):
     db = ClienteModel()
     result = db.get_company(id)
-    print(id)
-    print(result)
     flag = 1
     if request.method == 'POST':
         if request.form['submit_button'] == 'Excluir empresa':
