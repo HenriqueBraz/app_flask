@@ -1,19 +1,17 @@
+import os
+
 from flask import Flask
 import json
+
+from flask_uploads import UploadSet, configure_uploads
 from flask_wtf import CSRFProtect
 from flask_jwt_extended import JWTManager
 import flask_heroku
 
 
-UPLOAD_FOLDER = 'app/uploads'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-
-
-
-
 app = Flask(__name__)
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_PATH'] = os.path.dirname(os.path.abspath(__file__)) + '/home/henrique/novo_rumo/app/uploads'
 
 with open('config.json') as f:
     conf = json.load(f)

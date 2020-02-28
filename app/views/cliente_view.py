@@ -1,16 +1,10 @@
-from werkzeug.utils import redirect, secure_filename
-from flask_bootstrap import Bootstrap
-from app import app, ALLOWED_EXTENSIONS
+import os
+
+from werkzeug.utils import redirect
+from app import app
 from flask import render_template, request, session, flash, url_for
 from app.forms.company_forms import company_form
 from app.models.cliente_model import ClienteModel
-
-Bootstrap(app)
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 
@@ -42,6 +36,8 @@ def cadastrar_cliente():
         certificado_digital = request.form['certificado_digital']
         observacoes = request.form['observacoes']
         id_responsavel = session.get('user_id')
+        upload = request.form['upload']
+
         if db.insert_company(natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado,
                              capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
                              tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome, telefone, email):

@@ -13,7 +13,7 @@
 <div class="bloco">
 
     <form method="post">
-        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
         <div class="card">
             <div class="card-header">
                 Adicionar Empresa
@@ -199,18 +199,18 @@
             <h4>Anexos</h4>
             <div class="form-group">
                 <div class="row">
-                    <form method="post" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="col-6 offset-sm-2">
-                                <label><input type="file" id="file"  accept="application/pdf"  name="image[]" multiple="multiple"></label>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="col-4 offset-sm-2">
+                        {{form.upload(class="form-control")}} {{form.errors.upload}}
+                    </div>
                 </div>
             </div>
-
         </div>
     </form>
+</div>
+</div>
+
+</div>
+</form>
 </div>
 
 </div>

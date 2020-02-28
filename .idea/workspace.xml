@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/app/forms/company_forms/company_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/company_forms/company_form.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/cliente_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/index_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/index_view.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
