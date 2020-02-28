@@ -1,8 +1,6 @@
 import os
-
 from flask import Flask
 import json
-
 from flask_uploads import UploadSet, configure_uploads
 from flask_wtf import CSRFProtect
 from flask_jwt_extended import JWTManager
