@@ -1,6 +1,14 @@
 {% extends 'base/base.html' %}
 {% block header %}
 
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash" id="flash">{{  message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
 <br>
 <table id="table_id" class="display">
     <thead>
@@ -22,8 +30,20 @@
         <td> {{ row[3] }}</td>
         <td> {{ row[4] }}, {{ row[5] }}, {{ row[6] }} </td>
         <td> {{ row[7] }}</td>
-        <td><a href="{{ url_for('editar_cliente', id = row[0]) }}">Editar</a>
-            <a href="{{ url_for('excluir_cliente', id = row[0]) }}">Excluir</a></td>
+        <td><div class="btn-group dropleft">
+            <a class="btn btn-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Clique aqui
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{{ url_for('editar_cliente', id = row[0]) }}">Editar</a>
+                <a class="dropdown-item" href="{{ url_for('excluir_cliente', id = row[0]) }}">Excluir</a>
+                <a class="dropdown-item" href="{{ url_for('editar_contabilidade', id = row[0]) }}">Editar Contabilidade Anterior</a>
+                <a class="dropdown-item" href="{{ url_for('cadastrar_contabilidade', id = row[0]) }}">Cadastar Nova Contabilidade</a>
+                <a class="dropdown-item" href="{{ url_for('excluir_contabilidade', id = row[0]) }}">Excluir Contabilidade Atual</a>
+            </div>
+        </div>
+        </td>
     </tr>
     {% endfor %}
     {% endif %}
@@ -46,6 +66,5 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <script type=text/javascript src="{{url_for('static', filename='js/scripts.js') }}"></script>
 
-<br><br><br><br><br><br><br><br><br><br>
 
 {% endblock %}

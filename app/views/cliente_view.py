@@ -1,11 +1,8 @@
-import os
-
 from werkzeug.utils import redirect
 from app import app
 from flask import render_template, request, session, flash, url_for
 from app.forms.company_forms import company_form
 from app.models.cliente_model import ClienteModel
-
 
 
 @app.route('/cadastrar_cliente', methods=["GET", "POST"])
@@ -40,19 +37,21 @@ def cadastrar_cliente():
 
         if db.insert_company(natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado,
                              capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
-                             tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome, telefone, email):
+                             tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
+                             telefone, email):
 
             message = 'Empresa cadastrada com sucesso!'
             flash(message)
             return redirect(url_for('cadastrar_cliente', form=form))
 
         else:
-            flash('Houve um erro ao inserir a cliente, contate o administrador do sistema')
+            message = 'Houve um erro ao inserir a cliente, contate o administrador do sistema'
+            flash(message)
 
     return render_template('cliente/cadastrar_cliente.html', form=form, pagina='')
 
 
-@app.route('/listar_clientes',  methods=["GET"])
+@app.route('/listar_clientes', methods=["GET"])
 def listar_clientes():
     db = ClienteModel()
     lista_clientes = db.get_companies()
@@ -112,7 +111,10 @@ def editar_cliente(id):
         nome = request.form['nome']
         telefone = request.form['telefone']
         email = request.form['email']
-        if db.update_company(empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire, cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria, dia_faturamento, folha_pagamento, certificado_digital, observacoes, id_responsavel, id, nome, telefone, email):
+        if db.update_company(empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire,
+                             cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria,
+                             dia_faturamento, folha_pagamento, certificado_digital, observacoes, id_responsavel, id,
+                             nome, telefone, email):
             flash('Alterações salvas com sucesso!')
 
         else:
@@ -132,6 +134,5 @@ def excluir_cliente(id):
                 if db.update_status_company(result[0]):
                     flash('cliente excluído com sucesso!')
                     flag = 0
-
 
     return render_template('cliente/excluir_cliente.html', pagina='Excluir Cliente', result=result, flag=flag)

@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+{% block header %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="flash" id="flash">{{  message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="descadastro">
+     <table class = "table"><tbody>
+
+    {% if flag %}
+        {% if result %}
+            <h1>A  Seguinte Contabilidade será excluída:</h1><br><br>
+
+        {% else %}
+            <h1></h1><br><br>
+
+        {% endif %}
+
+        <tr>
+            <th>Contabilidade</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+        </tr>
+
+        <tr>
+            <td> {{ result[2] }} </td>
+            <td> {{ result[3] }} </td>
+            <td> {{ result[4] }} </td>
+            <td> {{ result[5] }} </td>
+        </tr>
+
+        </tbody></table>
+
+        <div class ="frase_botao">
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
+            <input class="btn btn-primary" type="submit" name="submit_button" value="Excluir Contabilidade Anterior">
+        </form>
+        </div>
+
+        {% else %}
+         <h1></h1><br><br>
+        <tr>
+            <th>Contabilidade</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+        </tr>
+
+        <tr>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+        </tr>
+        </tbody></table>
+         <div class ="frase_botao">
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
+        </form>
+        </div>
+        {% endif %}
+
+
+</div>
+{% endblock %}

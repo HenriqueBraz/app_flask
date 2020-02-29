@@ -176,6 +176,29 @@
                 </div>
             </div>
 
+            <h4>Contabilidade Anterior</h4>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Contabilidade</label>
+                    <div class="col-2">
+                        {{form.dia_faturamento(class="form-control")}} {{form.errors.dia_faturamento}}
+                    </div>
+
+                    <label class="control-label col-2 text-right">Nome</label>
+                    <div class="col-2">
+                        {{form.folha_pagamento(class="form-control")}} {{form.errors.folha_pagamento}}
+                    </div>
+
+                    <label class="control-label col-2 text-right">Certificado Digital</label>
+                    <div class="col-2">
+                        {{form.certificado_digital(class="form-control")}} {{form.errors.certificado_digital}}
+                    </div>
+                </div>
+            </div>
+
+
+
             <h4>Observações</h4>
 
             <div class="form-group">
