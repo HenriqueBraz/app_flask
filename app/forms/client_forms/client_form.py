@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, TextAreaField, validators, ValidationError
+from wtforms import StringField, SelectField, TextAreaField, validators, ValidationError, DateField
 from wtforms.fields import DecimalField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Email
@@ -24,40 +24,11 @@ def validate_phone(message='Invalid phone number.', region=None):
     return _validate_phone
 
 
-class ClientRegisterForm(FlaskForm):
+class ClientForm(FlaskForm):
+    nome_responsavel = SelectField("nome_responsavel",  coerce=int, render_kw={'readonly': True}, choices=[])
     empresa = StringField("cliente", validators=[DataRequired()], render_kw={"placeholder": 'Empresa'})
-    natureza_juridica = SelectField("natureza_juridica", render_kw={'readonly': True}, validators=[DataRequired()],
-                                    choices=[('selecione', ' - selecione - '), ('1', '201-1 - Empresa Pública'),
-                                             ('2', '203-8 - Sociedade de Economia Mista'),
-                                             ('3', '204-6 - Sociedade Anônima Aberta'),
-                                             ('4', '205-4 - Sociedade anônima Fechada'),
-                                             ('5', '206-2 - Sociedade Empresária Limitada'),
-                                             ('6', '207-0 - Sociedade Empresária em Nome Coletivo'),
-                                             ('7', '208-9 - Sociedade Empresária em Comandita Simples'),
-                                             ('8', '209-7 - Sociedade Empresária em Comandita por Ações'),
-                                             ('9', '212-7 - Sociedade em Conta de participação'),
-                                             ('10', '214-3 - Cooperativa'),
-                                             ('11', '215-1 - Consórcio de Sociedades'),
-                                             ('12', '216-0 - Grupo de sociedades'),
-                                             ('13', '223-2 - Sociedade simples Pura'),
-                                             ('14', '224-0 - Sociedade Simples Limitada'),
-                                             ('15', '225-9 - Sociedade simples em Nome Coletivo'),
-                                             ('16', '226-7 - Sociedade Simples em Comandita Simples'),
-                                             ('17', '229-1 - Consórcio Simples'),
-                                             ('18',
-                                              '230-5 - Empresa Individual de Responsabilidade Limitada (de Natureza Empresária)'),
-                                             ('19',
-                                              '231-3 - Empresa Individual de Responsabilidade Limitada (de natureza Simples)'),
-                                             ('20', '232-1 - Sociedade Unipessoal de Advogados'),
-                                             ('21', '306-9 - Fundação Privada'),
-                                             ('22', '322-0 - Organização Religiosa'),
-                                             ('23', '330-1 - Organização Social(OS)'),
-                                             ('24', '399-9 - Associação Privada'),
-                                             ('25', '408-1 - Contribuínte Individual')])
-    porte = SelectField("porte", render_kw={'readonly': True}, validators=[DataRequired()],
-                        choices=[('1', 'LTDA'), ('2', 'EIRELI'), ('3', 'EMPRESÁRIO'), ('4', 'MEI'),
-                                 ('5', 'S/S'), ('6', 'S/A'), ('7', 'ME'),
-                                 ('8', 'EPP'), ('9', 'Normal')])
+    natureza_juridica = SelectField("natureza_juridica", coerce=int, render_kw={'readonly': True}, choices=[])
+    porte = SelectField("porte", coerce=int, render_kw={'readonly': True}, choices=[])
     endereco = StringField("endereco", validators=[DataRequired()], render_kw={"placeholder": 'Endereço'})
     cidade = StringField("cidade", validators=[DataRequired()], render_kw={"placeholder": 'Cidade'})
     bairro = StringField("bairro", validators=[DataRequired()], render_kw={"placeholder": 'Bairro'})
@@ -76,7 +47,7 @@ class ClientRegisterForm(FlaskForm):
                                   ('sc', 'Santa Catarina'), ('sp', 'São Paulo'),
                                   ('se', 'Sergipe'), ('to', 'Tocantins')])
     nome = StringField("nome", validators=[DataRequired()], render_kw={"placeholder": 'Nome'})
-    telefone = StringField("telefone", validators=[validate_phone(region='BR')],
+    telefone = StringField("telefone", validators=[validate_phone(region='BR', message="Você precisa entrar com uma telefone válido.")],
                            render_kw={"placeholder": '(dd)ddddd-dddd'})
     email = EmailField("email", validators=[Email(), DataRequired()], render_kw={"placeholder": 'Email'})
     capital_social = DecimalField(places=0, validators=[DataRequired()], render_kw={"placeholder": 'Capital Social'})

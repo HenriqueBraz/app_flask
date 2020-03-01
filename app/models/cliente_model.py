@@ -29,11 +29,35 @@ class ClienteModel(object):
         self.cur.close()
         self.con.close()
 
+    def get_nj_porte_nome(self, id):
+        try:
+            self.cur.execute(
+                "SELECT inj.nome, ip.porte, u.nome FROM empresas e INNER JOIN info_natureza_juridica inj ON  inj.id=e.id_natureza_juridica INNER JOIN info_porte ip ON  ip.id=e.id_porte_empresa INNER JOIN usuarios u ON u.id=e.id_responsavel WHERE 1=1 AND e.id = '{}'".format(id))
+            result = self.cur.fetchone()
+            return result
+        except Exception as e:
+            logging.error('Erro em  EmpresaModel, método get_info_nj(: ' + str(e) + '\n')
+
+    def get_info_nj(self):
+        try:
+            self.cur.execute("SELECT  inf.id, inf.codigo, inf.nome, inf.descricao FROM info_natureza_juridica inf  WHERE  inf.status = 'Ativo';")
+            result = self.cur.fetchall()
+            return result
+        except Exception as e:
+            logging.error('Erro em  EmpresaModel, método get_info_nj(: ' + str(e) + '\n')
+
+    def get_info_porte(self):
+        try:
+            self.cur.execute("SELECT  ip.id, ip.porte, ip.nome FROM info_porte ip  WHERE  ip.status = 'Ativo';")
+            result = self.cur.fetchall()
+            return result
+        except Exception as e:
+            logging.error('Erro em  EmpresaModel, método get_info_porte(: ' + str(e) + '\n')
+
     def get_company(self, id):
         try:
             self.cur.execute("SELECT e.id, e.empresa, e.created, u.nome, e.endereco, e.bairro, e.cidade, e.estado FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE  e.id = '{}' AND e.status = 'Ativo';".format(id))
             result = self.cur.fetchone()
-            print(result)
             return result
         except Exception as e:
             logging.error('Erro em  EmpresaModel, método get_company(: ' + str(e) + '\n')
@@ -46,7 +70,7 @@ class ClienteModel(object):
         except Exception as e:
             logging.error('Erro em  EmpresaModel, método get_companies: ' + str(e) + '\n')
 
-    def insert_company(self, id_natureza_juridica, id_porte_empresa, id_responsavel, empresa, endereco,
+    def insert_company(self, nome_responsavel, id_natureza_juridica, id_porte_empresa, id_responsavel, empresa, endereco,
                        bairro, cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, cnaeSecundaria,
                        tributacao, diaFaturamento, folhaPagamento, certificadoDigital, observacoes, nome, telefone, email):
         try:
@@ -68,6 +92,10 @@ class ClienteModel(object):
             result = self.cur.fetchone()
             sql_data = (result, nome, telefone, email, data, data, 'Ativo')
             sql = "INSERT INTO empresas_contato (id_empresa, nome, telefone, email, created, updated, status) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            self.cur.execute(sql, sql_data)
+            self.con.commit()
+            sql_data = (result, nome_responsavel, data, data, 'Ativo')
+            sql = "INSERT INTO empresas_responsavel (id_empresa, id_usuario, created, updated, status) VALUES (%s, %s, %s, %s, %s)"
             self.cur.execute(sql, sql_data)
             self.con.commit()
             logging.info('cliente cadastrada com sucesso')

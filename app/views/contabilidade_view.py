@@ -53,7 +53,7 @@ def cadastrar_contabilidade(id):
             flash('Já foi cadastrada uma contabilidade para este cliente. Por favor escolha outro cliente ou tente outra Ação')
 
         elif db.insert_accounting(id, contabilidade, nome, telefone, email, dataEntrada):
-            flash('Empresa cadastrada com sucesso!')
+            flash('Contabilidade cadastrada com sucesso!')
 
         else:
             flash('Houve um erro ao inserir a cliente, contate o administrador do sistema')

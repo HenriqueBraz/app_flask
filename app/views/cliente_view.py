@@ -1,15 +1,25 @@
 from werkzeug.utils import redirect
 from app import app
 from flask import render_template, request, session, flash, url_for
-from app.forms.company_forms import company_form
+from app.forms.client_forms import client_form
 from app.models.cliente_model import ClienteModel
+from app.models.usuario_model import UsuarioModel
 
 
 @app.route('/cadastrar_cliente', methods=["GET", "POST"])
 def cadastrar_cliente():
-    form = company_form.ClientRegisterForm()
+    db = UsuarioModel()
+    result = db.get_users()
+    form = client_form.ClientForm()
+    form.nome_responsavel.choices = [(row[0], row[2]) for row in result]
+    db = ClienteModel()
+    result = db.get_info_nj()
+    form.natureza_juridica.choices = [(row[0], (row[1] + ' - ' + row[2])) for row in result]
+    result = db.get_info_porte()
+    form.porte.choices = [(row[0], row[1]) for row in result]
+
     if form.validate_on_submit():
-        db = ClienteModel()
+        nome_responsavel = request.form['nome_responsavel']
         empresa = request.form['empresa']
         natureza_juridica = request.form['natureza_juridica']
         porte = request.form['porte']
@@ -32,10 +42,10 @@ def cadastrar_cliente():
         folha_pagamento = request.form['folha_pagamento']
         certificado_digital = request.form['certificado_digital']
         observacoes = request.form['observacoes']
-        id_responsavel = session.get('user_id')
+        id_responsavel = nome_responsavel
         upload = request.form['upload']
 
-        if db.insert_company(natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado,
+        if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado,
                              capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
                              tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
                              telefone, email):
@@ -55,18 +65,23 @@ def cadastrar_cliente():
 def listar_clientes():
     db = ClienteModel()
     lista_clientes = db.get_companies()
+    print(lista_clientes)
     return render_template('cliente/listar_clientes.html', result=lista_clientes, pagina='Listar Clientes')
 
 
 @app.route('/editar_cliente/<int:id>', methods=["GET", "POST"])
 def editar_cliente(id):
-    db = ClienteModel()
-    result = db.find_one_id(id)
-    form = company_form.ClientRegisterForm(
 
+
+    db = ClienteModel()
+    result_a = db.get_nj_porte_nome(id)
+    print(result_a)
+    result = db.find_one_id(id)
+    form = client_form.ClientForm(
+        nome_responsavel=result_a[2],
         empresa=result[5],
-        natureza_juridica=result[1],
-        porte=result[2],
+        natureza_juridica=result_a[0],
+        porte=result_a[1],
         endereco=result[6],
         cidade=result[8],
         bairro=result[7],
@@ -87,7 +102,22 @@ def editar_cliente(id):
         telefone=result[26],
         email=result[27]
     )
+
+    db = UsuarioModel()
+    result = db.get_users()
+    form.nome_responsavel.choices = [(row[0], row[2]) for row in result]
+    form.nome_responsavel.choices.insert(0, (1, result_a[2]))
+
+    db = ClienteModel()
+    result = db.get_info_nj()
+    form.natureza_juridica.choices = [(row[0], (row[1] + ' - ' + row[2])) for row in result]
+    form.natureza_juridica.choices.insert(0, (1, result_a[0]))
+    result = db.get_info_porte()
+    form.porte.choices = [(row[0], row[1]) for row in result]
+    form.porte.choices.insert(0, (1, result_a[1]))
+
     if form.validate_on_submit():
+        nome_responsavel = request.form['nome_responsavel']
         empresa = request.form['empresa']
         natureza_juridica = request.form['natureza_juridica']
         porte = request.form['porte']
@@ -111,7 +141,7 @@ def editar_cliente(id):
         nome = request.form['nome']
         telefone = request.form['telefone']
         email = request.form['email']
-        if db.update_company(empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire,
+        if db.update_company(nome_responsavel, empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire,
                              cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria,
                              dia_faturamento, folha_pagamento, certificado_digital, observacoes, id_responsavel, id,
                              nome, telefone, email):
