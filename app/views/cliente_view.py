@@ -65,17 +65,14 @@ def cadastrar_cliente():
 def listar_clientes():
     db = ClienteModel()
     lista_clientes = db.get_companies()
-    print(lista_clientes)
     return render_template('cliente/listar_clientes.html', result=lista_clientes, pagina='Listar Clientes')
 
 
 @app.route('/editar_cliente/<int:id>', methods=["GET", "POST"])
 def editar_cliente(id):
 
-
     db = ClienteModel()
     result_a = db.get_nj_porte_nome(id)
-    print(result_a)
     result = db.find_one_id(id)
     form = client_form.ClientForm(
         nome_responsavel=result_a[2],
@@ -166,3 +163,6 @@ def excluir_cliente(id):
                     flag = 0
 
     return render_template('cliente/excluir_cliente.html', pagina='Excluir Cliente', result=result, flag=flag)
+
+
+

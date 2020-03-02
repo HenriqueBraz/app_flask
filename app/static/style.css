@@ -41,6 +41,7 @@
 
     tr:nth-child(even) {
     background-color: white;
+    text-align: left
     }
 
     .botao{

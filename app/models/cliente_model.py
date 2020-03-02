@@ -64,7 +64,7 @@ class ClienteModel(object):
 
     def get_companies(self):
         try:
-            self.cur.execute("SELECT e.id, e.empresa, e.created, u.nome, e.endereco, e.bairro, e.cidade, e.estado FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE e.status = 'Ativo';")
+            self.cur.execute("SELECT e.id, e.empresa, e.created, u.nome, e.cnpj, e.ccm, e.endereco, e.bairro, e.cidade, e.estado FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE e.status = 'Ativo';")
             result = self.cur.fetchall()
             return result
         except Exception as e:

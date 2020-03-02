@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, TextAreaField, validators, ValidationError, DateField
+from wtforms import StringField, SelectField, TextAreaField, validators, ValidationError
 from wtforms.fields import DecimalField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Email
@@ -33,19 +33,19 @@ class ClientForm(FlaskForm):
     cidade = StringField("cidade", validators=[DataRequired()], render_kw={"placeholder": 'Cidade'})
     bairro = StringField("bairro", validators=[DataRequired()], render_kw={"placeholder": 'Bairro'})
     estado = SelectField("estado", validators=[DataRequired()],
-                         choices=[('ac', 'Acre'), ('al', 'Alagoas'), ('ap', 'Amapá'),
-                                  ('am', 'Amazonas'), ('ba', 'Bahia'), ('ce', 'Ceara'),
-                                  ('df', 'Distrito Federal'), ('es', 'Espírito Santo'),
-                                  ('go', 'Goiás'), ('ma', 'Maranhão'),
-                                  ('mt', 'Mato Grosso'), ('ms', 'Mato Grosso do Sul'),
-                                  ('mg', 'Minas Gerais'), ('pa', 'Pará'),
-                                  ('pb', 'Paraíba'), ('pr', 'Paraná'), ('pe', 'Pernambuco'),
-                                  ('pi', 'Piauí'), ('rj', 'Rio de Janeiro'),
-                                  ('rn', 'Rio Grande do Norte'),
-                                  ('rs', 'Rio Grande do Sul'), ('ro', 'Rondônia'),
-                                  ('rr', 'Roraima'),
-                                  ('sc', 'Santa Catarina'), ('sp', 'São Paulo'),
-                                  ('se', 'Sergipe'), ('to', 'Tocantins')])
+                         choices=[('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
+                                  ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceara'),
+                                  ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'),
+                                  ('GO', 'Goiás'), ('MA', 'Maranhão'),
+                                  ('MT', 'Mato Grosso'), ('MS', 'Mato Grosso do Sul'),
+                                  ('MG', 'Minas Gerais'), ('PA', 'Pará'),
+                                  ('PB', 'Paraíba'), ('PR', 'Paraná'), ('PE', 'Pernambuco'),
+                                  ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'),
+                                  ('RN', 'Rio Grande do Norte'),
+                                  ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'),
+                                  ('RR', 'Roraima'),
+                                  ('SC', 'Santa Catarina'), ('SP', 'São Paulo'),
+                                  ('SE', 'Sergipe'), ('TO', 'Tocantins')])
     nome = StringField("nome", validators=[DataRequired()], render_kw={"placeholder": 'Nome'})
     telefone = StringField("telefone", validators=[validate_phone(region='BR', message="Você precisa entrar com uma telefone válido.")],
                            render_kw={"placeholder": '(dd)ddddd-dddd'})
@@ -77,5 +77,4 @@ class ClientForm(FlaskForm):
     observacoes = TextAreaField(u'observacoes', [validators.length(min=0, max=200)])
 
     upload = FileField('upload', validators=[FileAllowed(['txt', 'pdf', 'png', 'jpg', 'jpeg'], 'Somente .txt, .pdf, .png, .jpeg')])
-
 

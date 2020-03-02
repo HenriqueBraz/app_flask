@@ -35,7 +35,7 @@ def editar_contabilidade(id):
             else:
                 flash('Houve um erro ao inserir a cliente, contate o administrador do sistema')
 
-        return render_template('contabilidade/editar_contabilidade.html', form=form, pagina='')
+        return render_template('cliente/contabilidade/editar_contabilidade.html', form=form, pagina='')
 
 
 @app.route('/cadastrar_contabilidade/<int:id>',  methods=["GET", "POST"])
@@ -58,7 +58,7 @@ def cadastrar_contabilidade(id):
         else:
             flash('Houve um erro ao inserir a cliente, contate o administrador do sistema')
 
-    return render_template('contabilidade/cadastrar_contabilidade.html', form=form, pagina='')
+    return render_template('cliente/contabilidade/cadastrar_contabilidade.html', form=form, pagina='')
 
 
 @app.route('/excluir_contabilidade/<int:id>',  methods=["GET", "POST"])
@@ -77,4 +77,4 @@ def excluir_contabilidade(id):
                         flash('cliente excluído com sucesso!')
                         flag = 0
 
-        return render_template('contabilidade/excluir_contabilidade.html', pagina='Excluir Contabilidade Anterior', result=result, flag=flag)
+        return render_template('cliente/contabilidade/excluir_contabilidade.html', pagina='Excluir Contabilidade Anterior', result=result, flag=flag)

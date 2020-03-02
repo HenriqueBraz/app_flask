@@ -1,0 +1,178 @@
+{% extends 'base/base.html' %}
+{% block header %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash" id="flash">{{  message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<br>
+<div class="bloco">
+
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="card">
+            <div class="card-header">
+                Editar Socio
+            </div>
+            <br>
+            <div class="row">
+                <label class="control-label col-2 text-right">Nome</label>
+                <div class="col-3">
+                    {{form.nome(class="form-control")}} {{form.errors.nome}}
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Endereço</label>
+                    <div class="col-8">
+                        {{form.endereco(class="form-control")}} {{form.errors.endereco}}
+                    </div>
+
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="row">
+                        <label class="control-label col-2 text-right">Bairro</label>
+                        <div class="col-3">
+                            {{form.bairro(class="form-control")}} {{form.errors.bairro}}
+                        </div>
+                        <label class="control-label col-2 text-right">Cidade</label>
+                        <div class="col-3">
+                            {{form.cidade(class="form-control")}} {{form.errors.cidade}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right">Naturalidade</label>
+                            <div class="col-3">
+                                {{form.naturalidade(class="form-control")}} {{form.errors.naturalidade}}
+                            </div>
+                            <label class="control-label col-2 text-right">Nacionalidade</label>
+                            <div class="col-3">
+                                {{form.nacionalidade(class="form-control")}} {{form.errors.nacionalidade}}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right">Estado Civil</label>
+                            <div class="col-3">
+                                {{form.estadoCivil(class="form-control")}} {{form.errors.estadoCivil}}
+                            </div>
+                            <label class="control-label col-2 text-right">Profissão</label>
+                            <div class="col-3">
+                                {{form.profissao(class="form-control")}} {{form.errors.profissao}}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right">RG</label>
+                            <div class="col-3">
+                                {{form.rg(class="form-control")}} {{form.errors.rg}}
+                            </div>
+                            <label class="control-label col-2 text-right">Data de Expedicao</label>
+                            <div class="col-3">
+                                {{form.rgDataExpedicao(class="form-control")}} {{form.errors.rgDataExpedicao}}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right">CPF</label>
+                            <div class="col-3">
+                                {{form.cpf(class="form-control")}} {{form.errors.cpf}}
+                            </div>
+                            <label class="control-label col-2 text-right">Data de Nascimento</label>
+                            <div class="col-3">
+                                {{form.dataNascimento(class="form-control")}} {{form.errors.dataNascimento}}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right">Nome da Mãe</label>
+                            <div class="col-3">
+                                {{form.nomeMae(class="form-control")}} {{form.errors.nomeMae}}
+                            </div>
+                            <label class="control-label col-2 text-right">Nome do Pai</label>
+                            <div class="col-3">
+                                {{form.nomePai(class="form-control")}} {{form.errors.nomePai}}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right">Participação Capital Social</label>
+                            <div class="col-3">
+                                {{form.participacaoCapitalSocial(class="form-control")}} {{form.errors.participacaoCapitalSocial}}
+                            </div>
+                            <label class="control-label col-2 text-right">Socio Administrador</label>
+                            <div class="col-3">
+                                {{form.socioAdministrador(class="form-control")}} {{form.errors.socioAdministrador}}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right">Pro-labore</label>
+                            <div class="col-3">
+                                {{form.proLabore(class="form-control")}} {{form.errors.proLabore}}
+                            </div>
+                            <label class="control-label col-2 text-right">Valor</label>
+                            <div class="col-3">
+                                {{form.proLaboreValor(class="form-control")}} {{form.errors.proLaboreValor}}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                         <label class="control-label col-2 text-right">Responsável Receita</label>
+                            <div class="col-3">
+                                {{form.reponsavelReceita(class="form-control")}} {{form.errors.reponsavelReceita}}
+                            </div>
+                        <label class="control-label col-2 text-right">PIS</label>
+                        <div class="col-3">
+                            {{form.pis(class="form-control")}} {{form.errors.pis}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+</div>
+</br>
+<div class="form-group">
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
+            <button class="btn btn-primary"  type="submit">Salvar Alterações</button>
+        </div>
+    </div>
+</div>
+
+</div>
+</form>
+</div>
+
+</div>
+
+{% if messages %}
+{% endif %}
+{% endblock %}

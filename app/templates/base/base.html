@@ -42,15 +42,9 @@
     </ul>
 </nav>
 
-{% for message in get_flashed_messages() %}
-<div class="flash" id="flash">{{ teste }}</div>
-{% endfor %}
-
 <section class="content">
     <header>
-
         {% block header %}{% endblock %}
-
     </header>
 
     {% block content %}{% endblock %}
