@@ -1,6 +1,6 @@
-from werkzeug.utils import redirect
+from werkzeug.utils import secure_filename
 from app import app
-from flask import render_template, request, session, flash, url_for
+from flask import render_template, request, session, flash, url_for, redirect
 from app.forms.client_forms import client_form
 from app.models.cliente_model import ClienteModel
 from app.models.usuario_model import UsuarioModel

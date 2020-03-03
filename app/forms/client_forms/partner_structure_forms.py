@@ -21,15 +21,10 @@ class PartnerForm(FlaskForm):
     nomeMae = StringField("nomeMae", validators=[DataRequired()], render_kw={"placeholder": 'Nome da Mãe'})
     nomePai = StringField("nomePai", validators=[DataRequired()], render_kw={"placeholder": 'Nome do Pai'})
     participacaoCapitalSocial = SelectField("participacaoCapitalSocial", validators=[DataRequired()], choices=[('Percentual', 'Percentual'), ('Cotas', 'Cotas')])
-
     socioAdministrador = SelectField("socioAdministrador", validators=[DataRequired()], choices=[('Sim', 'Sim'), ('Nao', 'Nao')])
-
     proLabore = SelectField(" proLabore", validators=[DataRequired()], choices=[('Sim', 'Sim'), ('Nao', 'Nao')])
-
     proLaboreValor = IntegerField('proLaboreValor', [validators.required(message='Somente números')], render_kw={"placeholder": 'Valor do Pro-labore'})
-
     reponsavelReceita = SelectField("reponsavelReceita ", validators=[DataRequired()], choices=[('Sim', 'Sim'), ('Nao', 'Nao')])
-
     pis = StringField("pis", validators=[DataRequired()], render_kw={"placeholder": 'PIS'})
 
 

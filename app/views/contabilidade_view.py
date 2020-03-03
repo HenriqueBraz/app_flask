@@ -6,6 +6,17 @@ from app.forms.accounting_forms import accounting_form
 from app.models.contabilidade_model import ContabilidadeModel
 
 
+
+@app.route('/listar_contabilidade<int:id>', methods=["GET"])
+def listar_contabilidade(id):
+    db = ContabilidadeModel()
+    result = db.check_accounting(id)
+    if result is None:
+        return redirect(url_for('cadastrar_contabilidade', id=id))
+
+    return redirect(url_for('editar_contabilidade', id=id))
+
+
 @app.route('/contabilidade/<int:id>',  methods=["GET", "POST"])
 def editar_contabilidade(id):
     db = ContabilidadeModel()

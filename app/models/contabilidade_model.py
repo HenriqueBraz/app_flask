@@ -29,6 +29,16 @@ class ContabilidadeModel(object):
         self.cur.close()
         self.con.close()
 
+    def check_accounting(self, id):
+        try:
+            self.cur.execute(
+                "SELECT eca.id FROM empresas_contabilidade_anterior eca  WHERE  eca.id_empresa = '{}' AND eca.status = 'Ativo';".format(
+                    id))
+            result = self.cur.fetchone()
+            return result
+        except Exception as e:
+            logging.error('Erro em  ContabilidadeModel, método get_accounting(: ' + str(e) + '\n')
+
     def get_accounting(self, id):
         try:
             self.cur.execute(
