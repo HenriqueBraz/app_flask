@@ -76,5 +76,7 @@ class ClientForm(FlaskForm):
                                       choices=[('sim', 'Sim'), ('nao', 'Não')])
     observacoes = TextAreaField(u'observacoes', [validators.length(min=0, max=200)])
 
-    upload = FileField('upload', validators=[FileAllowed(['txt', 'pdf', 'png', 'jpg', 'jpeg'], 'Somente .txt, .pdf, .png, .jpeg')])
+    descricao = TextAreaField(u'descricao', [validators.length(min=0, max=200)])
+
+
 

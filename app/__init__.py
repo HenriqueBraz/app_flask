@@ -6,6 +6,7 @@ from flask_jwt_extended import JWTManager
 import flask_heroku
 
 UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads')
+PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads')
 ALLOWED_EXTENSIONS = set(['pdf', 'jpeg', 'png'])
 
 

@@ -189,7 +189,6 @@
             </div>
             <br>
             <h4>Observações</h4>
-
             <div class="form-group">
                 <div class="row">
                     <div class="col-6 offset-sm-2">
@@ -200,22 +199,32 @@
 
             <h4>Anexos</h4>
             <div class="form-group">
-                <form  method="post">
-                    <input type="file" name="image"> <br /><br />
-                </form>
-            </div>
-
-            <div class="form-group">
                 <div class="row">
-                    <div class="col-10"></div>
+                    <label class="control-label col-2 text-right">PDF, JPEG ou PNG</label>
                     <div class="col-2">
-                        <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
-                        <button class="btn btn-primary"  type="submit">Salvar</button>
+                        <form  method="post">
+                            <input type="file" name="image"> <br /><br />
+                        </form>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                <label class="control-label col-2 text-right">Descrição</label>
+                    <div class="col-4">
+                        {{form.descricao(class="form-control")}} {{form.errors. descricao}}
+                    </div>
+                </div>
 
-        </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-10"></div>
+                        <div class="col-2">
+                            <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
+                            <button class="btn btn-primary"  type="submit">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
     </form>
 </div>
 </div>

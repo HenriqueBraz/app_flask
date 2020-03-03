@@ -1,7 +1,7 @@
 import os
-
+import hashlib
 from werkzeug.utils import secure_filename
-from app import app, ALLOWED_EXTENSIONS, UPLOAD_FOLDER
+from app import app, ALLOWED_EXTENSIONS, UPLOAD_FOLDER, PATH
 from flask import render_template, request, session, flash, url_for, redirect
 from app.forms.client_forms import client_form
 from app.models.cliente_model import ClienteModel
@@ -54,25 +54,31 @@ def cadastrar_cliente():
         observacoes = request.form['observacoes']
         id_responsavel = nome_responsavel
         file = request.files['image']
-
-
-
-        if 'image' not in request.files:
-            flash('o arquivo não pode ser enviado!')
-
-
-        if file.filename == '':
-            flash('Arquivo não selecionado!')
+        descricao = request.form['descricao']
+        path = ''
+        filename = ''
+        size = ''
+        md5 = ''
+        type = ''
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            print(filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            path = (PATH + '/' + filename)
+            print(path)
+            size = int(os.path.getsize(path))
+            print(size)
+            md5 = hashlib.md5(b'filename').hexdigest()
+            print(md5)
+            type = filename.split('.')
+            type = type[1]
+            print(type)
+
 
         if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado,
                              capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
                              tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
-                             telefone, email):
+                             telefone, email, path, filename, descricao, size, type, md5):
 
             message = 'Empresa cadastrada com sucesso!'
             flash(message)
