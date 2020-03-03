@@ -5,7 +5,7 @@ from flask_wtf import CSRFProtect
 from flask_jwt_extended import JWTManager
 import flask_heroku
 
-UPLOAD_FOLDER = os.path.join('/home/henrique/novo_rumo/app/uploads')
+UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads')
 ALLOWED_EXTENSIONS = set(['pdf', 'jpeg', 'png'])
 
 

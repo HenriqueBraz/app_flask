@@ -12,14 +12,14 @@
 <br>
 <div class="bloco">
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <div class="card">
             <div class="card-header">
                 Adicionar Cliente
             </div>
 
-             <div class="form-group">
+            <div class="form-group">
                 <h4>Responsável pelo cliente</h4>
                 <div class="row">
                     <label class="control-label col-2 text-right">Nome</label>
@@ -198,13 +198,11 @@
                 </div>
             </div>
 
-              <h4>Anexos</h4>
+            <h4>Anexos</h4>
             <div class="form-group">
-                <div class="row">
-                    <div class="col-4 offset-sm-2">
-                        {{form.upload(class="form-control")}} {{form.errors.upload}}
-                    </div>
-                </div>
+                <form  method="post">
+                    <input type="file" name="image"> <br /><br />
+                </form>
             </div>
 
             <div class="form-group">

@@ -4,18 +4,8 @@
     <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/forms/client_forms/partner_structure_forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/client_forms/partner_structure_forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/contabilidade_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/contabilidade_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/socios_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/socios_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/excluir_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/excluir_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/cadastar_socio.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/cadastar_socio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/editar_socio.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/editar_socio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/excluir_socio.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/excluir_socio.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/cliente_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/contabilidade_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/contabilidade_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/socios_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/socios_view.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,23 +31,23 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../flask_fundamentos" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/uploads" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/app/templates/auth" />
-      <recent name="$PROJECT_DIR$/app/static/images/icon" />
-      <recent name="$PROJECT_DIR$/app/static" />
-      <recent name="$PROJECT_DIR$/app/templates/base" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/templates/cliente" />
       <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/templates/auth" />
       <recent name="$PROJECT_DIR$/app/forms/auth_forms" />
       <recent name="$PROJECT_DIR$/app/templates/" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/app/templates/auth" />
+      <recent name="$PROJECT_DIR$/app/static/images/icon" />
+      <recent name="$PROJECT_DIR$/app/static" />
+      <recent name="$PROJECT_DIR$/app/templates/base" />
     </key>
   </component>
   <component name="RunDashboard">

@@ -1,9 +1,19 @@
+import os
+
 from werkzeug.utils import secure_filename
-from app import app
+from app import app, ALLOWED_EXTENSIONS, UPLOAD_FOLDER
 from flask import render_template, request, session, flash, url_for, redirect
 from app.forms.client_forms import client_form
 from app.models.cliente_model import ClienteModel
 from app.models.usuario_model import UsuarioModel
+
+
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 
 
 @app.route('/cadastrar_cliente', methods=["GET", "POST"])
@@ -43,7 +53,21 @@ def cadastrar_cliente():
         certificado_digital = request.form['certificado_digital']
         observacoes = request.form['observacoes']
         id_responsavel = nome_responsavel
-        upload = request.form['upload']
+        file = request.files['image']
+
+
+
+        if 'image' not in request.files:
+            flash('o arquivo não pode ser enviado!')
+
+
+        if file.filename == '':
+            flash('Arquivo não selecionado!')
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            print(filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado,
                              capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
