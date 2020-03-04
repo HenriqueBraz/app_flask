@@ -1,7 +1,7 @@
 import os
 import hashlib
 from werkzeug.utils import secure_filename
-from app import app, ALLOWED_EXTENSIONS, UPLOAD_FOLDER, PATH
+from app import app, ALLOWED_EXTENSIONS, PATH
 from flask import render_template, request, session, flash, url_for, redirect
 from app.forms.client_forms import client_form
 from app.models.cliente_model import ClienteModel

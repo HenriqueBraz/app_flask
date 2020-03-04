@@ -37,7 +37,7 @@ class ContabilidadeModel(object):
             result = self.cur.fetchone()
             return result
         except Exception as e:
-            logging.error('Erro em  ContabilidadeModel, método get_accounting(: ' + str(e) + '\n')
+            logging.error('Erro em  ContabilidadeModel, método check_accounting(: ' + str(e) + '\n')
 
     def get_accounting(self, id):
         try:

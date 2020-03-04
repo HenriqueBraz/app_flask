@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+{% block header %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash" id="flash">{{  message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<br>
+<div class="bloco">
+
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="card">
+            <div class="card-header">
+                Cadastrar Acesso
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Código de Acesso Simples*</label>
+                    <div class="col-8">
+                        {{form.codigoAcessoSimples(class="form-control")}} {{form.errors.codigoAcessoSimples}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Acesso E-CAC*</label>
+                    <div class="col-8">
+                        {{form.AcessoECAC(class="form-control")}} {{form.errors.AcessoECAC}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Senha Prefeitura*</label>
+                    <div class="col-3">
+                        {{form.senhaPrefeitura(class="form-control")}} {{form.errors.senhaPrefeitura}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Senha INSS</label>
+                    <div class="col-3">
+                        {{form.senhaINSS(class="form-control")}} {{form.errors.senhaINSS}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Responsável Receita*</label>
+                    <div class="col-3">
+                        {{form.responsavelReceita(class="form-control")}} {{form.errors.responsavelReceita}}
+                    </div>
+                </div>
+            </div>
+            <h5>Posto Fiscal :</h5>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Username*</label>
+                    <div class="col-3">
+                        {{form.usernamePF(class="form-control")}} {{form.errors.usernamePF}}
+                    </div>
+                    <label class="control-label col-2 text-right">Senha*</label>
+                    <div class="col-3">
+                        {{form.senhaPF(class="form-control")}} {{form.errors.senhaPF}}
+                    </div>
+                </div>
+            </div>
+            </br>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-9"></div>
+                    <div class="col-3">
+                        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
+                        <button class="btn btn-primary"  type="submit">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+</div>
+
+{% if messages %}
+{% endif %}
+{% endblock %}
