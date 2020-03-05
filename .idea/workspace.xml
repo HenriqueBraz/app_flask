@@ -3,13 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/forms/accounting_forms/accounting_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/accounting_forms/accounting_form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/acesso_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/acesso_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/auth/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/auth/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/cadastar_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/cadastar_acesso.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/excluir_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/excluir_acesso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/cadastrar_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/cadastrar_contabilidade.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/editar_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/editar_contabilidade.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/excluir_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/excluir_contabilidade.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/acesso_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/acesso_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/contabilidade_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/contabilidade_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/editar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/editar_cliente.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/excluir_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/excluir_cliente.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/cadastar_socio.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/cadastar_socio.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/editar_socio.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/editar_socio.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/excluir_socio.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/excluir_socio.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/listar_socios.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/listar_socios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/teste.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/teste.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/usuario/editar_usuario.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/usuario/editar_usuario.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/usuario/excluir_usuario.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/usuario/excluir_usuario.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/usuario/listar_usuarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/usuario/listar_usuarios.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
