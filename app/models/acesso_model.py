@@ -75,3 +75,23 @@ class AcessoModel(object):
 
         except Exception as e:
             logging.error('Erro em AcessoModel,  método update_accounting ' + str(e) + '\n')
+
+
+    def get_company(self, id):
+        try:
+            self.cur.execute("SELECT e.id, e.empresa, e.created, ec.email, ec.telefone, e.endereco, e.bairro, e.cidade, e.estado FROM empresas e LEFT JOIN  empresas_contato ec  ON  ec.id_empresa = e.id  WHERE  e.id = '{}' AND e.status = 'Ativo';".format(id))
+            result = self.cur.fetchone()
+            return result
+        except Exception as e:
+            logging.error('Erro em  AcessoModel, método get_company(: ' + str(e) + '\n')
+
+
+    def update_status_acesso(self, id):
+        try:
+            self.cur.execute("UPDATE acessos SET status = 'Inativo' WHERE id_empresa = {}".format(id))
+            self.con.commit()
+            return True
+
+        except Exception as e:
+            logging.error('Erro em AcessoModel, método update_status_company' + str(e) + '\n')
+

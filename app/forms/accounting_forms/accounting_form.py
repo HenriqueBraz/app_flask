@@ -10,5 +10,5 @@ class RegisterFormAccouting(FlaskForm):
     contabilidade = StringField("contabilidade", validators=[DataRequired()])
     nome = StringField("nome", validators=[DataRequired()], render_kw={"placeholder": 'Nome'})
     telefone = StringField("telefone", validators=[validate_phone(region='BR', message="Você precisa entrar com uma telefone válido.")], render_kw={"placeholder": '(dd)ddddd-dddd'})
-    email = EmailField("email", validators=[Email(), DataRequired()], render_kw={"placeholder": 'Email'})
+    email = EmailField("email", validators=[Email(message="Email inválido"), DataRequired()], render_kw={"placeholder": 'Email'})
     dataEntrada = DateField("dataEntrada", validators=[DataRequired(message="Você precisa entrar com uma data válida.")], format='%d/%m/%Y', render_kw={"placeholder": 'dd/mm/aaaa'})

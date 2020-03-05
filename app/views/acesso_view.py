@@ -33,9 +33,10 @@ def cadastrar_acesso(id):
         senhaINSS = request.form['senhaINSS']
         responsavelReceita = request.form['responsavelReceita']
         if db.check_accounting(id) is not None:
-            return redirect(url_for('editar_acesso', id=id))
+            return redirect(url_for('editar_acesso', id_empresa=id))
 
-        elif db.insert_accounting(id, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS,responsavelReceita):
+        elif db.insert_accounting(id, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS,
+                                  responsavelReceita):
             flash('Acesso cadastrado com sucesso!')
 
         else:
@@ -48,7 +49,6 @@ def cadastrar_acesso(id):
 def editar_acesso(id):
     db = AcessoModel()
     result = db.get_accounting(id)
-    print(result)
     form = access_forms.AccessForm(
         id_empresa=result[1],
         codigoAcessoSimples=result[2],
@@ -67,9 +67,30 @@ def editar_acesso(id):
         senhaPrefeitura = request.form['senhaPrefeitura']
         senhaINSS = request.form['senhaINSS']
         responsavelReceita = request.form['responsavelReceita']
-        if db.update_accounting(id, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS,responsavelReceita):
+        if db.update_accounting(id, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS,
+                                responsavelReceita):
             flash('Alterações salvas com sucesso!')
         else:
             flash('Houve um erro ao inserir a cliente, contate o administrador do sistema')
 
-    return render_template('cliente/acesso/editar_acesso.html', form=form, pagina='Editar Acesso')
+    return render_template('cliente/acesso/editar_acesso.html', form=form, id_empresa=id, pagina='Editar Acesso')
+
+
+@app.route('/excluir_acesso/<int:id>', methods=["GET", "POST"])
+def excluir_acesso(id):
+    db = AcessoModel()
+    result = db.get_company(id)
+    print(result)
+    flag = 1
+    if request.method == 'POST':
+        if request.form['submit_button'] == 'Excluir Acesso':
+            if result:
+                if db.update_status_acesso(result[0]):
+                    flash('Acesso excluído com sucesso!')
+                    flag = 0
+    return render_template('cliente/acesso/excluir_acesso.html', result=result, flag=flag, id_empresa=id,  pagina='Excluir Acesso')
+
+
+
+
+

@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/forms/client_forms/access_forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/acesso_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/cadastar_acesso.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/excluir_acesso.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/acesso_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/contabilidade_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/contabilidade_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/editar_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/editar_contabilidade.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/rotas.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/rotas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/cliente_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms/accounting_forms/accounting_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/accounting_forms/accounting_form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/acesso_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/acesso_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/excluir_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/excluir_acesso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/excluir_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/excluir_contabilidade.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/acesso_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/acesso_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/contabilidade_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/contabilidade_view.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

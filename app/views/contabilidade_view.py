@@ -39,7 +39,7 @@ def cadastrar_contabilidade(id):
     return render_template('cliente/contabilidade/cadastrar_contabilidade.html', form=form, pagina='')
 
 
-@app.route('/contabilidade/<int:id>', methods=["GET", "POST"])
+@app.route('/editar_contabilidade/<int:id>', methods=["GET", "POST"])
 def editar_contabilidade(id):
     db = ContabilidadeModel()
     result = db.get_accounting(id)
@@ -70,17 +70,12 @@ def editar_contabilidade(id):
 def excluir_contabilidade(id):
     db = ContabilidadeModel()
     result = db.get_accounting(id)
-    if result is None:
-        flash('Esta empresa não possui Contabilidade Anterior cadastrada. Tente outra Ação.')
-        return redirect(url_for('listar_clientes'))
-    else:
-        flag = 1
-        if request.method == 'POST':
-            if request.form['submit_button'] == 'Excluir Contabilidade Anterior':
-                if result:
-                    if db.update_status_accounting(result[0]):
-                        flash('cliente excluído com sucesso!')
-                        flag = 0
+    flag = 1
+    if request.method == 'POST':
+        if request.form['submit_button'] == 'Excluir Contabilidade':
+            if result:
+                if db.update_status_accounting(result[0]):
+                    flash('Contabilidade excluída com sucesso!')
+                    flag = 0
 
-        return render_template('cliente/contabilidade/excluir_contabilidade.html',
-                               pagina='Excluir Contabilidade Anterior', result=result, flag=flag)
+    return render_template('cliente/contabilidade/excluir_contabilidade.html',pagina='Excluir Contabilidade Anterior', result=result, flag=flag)
