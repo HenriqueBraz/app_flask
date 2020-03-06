@@ -31,7 +31,15 @@ class SociosModel(object):
 
     def get_partner(self, id):
         try:
-            self.cur.execute("SELECT * FROM empresas_socios es LEFT JOIN  empresas e ON e.id = es.id_empresa  WHERE  1=1 AND  e.id = '{}' AND  e.status = 'Ativo' AND es.status = 'Ativo';".format(id))
+            self.cur.execute("SELECT * FROM empresas_socios es LEFT JOIN  empresas e ON e.id = es.id_empresa  WHERE  1=1 AND  es.id = '{}' AND  e.status = 'Ativo' AND es.status = 'Ativo';".format(id))
+            result = self.cur.fetchone()
+            return result
+        except Exception as e:
+            logging.error('Erro em  SociosModel, método get_partner: ' + str(e) + '\n')
+
+    def get_id_company(self, id):
+        try:
+            self.cur.execute("SELECT e.id FROM  empresas e LEFT JOIN  empresas_socios  es  ON e.id = es.id_empresa  WHERE  1=1 AND  es.id = '{}' AND  e.status = 'Ativo' AND es.status = 'Ativo';".format(id))
             result = self.cur.fetchone()
             return result
         except Exception as e:

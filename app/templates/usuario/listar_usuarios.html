@@ -1,6 +1,12 @@
 {% extends 'base/base.html' %}
-{% block content %}
 
+{% block page %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item active" aria-current="page">Listar_Usuários</li>
+{% endblock %}
+
+
+{% block content %}
 <br>
 {% if result %}
 <table id="table_id" class="display">
@@ -17,41 +23,41 @@
     </thead>
     <tbody>
     {% if group == 'Administrador' %}
-        {% for row in result %}
-        <tr>
-            <td> {{ row[1] }}</td>
-            <td> {{ row[2] }}</td>
-            <td> {{ row[3] }}</td>
-            <td> {{ row[4] }}</td>
-            <td> {{ row[5] }}</td>
-            <td> {{ row[6] }}</td>
-            <td><a href="{{ url_for('edita_usuario', id = row[0]) }}">Editar</a>
+    {% for row in result %}
+    <tr>
+        <td> {{ row[1] }}</td>
+        <td> {{ row[2] }}</td>
+        <td> {{ row[3] }}</td>
+        <td> {{ row[4] }}</td>
+        <td> {{ row[5] }}</td>
+        <td> {{ row[6] }}</td>
+        <td><a href="{{ url_for('edita_usuario', id = row[0]) }}">Editar</a>
             <a href="{{ url_for('exclui_usuario', id = row[0]) }}">Excluir</a></td>
-        </tr>
-        {% endfor %}
+    </tr>
+    {% endfor %}
 
     {% else %}
-        <tr>
-            <td> {{ result[1] }}</td>
-            <td> {{ result[2] }}</td>
-            <td> {{ result[3] }}</td>
-            <td> {{ result[4] }}</td>
-            <td> {{ result[5] }}</td>
-            <td> {{ result[6] }}</td>
-            <td><a href="{{ url_for('edita_usuario', id = result[0]) }}">Editar</a>
-        </tr>
+    <tr>
+        <td> {{ result[1] }}</td>
+        <td> {{ result[2] }}</td>
+        <td> {{ result[3] }}</td>
+        <td> {{ result[4] }}</td>
+        <td> {{ result[5] }}</td>
+        <td> {{ result[6] }}</td>
+        <td><a href="{{ url_for('edita_usuario', id = result[0]) }}">Editar</a>
+    </tr>
 
     {% endif %}
 
-{% endif %}
-</tbody>
+    {% endif %}
+    </tbody>
 </table>
 
 
 <br><br>
-  <div class="botao">
-      <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
-  </div>
+<div class="botao">
+    <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
+</div>
 
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">

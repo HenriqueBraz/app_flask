@@ -1,4 +1,12 @@
 {% extends 'base/base.html' %}
+
+{% block page %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_clientes') }}">Listar Cliente</a></li>
+<li class="breadcrumb-item active" aria-current="page">Cadastrar Contabilidade</li>
+{% endblock %}
+
+
 {% block content %}
 
 {% with messages = get_flashed_messages() %}

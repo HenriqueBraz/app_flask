@@ -33,7 +33,7 @@
         <li>{{"Logado como: "}}{{g.user[0]}}</li>
         <li><a href="{{ url_for('logout') }}">Logout</a>
             {% else %}
-        <li><a href="{{ url_for('register') }}">Cadastre-se</a>
+
         <li><a href="{{ url_for('login') }}">Login</a>
             {% endif %}
         </li>
@@ -41,8 +41,16 @@
 </nav>
 <!--End Navigation -->
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        {% block page %}{% endblock %}
+    </ol>
+</nav>
+
 <!--Content -->
 <section class="content">
+
+
 
     {% block content %}{% endblock %}
 
