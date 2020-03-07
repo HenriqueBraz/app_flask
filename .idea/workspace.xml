@@ -2,27 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/forms/occurrences_forms/occurrences_forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ocorrencia_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/ocorrencias/incluir_ocorrencia.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/ocorrencia_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/socios_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/socios_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/cadastar_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/cadastar_acesso.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/excluir_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/excluir_acesso.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/cadastrar_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/cadastrar_contabilidade.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/editar_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/editar_contabilidade.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/excluir_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/excluir_contabilidade.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/editar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/editar_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/excluir_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/excluir_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/cadastar_socio.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/cadastar_socio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/editar_socio.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/editar_socio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/excluir_socio.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/excluir_socio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/listar_socios.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/quadro_societario/listar_socios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/usuario/editar_usuario.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/usuario/editar_usuario.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/usuario/excluir_usuario.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/usuario/excluir_usuario.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/usuario/listar_usuarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/usuario/listar_usuarios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms/accounting_forms/accounting_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/accounting_forms/accounting_form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/cliente_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/cliente_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/cliente_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/socios_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/socios_view.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -49,16 +39,16 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/uploads" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/views" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/views" />
+      <recent name="$PROJECT_DIR$/app/views/ocorrencias" />
       <recent name="$PROJECT_DIR$/app/templates/cliente" />
       <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/templates/auth" />
-      <recent name="$PROJECT_DIR$/app/forms/auth_forms" />
-      <recent name="$PROJECT_DIR$/app/templates/" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -161,13 +151,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/models/usuario_model.py</url>
-          <line>88</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

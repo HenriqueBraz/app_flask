@@ -164,11 +164,11 @@ def editar_cliente(id):
         folha_pagamento = request.form['folha_pagamento']
         certificado_digital = request.form['certificado_digital']
         observacoes = request.form['observacoes']
-        id_responsavel = session.get('user_id')
+        id_responsavel = nome_responsavel
         nome = request.form['nome']
         telefone = request.form['telefone']
         email = request.form['email']
-        if db.update_company(nome_responsavel, empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire,
+        if db.update_company(empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire,
                              cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria,
                              dia_faturamento, folha_pagamento, certificado_digital, observacoes, id_responsavel, id,
                              nome, telefone, email):

@@ -2,7 +2,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, DateField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import Email, DataRequired
-
 from app.forms.client_forms.client_form import validate_phone
 
 

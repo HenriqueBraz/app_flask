@@ -1,7 +1,5 @@
 from datetime import datetime
-
 from werkzeug.utils import redirect
-
 from app import app
 from flask import render_template, request, flash, url_for
 from app.forms.client_forms import partner_structure_forms
