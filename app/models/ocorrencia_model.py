@@ -36,3 +36,15 @@ class OcorrenciaModel(object):
             return result
         except Exception as e:
             logging.error('Erro em  EmpresaModel, método get_companies: ' + str(e) + '\n')
+
+    def insert_ocorrencia(self, id_cliente, observacoes):
+        try:
+            now = datetime.now()
+            data = now.strftime('%Y-%m-%d %H:%M:%S')
+            sql_data = (id_cliente, observacoes, 'Aberto')
+            sql = "INSERT INTO empresas_ocorrencias (id_empresa, descritivo, status) VALUES (%s, %s, %s);"
+            self.cur.execute(sql, sql_data)
+            self.con.commit()
+            return True
+        except Exception as e:
+            logging.error('Erro em  EmpresaModel, método insert_ocorrencia(: ' + str(e) + '\n')

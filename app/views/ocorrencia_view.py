@@ -13,23 +13,21 @@ def incluir_ocorrencia():
     db = ClienteModel()
     result = db.get_companies()
     form.cliente.choices = [(row[0], row[1]) for row in result]
-    id = form.cliente.choices.row[0]
-    print(id)
-
     db = OcorrenciaModel()
     if form.validate_on_submit():
-        cliente = request.form['cliente']
-        observacoes = request.fomr['observacoes']
 
-    if db.insert_ocorrencia(cliente, observacoes):
+        id_cliente = request.form['cliente']
+        observacoes = request.form['observacoes']
 
-        message = 'Ocorrencia cadastrada com sucesso!'
-        flash(message)
-        return redirect(url_for('incluir_ocorrencia', form=form))
+        if db.insert_ocorrencia(id_cliente, observacoes):
 
-    else:
-        message = 'Houve um erro ao inserir a cliente, contate o administrador do sistema'
-        flash(message)
+            message = 'Ocorrencia cadastrada com sucesso!'
+            flash(message)
+            return redirect(url_for('incluir_ocorrencia', form=form, pagina='Incluir Ocorrencia'))
+
+        else:
+            message = 'Houve um erro ao inserir a cliente, contate o administrador do sistema'
+            flash(message)
 
 
     return render_template('ocorrencias/incluir_ocorrencia.html', form=form, pagina='Incluir Ocorrencia')
