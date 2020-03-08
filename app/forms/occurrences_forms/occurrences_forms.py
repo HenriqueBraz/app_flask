@@ -1,7 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, TextAreaField, validators
+from wtforms import SelectField, TextAreaField, validators, StringField
+from wtforms.validators import DataRequired
 
 
 class OccurrencesRegisterForm(FlaskForm):
     cliente = SelectField("cliente", coerce=int, render_kw={'readonly': True}, choices=[])
-    observacoes = TextAreaField(u'observacoes', [validators.length(min=0, max=200)])
+    observacoes = TextAreaField(u'observacoes', [validators.length(min=0, max=500, message='O campo precisa ser menor que 500 caracteres')])
+
+
+class OccurrencesEditForm(FlaskForm):
+    cliente = StringField("cliente", render_kw={'readonly': True}, validators=[DataRequired()])
+    observacoes = TextAreaField(u'observacoes', [validators.length(min=0, max=500, message='O campo precisa ser menor que 500 caracteres')])

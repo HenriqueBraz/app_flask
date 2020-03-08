@@ -2,7 +2,8 @@
 
 {% block page %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
-<li class="breadcrumb-item active" aria-current="page">Listar Clientes</li>
+<li class="breadcrumb-item active" aria-current="page">Listar Ocorrências - Simples Nacional</li>
+
 {% endblock %}
 
 
@@ -21,12 +22,11 @@
     <thead>
     <tr>
         <th>Empresa</th>
-        <th>Data Cadastro</th>
-        <th>Responsável</th>
         <th>CNPJ</th>
         <th>CCM</th>
-        <th>Endereço</th>
-        <th>Localidade</th>
+        <th>Data</th>
+        <th>Responsável</th>
+        <th>Ocorrência</th>
         <th></th>
     </tr>
     </thead>
@@ -34,24 +34,21 @@
     {% if result %}
     {% for row in result %}
     <tr>
-        <td> {{ row[1] }}</td>
-        <td> {{ row[2] }}</td>
-        <td> {{ row[3] }}</td>
-        <td> {{ row[4] }}</td>
-        <td> {{ row[5] }}</td>
-        <td> {{ row[6] }}, {{ row[7] }}, {{ row[8] }} </td>
-        <td> {{ row[9] }}</td>
+        <td> {{ row[1] }} </td>
+        <td> {{ row[2] }} </td>
+        <td> {{ row[3] }} </td>
+        <td> {{ row[4] }} </td>
+        <td> {{ row[5] }} </td>
+        <td> {{ row[6] }} </td>
         <td><div class="btn-group dropleft">
             <a class="btn btn-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ações
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{{ url_for('editar_cliente', id = row[0]) }}">Editar</a>
-                <a class="dropdown-item" href="{{ url_for('excluir_cliente', id = row[0]) }}">Excluir</a>
-                <a class="dropdown-item" href="{{ url_for('listar_contabilidade', id = row[0]) }}">Contabilidade</a>
-                <a class="dropdown-item" href="{{ url_for('listar_socios', id = row[0]) }}">Socios</a>
-                <a class="dropdown-item" href="{{ url_for('listar_acessos', id = row[0]) }}">Acessos</a>
+                <a class="dropdown-item" href="{{ url_for('ver_ocorrencia', id = row[0]) }}">Ver</a>
+                <a class="dropdown-item" href="{{ url_for('alterar_ocorrencia', id = row[0]) }}">Alterar</a>
+                <a class="dropdown-item" href="{{ url_for('excluir_ocorrencia', id = row[0]) }}">Excluir</a>
             </div>
         </div>
         </td>
@@ -65,9 +62,9 @@
 <div class="form-group">
     <div class="row">
         <div class="col-11"></div>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
-        </div>
+        <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
     </div>
+</div>
 </div>
 
 

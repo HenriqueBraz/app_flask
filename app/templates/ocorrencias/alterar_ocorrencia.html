@@ -1,0 +1,67 @@
+{% extends 'base/base.html' %}
+
+{% block page %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples nacional</a></li>
+<li class="breadcrumb-item active" aria-current="page">Alterar Ocorrência</li>
+{% endblock %}
+
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash" id="flash">{{  message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<br>
+<div class="bloco">
+
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="card">
+            <div class="card-header">
+                Alterar Ocorrência
+            </div>
+            <br>
+            <div class="row">
+                <label class="control-label col-4 text-right">Cliente</label>
+                <div class="col-4">
+                    {{form.cliente(class="form-control")}} {{form.errors.cliente }}
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-4 text-right">Observações</label>
+                    <div class="col-4">
+                        {{form.observacoes(class="form-control")}} {{form.errors.observacoes}}
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+</div>
+</br>
+<div class="form-group">
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_sn') }}" ><font color=white>voltar</font></a></button>
+            <button class="btn btn-primary"  type="submit">Salvar Alterações</button>
+        </div>
+    </div>
+</div>
+
+</div>
+</form>
+</div>
+
+</div>
+
+{% if messages %}
+{% endif %}
+{% endblock %}

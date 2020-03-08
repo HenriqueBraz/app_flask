@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+
+{% block page %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples Nacional</a></li>
+<li class="breadcrumb-item active" aria-current="page">Ver ocorrência</li>
+{% endblock %}
+
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash" id="flash">{{  message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<br>
+<table id="table_id" class="display">
+    <thead>
+    <tr>
+        <th>Empresa</th>
+        <th>CNPJ</th>
+        <th>CCM</th>
+        <th>Data</th>
+        <th>Responsável</th>
+        <th>Ocorrência</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if result %}
+    <tr>
+        <td> {{ result[1] }} </td>
+        <td> {{ result[2] }} </td>
+        <td> {{ result[3] }} </td>
+        <td> {{ result[4] }} </td>
+        <td> {{ result[5] }} </td>
+        <td> {{ result[6] }} </td>
+    </tr>
+    {% endif %}
+    </tbody>
+</table>
+
+<br><br>
+<div class="form-group">
+    <div class="row">
+        <div class="col-11"></div>
+        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_sn') }}" ><font color=white>voltar</font></a></button>
+    </div>
+</div>
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type=text/javascript src="{{url_for('static', filename='js/scripts.js') }}"></script>
+
+
+
+
+{% endblock %}
