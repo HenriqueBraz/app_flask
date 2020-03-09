@@ -92,6 +92,6 @@ def excluir_ocorrencia(id, flag):
             if result:
                 if db.update_status_partner(result[7]):
                     flash('ocorrência excluída com sucesso!')
-                    flag = 0
+                    flag1 = 0
     return render_template('ocorrencias/excluir_ocorrencia.html', result=result, flag=flag, flag1=flag1,
                            pagina='Excluir Ocorrencia')

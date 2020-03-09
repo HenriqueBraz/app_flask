@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/templates/ocorrencias/listar_ocorrencias_lp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/ocorrencia_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/ocorrencia_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/alterar_ocorrencia.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/alterar_ocorrencia.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/excluir_ocorrencia.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/excluir_ocorrencia.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/listar_ocorrencias_sn.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/listar_ocorrencias_sn.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/ver_ocorrencia.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/ver_ocorrencia.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/ocorrencia_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/ocorrencia_view.py" afterDir="false" />
-    </list>
+    <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
