@@ -60,6 +60,7 @@ def cadastrar_cliente():
         size = ''
         md5 = ''
         type = ''
+        flag = ''
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -73,12 +74,12 @@ def cadastrar_cliente():
             type = filename.split('.')
             type = type[1]
             print(type)
-
+            flag = 1
 
         if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado,
                              capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
                              tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
-                             telefone, email, path, filename, descricao, size, type, md5):
+                             telefone, email, path, filename, descricao, size, type, md5, flag):
 
             message = 'Empresa cadastrada com sucesso!'
             flash(message)

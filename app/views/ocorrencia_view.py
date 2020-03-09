@@ -7,6 +7,16 @@ from app.models.cliente_model import ClienteModel
 from app.models.ocorrencia_model import OcorrenciaModel
 
 
+
+@app.route('/listar_ocorrencias_lp', methods=["GET"])
+def listar_ocorrencias_lp():
+    db = OcorrenciaModel()
+    lista_ocorrencias = db.get_occurrences_lp()
+    flag = 0
+    return render_template('ocorrencias/listar_ocorrencias_lp.html', flag=flag, result=lista_ocorrencias,
+                           pagina='Listar Ocorrencias')
+
+
 @app.route('/listar_ocorrencias_sn', methods=["GET"])
 def listar_ocorrencias_sn():
     db = OcorrenciaModel()
@@ -16,12 +26,13 @@ def listar_ocorrencias_sn():
                            pagina='Listar Ocorrencias')
 
 
-@app.route('/listar_ocorrencias_lp', methods=["GET"])
-def listar_ocorrencias_lp():
+@app.route('/listar_ocorrencias_r', methods=["GET"])
+def listar_ocorrencias_r():
     db = OcorrenciaModel()
-    lista_ocorrencias = db.get_occurrences_lp()
-    flag = 0
-    return render_template('ocorrencias/listar_ocorrencias_lp.html', flag=flag, result=lista_ocorrencias,
+    lista_ocorrencias = db.get_occurrences_r()
+    flag = 2
+    print(lista_ocorrencias)
+    return render_template('ocorrencias/listar_ocorrencias_r.html', flag=flag, result=lista_ocorrencias,
                            pagina='Listar Ocorrencias')
 
 

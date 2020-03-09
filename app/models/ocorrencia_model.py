@@ -36,7 +36,7 @@ class OcorrenciaModel(object):
             result = self.cur.fetchall()
             return result
         except Exception as e:
-            logging.error('Erro em  OcorrenciaModel, método get_occurrences: ' + str(e) + '\n')
+            logging.error('Erro em  OcorrenciaModel, método get_occurrences_sn: ' + str(e) + '\n')
 
     def get_occurrences_lp(self):
         try:
@@ -45,7 +45,16 @@ class OcorrenciaModel(object):
             result = self.cur.fetchall()
             return result
         except Exception as e:
-            logging.error('Erro em  OcorrenciaModel, método get_occurrences: ' + str(e) + '\n')
+            logging.error('Erro em  OcorrenciaModel, método get_occurrences_lp: ' + str(e) + '\n')
+
+    def get_occurrences_r(self):
+        try:
+            self.cur.execute(
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, eo.updated, eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'REAL' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
+            result = self.cur.fetchall()
+            return result
+        except Exception as e:
+            logging.error('Erro em  OcorrenciaModel, método get_occurrences_r: ' + str(e) + '\n')
 
     def insert_occurrence(self, id_cliente, responsavel, observacoes):
         try:

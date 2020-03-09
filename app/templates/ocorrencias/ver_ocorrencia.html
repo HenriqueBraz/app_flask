@@ -2,12 +2,15 @@
 
 {% block page %}
 
-{% if  flag  %}
+{% if  flag == 1  %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples Nacional</a></li>
-{% else %}
+{% elif  flag == 0  %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_lp') }}">Listar Ocorrências - Lucro Presumido</a></li>
+{% else %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_r') }}">Listar Ocorrências - Lucro Real</a></li>
 {% endif %}
 
 <li class="breadcrumb-item active" aria-current="page">Ver ocorrência</li>
@@ -56,10 +59,12 @@
 <div class="form-group">
     <div class="row">
         <div class="col-11"></div>
-        {% if flag %}
+        {% if flag == 1 %}
         <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_sn') }}" ><font color=white>voltar</font></a></button>
-        {% else %}
+        {% elif flag == 0 %}
         <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_lp') }}" ><font color=white>voltar</font></a></button>
+        {% else %}
+        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_r') }}" ><font color=white>voltar</font></a></button>
         {% endif %}
     </div>
 </div>
