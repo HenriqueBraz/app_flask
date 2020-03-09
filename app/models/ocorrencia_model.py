@@ -29,10 +29,19 @@ class OcorrenciaModel(object):
         self.cur.close()
         self.con.close()
 
-    def get_occurrences(self):
+    def get_occurrences_sn(self):
         try:
             self.cur.execute(
                 "SELECT e.id, e.empresa, e.cnpj, e.ccm, eo.updated, eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'SIMPLES NACIONAL' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
+            result = self.cur.fetchall()
+            return result
+        except Exception as e:
+            logging.error('Erro em  OcorrenciaModel, método get_occurrences: ' + str(e) + '\n')
+
+    def get_occurrences_lp(self):
+        try:
+            self.cur.execute(
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, eo.updated, eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'PRESUMIDO' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
             result = self.cur.fetchall()
             return result
         except Exception as e:

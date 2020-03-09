@@ -7,11 +7,30 @@ from app.models.cliente_model import ClienteModel
 from app.models.ocorrencia_model import OcorrenciaModel
 
 
-@app.route('/ver_ocorrencia<int:id>', methods=["GET","POST"])
-def ver_ocorrencia(id):
+@app.route('/listar_ocorrencias_sn', methods=["GET"])
+def listar_ocorrencias_sn():
+    db = OcorrenciaModel()
+    lista_ocorrencias = db.get_occurrences_sn()
+    flag = 1
+    return render_template('ocorrencias/listar_ocorrencias_sn.html', flag=flag, result=lista_ocorrencias,
+                           pagina='Listar Ocorrencias')
+
+
+@app.route('/listar_ocorrencias_lp', methods=["GET"])
+def listar_ocorrencias_lp():
+    db = OcorrenciaModel()
+    lista_ocorrencias = db.get_occurrences_lp()
+    flag = 0
+    return render_template('ocorrencias/listar_ocorrencias_lp.html', flag=flag, result=lista_ocorrencias,
+                           pagina='Listar Ocorrencias')
+
+
+@app.route('/ver_ocorrencia<int:id><int:flag>', methods=["GET", "POST"])
+def ver_ocorrencia(id, flag):
     db = OcorrenciaModel()
     result = db.get_occurrence(id)
-    return render_template('ocorrencias/ver_ocorrencia.html', result=result,   pagina='Ver Ocorrencia')
+    print(flag)
+    return render_template('ocorrencias/ver_ocorrencia.html', result=result, flag=flag, pagina='Ver Ocorrencia')
 
 
 @app.route('/incluir_ocorrencia', methods=["GET", "POST"])
@@ -36,20 +55,11 @@ def incluir_ocorrencia():
             message = 'Houve um erro ao inserir a cliente, contate o administrador do sistema'
             flash(message)
 
-
     return render_template('ocorrencias/incluir_ocorrencia.html', form=form, pagina='Incluir Ocorrencia')
 
 
-
-@app.route('/listar_ocorrencias_sn', methods=["GET"])
-def listar_ocorrencias_sn():
-    db = OcorrenciaModel()
-    lista_ocorrencias = db.get_occurrences()
-    return render_template('ocorrencias/listar_ocorrencias_sn.html', result=lista_ocorrencias, pagina='Listar Ocorrencias')
-
-
-@app.route('/alterar_ocorrencia<int:id>', methods=["GET", "POST"])
-def alterar_ocorrencia(id):
+@app.route('/alterar_ocorrencia<int:id><int:flag>', methods=["GET", "POST"])
+def alterar_ocorrencia(id, flag):
     db = OcorrenciaModel()
     result = db.get_occurrence_edit(id)
     id_ocorrencia = result[4]
@@ -63,29 +73,25 @@ def alterar_ocorrencia(id):
         responsavel = session.get('username')
         observacoes = request.form['observacoes']
 
-
         if db.update_occurrence(id_cliente, responsavel, observacoes, id_ocorrencia):
             flash('Alterações salvas com sucesso!')
 
         else:
             flash('Houve um erro ao realizar a alteração, contate o administrador do sistema')
 
-    return render_template('ocorrencias/alterar_ocorrencia.html', form=form, pagina='Alterar Ocorrencia')
+    return render_template('ocorrencias/alterar_ocorrencia.html', flag=flag, form=form, pagina='Alterar Ocorrencia')
 
 
-
-@app.route('/excluir_ocorrencia<int:id>', methods=["GET","POST"])
-def excluir_ocorrencia(id):
+@app.route('/excluir_ocorrencia<int:id><int:flag>', methods=["GET", "POST"])
+def excluir_ocorrencia(id, flag):
     db = OcorrenciaModel()
     result = db.get_occurrence(id)
-    print(result)
-    flag = 1
+    flag1 = 1
     if request.method == 'POST':
         if request.form['submit_button'] == 'Excluir ocorrencia':
             if result:
                 if db.update_status_partner(result[7]):
                     flash('ocorrência excluída com sucesso!')
                     flag = 0
-    return render_template('ocorrencias/excluir_ocorrencia.html', result=result, flag=flag,  pagina='Excluir Ocorrencia')
-
-
+    return render_template('ocorrencias/excluir_ocorrencia.html', result=result, flag=flag, flag1=flag1,
+                           pagina='Excluir Ocorrencia')

@@ -1,9 +1,16 @@
 {% extends 'base/base.html' %}
 
 {% block page %}
+
+{% if flag %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
-<li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples nacional</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples Nacional</a></li>
+{% else %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Lucro Presumido</a></li>
+{% endif %}
 <li class="breadcrumb-item active" aria-current="page">Excluir Ocorrência</li>
+
 {% endblock %}
 
 {% block content %}
@@ -19,7 +26,7 @@
 <div class="descadastro">
     <table class = "table"><tbody>
 
-    {% if flag %}
+    {% if flag1 %}
     {% if result %}
     <h1>A seguinte ocorrência será excluída:</h1><br><br>
 

@@ -20,7 +20,7 @@
             <label for="check2" >Ocorrências por Cliente</label>
             <ul>
                 <li><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples Nacional</a></li>
-                <li><a href="#">Listar Ocorrências - Lucro Presumido</a></li>
+                <li><a href="{{ url_for('listar_ocorrencias_lp') }}">Listar Ocorrências - Lucro Presumido</a></li>
                 <li><a href="{{ url_for('incluir_ocorrencia') }}">Incluir Ocorrência</a></li>
             </ul>
         </div>
