@@ -1,4 +1,3 @@
-from datetime import datetime
 from werkzeug.utils import redirect
 from app import app
 from flask import render_template, request, flash, url_for, session
@@ -31,7 +30,6 @@ def listar_ocorrencias_r():
     db = OcorrenciaModel()
     lista_ocorrencias = db.get_occurrences_r()
     flag = 2
-    print(lista_ocorrencias)
     return render_template('ocorrencias/listar_ocorrencias_r.html', flag=flag, result=lista_ocorrencias,
                            pagina='Listar Ocorrencias')
 
@@ -40,7 +38,6 @@ def listar_ocorrencias_r():
 def ver_ocorrencia(id, flag):
     db = OcorrenciaModel()
     result = db.get_occurrence(id)
-    print(flag)
     return render_template('ocorrencias/ver_ocorrencia.html', result=result, flag=flag, pagina='Ver Ocorrencia')
 
 

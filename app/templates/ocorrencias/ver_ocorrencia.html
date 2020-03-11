@@ -4,12 +4,15 @@
 
 {% if  flag == 1  %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Ocorrências por Cliente</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples Nacional</a></li>
 {% elif  flag == 0  %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Ocorrências por Cliente</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_lp') }}">Listar Ocorrências - Lucro Presumido</a></li>
 {% else %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Ocorrências por Cliente</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_r') }}">Listar Ocorrências - Lucro Real</a></li>
 {% endif %}
 

@@ -1,9 +1,9 @@
 {% extends 'base/base.html' %}
 
 {% block page %}
-<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
-<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Ocorrências por Cliente</a></li>
-<li class="breadcrumb-item active" aria-current="page">Incluir Ocorrência</li>
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a>
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Serviços por Cliente</a></li>
+<li class="breadcrumb-item active" aria-current="page">Faturamento Individual</li>
 {% endblock %}
 
 
@@ -24,7 +24,7 @@
         {{ form.csrf_token }}
         <div class="card">
             <div class="card-header">
-                Incluir Ocorrência
+                Faturamento Individual
             </div>
             <br>
             <div class="row">
@@ -36,9 +36,27 @@
             <br>
             <div class="form-group">
                 <div class="row">
-                    <label class="control-label col-4 text-right">Observações</label>
+                    <label class="control-label col-4 text-right">Mês</label>
+                    <div class="col-0">
+                        {{form.mes(class="form-control")}} {{form.errors.mes}}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-4 text-right">Ano</label>
+                    <div class="col-1">
+                        {{form.ano(class="form-control")}} {{form.errors.ano}}
+                    </div>
+                </div>
+            </div>
+             <br>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-4 text-right">Valor</label>
                     <div class="col-4">
-                        {{form.observacoes(class="form-control")}} {{form.errors.observacoes}}
+                        {{form.valor(class="form-control")}} {{form.errors.valor}}
                     </div>
                 </div>
             </div>
@@ -51,7 +69,7 @@
         <div class="col-9"></div>
         <div class="col-3">
             <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
-            <button class="btn btn-primary"  type="submit">Salvar Alterações</button>
+            <button class="btn btn-primary"  type="submit">Enviar</button>
         </div>
     </div>
 </div>

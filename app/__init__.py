@@ -15,7 +15,8 @@ with open('config.json') as f:
 
 JWTManager(app)
 
-from .views import usuario_view, auth_view, index_view, cliente_view, contabilidade_view, socios_view, acesso_view
+from .views import usuario_view, auth_view, index_view, cliente_view, contabilidade_view, socios_view, acesso_view, \
+    faturamento_view
 from app.views import ocorrencia_view
 from .models import usuario_model, cliente_model, contabilidade_model, socios_model, acesso_model
 
