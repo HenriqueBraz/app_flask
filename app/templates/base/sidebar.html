@@ -1,55 +1,96 @@
 {% block sidebar %}
-<div class="barra">
-    <nav2>
-        <br>
-        <div class="item">
-            <input type="checkbox" id="check0">
-            <label for="check1"><a href="{{ url_for('usuarios') }}" ><font color=white><div class="link">Listar Usuários</div></font></a></label>
-        </div>
-        <br>
-        <div class="item">
-            <input type="checkbox" id="check1">
-            <label for="check1" >Clientes</label>
-            <ul>
-                <li><a href="{{ url_for('listar_clientes') }}">Listar Clientes</a></li>
-                <li><a href="{{ url_for('cadastrar_cliente') }}">Cadastrar Novo Cliente</a></li>
+<aside class="left-sidebar" data-sidebarbg="skin6">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar ps-container ps--theme_default ps--active-y">
+
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav" class="in">
+                <li class="sidebar-item">
+                    <a href="{{ url_for('usuarios') }}" class="sidebar-link waves-effect waves-dark sidebar-link">
+                        <i class="mdi mdi mdi-account-box"></i>
+                        Listar Usuários
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-face"></i>
+                        <span class="hide-menu">Clientes </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('listar_clientes') }}" class="sidebar-link">
+                            
+                                <span class="hide-menu">Listar Clientes</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('cadastrar_cliente') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Cadastrar novo Cliente</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-book-open"></i>
+                        <span class="hide-menu">Ocorrências por Cliente</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('listar_ocorrencias_sn') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Listar Ocorrências - Simples Nacional</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('listar_ocorrencias_lp') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Listar Ocorrências - Lucro Presumido</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Listar Ocorrências - Lucro Real</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('incluir_ocorrencia') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Incluir Ocorrência</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-book-open"></i>
+                        <span class="hide-menu">Serviços por Cliente</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Faturamento Coletivo - Simples Nacional</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Faturamento Coletivo - Lucro Presumido</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Faturamento Individual</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
-        </div>
-        <div class="item">
-            <input type="checkbox" id="check2">
-            <label for="check2" >Ocorrências por Cliente</label>
-            <ul>
-                <li><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples Nacional</a></li>
-                <li><a href="{{ url_for('listar_ocorrencias_lp') }}">Listar Ocorrências - Lucro Presumido</a></li>
-                <li><a href="{{ url_for('listar_ocorrencias_r') }}">Listar Ocorrências - Lucro Real</a></li>
-                <li><a href="{{ url_for('incluir_ocorrencia') }}">Incluir Ocorrência</a></li>
-            </ul>
-        </div>
-        <div class="item">
-            <input type="checkbox" id="check3">
-            <label for="check3" >Serviços por Cliente</label>
-            <ul>
-                <li><a href="#">Faturamento Coletivo - Simples Nacional</a></li>
-                <li><a href="#">Faturamento Coletivo - Lucro Presumido</a>
-                <li><a href="{{ url_for('inserir_faturamento_individual') }}">Faturamento Individual</a></li>
-            </ul>
-        </div>
-        <div class="item">
-            <input type="checkbox" id="check4">
-            <label for="check4" >Exemplo</label>
-            <ul>
-                <li><a href="#">sub_exemplo1</a></li>
-                <li><a href="#">sub_exemplo2</a></li>
-            </ul>
-        </div>
-        <div class="item">
-            <input type="checkbox" id="check5">
-            <label for="check5" >Exemplo</label>
-            <ul>
-                <li><a href="#">sub_exemplo1</a></li>
-                <li><a href="#">sub_exemplo2</a></li>
-            </ul>
-        </div>
-    </nav2>
-</div>
+        </nav>
+    <!-- End Bottom points-->
+</aside>
 {% endblock  %}
