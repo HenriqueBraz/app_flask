@@ -72,7 +72,7 @@ class ClienteModel(object):
 
     def insert_company(self, nome_responsavel, id_natureza_juridica, id_porte_empresa, id_responsavel, empresa, endereco,
                        bairro, cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, cnaeSecundaria,
-                       tributacao, diaFaturamento, folhaPagamento, certificadoDigital, observacoes, nome, telefone, email, path, filename, descricao, size, type, md5, flag):
+                       tributacao, diaFaturamento, folhaPagamento, certificadoDigital, observacoes, nome, telefone, email, path, filename, descricao, size, type, md5, flag, range_anexo):
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
@@ -99,11 +99,12 @@ class ClienteModel(object):
             self.cur.execute(sql, sql_data)
             self.con.commit()
             if flag:
-                sql_data = (result, path, filename, descricao, size, type, md5, data, data)
-                sql = "INSERT INTO anexos (id_empresa, path, filename, descricao, size, type, md5, created, updated) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                self.cur.execute(sql, sql_data)
-                self.con.commit()
-            logging.info('cliente cadastrado com sucesso')
+                for i in range(range_anexo):
+                    sql_data = (result, path[i], filename[i], descricao, size[i], type[i], md5[i], data, data)
+                    sql = "INSERT INTO anexos (id_empresa, path, filename, descricao, size, type, md5, created, updated) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                    self.cur.execute(sql, sql_data)
+                    self.con.commit()
+
             return True
 
         except Exception as e:

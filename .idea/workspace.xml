@@ -2,31 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/forms/billings_forms/billings_forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/faturamentos/faturamento_individual.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/faturamento_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/cadastar_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/cadastar_acesso.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/excluir_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/excluir_acesso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/cliente_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/cliente_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/cadastrar_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/cadastrar_contabilidade.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/editar_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/editar_contabilidade.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/contabilidade/excluir_contabilidade.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/contabilidade/excluir_contabilidade.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/editar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/editar_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/excluir_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/excluir_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/alterar_ocorrencia.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/alterar_ocorrencia.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/excluir_ocorrencia.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/excluir_ocorrencia.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/incluir_ocorrencia.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/incluir_ocorrencia.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/listar_ocorrencias_lp.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/listar_ocorrencias_lp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/listar_ocorrencias_r.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/listar_ocorrencias_r.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/listar_ocorrencias_sn.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/listar_ocorrencias_sn.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/ocorrencias/ver_ocorrencia.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/ocorrencias/ver_ocorrencia.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/usuario/editar_usuario.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/usuario/editar_usuario.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/ocorrencia_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/ocorrencia_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/uploads/python.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/cliente_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente_view.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

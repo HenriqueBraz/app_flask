@@ -8,12 +8,8 @@ from app.models.cliente_model import ClienteModel
 from app.models.usuario_model import UsuarioModel
 
 
-
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
 
 
 @app.route('/cadastrar_cliente', methods=["GET", "POST"])
@@ -53,41 +49,53 @@ def cadastrar_cliente():
         certificado_digital = request.form['certificado_digital']
         observacoes = request.form['observacoes']
         id_responsavel = nome_responsavel
-        file = request.files['image']
         descricao = request.form['descricao']
-        path = ''
-        filename = ''
-        size = ''
-        md5 = ''
-        type = ''
+        file = []
+        if request.files['image1']:
+            file.append(request.files['image1'])
+
+        if request.files['image2']:
+            file.append(request.files['image2'])
+
+        if request.files['image3']:
+            file.append(request.files['image3'])
+
+        anexos = len(file)
+        range_anexo = 0
+        path = []
+        filename = []
+        size = []
+        md5 = []
+        type = []
         flag = ''
 
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            path = (PATH + '/' + filename)
-            print(path)
-            size = int(os.path.getsize(path))
-            print(size)
-            md5 = hashlib.md5(b'filename').hexdigest()
-            print(md5)
-            type = filename.split('.')
-            type = type[1]
-            print(type)
-            flag = 1
+        for i in range(anexos):
+            if allowed_file(file[i].filename):
+                filename.append(secure_filename(file[i].filename))
+                file[i].save(os.path.join(app.config['UPLOAD_FOLDER'], filename[i]))
+                path.append(PATH + '/' + filename[i])
+                size.append(int(os.path.getsize(path[i])))
+                md5.append(hashlib.md5(b'filename').hexdigest())
+                temp = filename[i].split('.')
+                type.append(temp[1])
+                flag = 1
+                range_anexo += 1
 
-        if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado,
+            else:
+                flash('O arquivo {} não é um pdf e não foi inserido!'.format(file[i].filename))
+
+        if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro,
+                             cidade, estado,
                              capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
                              tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
-                             telefone, email, path, filename, descricao, size, type, md5, flag):
+                             telefone, email, path, filename, descricao, size, type, md5, flag, range_anexo):
 
-            message = 'Empresa cadastrada com sucesso!'
-            flash(message)
+
+            flash('Empresa cadastrada com sucesso!')
             return redirect(url_for('cadastrar_cliente', form=form))
 
         else:
-            message = 'Houve um erro ao inserir a cliente, contate o administrador do sistema'
-            flash(message)
+           flash('Houve um erro ao inserir a cliente, contate o administrador do sistema')
 
     return render_template('cliente/cadastrar_cliente.html', form=form, pagina='')
 
@@ -101,7 +109,6 @@ def listar_clientes():
 
 @app.route('/editar_cliente/<int:id>', methods=["GET", "POST"])
 def editar_cliente(id):
-
     db = ClienteModel()
     result_a = db.get_nj_porte_nome(id)
     result = db.find_one_id(id)
@@ -194,6 +201,3 @@ def excluir_cliente(id):
                     flag = 0
 
     return render_template('cliente/excluir_cliente.html', pagina='Excluir Cliente', result=result, flag=flag)
-
-
-
