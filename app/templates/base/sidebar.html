@@ -6,12 +6,6 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav" class="in">
                 <li class="sidebar-item">
-                    <a href="{{ url_for('usuarios') }}" class="sidebar-link waves-effect waves-dark sidebar-link">
-                        <i class="mdi mdi mdi-account-box"></i>
-                        Listar Usuários
-                    </a>
-                </li>
-                <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                         <i class="mdi mdi-face"></i>
                         <span class="hide-menu">Clientes </span>
@@ -33,6 +27,58 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-account-cog"></i>
+                        <span class="hide-menu">Faturamentos por Clientes</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('inserir_faturamento_coletivo_sn') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Simples Nacional</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('inserir_faturamento_coletivo_lp') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Lucro Presumido</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('inserir_faturamento_coletivo_r') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Real</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('inserir_faturamento_individual') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Faturamento Individual</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-book-open"></i>
+                        <span class="hide-menu">Serviços por Cliente</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">sub_exemplo1</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">sub_exemplo2</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                         <i class="mdi mdi-book-open"></i>
                         <span class="hide-menu">Ocorrências por Cliente</span>
                     </a>
@@ -40,19 +86,19 @@
                         <li class="sidebar-item">
                             <a href="{{ url_for('listar_ocorrencias_sn') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Listar Ocorrências - Simples Nacional</span>
+                                <span class="hide-menu">Simples Nacional</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a href="{{ url_for('listar_ocorrencias_lp') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Listar Ocorrências - Lucro Presumido</span>
+                                <span class="hide-menu">Lucro Presumido</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a href="{{ url_for('listar_ocorrencias_r') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Listar Ocorrências - Lucro Real</span>
+                                <span class="hide-menu">Lucro Real</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -65,26 +111,34 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="mdi mdi-account-cog"></i>
-                        <span class="hide-menu">Serviços por Cliente</span>
+                        <i class="mdi mdi-account-box"></i>
+                        <span class="hide-menu">Relatórios</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
                             <a href="#" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Faturamento Coletivo - Simples Nacional</span>
+                                <span class="hide-menu">sub_exemplo1</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-account-box"></i>
+                        <span class="hide-menu">Usuários</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('usuarios') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu">Listar Usuários</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a href="#" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Faturamento Coletivo - Lucro Presumido</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url_for('inserir_faturamento_individual') }}" class="sidebar-link">
-                                <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Faturamento Individual</span>
+                                <span class="hide-menu">sub_exemplo2</span>
                             </a>
                         </li>
                     </ul>

@@ -38,12 +38,14 @@ class AcessoModel(object):
         except Exception as e:
             logging.error('Erro em  AcessoModel, método check_accounting(: ' + str(e) + '\n')
 
-
-    def insert_accounting(self, id, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS, responsavelReceita):
+    def insert_accounting(self, id, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS,
+                          responsavelReceita):
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
-            sql_data = (id, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS, responsavelReceita, data, data, 'Ativo')
+            sql_data = (
+            id, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS, responsavelReceita,
+            data, data, 'Ativo')
             sql = "INSERT INTO acessos (id_empresa, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS, responsavelReceita, created, updated, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
             self.cur.execute(sql, sql_data)
             self.con.commit()
@@ -51,40 +53,43 @@ class AcessoModel(object):
         except Exception as e:
             logging.error('Erro em  AcessoModel, método insert_accounting(: ' + str(e) + '\n')
 
-
     def get_accounting(self, id):
         try:
             self.cur.execute(
-                "SELECT * FROM acessos a  WHERE  a.id_empresa = '{}' AND a.status = 'Ativo';".format(id))
+                "SELECT a.*, e.tributacao  FROM acessos a LEFT JOIN empresas e  ON  e.id=a.id_empresa  WHERE "
+                "a.id_empresa = '{}' AND a.status = 'Ativo';".format(id))
             result = self.cur.fetchone()
             return result
         except Exception as e:
             logging.error('Erro em  AcessoModel, método get_accounting(: ' + str(e) + '\n')
 
-
-    def update_accounting(self, id, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS, responsavelReceita):
+    def update_accounting(self, id, codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS,
+                          responsavelReceita):
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
             self.cur.execute(
                 "UPDATE acessos SET  codigoAcessoSimples = '{}', AcessoECAC = '{}', usernamePF = '{}', "
-                "senhaPF = '{}', senhaPrefeitura = '{}', senhaINSS = '{}', responsavelReceita = '{}', updated = '{}' WHERE id_empresa = {}".format(
-                    codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS, responsavelReceita, data, id))
+                "senhaPF = '{}', senhaPrefeitura = '{}', senhaINSS = '{}', responsavelReceita = '{}', updated = '{}' "
+                "WHERE id_empresa = {}".format(
+                    codigoAcessoSimples, AcessoECAC, usernamePF, senhaPF, senhaPrefeitura, senhaINSS,
+                    responsavelReceita, data, id))
             self.con.commit()
             return True
 
         except Exception as e:
             logging.error('Erro em AcessoModel,  método update_accounting ' + str(e) + '\n')
 
-
     def get_company(self, id):
         try:
-            self.cur.execute("SELECT e.id, e.empresa, e.created, ec.email, ec.telefone, e.endereco, e.bairro, e.cidade, e.estado FROM empresas e LEFT JOIN  empresas_contato ec  ON  ec.id_empresa = e.id  WHERE  e.id = '{}' AND e.status = 'Ativo';".format(id))
+            self.cur.execute(
+                "SELECT e.id, e.empresa, e.created, ec.email, ec.telefone, e.endereco, e.bairro, e.cidade, "
+                "e.estado FROM empresas e LEFT JOIN  empresas_contato ec  ON  ec.id_empresa = e.id  WHERE  e.id = '{"
+                "}' AND e.status = 'Ativo';".format( id))
             result = self.cur.fetchone()
             return result
         except Exception as e:
             logging.error('Erro em  AcessoModel, método get_company(: ' + str(e) + '\n')
-
 
     def update_status_acesso(self, id):
         try:
@@ -94,4 +99,3 @@ class AcessoModel(object):
 
         except Exception as e:
             logging.error('Erro em AcessoModel, método update_status_company' + str(e) + '\n')
-

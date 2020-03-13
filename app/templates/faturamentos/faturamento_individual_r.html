@@ -3,7 +3,7 @@
 {% block page %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Faturamento por Cliente</a></li>
-<li class="breadcrumb-item active" aria-current="page">Faturamento Individual</li>
+<li class="breadcrumb-item active" aria-current="page">Faturamento Coletivo Real</li>
 {% endblock %}
 
 
@@ -24,7 +24,7 @@
         {{ form.csrf_token }}
         <div class="card">
             <div class="card-header">
-                Faturamento Individual
+                Faturamento Coletivo
             </div>
             <br>
             <div class="row">

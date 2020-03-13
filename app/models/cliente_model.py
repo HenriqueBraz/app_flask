@@ -103,7 +103,7 @@ class ClienteModel(object):
                     sql_data = (result, path[i], filename[i], descricao, size[i], type[i], md5[i], data, data)
                     sql = "INSERT INTO anexos (id_empresa, path, filename, descricao, size, type, md5, created, updated) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                     self.cur.execute(sql, sql_data)
-                    self.con.commit()
+                self.con.commit()
 
             return True
 
