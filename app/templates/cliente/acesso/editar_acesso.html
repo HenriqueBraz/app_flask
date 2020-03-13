@@ -28,6 +28,7 @@
                 Editar Acesso
             </div>
             <br>
+            {% if tributacao == 1  %}
             <div class="form-group">
                 <div class="row">
                     <label class="control-label col-2 text-right">Código de Acesso Simples*</label>
@@ -36,6 +37,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             <div class="form-group">
                 <div class="row">
                     <label class="control-label col-2 text-right">Acesso E-CAC*</label>

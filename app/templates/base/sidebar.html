@@ -3,11 +3,6 @@
     <nav2>
         <br>
         <div class="item">
-            <input type="checkbox" id="check0">
-            <label for="check1"><a href="{{ url_for('usuarios') }}" ><font color=white><div class="link">Listar Usuários</div></font></a></label>
-        </div>
-        <br>
-        <div class="item">
             <input type="checkbox" id="check1">
             <label for="check1" >Clientes</label>
             <ul>
@@ -16,8 +11,26 @@
             </ul>
         </div>
         <div class="item">
+            <input type="checkbox" id="check7">
+            <label for="check7" >Faturamentos por Clientes</label>
+            <ul>
+                <li><a href="{{ url_for('inserir_faturamento_coletivo_sn') }}">Faturamento Coletivo - Simples Nacional</a></li>
+                <li><a href="{{ url_for('inserir_faturamento_coletivo_lp') }}">Faturamento Coletivo - Lucro Presumido</a></li>
+                <li><a href="{{ url_for('inserir_faturamento_coletivo_r') }}">Faturamento Coletivo - Real</a></li>
+                <li><a href="{{ url_for('inserir_faturamento_individual') }}">Faturamento Individual</a></li>
+            </ul>
+        </div>
+        <div class="item">
             <input type="checkbox" id="check2">
-            <label for="check2" >Ocorrências por Cliente</label>
+            <label for="check2" >Serviços por Cliente</label>
+            <ul>
+                <li><a href="#">sub_exemplo1</a></li>
+                <li><a href="#">sub_exemplo2</a></li>
+            </ul>
+        </div>
+        <div class="item">
+            <input type="checkbox" id="check3">
+            <label for="check3" >Ocorrências por Cliente</label>
             <ul>
                 <li><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples Nacional</a></li>
                 <li><a href="{{ url_for('listar_ocorrencias_lp') }}">Listar Ocorrências - Lucro Presumido</a></li>
@@ -26,17 +39,8 @@
             </ul>
         </div>
         <div class="item">
-            <input type="checkbox" id="check3">
-            <label for="check3" >Serviços por Cliente</label>
-            <ul>
-                <li><a href="#">Faturamento Coletivo - Simples Nacional</a></li>
-                <li><a href="#">Faturamento Coletivo - Lucro Presumido</a>
-                <li><a href="{{ url_for('inserir_faturamento_individual') }}">Faturamento Individual</a></li>
-            </ul>
-        </div>
-        <div class="item">
             <input type="checkbox" id="check4">
-            <label for="check4" >Exemplo</label>
+            <label for="check4" >Relatórios</label>
             <ul>
                 <li><a href="#">sub_exemplo1</a></li>
                 <li><a href="#">sub_exemplo2</a></li>
@@ -44,7 +48,15 @@
         </div>
         <div class="item">
             <input type="checkbox" id="check5">
-            <label for="check5" >Exemplo</label>
+            <label for="check5" >Usuários</label>
+            <ul>
+                <li><a href="{{ url_for('usuarios') }}" ><font color=white><div class="link">Listar Usuários</div></font></a></li>
+                <li><a href="#">sub_exemplo2</a></li>
+            </ul>
+        </div>
+        <div class="item">
+            <input type="checkbox" id="check6">
+            <label for="check6" >Exemplo</label>
             <ul>
                 <li><a href="#">sub_exemplo1</a></li>
                 <li><a href="#">sub_exemplo2</a></li>

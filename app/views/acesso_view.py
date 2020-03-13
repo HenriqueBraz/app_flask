@@ -13,7 +13,6 @@ from app.models.usuario_model import UsuarioModel
 def listar_acessos(id):
     db = AcessoModel()
     result = db.check_accounting(id)
-    print(result)
     if result is None:
         return redirect(url_for('cadastrar_acesso', id=id))
 
@@ -49,6 +48,10 @@ def cadastrar_acesso(id):
 def editar_acesso(id):
     db = AcessoModel()
     result = db.get_accounting(id)
+    tributacao = result[-1]
+    if tributacao == 'SIMPLES NACIONAL':
+        tributacao = 1
+
     form = access_forms.AccessForm(
         id_empresa=result[1],
         codigoAcessoSimples=result[2],
@@ -73,14 +76,13 @@ def editar_acesso(id):
         else:
             flash('Houve um erro ao inserir a cliente, contate o administrador do sistema')
 
-    return render_template('cliente/acesso/editar_acesso.html', form=form, id_empresa=id, pagina='Editar Acesso')
+    return render_template('cliente/acesso/editar_acesso.html', form=form, id_empresa=id, tributacao=tributacao, pagina='Editar Acesso')
 
 
 @app.route('/excluir_acesso/<int:id>', methods=["GET", "POST"])
 def excluir_acesso(id):
     db = AcessoModel()
     result = db.get_company(id)
-    print(result)
     flag = 1
     if request.method == 'POST':
         if request.form['submit_button'] == 'Excluir Acesso':

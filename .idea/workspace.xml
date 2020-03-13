@@ -2,11 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/models/faturamento_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/faturamentos/faturamento_individual_lp.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/faturamentos/faturamento_individual_r.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/faturamentos/faturamento_individual_sn.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/acesso_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/acesso_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/cliente_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/cliente_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/uploads/python.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/cliente_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/cadastar_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/cadastar_acesso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/faturamentos/faturamento_individual.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/faturamentos/faturamento_individual.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/acesso_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/acesso_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/faturamento_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/faturamento_view.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +29,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -36,19 +45,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/templates/ocorrencias" />
-      <recent name="$PROJECT_DIR$/app/templates/ocorrencias/ocorrencias_sn" />
-      <recent name="$PROJECT_DIR$/app/views" />
-      <recent name="$PROJECT_DIR$/app/views/ocorrencias" />
-      <recent name="$PROJECT_DIR$/app/templates/cliente" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/templates/faturamentos" />
       <recent name="$PROJECT_DIR$/app/templates/ocorrencias" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/templates/auth" />
       <recent name="$PROJECT_DIR$/app/static/images/icon" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/templates/ocorrencias" />
+      <recent name="$PROJECT_DIR$/app/templates/ocorrencias/ocorrencias_sn" />
+      <recent name="$PROJECT_DIR$/app/views" />
+      <recent name="$PROJECT_DIR$/app/views/ocorrencias" />
+      <recent name="$PROJECT_DIR$/app/templates/cliente" />
     </key>
   </component>
   <component name="RunDashboard">
