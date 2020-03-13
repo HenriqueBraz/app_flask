@@ -32,25 +32,26 @@ def register():
     return render_template('auth/register.html', form=form, pagina=' Cadastro')
 
 
-@app.route('/login', methods=["GET", "POST"])
-def login():
+@app.route('/login<int:flag>', methods=["GET", "POST"])
+def login(flag):
     if session.get('username'):
         return redirect(url_for('index'))
 
     else:
         form = login_form.LoginForm(username=session.get('username'))
         if form.validate_on_submit():
+            flag = 1
             db = UsuarioModel()
             username = request.form['username']
             password = request.form['password']
             error = None
             result = db.find_all_username(username)
             if result is None:
-                error = 'Credenciais inválidas.'
+                error = 'Credenciais inválidas!'
                 flash(error)
 
             elif not check_password_hash(result[2], password):
-                error = 'Credenciais inválidas.'
+                error = 'Credenciais inválidas!'
                 flash(error)
 
             if error is None:
@@ -60,7 +61,12 @@ def login():
                 session['username'] = result[1]
                 return redirect(url_for('index'))
 
-        return render_template('auth/login.html', content_type='application/json', form=form, pagina='')
+        elif request.method == 'POST':
+            if request.form['action'] == 'Resetar':
+                flash('Instruções de reset de senha enviadas, consulte o seu email!')
+                return redirect(url_for('login', flag=0))
+
+        return render_template('auth/login.html', content_type='application/json', flag=flag,  form=form, pagina='')
 
 
 
@@ -79,14 +85,14 @@ def load_logged_in_user():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('login'))
+    return redirect(url_for('login', flag=1))
 
 
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
-            return redirect(url_for('login'))
+            return redirect(url_for('login', flag=1))
 
         return view(**kwargs)
 

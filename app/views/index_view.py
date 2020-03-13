@@ -7,11 +7,11 @@ from flask import render_template, url_for
 @app.route("/")
 def rotas():
     #return render_template("rotas.html")
-    return redirect(url_for('login'))
+    return redirect(url_for('login', flag=1))
 
 @app.route("/favicon.ico")
 def favicon():
-    return redirect(url_for('login'))
+    return redirect(url_for('login', flag=1))
 
 
 @app.route('/index', methods=["GET"])

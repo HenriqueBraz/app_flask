@@ -7,92 +7,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
     <title>Novo Rumo | Login</title>
-    
+
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
-    
+
 </head>
 
 <body>
-    <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ url_for('static', filename='images/background-login.jpg') }}); background-size: contain;">
-        <div class="auth-box on-sidebar p-4 bg-white m-0">
-            <div id="loginform">
-                <div class="logo text-center">
+
+
+
+
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ url_for('static', filename='images/background-login.jpg') }}); background-size: contain;">
+    <div class="auth-box on-sidebar p-4 bg-white m-0">
+        <div id="loginform">
+            <div class="logo text-center">
                     <span class="db">
                         <img src="{{ url_for('static', filename='images/icon/casa.png') }}" alt="logo" />
                     </span>
-                </div>
-                <!-- Form -->
-                <div class="row">
-                    <div class="col-12">
-                        <form class="form-horizontal mt-3 form-material" id="loginform" method="POST">
-                            {{ form.csrf_token }}
-                            <div class="form-group mb-3">
-                                <div class="col-xs-12">
-                                    {{form.username(class="form-control", placeholder="Usuário")}}
-                                    {{form.errors.username}} 
-                                </div>
-                            </div>
-                            <div class="form-group mb-3">
-                                <div class="col-xs-12">
-                                    {{form.password(class="form-control", placeholder="Senha")}}
-                                    {{form.errors.password}}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="d-flex">
-                                    <div class="ml-auto">
-                                        <a href="javascript:void(0)" class="text-muted float-right to-recover"><i class="fa fa-lock mr-1"></i> Esqueceu a senha?</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group text-center mt-3">
-                                <div class="col-xs-12">
-                                    <button class="btn btn-primary btn-lg btn-block text-uppercase" type="submit">Entrar <i class="fas fa-arrow-circle-right"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
-            <div id="recoverform">
-                <div class="logo">
-                    <h3 class="font-weight-medium mb-3">Recuperar a senha</h3>
-                    <span>Digite o seu e-mail que iremos te mandar as instruções para resetar sua senha.</span>
-                </div>
-                <div class="row mt-3">
-                    <!-- Form -->
-                    <form class="col-12 form-material" method="POST">
-                        <!-- email -->
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <input class="form-control" type="email" required="" placeholder="E-mail">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="flash" font-size="500" color="red" id="flash">{{  message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <!-- Form -->
+            <div class="row">
+                <div class="col-12">
+                    <form class="form-horizontal mt-3 form-material" id="loginform1" method="POST">
+                        {{ form.csrf_token }}
+                        <div class="form-group mb-3">
+                            <div class="col-xs-12">
+                                {{form.username(class="form-control", placeholder="Usuário")}}
+                                {{form.errors.username}}
                             </div>
                         </div>
-                        <!-- pwd -->
-                        <div class="row mt-3">
-                            <div class="col-12 mb-3">
-                                <button class="btn btn-block btn-lg btn-primary text-uppercase" type="submit" name="action">Resetar</button>
+                        <div class="form-group mb-3">
+                            <div class="col-xs-12">
+                                {{form.password(class="form-control", placeholder="Senha")}}
+                                {{form.errors.password}}
                             </div>
-                            <div class="d-flex justify-content-center col-3">
-                                <a href="javascript:void(0)" class="text-muted recovery-back"><i class="fa fa-angle-left mr-1"></i> Voltar</a>
+                        </div>
+                        {% if flag  %}
+                        <div class="form-group">
+                            <div class="d-flex">
+                                <div class="ml-auto">
+                                    <a href="javascript:void(0)" class="text-muted float-right to-recover"><i class="fa fa-lock mr-1"></i> Esqueceu a senha?</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="form-group text-center mt-3">
+                            <div class="col-xs-12">
+                                <button class="btn btn-primary btn-lg btn-block text-uppercase" type="submit">Entrar <i class="fas fa-arrow-circle-right"></i></button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <div id="recoverform">
+            <div class="logo">
+                <h3 class="font-weight-medium mb-3">Recuperar a senha</h3>
+                <span>Digite o seu e-mail que iremos te mandar as instruções para resetar sua senha.</span>
+            </div>
+            <div class="row mt-3">
+                <!-- Form -->
+                <form class="col-12 form-material" method="POST">
+                    {{ form.csrf_token }}
+                    <!-- email -->
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <input class="form-control" type="email" required="" placeholder="E-mail">
+                        </div>
+                    </div>
+                    <!-- pwd -->
+                    <div class="row mt-3">
+                        <div class="col-12 mb-3">
+                            <button class="btn btn-block btn-lg btn-primary text-uppercase" type="submit" name="action" value="Resetar">Resetar</button>
+                        </div>
+                        <div class="d-flex justify-content-center col-3">
+                            <a href="javascript:void(0)" class="text-muted recovery-back"><i class="fa fa-angle-left mr-1"></i> Voltar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
-        <div class="flash" font-size="50" id="flash">{{  message }}</div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    
-    <script src="{{ url_for('static', filename='libs/jquery/dist/jquery.min.js') }}"></script>
-    <script>
+<script src="{{ url_for('static', filename='libs/jquery/dist/jquery.min.js') }}"></script>
+<script>
         $(".preloader").fadeOut();
         
         $('.to-recover').on("click", function() {
@@ -101,7 +107,7 @@
         });
         
         $('.recovery-back').on("click", function() {
-            $("#loginform > .row").slideToggle();
+            $("#loginform1 > .row").slideToggle();
             $("#recoverform").slideToggle();
         });
     </script>
