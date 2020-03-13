@@ -50,7 +50,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">
+                            <a href="{{ url_for('listar_ocorrencias_r') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Listar Ocorrências - Lucro Real</span>
                             </a>
@@ -65,7 +65,7 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="mdi mdi-book-open"></i>
+                        <i class="mdi mdi-account-cog"></i>
                         <span class="hide-menu">Serviços por Cliente</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
@@ -82,7 +82,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">
+                            <a href="{{ url_for('inserir_faturamento_individual') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Faturamento Individual</span>
                             </a>
