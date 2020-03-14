@@ -1,5 +1,11 @@
 {% extends 'base/base.html' %}
 
+{% block page %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Usuários</a></li>
+<li class="breadcrumb-item active" aria-current="page">Cadastrar_Usuário</li>
+{% endblock %}
+
 {% block content %}
 
 {% with messages = get_flashed_messages() %}
@@ -66,12 +72,18 @@
         <div class="row">
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
-                <button class="btn btn-primary" type="button"><a href="{{ url_for('login') }}" ><font color=white>voltar</font></a></button>
+                <button class="btn btn-primary" type="button"><a href="{{ url_for('login',flag=1) }}" ><font color=white>voltar</font></a></button>
                 <button class="btn btn-primary"  type="submit">Registar</button>
             </div>
         </div>
 
     </form>
 </div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type=text/javascript src="{{url_for('static', filename='js/scripts.js') }}"></script>
+
+
 <br><br><br><br>
 {% endblock %}

@@ -1,7 +1,7 @@
 from werkzeug.utils import redirect
 from app import app
 from app.forms.auth_forms import login_form
-from flask import render_template, url_for
+from flask import render_template, url_for, session
 
 
 @app.route("/")
@@ -17,7 +17,8 @@ def favicon():
 @app.route('/index', methods=["GET"])
 def index():
     form = login_form.LoginForm()
-    return render_template('index/index.html', content_type='application/json', form=form, pagina='')
+    email = session.get('email')
+    return render_template('index/index.html', content_type='application/json', email=email,  form=form, pagina='')
 
 
 

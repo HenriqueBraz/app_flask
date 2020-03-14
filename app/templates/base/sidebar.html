@@ -13,7 +13,7 @@
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
                             <a href="{{ url_for('listar_clientes') }}" class="sidebar-link">
-                            
+
                                 <span class="hide-menu">Listar Clientes</span>
                             </a>
                         </li>
@@ -27,7 +27,7 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                         <i class="mdi mdi-book-open"></i>
+                        <i class="mdi mdi-book-open"></i>
                         <span class="hide-menu">Faturamentos por Clientes</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
@@ -46,13 +46,7 @@
                         <li class="sidebar-item">
                             <a href="{{ url_for('inserir_faturamento_coletivo_r') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Real</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url_for('inserir_faturamento_individual') }}" class="sidebar-link">
-                                <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Faturamento Individual</span>
+                                <span class="hide-menu">Lucro Real</span>
                             </a>
                         </li>
                     </ul>
@@ -136,15 +130,15 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">
+                            <a href="{{ url_for('register') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">sub_exemplo2</span>
+                                <span class="hide-menu">Cadastrar novo usuario</span>
                             </a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </nav>
-    <!-- End Bottom points-->
+    </div>     <!-- End Bottom points-->
 </aside>
 {% endblock  %}
