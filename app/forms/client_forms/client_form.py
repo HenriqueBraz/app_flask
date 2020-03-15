@@ -25,7 +25,7 @@ def validate_phone(message='Invalid phone number.', region=None):
 
 
 class ClientForm(FlaskForm):
-    nome_responsavel = SelectField("nome_responsavel",  coerce=int, render_kw={'readonly': True}, choices=[])
+    nome_responsavel = SelectField("nome_responsavel", coerce=int, render_kw={'readonly': True}, choices=[])
     empresa = StringField("cliente", validators=[DataRequired()], render_kw={"placeholder": 'Empresa'})
     natureza_juridica = SelectField("natureza_juridica", coerce=int, render_kw={'readonly': True}, choices=[])
     porte = SelectField("porte", coerce=int, render_kw={'readonly': True}, choices=[])
@@ -47,7 +47,8 @@ class ClientForm(FlaskForm):
                                   ('SC', 'Santa Catarina'), ('SP', 'São Paulo'),
                                   ('SE', 'Sergipe'), ('TO', 'Tocantins')])
     nome = StringField("nome", validators=[DataRequired()], render_kw={"placeholder": 'Nome'})
-    telefone = StringField("telefone", validators=[validate_phone(region='BR', message="Você precisa entrar com uma telefone válido.")],
+    telefone = StringField("telefone", validators=[
+        validate_phone(region='BR', message="Você precisa entrar com uma telefone válido.")],
                            render_kw={"placeholder": '(dd)ddddd-dddd'})
     email = EmailField("email", validators=[Email(), DataRequired()], render_kw={"placeholder": 'Email'})
     capital_social = DecimalField(places=0, validators=[DataRequired()], render_kw={"placeholder": 'Capital Social'})
@@ -76,7 +77,6 @@ class ClientForm(FlaskForm):
                                       choices=[('sim', 'Sim'), ('nao', 'Não')])
     observacoes = TextAreaField(u'observacoes', [validators.length(min=0, max=200)])
 
+
+class AnexoForm(FlaskForm):
     descricao = TextAreaField(u'descricao', [validators.length(min=0, max=200)])
-
-
-

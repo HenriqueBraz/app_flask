@@ -1,0 +1,127 @@
+{% extends 'base/base.html' %}
+
+{% block page %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Clientes</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_anexos', id=id) }}">Anexos</a></li>
+<li class="breadcrumb-item active" aria-current="page">Inserir Anexo</li>
+
+{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash" id="flash">{{  message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<br>
+<div class="bloco">
+
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    Empresa:  <div class="col-10">{{empresa}}</div>
+                </div>
+            </div>
+            <h4>Anexos</h4>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right"> Somente PDF!!!</label>
+                    <div class="col-2">
+                        <form  method="post">
+                            <input type="file" name="image1"> <br /><br />
+                            <input type="file" name="image2"> <br /><br />
+                            <input type="file" name="image3"> <br /><br />
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label col-2 text-right">Descrição</label>
+                    <div class="col-4">
+                        {{form.descricao(class="form-control")}} {{form.errors. descricao}}
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-9"></div>
+                        <div class="col-3">
+                            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
+                            <button class="btn btn-primary"  type="submit">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+</div>
+</form>
+</div>
+
+</div>
+
+
+<!-- Botão para acionar modal -->
+<button type="button" class="btn btn-primary" id="botao" data-toggle="modal" data-target="#modalExemplo">
+    Abrir modal de demonstração
+</button>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Empresa cadastrada com sucesso!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+<script>
+$(function () {
+
+      $('#botao').trigger('click');
+});
+
+
+$('#botao').trigger('click') {
+
+      var file = document.getElementById("file").value;
+      var entry = {
+        file : file.value
+      };
+
+      console.log(entry);
+};
+
+
+
+</script>
+{% endif %}
+
+
+
+{% endblock %}

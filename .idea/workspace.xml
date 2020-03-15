@@ -2,14 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff2e6af5-9099-4b22-965a-ab05bf08392d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/templates/cliente/anexos/inserir_anexo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/cliente/anexos/listar_anexos.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/cliente/acoes_cliente/anexos_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/auth/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/auth/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/usuario/listar_usuarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/usuario/listar_usuarios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/auth_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/auth_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/index_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/index_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms/client_forms/client_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/client_forms/client_form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/acesso/editar_acesso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/cadastrar_cliente.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/cliente/listar_clientes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/anexos_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/acesso_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente/acoes_cliente/acesso_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/cliente_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente/cliente_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/contabilidade_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente/acoes_cliente/contabilidade_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/socios_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente/acoes_cliente/socios_view.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +29,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -35,23 +41,23 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/views/cliente/acoes_cliente" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/views/cliente/acoes_cliente" />
+      <recent name="$PROJECT_DIR$/app/views/cliente" />
+      <recent name="$PROJECT_DIR$/app/templates/ocorrencias" />
+      <recent name="$PROJECT_DIR$/app/templates/ocorrencias/ocorrencias_sn" />
+      <recent name="$PROJECT_DIR$/app/views" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/templates/faturamentos" />
       <recent name="$PROJECT_DIR$/app/templates/ocorrencias" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/templates/auth" />
       <recent name="$PROJECT_DIR$/app/static/images/icon" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/templates/ocorrencias" />
-      <recent name="$PROJECT_DIR$/app/templates/ocorrencias/ocorrencias_sn" />
-      <recent name="$PROJECT_DIR$/app/views" />
-      <recent name="$PROJECT_DIR$/app/views/ocorrencias" />
-      <recent name="$PROJECT_DIR$/app/templates/cliente" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -79,7 +85,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/views/acesso_view.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/views/cliente/acoes_cliente/acesso_view.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
