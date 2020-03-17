@@ -15,7 +15,6 @@ def allowed_file(filename):
 def listar_anexos(id):
     db = AnexoModel()
     result = db.get_anexos(id)
-    print(result)
     if len(result) == 0:
         empresa = db.get_company_name(id)
         return redirect(url_for('inserir_anexo', id=id, empresa=empresa[0]))
@@ -26,7 +25,7 @@ def listar_anexos(id):
         return render_template("cliente/anexos/listar_anexos.html", result=result, id=id,  empresa=empresa,  pagina='Listar Anexos')
 
 
-@app.route('/inserir_anexo<int:id><string:empresa>', methods=["GET", "POST"])
+@app.route('/inserir_anexo/<int:id>/<string:empresa>', methods=["GET", "POST"])
 def inserir_anexo(id, empresa):
     form = client_form.AnexoForm()
     db = AnexoModel()
@@ -45,14 +44,19 @@ def inserir_anexo(id, empresa):
         if request.files['image3']:
             file.append(request.files['image3'])
 
+        if request.files['image4']:
+            file.append(request.files['image4'])
+
+        if request.files['image5']:
+            file.append(request.files['image5'])
+
         anexos = len(file)
-        range_anexo = 0
         path = []
         filename = []
         size = []
         md5 = []
         type = []
-        flag = ''
+        print(anexos)
 
         for i in range(anexos):
             if allowed_file(file[i].filename):
@@ -63,22 +67,19 @@ def inserir_anexo(id, empresa):
                 md5.append(hashlib.md5(b'filename').hexdigest())
                 temp = filename[i].split('.')
                 type.append(temp[1])
-                flag = 1
-                range_anexo += 1
+
+                if  db.insert_anexo(id, path[i], filename[i], descricao, size[i], type[i], md5[i]):
+                    flash('anexo {} inserido com sucesso!'.format(file[i].filename))
+
+                else:
+                    flash('Erro ao inserir o arquivo {}, contate o administrador do sistema.'.format(file[i].filename))
+
 
             else:
                 flash('O arquivo {} não é um PDF e não foi inserido!'.format(file[i].filename))
 
-        if db.insert_anexo(id, path, filename, descricao, size, type, md5, flag, range_anexo):
+        return redirect(url_for('listar_anexos', id=id, form=form))
 
-
-            flash('anexo inserido com sucesso!')
-            return redirect(url_for('listar_anexos', id=id, form=form))
-
-        else:
-           flash('Houve um erro ao inserir u ou mais anexos, contate o administrador do sistema')
-
-    print(form.errors)
     return render_template("cliente/anexos/inserir_anexo.html", id=id, empresa=empresa, form=form, pagina='Inserir Anexo')
 
 
