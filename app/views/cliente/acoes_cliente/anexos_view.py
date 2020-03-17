@@ -1,9 +1,8 @@
 import hashlib
 import os
-from datetime import datetime
 from werkzeug.utils import redirect, secure_filename
 from app import app, ALLOWED_EXTENSIONS, PATH
-from flask import render_template, request, flash, url_for
+from flask import render_template, request, flash, url_for, send_from_directory
 
 from app.forms.client_forms import client_form
 from app.models.anexos_model import AnexoModel
@@ -83,7 +82,7 @@ def inserir_anexo(id, empresa):
     return render_template("cliente/anexos/inserir_anexo.html", id=id, empresa=empresa, form=form, pagina='Inserir Anexo')
 
 
-@app.route('/excluir_anexo<int:id><int:id_anexo>', methods=["GET", "POST"])
+@app.route('/excluir_anexo/<int:id>/<int:id_anexo>/', methods=["GET", "POST"])
 def excluir_anexo(id, id_anexo):
     db = AnexoModel()
     result = db.update_status_anexo(id_anexo)
@@ -96,8 +95,16 @@ def excluir_anexo(id, id_anexo):
     return redirect(url_for('listar_anexos', id=id))
 
 
-@app.route('/baixar_anexo<int:id_anexo><int:id>', methods=["GET", "POST"])
-def baixar_anexo(id_anexo, id):
 
-    return('codar a parte de download de anexos!')
+@app.route('/baixar_anexo/<int:id_anexo>', methods=["GET", "POST"])
+def baixar_anexo(id_anexo):
+    db = AnexoModel()
+    result = db.get_anexo(id_anexo)
+    path = result[0]
+    nome = result[1]
+    return send_from_directory('uploads', nome, as_attachment=True)
+
+
+
+
 

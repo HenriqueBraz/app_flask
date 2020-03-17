@@ -52,7 +52,7 @@
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="{{ url_for('baixar_anexo', id_anexo=row[1], id=id) }}">Download</a>
+                    <a class="dropdown-item" href="{{ url_for('baixar_anexo', id_anexo=row[1]) }}">Download</a>
                     <a class="dropdown-item" href="{{ url_for('excluir_anexo', id_anexo=row[1], id=id) }}">Excluir Anexo</a>
                 </div>
             </div>

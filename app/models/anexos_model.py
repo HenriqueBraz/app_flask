@@ -40,6 +40,15 @@ class AnexoModel(object):
         except Exception as e:
             logging.error('Erro em  AnexosModel, método get_anexos: ' + str(e) + '\n')
 
+    def get_anexo(self, id_anexo):
+        try:
+            self.cur.execute(
+                "SELECT a.path, a.filename FROM anexos a WHERE  a.id = '{}' AND  a.status = 'Ativo';".format(id_anexo))
+            result = self.cur.fetchone()
+            return result
+        except Exception as e:
+            logging.error('Erro em  AnexosModel, método get_anexo: ' + str(e) + '\n')
+
 
     def update_status_anexo(self, id):
         try:

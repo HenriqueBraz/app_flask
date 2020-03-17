@@ -3,12 +3,14 @@ from flask import Flask
 import json
 from flask_wtf import CSRFProtect
 from flask_jwt_extended import JWTManager
+from flask_babel import Babel
 
 UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads')
 PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads')
 ALLOWED_EXTENSIONS = set(['pdf'])
+BABEL_DEFAULT_LOCALE = 'pt'
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 with open('config.json') as f:
     conf = json.load(f)
@@ -28,4 +30,5 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 csrf = CSRFProtect(app)
 csrf.init_app(app)
 app.register_blueprint(auth_view.bp)
+babel = Babel(app)
 # flask_heroku.settings(locals())
