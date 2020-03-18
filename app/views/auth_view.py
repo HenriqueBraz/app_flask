@@ -63,9 +63,10 @@ def login(flag):
 
         elif request.method == 'POST':
             if request.form['action'] == 'Resetar':
-                if request.form['email']:
+                email = request.form['email']
+                if email:
                     flag = 0
-                    flash('Instruções de reset de senha enviadas, consulte o seu email!')
+                    flash('Instruções de reset de senha enviadas para {} com sucesso!'.format(email))
                     return redirect(url_for('login', flag=flag))
                 else:
                     flag = 1
