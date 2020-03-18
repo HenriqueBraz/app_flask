@@ -60,7 +60,7 @@
                         {% endif %}
                         <div class="form-group text-center mt-3">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block text-uppercase" type="submit">Entrar <i class="fas fa-arrow-circle-right"></i></button>
+                                <button class="btn btn-primary btn-lg btn-block text-uppercase" type="submit" name="action" value="Entrar">Entrar <i class="fas fa-arrow-circle-right"></i></button>
                             </div>
                         </div>
                     </form>
@@ -69,6 +69,7 @@
         </div>
         <div id="recoverform">
             <div class="logo">
+                <br>
                 <h3 class="font-weight-medium mb-3">Recuperar a senha</h3>
                 <span>Digite o seu e-mail que iremos te mandar as instruções para resetar sua senha.</span>
             </div>
@@ -79,8 +80,8 @@
                     <!-- email -->
                     <div class="form-group row">
                         <div class="col-12">
-                            {{form.email(class="form-control", placeholder="Email")}}
-                            {{form.errors.email}}
+                            {{form2.email(class="form-control", placeholder="Email")}}
+                            {{form2.errors.email}}
                         </div>
                     </div>
                     <!-- pwd -->
@@ -89,7 +90,7 @@
                             <button class="btn btn-block btn-lg btn-primary text-uppercase" type="submit" name="action" value="Resetar">Resetar</button>
                         </div>
                         <div class="d-flex justify-content-center col-3">
-                            <button class="btn btn-primary" type="button"><a href="{{ url_for('login', flag=1) }}" ><font color=white>voltar</font></a></button>
+                            <button class="btn btn-primary" type="button"><a href="{{ url_for('login', flag=1, render_email=0) }}" ><font color=white>voltar</font></a></button>
                         </div>
                     </div>
                 </form>

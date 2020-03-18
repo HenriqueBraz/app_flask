@@ -8,4 +8,7 @@ from wtforms.widgets import PasswordInput
 class LoginForm(FlaskForm):
     username = StringField("username", validators=[DataRequired()])
     password = StringField('password', validators=[DataRequired()], widget=PasswordInput(hide_value=False))
-    email = EmailField("email", validators=[Email()])
+
+
+class LoginFormForgotPass(FlaskForm):
+    email = EmailField("email", validators=[Email(message='Email inválido!'), DataRequired()])

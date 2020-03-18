@@ -39,41 +39,48 @@ def login(flag):
 
     else:
         form = login_form.LoginForm(username=session.get('username'))
-        if form.validate_on_submit():
-            db = UsuarioModel()
-            username = request.form['username']
-            password = request.form['password']
-            error = None
-            result = db.find_all_username(username)
-            if result is None:
-                error = 'Credenciais inválidas!'
-                flash(error)
+        form2 = login_form.LoginFormForgotPass()
+        if request.method == 'POST':
+            if request.form['action'] == 'Entrar':
+                if form.validate_on_submit():
+                    db = UsuarioModel()
+                    username = request.form['username']
+                    password = request.form['password']
+                    error = None
+                    result = db.find_all_username(username)
+                    if result is None:
+                        error = 'Credenciais inválidas!'
+                        flash(error)
 
-            elif not check_password_hash(result[2], password):
-                error = 'Credenciais inválidas!'
-                flash(error)
+                    elif not check_password_hash(result[2], password):
+                        error = 'Credenciais inválidas!'
+                        flash(error)
 
-            if error is None:
-                session.clear()
-                session['user_id'] = result[0]
-                session['group'] = result[9]
-                session['username'] = result[1]
-                session['email'] = result[4]
-                return redirect(url_for('index'))
+                    if error is None:
+                        session.clear()
+                        session['user_id'] = result[0]
+                        session['group'] = result[9]
+                        session['username'] = result[1]
+                        session['email'] = result[4]
+                        return redirect(url_for('index'))
 
-        elif request.method == 'POST':
-            if request.form['action'] == 'Resetar':
-                email = request.form['email']
-                if email:
-                    flag = 0
-                    flash('Instruções de reset de senha enviadas para {} com sucesso!'.format(email))
-                    return redirect(url_for('login', flag=flag))
+            elif request.form['action'] == 'Resetar':
+                if form2.validate_on_submit():
+                    email = request.form['email']
+                    if email:
+                        email = request.form['email']
+                        flag = 0
+                        flash('Instruções de reset de senha enviadas para {} com sucesso!'.format(email))
+                        return redirect(url_for('login', flag=flag))
+                    else:
+                        flag = 1
+                        return redirect(url_for('login', flag=flag))
                 else:
-                    flag = 1
+                    email = request.form['email']
+                    flash('Email {} inválido!'.format(email))
                     return redirect(url_for('login', flag=flag))
 
-        return render_template('auth/login.html', content_type='application/json', flag=flag,  form=form, pagina='')
-
+    return render_template('auth/login.html', content_type='application/json', flag=flag, form=form, form2=form2, pagina='')
 
 
 @bp.before_app_request
@@ -85,7 +92,6 @@ def load_logged_in_user():
 
     else:
         g.user = db.find_one_id(user_id)
-
 
 
 @app.route('/logout')
