@@ -72,7 +72,7 @@ class ClienteModel(object):
 
     def insert_company(self, nome_responsavel, id_natureza_juridica, id_porte_empresa, id_responsavel, empresa, endereco,
                        bairro, cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, cnaeSecundaria,
-                       tributacao, diaFaturamento, folhaPagamento, certificadoDigital, observacoes, nome, telefone, email, path, filename, descricao, size, type, md5, flag, range_anexo):
+                       tributacao, diaFaturamento, folhaPagamento, certificadoDigital, observacoes, nome, telefone, email):
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
@@ -98,13 +98,6 @@ class ClienteModel(object):
             sql = "INSERT INTO empresas_responsavel (id_empresa, id_usuario, created, updated, status) VALUES (%s, %s, %s, %s, %s)"
             self.cur.execute(sql, sql_data)
             self.con.commit()
-            if flag:
-                for i in range(range_anexo):
-                    sql_data = (result, path[i], filename[i], descricao, size[i], type[i], md5[i], data, data)
-                    sql = "INSERT INTO anexos (id_empresa, path, filename, descricao, size, type, md5, created, updated) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                    self.cur.execute(sql, sql_data)
-                self.con.commit()
-
             return True
 
         except Exception as e:

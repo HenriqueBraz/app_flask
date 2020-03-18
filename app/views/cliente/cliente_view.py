@@ -49,46 +49,13 @@ def cadastrar_cliente():
         certificado_digital = request.form['certificado_digital']
         observacoes = request.form['observacoes']
         id_responsavel = nome_responsavel
-        descricao = request.form['descricao']
-        file = []
-        if request.files['image1']:
-            file.append(request.files['image1'])
 
-        if request.files['image2']:
-            file.append(request.files['image2'])
-
-        if request.files['image3']:
-            file.append(request.files['image3'])
-
-        anexos = len(file)
-        range_anexo = 0
-        path = []
-        filename = []
-        size = []
-        md5 = []
-        type = []
-        flag = ''
-
-        for i in range(anexos):
-            if allowed_file(file[i].filename):
-                filename.append(secure_filename(file[i].filename))
-                file[i].save(os.path.join(app.config['UPLOAD_FOLDER'], filename[i]))
-                path.append(PATH + '/' + filename[i])
-                size.append(int(os.path.getsize(path[i])))
-                md5.append(hashlib.md5(b'filename').hexdigest())
-                temp = filename[i].split('.')
-                type.append(temp[1])
-                flag = 1
-                range_anexo += 1
-
-            else:
-                flash('O arquivo {} não é um pdf e não foi inserido!'.format(file[i].filename))
 
         if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro,
                              cidade, estado,
                              capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
                              tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
-                             telefone, email, path, filename, descricao, size, type, md5, flag, range_anexo):
+                             telefone, email):
 
 
             flash('Empresa cadastrada com sucesso!')
