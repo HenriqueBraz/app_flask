@@ -56,7 +56,6 @@ def inserir_anexo(id, empresa):
         size = []
         md5 = []
         type = []
-        print(anexos)
 
         for i in range(anexos):
             if allowed_file(file[i].filename):

@@ -32,7 +32,7 @@ def register():
     return render_template('auth/register.html', form=form, pagina=' Cadastro')
 
 
-@app.route('/login<int:flag>', methods=["GET", "POST"])
+@app.route('/login/<int:flag>', methods=["GET", "POST"])
 def login(flag):
     if session.get('username'):
         return redirect(url_for('index'))
@@ -40,7 +40,6 @@ def login(flag):
     else:
         form = login_form.LoginForm(username=session.get('username'))
         if form.validate_on_submit():
-            flag = 1
             db = UsuarioModel()
             username = request.form['username']
             password = request.form['password']
@@ -64,8 +63,13 @@ def login(flag):
 
         elif request.method == 'POST':
             if request.form['action'] == 'Resetar':
-                flash('Instruções de reset de senha enviadas, consulte o seu email!')
-                return redirect(url_for('login', flag=0))
+                if request.form['email']:
+                    flag = 0
+                    flash('Instruções de reset de senha enviadas, consulte o seu email!')
+                    return redirect(url_for('login', flag=flag))
+                else:
+                    flag = 1
+                    return redirect(url_for('login', flag=flag))
 
         return render_template('auth/login.html', content_type='application/json', flag=flag,  form=form, pagina='')
 

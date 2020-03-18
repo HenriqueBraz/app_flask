@@ -79,7 +79,8 @@
                     <!-- email -->
                     <div class="form-group row">
                         <div class="col-12">
-                            <input class="form-control" type="email" required="" placeholder="E-mail">
+                            {{form.email(class="form-control", placeholder="Email")}}
+                            {{form.errors.email}}
                         </div>
                     </div>
                     <!-- pwd -->
@@ -88,7 +89,7 @@
                             <button class="btn btn-block btn-lg btn-primary text-uppercase" type="submit" name="action" value="Resetar">Resetar</button>
                         </div>
                         <div class="d-flex justify-content-center col-3">
-                            <a href="javascript:void(0)" class="text-muted recovery-back"><i class="fa fa-angle-left mr-1"></i> Voltar</a>
+                            <button class="btn btn-primary" type="button"><a href="{{ url_for('login', flag=1) }}" ><font color=white>voltar</font></a></button>
                         </div>
                     </div>
                 </form>
