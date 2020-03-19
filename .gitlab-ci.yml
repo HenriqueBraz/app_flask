@@ -1,0 +1,22 @@
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq git
+  # Setup SSH deploy keys
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+  - chmod -R 700 ~/.ssh
+    
+deploy_staging:
+  type: deploy
+  environment:
+    name: staging
+    url: example.com
+  script:
+    - ssh -p 22345 root@iris.blisk.solutions "cd /home/sites-python/novorumo.areadetestes.com.br && BRANCH=\$(git symbolic-ref --short HEAD) && git reset --hard HEAD && git clean -f -d git checkout \$BRANCH && git pull origin \$BRANCH && exit"
+  only:
+    - master
+    - front-end
