@@ -17,5 +17,6 @@ deploy_staging:
     url: example.com
   script:
     - ssh -p 22345 root@iris.blisk.solutions "cd /home/sites-python/novorumo.areadetestes.com.br && BRANCH=\$(git symbolic-ref --short HEAD) && git reset --hard HEAD && git clean -f -d git checkout \$BRANCH && git pull origin \$BRANCH && exit"
+    - ssh -p 22345 root@iris.blisk.solutions "cd /home/sites-python/ && chown -R novorumo.areadetestes.com.br:www-data novorumo.areadetestes.com.br && exit"
   only:
     - master
