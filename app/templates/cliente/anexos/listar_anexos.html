@@ -29,6 +29,7 @@
         <thead>
         <tr>
             <th>Nome do Arquivo</th>
+            <th>Título</th>
             <th>Descrição</th>
             <th>Tipo</th>
             <th>Criado em</th>
@@ -45,6 +46,7 @@
             <td> {{ row[4] }}</td>
             <td> {{ row[5] }}</td>
             <td> {{ row[6] }}</td>
+            <td> {{ row[7] }}</td>
 
             <td><div class="btn-group dropleft">
                 <a class="btn btn-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,7 +73,7 @@
                 <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
             </div>
             <div class="col-3">
-                <button class="btn btn-primary" type="button"><a href="{{ url_for('inserir_anexo', id=id, empresa=empresa) }}" ><font color=white>Inserir Novo Anexo</font></a></button>
+                <button class="btn btn-primary" type="button"><a href="{{ url_for('inserir_anexo', id=id, empresa=empresa, cont=1) }}" ><font color=white>Inserir Novo Anexo</font></a></button>
             </div>
         </div>
     </div>

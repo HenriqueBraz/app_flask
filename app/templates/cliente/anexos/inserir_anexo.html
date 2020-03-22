@@ -18,6 +18,7 @@
 {% endif %}
 {% endwith %}
 
+
 <br>
 <div class="bloco">
 
@@ -31,33 +32,66 @@
             </div>
             <br>
             <h4>Anexos</h4>
-            <br>
+
             <div class="form-group">
-                <div class="row">
-                    <label class="control-label col-2 text-right"> Somente PDF!!!</label>
-                    <div class="col-2">
-                        <form  method="post">
-                            <input type="file" name="image1"> <br /><br />
-                            <input type="file" name="image2"> <br /><br />
-                            <input type="file" name="image3"> <br /><br />
-                            <input type="file" name="image4"> <br /><br />
-                            <input type="file" name="image5"> <br /><br />
-                        </form>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-10"></div>
+                        <div class="col-2">
+                            <button class="btn btn-primary" type="button"><a href="{{ url_for('inserir_campo_anexo', id=id, empresa=empresa, cont=cont + 1) }}" ><font color=white>Inserir mais Anexos</font></a></button>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <label class="control-label col-2 text-right">Descrição</label>
-                    <div class="col-4">
-                        {{form.descricao(class="form-control")}} {{form.errors. descricao}}
+                <div class="form-group">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right"><h5>Título:</h5></label>
+                            <div class="col-4">
+                                {{form.titulo(class="form-control")}} {{form.errors.titulo}}
+                            </div>
+                        </div>
                     </div>
+                    <br><br>
+                    {% for row in range(cont) %}
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right">Descrição {{ row + 1 }} :</label>
+                            <div class="col-4">
+                                {{form.descricao(class="form-control")}} {{form.errors. descricao}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right"></label>
+                            <div class="col-6">
+                                <form id='form' action='' method='post' enctype='multipart/form-data'>
+                                    <input id='file-input' class='file-input' type='file' name='file' onchange="newInput(this)" multiple='multiple' />
+                                </form>
+                                <ul id="dp-files"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <input type="button" onClick="ctexto()" value="Texto">
+                    <div id=editavel">
+                        <textarea   name="editavel" rows="5" cols="33"></textarea>
+                    </div>
+
+
+
                 </div>
+                <br>
+                <br>
                 <br>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-9"></div>
-                        <div class="col-3">
+                        <div class="col-8"></div>
+                        <div class="col-4">
                             <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
-                            <button class="btn btn-primary"  type="submit">Salvar</button>
+                            <button class="btn btn-primary"  type="submit"><font color=white>Salvar</font></button>
+                            <button class="btn btn-primary" type="button"><a href="{{ url_for('inserir_anexo', id=id, empresa=empresa, cont=cont) }}" ><font color=white>Limpar Campos</font></a></button>
                         </div>
                     </div>
                 </div>
@@ -69,10 +103,64 @@
 </div>
 
 </div>
+
+
+
+
 </form>
 </div>
 
 </div>
+
+
+
+
+<script>
+
+function ctexto() {
+
+    $('#editavel').append('<div class="ui-widget-content, draggable">Arrastar<div  id="divv" class="" contenteditable="true" >Este é um texto de teste</div></div>');
+
+         $(".draggable")
+    .draggable()
+    .click(function(){
+        if ( $(this).is('.ui-draggable-dragging') ) {
+            return;
+        }
+        $(this).draggable( "option", "disabled", true );
+        $(this).attr('contenteditable','true');
+        $(this).attr('resizable','false');
+
+    })
+    .blur(function(){
+        $(this).draggable( 'option', 'disabled', false);
+        $(this).attr('contenteditable','false');
+    });
+}
+
+
+    var inputFiles = [];
+
+function newInput(input) {
+  var filesStr = "";
+
+  for (let i = 0; i < input.files.length; i++) {
+    inputFiles.push(input.files[i]);
+    filesStr += "<li>" + input.files[i].name + "<button onclick='removeLi(this)'>Remover</button>" + "</li>";
+  }
+
+  document.getElementById("file-input").value = "";
+
+  document.getElementById("dp-files").innerHTML += filesStr;
+}
+
+function removeLi(e) {
+  inputFiles = inputFiles.filter(function(file) {
+    return file.name !== e.parentNode.innerHTML.split("<button")[0];
+  })
+  e.parentNode.parentNode.removeChild(e.parentNode);
+}
+</script>
 
 
 
