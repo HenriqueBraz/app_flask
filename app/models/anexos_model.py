@@ -32,7 +32,7 @@ class AnexoModel(object):
     def get_anexos(self, id):
         try:
             self.cur.execute(
-                "SELECT e.id, a.id,  a.filename, a.descricao, a.type, a.created, a.updated, e.empresa  FROM anexos a  LEFT "
+                "SELECT e.id, a.id,  a.filename, a.titulo, a.descricao, a.type, a.created, a.updated, e.empresa  FROM anexos a  LEFT "
                 "JOIN  empresas e ON e.id = a.id_empresa  WHERE  1=1 AND "
                 "a.id_empresa = '{}' AND  a.status = 'Ativo' AND e.status = 'Ativo';".format(id))
             result = self.cur.fetchall()
@@ -68,12 +68,12 @@ class AnexoModel(object):
             logging.error('Erro em  EmpresaModel, método get_company_name(: ' + str(e) + '\n')
 
 
-    def insert_anexo(self,id_empresa, path, filename, descricao, size, type, md5) :
+    def insert_anexo(self,id_empresa, titulo,  path, filename, descricao, size, typee, md5) :
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
-            sql_data = (id_empresa, path, filename, descricao, size, type, md5, data, data)
-            sql = "INSERT INTO anexos (id_empresa, path, filename, descricao, size, type, md5, created, updated) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            sql_data = (id_empresa, titulo, path, filename, descricao, size, typee, md5, data, data)
+            sql = "INSERT INTO anexos (id_empresa, titulo, path, filename, descricao, size, type, md5, created, updated) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
             self.cur.execute(sql, sql_data)
             self.con.commit()
             return True

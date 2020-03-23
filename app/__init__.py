@@ -8,6 +8,7 @@ from flask_babel import Babel
 UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads')
 PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads')
 ALLOWED_EXTENSIONS = set(['pdf'])
+MAX_IMAGE_FILESIZE = 0.5 * 1024 * 1024
 BABEL_DEFAULT_LOCALE = 'pt'
 
 app = Flask(__name__, static_url_path='')

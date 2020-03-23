@@ -18,6 +18,7 @@
 {% endif %}
 {% endwith %}
 
+
 <br>
 <div class="bloco">
 
@@ -31,33 +32,57 @@
             </div>
             <br>
             <h4>Anexos</h4>
-            <br>
-            <div class="form-group">
-                <div class="row">
-                    <label class="control-label col-2 text-right"> Somente PDF!!!</label>
-                    <div class="col-2">
-                        <form  method="post">
-                            <input type="file" name="image1"> <br /><br />
-                            <input type="file" name="image2"> <br /><br />
-                            <input type="file" name="image3"> <br /><br />
-                            <input type="file" name="image4"> <br /><br />
-                            <input type="file" name="image5"> <br /><br />
-                        </form>
+
+            <div class="form">
+                <div class="form">
+                    <div class="row">
+                        <div class="col-10"></div>
+                        <div class="col-2">
+                            <button class="btn btn-primary" id="add_anexo2" title="Adicionar mais anexos"> Adicionar mais anexos</button>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <label class="control-label col-2 text-right">Descrição</label>
-                    <div class="col-4">
-                        {{form.descricao(class="form-control")}} {{form.errors. descricao}}
+                <div class="form">
+                    <div class="form">
+                        <div class="row">
+                            <label class="control-label col-2 text-right"><h5>Título* :</h5></label>
+                            <div class="col-4">
+                                {{form.titulo(class="form-control")}} {{form.errors.titulo}}
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div id="id_anexo">
+                        <div class="anexos">
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="control-label col-2 text-right"></label>
+                                    <div class="col-6">
+                                        <input class='file-input' type='file' name='files[]' multiple='multiple'  />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="control-label col-2 text-right">Descrição:</label>
+                                    <div class="col-4">
+                                        <textarea rows="3" cols="24" name="descricao[]"  multiple='multiple' class="form-control" > </textarea>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <br>
+                <br>
+                <br>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-9"></div>
-                        <div class="col-3">
+                        <div class="col-8"></div>
+                        <div class="col-4">
                             <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
-                            <button class="btn btn-primary"  type="submit">Salvar</button>
+                            <button class="btn btn-primary" type="submit"><font color=white>Salvar</font></button>
                         </div>
                     </div>
                 </div>
@@ -69,11 +94,71 @@
 </div>
 
 </div>
+
+
+
+
 </form>
 </div>
 
 </div>
 
+
+
+<script>
+
+
+    $(document).ready(function () {
+        var num = 1;
+
+        $('#add_anexo2').on('keydown', function (e) {
+            if (e.keyCode == 9) {
+                $(this).next().focus();
+                return true;
+            }
+
+            e.preventDefault();
+            if (e.keyCode == 13 || e.keyCode == 32) {
+                $('#add_anexo2').trigger('click');
+            }
+        });
+
+        $("#add_anexo2").on("click", function (e) {
+            e.preventDefault();
+
+            if (num > 6) {
+                return false;
+            }
+
+            var str = '';
+            str += '<div class="form-group">';
+            str += '<div class="anexos"> ';
+            str += '<div class="form-group">';
+            str += '<div class="row">';
+            str += '<label class="control-label col-2 text-right"></label>';
+            str += '<div class="col-6">';
+            str += '<input id="add_anexo" class="file-input" type="file" name="files[]" multiple="multiple" /> ';
+            str += '<button class="btn btn-primary deltel" title="Remover Anexo"> - </button>';
+            str += '</div></div>';
+            str += '<div class="row">';
+            str += '<label class="control-label col-2 text-right">Descrição:</label>';
+            str += '<div class="col-4">';
+            str += '<textarea rows="3" cols="24" name="descricao[]" multiple="multiple" class="form-control"> </textarea>';
+            str += '<br></div></div></div></div></div></div>';
+
+            var objfields = $(str);
+            $('#id_anexo').append(objfields);
+            num++;
+        });
+
+
+        $(document).on('click', '.deltel', function(e) {
+            e.preventDefault();
+            $(this).parents('.anexos').remove();
+            num--;
+        });
+    });
+</script>
 
 
 

@@ -1,12 +1,8 @@
-import os
-import hashlib
-from werkzeug.utils import secure_filename
-from app import app, ALLOWED_EXTENSIONS, PATH
-from flask import render_template, request, session, flash, url_for, redirect
-from app.forms.client_forms import client_form, access_forms
+from app import app
+from flask import render_template, request, flash, url_for, redirect
+from app.forms.client_forms import access_forms
 from app.models.acesso_model import AcessoModel
-from app.models.cliente_model import ClienteModel
-from app.models.usuario_model import UsuarioModel
+
 
 
 @app.route('/listar_acesso<int:id>', methods=["GET", "POST"])

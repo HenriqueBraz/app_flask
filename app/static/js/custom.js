@@ -178,12 +178,12 @@ $(function () {
             e.preventDefault();
         });
     
-        // Auto scroll to the active nav
-        if ( $(window).width() > 768 || window.Touch) { 
+        /* Auto scroll to the active nav
+        if ( $(window).width() > 768 || window.Touch) {
              $('.scroll-sidebar').animate({
                 scrollTop: $("#sidebarnav .sidebar-item.selected").offset().top -250
             }, 500);
-        }
+        }*/
         
     });
 });
