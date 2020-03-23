@@ -33,17 +33,17 @@
             <br>
             <h4>Anexos</h4>
 
-            <div class="form-group">
-                <div class="form-group">
+            <div class="form">
+                <div class="form">
                     <div class="row">
                         <div class="col-10"></div>
                         <div class="col-2">
-                            <button class="btn btn-primary" type="button"><a href="{{ url_for('inserir_campo_anexo', id=id, empresa=empresa, cont=cont + 1) }}" ><font color=white>Inserir mais Anexos</font></a></button>
+                            <button class="btn btn-primary" id="add_anexo2" title="Adicionar mais anexos"> Adicionar mais anexos</button>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="form-group">
+                <div class="form">
+                    <div class="form">
                         <div class="row">
                             <label class="control-label col-2 text-right"><h5>Título:</h5></label>
                             <div class="col-4">
@@ -52,35 +52,26 @@
                         </div>
                     </div>
                     <br><br>
-                    {% for row in range(cont) %}
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="control-label col-2 text-right">Descrição {{ row + 1 }} :</label>
-                            <div class="col-4">
-                                {{form.descricao(class="form-control")}} {{form.errors. descricao}}
+                    <div id="id_anexo">
+                        <div class="batatinhas">
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="control-label col-2 text-right">Descrição:</label>
+                                    <div class="col-4">
+                                        <textarea rows="3" cols="24" name="descricao"[] class="form-control" > </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="control-label col-2 text-right"></label>
+                                    <div class="col-6">
+                                        <input class='file-input' type='file' name='files[]' multiple='multiple' class="form-control" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="control-label col-2 text-right"></label>
-                            <div class="col-6">
-                                <form id='form' action='' method='post' enctype='multipart/form-data'>
-                                    <input id='file-input' class='file-input' type='file' name='file' onchange="newInput(this)" multiple='multiple' />
-                                </form>
-                                <ul id="dp-files"></ul>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-                    <input type="button" onClick="ctexto()" value="Texto">
-                    <div id=editavel">
-                        <textarea   name="editavel" rows="5" cols="33"></textarea>
-                    </div>
-
-
-
                 </div>
                 <br>
                 <br>
@@ -90,8 +81,7 @@
                         <div class="col-8"></div>
                         <div class="col-4">
                             <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
-                            <button class="btn btn-primary"  type="submit"><font color=white>Salvar</font></button>
-                            <button class="btn btn-primary" type="button"><a href="{{ url_for('inserir_anexo', id=id, empresa=empresa, cont=cont) }}" ><font color=white>Limpar Campos</font></a></button>
+                            <button class="btn btn-primary" type="submit"><font color=white>Salvar</font></button>
                         </div>
                     </div>
                 </div>
@@ -114,54 +104,58 @@
 
 
 
-
 <script>
+    $(document).ready(function () {
+        var num = 1;
 
-function ctexto() {
+        $('#add_anexo2').on('keydown', function (e) {
+            if (e.keyCode == 9) {
+                $(this).next().focus();
+                return true;
+            }
 
-    $('#editavel').append('<div class="ui-widget-content, draggable">Arrastar<div  id="divv" class="" contenteditable="true" >Este é um texto de teste</div></div>');
+            e.preventDefault();
+            if (e.keyCode == 13 || e.keyCode == 32) {
+                $('#add_anexo2').trigger('click');
+            }
+        });
 
-         $(".draggable")
-    .draggable()
-    .click(function(){
-        if ( $(this).is('.ui-draggable-dragging') ) {
-            return;
-        }
-        $(this).draggable( "option", "disabled", true );
-        $(this).attr('contenteditable','true');
-        $(this).attr('resizable','false');
+        $("#add_anexo2").on("click", function (e) {
+            e.preventDefault();
 
-    })
-    .blur(function(){
-        $(this).draggable( 'option', 'disabled', false);
-        $(this).attr('contenteditable','false');
+            if (num > 4) {
+                return false;
+            }
+
+            var str = '';
+            str += '<div class="form-group">';
+            str += '<div class="batatinhas"> ';
+            str += '    <div class="row">';
+            str += '    <label class="control-label col-2 text-right">Descrição:</label>';
+            str += '     <div class="col-4">';
+            str += '    <textarea rows="3" cols="24" name="descricao[]" class="form-control"> </textarea>';
+            str += '    </div></div>';
+            str += '    <div class="form-group">';
+            str += '     <div class="row">';
+            str += '     <label class="control-label col-2 text-right"></label>';
+            str += '     <div class="col-6">';
+            str += '      <input id="add_anexo" class="file-input" type="file" name="files[]" multiple="multiple" class="form-control" /> ';
+            str += '    <button class="btn btn-danger btn-small deltel" title="Remover Anexo"> - </button>';
+            str += '       </div></div></div></div></div></div>';
+
+            var objfields = $(str);
+            $('#id_anexo').append(objfields);
+            num++;
+        });
+
+
+        $(document).on('click', '.deltel', function(e) {
+            e.preventDefault();
+            $(this).parents('.batatinhas').remove();
+            num--;
+        });
     });
-}
-
-
-    var inputFiles = [];
-
-function newInput(input) {
-  var filesStr = "";
-
-  for (let i = 0; i < input.files.length; i++) {
-    inputFiles.push(input.files[i]);
-    filesStr += "<li>" + input.files[i].name + "<button onclick='removeLi(this)'>Remover</button>" + "</li>";
-  }
-
-  document.getElementById("file-input").value = "";
-
-  document.getElementById("dp-files").innerHTML += filesStr;
-}
-
-function removeLi(e) {
-  inputFiles = inputFiles.filter(function(file) {
-    return file.name !== e.parentNode.innerHTML.split("<button")[0];
-  })
-  e.parentNode.parentNode.removeChild(e.parentNode);
-}
 </script>
-
 
 
 

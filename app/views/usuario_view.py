@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from flask_paginate import get_page_parameter, Pagination
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import app
@@ -26,7 +25,7 @@ def usuarios():
         user_id = session.get('user_id')
         user = db.get_user(user_id)
         print(user)
-        return render_template('usuario/listar_usuarios.html', result=user, group=group,pagina='Listar Usuários', pagination=pagination)
+        return render_template('usuario/listar_usuarios.html', result=user, group=group, pagina='Listar Usuários', pagination=pagination)
 
 
 @app.route("/edita_usuario/<int:id>", methods=["GET", "POST"])

@@ -7,9 +7,12 @@ from app.forms.client_forms import client_form
 from app.models.anexos_model import AnexoModel
 
 
-def allowed_file(filename, filesize):
-    return ('.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS) and (
-            int(filesize) <= MAX_IMAGE_FILESIZE)
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def allowed_file_extension(filesize):
+    return int(filesize) <= MAX_IMAGE_FILESIZE
 
 
 @app.route('/listar_anexos<int:id>', methods=["GET"])
@@ -18,7 +21,7 @@ def listar_anexos(id):
     result = db.get_anexos(id)
     if len(result) == 0:
         empresa = db.get_company_name(id)
-        return redirect(url_for('inserir_anexo', id=id, empresa=empresa[0], cont=1))
+        return redirect(url_for('inserir_anexo', id=id, empresa=empresa[0]))
 
     else:
         empresa = result[0][-1]
@@ -27,13 +30,8 @@ def listar_anexos(id):
                                pagina='Listar Anexos')
 
 
-@app.route('/listar_anexos/<int:id>/<string:empresa>/<int:cont>', methods=["GET", "POST"])
-def inserir_campo_anexo(id, empresa, cont):
-    return redirect(url_for('inserir_anexo', id=id, empresa=empresa, cont=cont))
-
-
-@app.route('/inserir_anexo/<int:id>/<string:empresa>/<int:cont>', methods=["GET", "POST"])
-def inserir_anexo(id, empresa, cont):
+@app.route('/inserir_anexo/<int:id>/<string:empresa>', methods=["GET", "POST"])
+def inserir_anexo(id, empresa):
     form = client_form.AnexoForm()
     db = AnexoModel()
 
@@ -45,7 +43,7 @@ def inserir_anexo(id, empresa, cont):
         # file.size  # Gives file's size in byte
         # file.read()  # Reads file
 
-        files = request.files.getlist('file')
+        files = request.files.getlist('files[]')
         for i in range(len(files)):
             print(files)
             print(len(files))
@@ -66,7 +64,7 @@ def inserir_anexo(id, empresa, cont):
         filename = []
 
         for i in range(anexos):
-            if allowed_file(files[i].filename, os.path.getsize(path[i])):
+            if allowed_file(files[i].filename):
                 filename = secure_filename(files[i].filename)
                 files[i].save(os.path.join(app.config['UPLOAD_FOLDER'], filename[i]))
                 path.append(PATH + '/' + filename[i])
@@ -84,11 +82,13 @@ def inserir_anexo(id, empresa, cont):
 
 
             else:
-                flash('O arquivo {} não é um PDF ou excedeu o limite máximo, não foi inserido!'.format(files[i].filename))
+                flash(
+                    'O arquivo {} não é um PDF ou excedeu o limite máximo, não foi inserido!'.format(files[i].filename))
 
         return redirect(url_for('listar_anexos', id=id, form=form))
 
-    return render_template("cliente/anexos/inserir_anexo.html", id=id, empresa=empresa, cont=cont, form=form,
+    print(form.errors)
+    return render_template("cliente/anexos/inserir_anexo.html", id=id, empresa=empresa, form=form,
                            pagina='Inserir Anexo')
 
 
