@@ -79,5 +79,4 @@ class ClientForm(FlaskForm):
 
 
 class AnexoForm(FlaskForm):
-    titulo = StringField(u'titulo', [validators.length(min=0, max=50)])
-    descricao = TextAreaField(u'descricao', [validators.length(min=0, max=500)])
+    titulo = StringField(u'titulo', [validators.length(min=0, max=50), validators.DataRequired()])

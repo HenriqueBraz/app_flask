@@ -45,7 +45,7 @@
                 <div class="form">
                     <div class="form">
                         <div class="row">
-                            <label class="control-label col-2 text-right"><h5>Título:</h5></label>
+                            <label class="control-label col-2 text-right"><h5>Título* :</h5></label>
                             <div class="col-4">
                                 {{form.titulo(class="form-control")}} {{form.errors.titulo}}
                             </div>
@@ -53,20 +53,21 @@
                     </div>
                     <br><br>
                     <div id="id_anexo">
-                        <div class="batatinhas">
+                        <div class="anexos">
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="control-label col-2 text-right">Descrição:</label>
-                                    <div class="col-4">
-                                        <textarea rows="3" cols="24" name="descricao"[] class="form-control" > </textarea>
+                                    <label class="control-label col-2 text-right"></label>
+                                    <div class="col-6">
+                                        <input class='file-input' type='file' name='files[]' multiple='multiple'  />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="control-label col-2 text-right"></label>
-                                    <div class="col-6">
-                                        <input class='file-input' type='file' name='files[]' multiple='multiple' class="form-control" />
+                                    <label class="control-label col-2 text-right">Descrição:</label>
+                                    <div class="col-4">
+                                        <textarea rows="3" cols="24" name="descricao[]"  multiple='multiple' class="form-control" > </textarea>
+                                        <br>
                                     </div>
                                 </div>
                             </div>
@@ -105,6 +106,8 @@
 
 
 <script>
+
+
     $(document).ready(function () {
         var num = 1;
 
@@ -123,25 +126,25 @@
         $("#add_anexo2").on("click", function (e) {
             e.preventDefault();
 
-            if (num > 4) {
+            if (num > 6) {
                 return false;
             }
 
             var str = '';
             str += '<div class="form-group">';
-            str += '<div class="batatinhas"> ';
-            str += '    <div class="row">';
-            str += '    <label class="control-label col-2 text-right">Descrição:</label>';
-            str += '     <div class="col-4">';
-            str += '    <textarea rows="3" cols="24" name="descricao[]" class="form-control"> </textarea>';
-            str += '    </div></div>';
-            str += '    <div class="form-group">';
-            str += '     <div class="row">';
-            str += '     <label class="control-label col-2 text-right"></label>';
-            str += '     <div class="col-6">';
-            str += '      <input id="add_anexo" class="file-input" type="file" name="files[]" multiple="multiple" class="form-control" /> ';
-            str += '    <button class="btn btn-danger btn-small deltel" title="Remover Anexo"> - </button>';
-            str += '       </div></div></div></div></div></div>';
+            str += '<div class="anexos"> ';
+            str += '<div class="form-group">';
+            str += '<div class="row">';
+            str += '<label class="control-label col-2 text-right"></label>';
+            str += '<div class="col-6">';
+            str += '<input id="add_anexo" class="file-input" type="file" name="files[]" multiple="multiple" /> ';
+            str += '<button class="btn btn-primary deltel" title="Remover Anexo"> - </button>';
+            str += '</div></div>';
+            str += '<div class="row">';
+            str += '<label class="control-label col-2 text-right">Descrição:</label>';
+            str += '<div class="col-4">';
+            str += '<textarea rows="3" cols="24" name="descricao[]" multiple="multiple" class="form-control"> </textarea>';
+            str += '<br></div></div></div></div></div></div>';
 
             var objfields = $(str);
             $('#id_anexo').append(objfields);
@@ -151,7 +154,7 @@
 
         $(document).on('click', '.deltel', function(e) {
             e.preventDefault();
-            $(this).parents('.batatinhas').remove();
+            $(this).parents('.anexos').remove();
             num--;
         });
     });

@@ -11,7 +11,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def allowed_file_extension(filesize):
+def allowed_file_size(filesize):
     return int(filesize) <= MAX_IMAGE_FILESIZE
 
 
@@ -37,57 +37,43 @@ def inserir_anexo(id, empresa):
 
     if form.validate_on_submit():
 
-        # file = request.FILES['filename']
-        # file.name  # Gives name
-        # file.content_type  # Gives Content type text/html etc
-        # file.size  # Gives file's size in byte
-        # file.read()  # Reads file
-
         files = request.files.getlist('files[]')
+        titulo = request.form['titulo']
+        descricao = request.form.getlist('descricao[]')
+        print(files)
+        print(descricao)
+
         for i in range(len(files)):
-            print(files)
-            print(len(files))
-
-        if request.form['titulo']:
-            titulo = request.form['titulo']
-        else:
-            titulo = len(files)
-
-        descricao = []
-        if request.form['descricao']:
-            descricao.append(request.form['descricao'])
-        else:
-            descricao = len(files)
-
-        anexos = len(files)
-        path = []
-        filename = []
-
-        for i in range(anexos):
-            if allowed_file(files[i].filename):
-                filename = secure_filename(files[i].filename)
-                files[i].save(os.path.join(app.config['UPLOAD_FOLDER'], filename[i]))
-                path.append(PATH + '/' + filename[i])
-                size = int(os.path.getsize(path[i]))
-                md5 = hashlib.md5(b'filename').hexdigest()
-                type = files[i].content_type()
-                # temp = filename[i].split('.')
-                # type.append(temp[1])
-
-                if db.insert_anexo(id, titulo, path[i], filename, descricao[i], size, type, md5):
-                    flash('anexo {} inserido com sucesso!'.format(files[i].filename))
-
-                else:
-                    flash('Erro ao inserir o arquivo {}, contate o administrador do sistema.'.format(files[i].filename))
-
+            if files[i].filename == "":
+                flash('O arquivo {} não possui um nome válido, não foi inserido'.format(files[i].filename))
 
             else:
-                flash(
-                    'O arquivo {} não é um PDF ou excedeu o limite máximo, não foi inserido!'.format(files[i].filename))
+                if allowed_file(files[i].filename):
+                    filename = secure_filename(files[i].filename)
+                    files[i].save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    path = PATH + '/' + filename
+                    size = int(os.path.getsize(path))
+                    if allowed_file_size(size):
+                        md5 = hashlib.md5(b'filename').hexdigest()
+                        temp = filename.split('.')
+                        typee = temp[1]
+                        if db.insert_anexo(id, titulo, path, filename, descricao[i], size, typee, md5):
+                            flash('anexo {} inserido com sucesso!'.format(files[i].filename))
+
+                        else:
+                            flash('Erro ao inserir o arquivo {}, contate o administrador do sistema.'.format(
+                                files[i].filename))
+                    else:
+                        flash('O arquivo {} excedeu o tamanho máximo permitido e não foi inserido.'.format(
+                            files[i].filename))
+                else:
+                    flash(
+                        'O arquivo {} não é um PDF não foi inserido!'.format(
+                            files[i].filename))
+
 
         return redirect(url_for('listar_anexos', id=id, form=form))
 
-    print(form.errors)
     return render_template("cliente/anexos/inserir_anexo.html", id=id, empresa=empresa, form=form,
                            pagina='Inserir Anexo')
 

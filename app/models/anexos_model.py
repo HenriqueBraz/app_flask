@@ -68,11 +68,11 @@ class AnexoModel(object):
             logging.error('Erro em  EmpresaModel, método get_company_name(: ' + str(e) + '\n')
 
 
-    def insert_anexo(self,id_empresa, titulo,  path, filename, descricao, size, type, md5) :
+    def insert_anexo(self,id_empresa, titulo,  path, filename, descricao, size, typee, md5) :
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
-            sql_data = (id_empresa, titulo, path, filename, descricao, size, type, md5, data, data)
+            sql_data = (id_empresa, titulo, path, filename, descricao, size, typee, md5, data, data)
             sql = "INSERT INTO anexos (id_empresa, titulo, path, filename, descricao, size, type, md5, created, updated) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
             self.cur.execute(sql, sql_data)
             self.con.commit()
