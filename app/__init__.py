@@ -21,7 +21,7 @@ JWTManager(app)
 from .views import usuario_view, auth_view, index_view, faturamento_view
 from app.views.cliente.acoes_cliente import contabilidade_view, socios_view, acesso_view, anexos_view
 from app.views.cliente import cliente_view
-from app.views import ocorrencia_view
+from app.views import ocorrencia_view, financeiro_view
 from .models import usuario_model, cliente_model, contabilidade_model, socios_model, acesso_model, faturamento_model, anexos_model
 
 DEBUG = True
