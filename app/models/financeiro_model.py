@@ -25,11 +25,22 @@ class FinanceiroModel(object):
         logging.info('Construtor do FinanceiroModel chamado com sucesso\n')
         logging.disable(logging.DEBUG)
 
-    def get_companies(self):
+    def get_companies(self, user_id):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE e.status = 'Ativo';")
+                "SELECT e.id, e.empresa, e.cnpj FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE u.id = '{}' AND e.status = 'Ativo';".format(user_id))
             result = self.cur.fetchall()
             return result
         except Exception as e:
             logging.error('Erro em  FinanceiroModel, método get_companies: ' + str(e) + '\n')
+
+
+    def finantials_companie(self, id):
+        try:
+            self.cur.execute(
+                "SELECT e.id, e.empresa, c.data, c.servico, c.valor FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "c.id_empresa  WHERE e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
+            result = self.cur.fetchall()
+            return result
+        except Exception as e:
+            logging.error('Erro em  FinanceiroModel, método finantials_companie: ' + str(e) + '\n')

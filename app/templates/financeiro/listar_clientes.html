@@ -39,7 +39,7 @@
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="{{ url_for('inativar_financeiro', id = row[0]) }}">Inativar</a>
-                <a class="dropdown-item" href="{{ url_for('cobranca_financeiro', id = row[0]) }}">Cobrança</a>
+                <a class="dropdown-item" href="{{ url_for('select_financeiro', id = row[0], nome = row[1]) }}">Cobrança</a>
             </div>
         </div>
         </td>

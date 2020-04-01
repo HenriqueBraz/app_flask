@@ -68,7 +68,6 @@ def cadastrar_cliente():
 def listar_clientes():
     db = ClienteModel()
     user_id = session['user_id']
-    print(user_id)
     lista_clientes = db.get_companies(user_id)
     return render_template('cliente/listar_clientes.html', result=lista_clientes, pagina='Listar Clientes')
 

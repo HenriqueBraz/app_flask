@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+
+{% block page %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a>
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Financeiro</a>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro') }}">Listar Clientes</a></li>
+<li class="breadcrumb-item active" aria-current="page">Incluir Cobrança</li>
+{% endblock %}
+
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash" id="flash">{{  message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<br>
+<div class="bloco">
+
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="card">
+            <div class="card-header">
+                <div class="form-group">
+                    {{nome}}:&nbsp;&nbsp; Incluir Cobrança
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-4 text-right">Período</label>
+                    <div class="col-4">
+                        {{form.periodo(class="form-control")}} {{form.errors.periodo }}
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+</div>
+</br>
+<div class="form-group">
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_financeiro') }}" ><font color=white>voltar</font></a></button>
+            &nbsp;&nbsp;&nbsp;<button class="btn btn-primary"  type="submit">Enviar</button>
+        </div>
+    </div>
+</div>
+
+</div>
+</form>
+</div>
+
+</div>
+
+{% if messages %}
+{% endif %}
+{% endblock %}

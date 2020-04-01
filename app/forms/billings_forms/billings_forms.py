@@ -35,7 +35,7 @@ class BetterDecimalField(DecimalField):
                 raise ValueError(self.gettext('Não é um valor decimal válido'))
 
 
-class IndividualBillingForm(FlaskForm):
+class BillingForm(FlaskForm):
     cliente = SelectField("cliente", coerce=int, render_kw={'readonly': True}, choices=[])
     mes = SelectField("mes", validators=[DataRequired()],
                       choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'),
