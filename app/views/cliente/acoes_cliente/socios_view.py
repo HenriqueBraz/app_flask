@@ -6,22 +6,29 @@ from app.forms.client_forms import partner_structure_forms
 from app.models.socios_model import SociosModel
 
 
-@app.route('/listar_socios<int:id>', methods=["GET"])
-def listar_socios(id):
+@app.route('/select_socios<int:id>', methods=["GET"])
+def select_socios(id):
     db = SociosModel()
     result = db.get_partners(id)
     print(result)
-    if len(result) == 0:
+    if result == ():
         return redirect(url_for('cadastrar_socio', id=id))
 
-    return render_template("cliente/quadro_societario/listar_socios.html", result=result, id_empresa=id, pagina='Listar Socios')
+    else:
+        return redirect(url_for('listar_socios', id=id))
+
+
+@app.route('/listar_socios/<int:id>', methods=["GET"])
+def listar_socios(id):
+    db = SociosModel()
+    result = db.get_partners(id)
+    return render_template("cliente/quadro_societario/listar_socios.html", result=result, id_empresa=id )
 
 
 @app.route("/cadastrar_socio<int:id>", methods=["GET", "POST"])
 def cadastrar_socio(id):
     form = partner_structure_forms.PartnerForm()
     db = SociosModel()
-    id_empresa = db.get_id_company(id)
     if form.validate_on_submit():
         nome = request.form['nome']
         endereco = request.form['endereco']
@@ -56,14 +63,14 @@ def cadastrar_socio(id):
         else:
             flash('Houve um erro ao inserir o sócio, contate o administrador do sistema')
 
-    return render_template("/cliente/quadro_societario/cadastar_socio.html", form=form, id_empresa=id_empresa[0],  pagina='Cadastrar Sócio')
+    return render_template("/cliente/quadro_societario/cadastar_socio.html", form=form, id_empresa=id,  pagina='Cadastrar Sócio')
 
 
-@app.route('/editar_socio<int:id>', methods=["GET", "POST"])
-def editar_socio(id):
+@app.route('/editar_socio<int:id_socio>', methods=["GET", "POST"])
+def editar_socio(id_socio):
     db = SociosModel()
-    id_empresa = db.get_id_company(id)
-    result = db.get_partner(id)
+    id_empresa = db.get_id_company(id_socio)
+    result = db.get_partner(id_socio)
     result11 = result[11]
     result13 = result[13]
     result11 = str(result11).split("-")
@@ -130,10 +137,11 @@ def editar_socio(id):
     return render_template("cliente/quadro_societario/editar_socio.html", form=form, id_empresa=id_empresa[0], pagina='Editar Socio')
 
 
-@app.route('/excluir_socio<int:id>', methods=["GET", "POST"])
-def excluir_socio(id):
+@app.route('/excluir_socio<int:id_socio>', methods=["GET", "POST"])
+def excluir_socio(id_socio):
     db = SociosModel()
-    result = db.select_partner(id)
+    result = db.select_partner(id_socio)
+    print(result)
     flag = 1
     if request.method == 'POST':
         if request.form['submit_button'] == 'Excluir socio':

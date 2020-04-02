@@ -1,8 +1,6 @@
 from werkzeug.utils import redirect
 from app import app
-from app.forms.auth_forms import login_form
 from flask import render_template, url_for, session
-
 from app.forms.finantial_forms import finantial_forms
 from app.models.financeiro_model import FinanceiroModel
 

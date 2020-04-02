@@ -44,11 +44,16 @@
     </tbody></table>
 
     <div class ="frase_botao">
-        <form method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_socios', id=id_empresa) }}" ><font color=white>voltar</font></a></button>
-            <input class="btn btn-primary" type="submit" name="submit_button" value="Excluir socio">
-        </form>
+        <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3">
+                <form method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_socios', id=id_empresa) }}" ><font color=white>voltar</font></a></button>&ensp;
+                    <input class="btn btn-primary" type="submit" name="submit_button" value="Excluir socio">
+                </form>
+            </div>
+        </div>
     </div>
 
     {% else %}
@@ -66,10 +71,15 @@
     </tr>
     </tbody></table>
     <div class ="frase_botao">
-        <form method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_socios', id=id_empresa) }}" ><font color=white>voltar</font></a></button>
-        </form>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-1">
+                <form method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_socios', id=id_empresa) }}" ><font color=white>voltar</font></a></button>
+                </form>
+            </div>
+        </div>
     </div>
     {% endif %}
 

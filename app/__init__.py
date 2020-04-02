@@ -4,6 +4,7 @@ import json
 from flask_wtf import CSRFProtect
 from flask_jwt_extended import JWTManager
 from flask_babel import Babel
+from flask_bootstrap import Bootstrap
 
 UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads')
 PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads')
@@ -33,3 +34,4 @@ csrf.init_app(app)
 app.register_blueprint(auth_view.bp)
 babel = Babel(app)
 # flask_heroku.settings(locals())
+bootstrap = Bootstrap(app)
