@@ -16,59 +16,60 @@
     <script src="{{ url_for('static', filename='js/pages/sparkline/sparkline.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/bootstrap/dist/js/bootstrap.js') }}"></script>
+
 </head>
 
 <body>
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
+<div class="preloader">
+    <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
     </div>
+</div>
 
-    <div id="main-wrapper"  data-theme="light" data-layout="vertical" data-navbarbg="skin1" data-sidebarbg="skin1" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <header class="topbar" style="background: #dcaf39;">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header">
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                    <a class="navbar-brand" href="{{ url_for('index') }}">
-                        <b class="logo-icon">
-                            <img src="{{ url_for('static', filename='images/icon/white-logo.png') }}" height="60px" alt="homepage">
-                        </b>
-                    </a>
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
-                </div>
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto float-left">
-                    </ul>
-                    <ul class="navbar-nav float-right">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-user"></i>
-                            </a>
-                            <div class="dropdown-menu mailbox dropdown-menu-right scale-up">
-                                <ul class="dropdown-user list-style-none">
-                                    <li>
-                                        <div class="dw-user-box p-3 d-flex">
-                                            <div class="u-img"><i class="fas fa-user"></i></div>
-                                            <div class="u-text ml-2">
-                                                {% if g.user %}
-                                                    <h4 class="mb-0">{{g.user[0]}}</h4>
-                                                {% endif %}
-                                                <p class="text-muted mb-1 font-14">{{ email }}</p>
-                                            </div>
+<div id="main-wrapper"  data-theme="light" data-layout="vertical" data-navbarbg="skin1" data-sidebarbg="skin1" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+    <header class="topbar" style="background: #dcaf39;">
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+            <div class="navbar-header">
+                <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                <a class="navbar-brand" href="{{ url_for('index') }}">
+                    <b class="logo-icon">
+                        <img src="{{ url_for('static', filename='images/icon/white-logo.png') }}" height="60px" alt="homepage">
+                    </b>
+                </a>
+                <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+            </div>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto float-left">
+                </ul>
+                <ul class="navbar-nav float-right">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu mailbox dropdown-menu-right scale-up">
+                            <ul class="dropdown-user list-style-none">
+                                <li>
+                                    <div class="dw-user-box p-3 d-flex">
+                                        <div class="u-img"><i class="fas fa-user"></i></div>
+                                        <div class="u-text ml-2">
+                                            {% if g.user %}
+                                            <h4 class="mb-0">{{g.user[0]}}</h4>
+                                            {% endif %}
+                                            <p class="text-muted mb-1 font-14">{{ email }}</p>
                                         </div>
-                                    </li>
-                                    <li role="separator" class="dropdown-divider"></li>
-                                    <li class="user-list"><a class="px-3 py-2" href="{{ url_for('logout') }}"><i class="fa fa-power-off"></i> Logout</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        
+                                    </div>
+                                </li>
+                                <li role="separator" class="dropdown-divider"></li>
+                                <li class="user-list"><a class="px-3 py-2" href="{{ url_for('logout') }}"><i class="fa fa-power-off"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     <!--End Navigation-->
 
     <form method="post">
@@ -77,38 +78,38 @@
 
     <!--Content -->
 
-        {% include "base/sidebar.html" %}
+    {% include "base/sidebar.html" %}
 
-        <div class="page-wrapper">
-            <div class="row page-titles">
-                {% block page %}{% endblock %}
-            </div>
+    <div class="page-wrapper">
+        <div class="row page-titles">
+            {% block page %}{% endblock %}
+        </div>
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                {% block content %}{% endblock %}
-                            </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            {% block content %}{% endblock %}
                         </div>
                     </div>
                 </div>
             </div>
-            <footer class="footer bottom">
-                <div class="container">
-                    <div class="copyright text-center">
-                        <span>Copyright &copy; KGRNet 2020</span>
-                    </div>
-                </div>
-            </footer>
         </div>
+        <footer class="footer bottom">
+            <div class="container">
+                <div class="copyright text-center">
+                    <span>Copyright &copy; KGRNet 2020</span>
+                </div>
+            </div>
+        </footer>
     </div>
+</div>
 
-    <!-- End Content -->
+<!-- End Content -->
 
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/waves.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+<script src="{{ url_for('static', filename='js/waves.js') }}"></script>
 </body>
 </html>

@@ -32,22 +32,24 @@
             <br>
             <div class="form-group">
                 <div class="row">
-                    <label class="control-label col-4 text-right">Período</label>
-                    <div class="col-4">
-                        {{form.periodo(class="form-control")}} {{form.errors.periodo }}
+                    <label class="control-label col-4 text-right">Informe o Período</label>
+                    <div class="col-2">
+                    <input type="text" id="calendario" />
                     </div>
                 </div>
             </div>
-                <div class="form-group">
-                <div class="row">
-                    <label class="control-label col-4 text-right">Dia</label>
-                    <div class="col-4">
-                        {{form.dia_cobranca(class="form-control")}} {{form.errors.dia_cobranca }}
-                    </div>
-                </div>
-            </div>
-            <br>
         </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="control-label col-4 text-right">Dia</label>
+                <div class="col-1">
+                    {{form.dia_cobranca(class="form-control")}} {{form.errors.dia_cobranca }}
+                </div>
+            </div>
+        </div>
+        <br>
+</div>
+</form>
 </div>
 </br>
 <div class="form-group">
@@ -64,8 +66,32 @@
 </form>
 </div>
 
-</div>
 
 {% if messages %}
 {% endif %}
+
+
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="~/Scripts/bootstrap-datepicker-globalize.js"></script>
+ <script src="~/Scripts/locales/bootstrap-datepicker.pt-BR.js"></script>
+
+
+<script>
+
+
+    jQuery.noConflict();
+
+(function( $ ) {
+    $('#calendario').datepicker({
+    minDate: 0,
+    format: 'dd/mm/yyyy',
+    locales: 'pt-br',
+    });
+})( jQuery );
+
+</script>
+
 {% endblock %}
