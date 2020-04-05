@@ -1,13 +1,39 @@
+import decimal
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, validators, DateField, IntegerField
+from wtforms import validators, TextAreaField, DecimalField, RadioField
 from wtforms.validators import DataRequired
 
-class FinantialForm(FlaskForm):
-    periodo = DateField("perido", validators=[DataRequired()], format='%d/%m/%Y')
-    dia_cobranca = SelectField("dia_cobranca", validators=[DataRequired()],
-                                  choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'),
-                                           ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10'), ('11', '11'),
-                                           ('12', '12'), ('13', '13'), ('14', '14'), ('15', '15'), ('16', '16'),
-                                           ('17', '17'), ('18', '18'), ('19', '19'), ('20', '20'), ('21', '21'),
-                                           ('22', '22'), ('23', '23'), ('24', '24'), ('25', '25'), ('26', '26'),
-                                           ('27', '27'), ('28', '28'), ('29', '29'), ('30', '30'), ('31', '31')])
+
+class BetterDecimalField(DecimalField):
+    """
+    Very similar to WTForms DecimalField, except with the option of rounding
+    the data always.
+    """
+
+    def __init__(self, label=None, validators=None, places=2, rounding=None,
+                 round_always=False, **kwargs):
+        super(BetterDecimalField, self).__init__(
+            label=label, validators=validators, places=places, rounding=
+            rounding, **kwargs)
+        self.round_always = round_always
+
+    def process_formdata(self, valuelist):
+        if valuelist:
+            try:
+                self.data = decimal.Decimal(valuelist[0])
+                if self.round_always and hasattr(self.data, 'quantize'):
+                    exp = decimal.Decimal('.1') ** self.places
+                    if self.rounding is None:
+                        quantized = self.data.quantize(exp)
+                    else:
+                        quantized = self.data.quantize(
+                            exp, rounding=self.rounding)
+                    self.data = quantized
+            except (decimal.InvalidOperation, ValueError):
+                self.data = None
+                raise ValueError(self.gettext('Não é um valor decimal válido'))
+
+class FinantialForms(FlaskForm):
+    servico = TextAreaField(u'descricao', [validators.length(min=0, max=1000), validators.DataRequired()])
+    valor = DecimalField(render_kw={"placeholder": '0.00'}, validators=[DataRequired()])
+    tipo_cobranca = RadioField('tipo_cobranca', choices=[('Continuo', 'Contínuo'), ('Nao_Continuo', 'Não Contínuo')])

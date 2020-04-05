@@ -4,7 +4,7 @@
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Financeiro</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro') }}">Listar Clientes</a></li>
-<li class="breadcrumb-item active" aria-current="page">Cobrança</li>
+<li class="breadcrumb-item active" aria-current="page">Listar Cobranças</li>
 {% endblock %}
 
 
@@ -43,7 +43,7 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{{ url_for('incluir_cobranca', id = row[0]) }}">Incluir Cobrança</a>
+                <a class="dropdown-item" href="{{ url_for('incluir_cobranca', id = row[0], nome = row[1])}}">Incluir Cobrança</a>
             </div>
         </div>
         </td>

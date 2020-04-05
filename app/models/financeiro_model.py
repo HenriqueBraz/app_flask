@@ -35,7 +35,7 @@ class FinanceiroModel(object):
             logging.error('Erro em  FinanceiroModel, método get_companies: ' + str(e) + '\n')
 
 
-    def finantials_companie(self, id):
+    def get_levyings(self, id):
         try:
             self.cur.execute(
                 "SELECT e.id, e.empresa, c.data, c.servico, c.valor FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
@@ -44,3 +44,16 @@ class FinanceiroModel(object):
             return result
         except Exception as e:
             logging.error('Erro em  FinanceiroModel, método finantials_companie: ' + str(e) + '\n')
+
+    def insert_finantal_levying(self, id, data, servico, valor, tipo_cobranca):
+        try:
+            now = datetime.now()
+            data1 = now.strftime('%Y-%m-%d %H:%M:%S')
+            sql_data = (id, data, servico, valor, tipo_cobranca, data1, data1, 'Ativo')
+            sql = "INSERT INTO cobrancas (id_empresa, data, servico, valor, tipo_cobranca, created, updated, " \
+                  "status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s); "
+            self.cur.execute(sql, sql_data)
+            self.con.commit()
+            return True
+        except Exception as e:
+            logging.error('Erro em  FinanceiroModel, método insert_finantal_levy(: ' + str(e) + '\n')

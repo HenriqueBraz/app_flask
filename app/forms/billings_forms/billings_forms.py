@@ -1,6 +1,6 @@
 import decimal
 from flask_wtf import FlaskForm
-from wtforms import SelectField, TextAreaField, validators, StringField, DateField, DecimalField
+from wtforms import SelectField, DateField
 from wtforms.validators import DataRequired
 from wtforms import DecimalField
 

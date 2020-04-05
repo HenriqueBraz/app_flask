@@ -3,7 +3,8 @@
 {% block page %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Financeiro</a>
-<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro') }}">Listar Clientes</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro') }}">Listar Clientes</a>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome) }}">Listar Cobranças</a></li>
 <li class="breadcrumb-item active" aria-current="page">Incluir Cobrança</li>
 {% endblock %}
 
@@ -32,51 +33,59 @@
             <br>
             <div class="form-group">
                 <div class="row">
-                    <label class="control-label col-4 text-right">Informe o Período</label>
-                    <div class="col-2">
-                    <input type="text" id="calendario" />
+                    <label class="control-label col-4 text-right">Dia do Vencimento</label>
+                    <div class="col-3">
+                        <input type="text" name="data" id="data" readonly="readonly" />
                     </div>
                 </div>
             </div>
+            <br>
+            <div class="row">
+                <label class="control-label col-4 text-right">Serviço</label>
+                <div class="col-4">
+                    {{form.servico(class="form-control")}} {{form.errors.servico }}
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-4 text-right">Valor</label>
+                    <div class="col-4">
+                        {{form.valor(class="form-control")}} {{form.errors.valor }}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <label class="control-label col-4 text-right">Tipo de Cobrança</label>
+                <div class="col-4">
+                    {{form.tipo_cobranca()}}  {{form.errors.tipo_cobranca }}
+                </div>
+            </div>
+            <br>
         </div>
+        </br>
         <div class="form-group">
             <div class="row">
-                <label class="control-label col-4 text-right">Dia</label>
-                <div class="col-1">
-                    {{form.dia_cobranca(class="form-control")}} {{form.errors.dia_cobranca }}
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome) }}" ><font color=white>voltar</font></a></button>
+                    &nbsp;&nbsp;&nbsp;<button class="btn btn-primary"  type="submit">Enviar</button>
                 </div>
             </div>
         </div>
-        <br>
-</div>
-</form>
-</div>
-</br>
-<div class="form-group">
-    <div class="row">
-        <div class="col-9"></div>
-        <div class="col-3">
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_financeiro') }}" ><font color=white>voltar</font></a></button>
-            &nbsp;&nbsp;&nbsp;<button class="btn btn-primary"  type="submit">Enviar</button>
-        </div>
-    </div>
-</div>
-
-</div>
-</form>
+    </form>
 </div>
 
 
 {% if messages %}
 {% endif %}
 
-
-
+<!-- Datepicker -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-<script src="~/Scripts/bootstrap-datepicker-globalize.js"></script>
- <script src="~/Scripts/locales/bootstrap-datepicker.pt-BR.js"></script>
+
 
 
 <script>
@@ -85,7 +94,7 @@
     jQuery.noConflict();
 
 (function( $ ) {
-    $('#calendario').datepicker({
+    $('#data').datepicker({
     minDate: 0,
     format: 'dd/mm/yyyy',
     locales: 'pt-br',
