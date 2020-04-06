@@ -34,6 +34,16 @@ class FinanceiroModel(object):
         except Exception as e:
             logging.error('Erro em  FinanceiroModel, método get_companies: ' + str(e) + '\n')
 
+    def get_levying(self, id):
+        try:
+            self.cur.execute(
+                "SELECT e.id, e.empresa, c.data, c.servico, c.valor, c.tipo_cobranca, c.id FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "c.id_empresa  WHERE e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
+            result = self.cur.fetchone()
+            return result
+        except Exception as e:
+            logging.error('Erro em  FinanceiroModel, método get_levyings_sum: ' + str(e) + '\n')
+
 
     def get_levyings(self, id):
         try:
@@ -43,7 +53,18 @@ class FinanceiroModel(object):
             result = self.cur.fetchall()
             return result
         except Exception as e:
-            logging.error('Erro em  FinanceiroModel, método finantials_companie: ' + str(e) + '\n')
+            logging.error('Erro em  FinanceiroModel, método get_levyings_sum: ' + str(e) + '\n')
+
+
+    def get_levyings_sum(self, id):
+        try:
+            self.cur.execute("SELECT SUM(c.valor)  FROM  empresas e LEFT JOIN  cobrancas c ON e.id = "
+                             "c.id_empresa WHERE  e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
+            result = self.cur.fetchone()
+            return result
+        except Exception as e:
+            logging.error('Erro em  FinanceiroModel, método get_levyings_sum: ' + str(e) + '\n')
+
 
     def insert_finantal_levying(self, id, data, servico, valor, tipo_cobranca):
         try:
@@ -57,3 +78,25 @@ class FinanceiroModel(object):
             return True
         except Exception as e:
             logging.error('Erro em  FinanceiroModel, método insert_finantal_levy(: ' + str(e) + '\n')
+
+    def update_finantal_levying(self, data, servico, valor, tipo_cobranca, id_cobranca):
+        try:
+            now = datetime.now()
+            data1 = now.strftime('%Y-%m-%d %H:%M:%S')
+            self.cur.execute(
+                "UPDATE cobrancas SET  data = '{}', servico = '{}', valor = '{}', tipo_cobranca = '{}', updated = '{}' WHERE id = '{}'".format(data, servico, valor, tipo_cobranca, data1, id_cobranca))
+            self.con.commit()
+            return True
+        except Exception as e:
+            logging.error('Erro em  FinanceiroModel, método  update_finantal_levying: ' + str(e) + '\n')
+
+    def update_status_levying(self, id_cobranca):
+        try:
+            now = datetime.now()
+            data = now.strftime('%Y-%m-%d %H:%M:%S')
+            self.cur.execute("UPDATE cobrancas SET  status = '{}', updated = '{}' WHERE id = '{}'".format(
+                    'Inativo', data, id_cobranca))
+            self.con.commit()
+            return True
+        except Exception as e:
+            logging.error('Erro em  FinanceiroModel, método  update_finantal_levying: ' + str(e) + '\n')

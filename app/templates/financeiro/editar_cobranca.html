@@ -5,7 +5,7 @@
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Financeiro</a>
 <li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro') }}">Listar Clientes</a>
 <li class="breadcrumb-item"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome) }}">Listar Cobranças</a></li>
-<li class="breadcrumb-item active" aria-current="page">Incluir Cobrança</li>
+<li class="breadcrumb-item active" aria-current="page">Editar Cobrança</li>
 {% endblock %}
 
 
@@ -21,13 +21,12 @@
 
 <br>
 <div class="bloco">
-
     <form method="post">
         {{ form.csrf_token }}
         <div class="card">
             <div class="card-header">
                 <div class="form-group">
-                    <h4>Incluir Cobrança:&nbsp;&nbsp; {{nome}}  </h4>
+                    <h4>Editar Cobrança:&nbsp;&nbsp;{{nome}}</h4>
                 </div>
             </div>
             <br>
@@ -35,7 +34,7 @@
                 <div class="row">
                     <label class="control-label col-4 text-right">Dia do Vencimento</label>
                     <div class="col-3">
-                        <input type="text" name="data" id="data" readonly="readonly" />
+                        <input type="text" name="data" id="data" readonly="readonly" placeholder={{data}} />
                     </div>
                 </div>
             </div>
@@ -58,15 +57,31 @@
             <br>
             <div class="row">
                 <label class="control-label col-4 text-right">Tipo de Cobrança</label>
+                {% if tipo_cobranca == 'Continuo' %}
                 <div class="radio">
-                    <input type="radio" name="tipo_cobranca" id="optionsRadios1" value="Continuo" checked="">
+
+                    <input type="radio" name="tipo_cobranca" id="optionsRadios1" value="Continuo" checked>
                     <label for="optionsRadios1">Contínuo</label>
 
                     <div class="radio">
+
                         <input type="radio" name="tipo_cobranca" id="optionsRadios2" value="Nao_Continuo">
                         <label for="optionsRadios2">Não Contínuo</label>
                     </div>
                 </div>
+                {% elif tipo_cobranca == 'Nao_Continuo' %}
+                <div class="radio">
+
+                    <input type="radio" name="tipo_cobranca" id="optionsRadios1" value="Continuo" >
+                    <label for="optionsRadios1">Contínuo</label>
+
+                    <div class="radio">
+
+                        <input type="radio" name="tipo_cobranca" id="optionsRadios2" value="Nao_Continuo" checked>
+                        <label for="optionsRadios2">Não Contínuo</label>
+                    </div>
+                </div>
+                {%endif%}
             </div>
             </br>
             <div class="form-group">
