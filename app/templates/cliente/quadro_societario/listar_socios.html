@@ -40,9 +40,9 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{{ url_for('editar_socio', id = row[0]) }}">Detalhes / Alterar</a>
-                <a class="dropdown-item" href="{{ url_for('cadastrar_socio', id = row[0]) }}">Cadastrar Novo Sócio</a>
-                <a class="dropdown-item" href="{{ url_for('excluir_socio', id = row[0]) }}">Excluir</a>
+                <a class="dropdown-item" href="{{ url_for('editar_socio', id_socio = row[0]) }}">Detalhes / Alterar</a>
+                <a class="dropdown-item" href="{{ url_for('cadastrar_socio', id = id_empresa) }}">Cadastrar Novo Sócio</a>
+                <a class="dropdown-item" href="{{ url_for('excluir_socio', id_socio = row[0]) }}">Excluir</a>
             </div>
         </div>
         </td>

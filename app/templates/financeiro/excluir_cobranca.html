@@ -1,0 +1,95 @@
+{% extends 'base/base.html' %}
+
+{% block page %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Clientes</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro') }}">Listar Clientes</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome) }}">Listar Cobranças</a></li>
+<li class="breadcrumb-item active" aria-current="page">Excluir Cobrança</li>
+{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash" id="flash">{{  message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="descadastro">
+    <table class = "table"><tbody>
+
+    {% if flag %}
+    {% if result %}
+    <h1>A seguinte cobrança será excluída:</h1><br><br>
+
+    {% else %}
+    <h1></h1><br><br>
+
+    {% endif %}
+
+    <tr>
+        <th>Empresa</th>
+        <th>Data</th>
+        <th>Serviço</th>
+        <th>Valor</th>
+    </tr>
+
+    <tr>
+        <td> {{ result[1] }} </td>
+        <td> {{ result[2] }} </td>
+        <td> {{ result[3] }} </td>
+        <td> {{ result[4] }} </td>
+    </tr>
+
+    </tbody></table>
+    <br>
+    <div class ="frase_botao">
+        <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3">
+                <form method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
+                    <input class="btn btn-primary" type="submit" name="submit_button" value="Excluir Cobrança">
+                </form>
+            </div>
+        </div>
+
+        {% else %}
+        <h1></h1><br><br>
+        <tr>
+        <tr>
+            <th>Empresa</th>
+            <th>Data</th>
+            <th>Serviço</th>
+            <th>Valor</th>
+        </tr>
+        </tr>
+
+        <tr>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+            <td> {{''}}</td>
+        </tr>
+        </tbody></table>
+        <div class ="frase_botao">
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-1">
+                    <form method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome) }}" ><font color=white>voltar</font></a></button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+        <br><br><br><br><br><br>
+        <br><br><br><br><br>
+
+        {% endblock %}

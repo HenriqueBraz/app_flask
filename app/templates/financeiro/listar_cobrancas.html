@@ -2,8 +2,9 @@
 
 {% block page %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
-<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Clientes</a></li>
-<li class="breadcrumb-item active" aria-current="page">Listar Clientes</li>
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Financeiro</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro') }}">Listar Clientes</a></li>
+<li class="breadcrumb-item active" aria-current="page">Listar Cobranças</li>
 {% endblock %}
 
 
@@ -16,18 +17,16 @@
 {% endfor %}
 {% endif %}
 {% endwith %}
+<br>
 
+<h4>Empresa:&nbsp; {{nome}}</h4>
 <br>
 <table id="table_id" class="display">
     <thead>
     <tr>
-        <th>Empresa</th>
-        <th>Data Cadastro</th>
-        <th>Responsável</th>
-        <th>CNPJ</th>
-        <th>CCM</th>
-        <th>Endereço</th>
-        <th>Localidade</th>
+        <th>Data</th>
+        <th>Serviço</th>
+        <th>Valor</th>
         <th></th>
     </tr>
     </thead>
@@ -35,25 +34,17 @@
     {% if result %}
     {% for row in result %}
     <tr>
-        <td> {{ row[1] }}</td>
         <td> {{ row[2] }}</td>
         <td> {{ row[3] }}</td>
         <td> {{ row[4] }}</td>
-        <td> {{ row[5] }}</td>
-        <td> {{ row[6] }}, {{ row[7] }}, {{ row[8] }} </td>
-        <td> {{ row[9] }}</td>
         <td><div class="btn-group dropleft">
             <a class="btn btn-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ações
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{{ url_for('editar_cliente', id = row[0]) }}">Editar</a>
-                <a class="dropdown-item" href="{{ url_for('excluir_cliente', id = row[0]) }}">Excluir</a>
-                <a class="dropdown-item" href="{{ url_for('listar_contabilidade', id = row[0]) }}">Contabilidade</a>
-                <a class="dropdown-item" href="{{ url_for('select_socios', id = row[0]) }}">Socios</a>
-                <a class="dropdown-item" href="{{ url_for('listar_acessos', id = row[0]) }}">Acessos</a>
-                <a class="dropdown-item" href="{{ url_for('listar_anexos', id = row[0]) }}">Anexos</a>
+                <a class="dropdown-item" href="{{ url_for('editar_cobranca', id=id, nome=nome )}}">Editar Cobrança</a>
+                 <a class="dropdown-item" href="{{ url_for('excluir_cobranca', id=id, nome=nome)}}">Excluir Cobrança</a>
             </div>
         </div>
         </td>
@@ -62,12 +53,15 @@
     {% endif %}
     </tbody>
 </table>
-
+<br>
+<h4> Total:&nbsp;&nbsp;R${{soma}} </h4>
 <br><br>
 <div class="form-group">
     <div class="row">
-        <div class="col-11"></div>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
+        <div class="col-9"></div>
+        <div class="col-3">
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_financeiro') }}" ><font color=white>voltar</font></a></button>
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('incluir_cobranca', id=id, nome=nome) }}" ><font color=white>Incluir Cobrança</font></a></button>
         </div>
     </div>
 </div>

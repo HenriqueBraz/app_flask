@@ -62,9 +62,9 @@ class ClienteModel(object):
         except Exception as e:
             logging.error('Erro em  EmpresaModel, método get_company(: ' + str(e) + '\n')
 
-    def get_companies(self):
+    def get_companies(self, user_id):
         try:
-            self.cur.execute("SELECT e.id, e.empresa, e.created, u.nome, e.cnpj, e.ccm, e.endereco, e.bairro, e.cidade, e.estado FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE e.status = 'Ativo';")
+            self.cur.execute("SELECT e.id, e.empresa, e.created, u.nome, e.cnpj, e.ccm, e.endereco, e.bairro, e.cidade, e.estado FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE u.id = '{}' AND e.status = 'Ativo';".format(user_id))
             result = self.cur.fetchall()
             return result
         except Exception as e:

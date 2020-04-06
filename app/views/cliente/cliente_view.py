@@ -1,5 +1,5 @@
 from app import app, ALLOWED_EXTENSIONS
-from flask import render_template, request, flash, url_for, redirect
+from flask import render_template, request, flash, url_for, redirect, session
 from app.forms.client_forms import client_form
 from app.models.cliente_model import ClienteModel
 from app.models.usuario_model import UsuarioModel
@@ -67,7 +67,8 @@ def cadastrar_cliente():
 @app.route('/listar_clientes', methods=["GET"])
 def listar_clientes():
     db = ClienteModel()
-    lista_clientes = db.get_companies()
+    user_id = session['user_id']
+    lista_clientes = db.get_companies(user_id)
     return render_template('cliente/listar_clientes.html', result=lista_clientes, pagina='Listar Clientes')
 
 

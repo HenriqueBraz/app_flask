@@ -36,12 +36,9 @@ def inserir_anexo(id, empresa):
     db = AnexoModel()
 
     if form.validate_on_submit():
-
         files = request.files.getlist('files[]')
         titulo = request.form['titulo']
         descricao = request.form.getlist('descricao[]')
-        print(files)
-        print(descricao)
 
         for i in range(len(files)):
             if files[i].filename == "":

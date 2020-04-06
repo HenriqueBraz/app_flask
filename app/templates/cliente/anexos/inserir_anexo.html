@@ -35,12 +35,6 @@
 
             <div class="form">
                 <div class="form">
-                    <div class="row">
-                        <div class="col-10"></div>
-                        <div class="col-2">
-                            <button class="btn btn-primary" id="add_anexo2" title="Adicionar mais anexos"> Adicionar mais anexos</button>
-                        </div>
-                    </div>
                 </div>
                 <div class="form">
                     <div class="form">
@@ -59,6 +53,7 @@
                                     <label class="control-label col-2 text-right"></label>
                                     <div class="col-6">
                                         <input class='file-input' type='file' name='files[]' multiple='multiple'  />
+                                        <button class="btn btn-primary" id="add_anexo2" title="Adicionar mais anexos"> + </button>
                                     </div>
                                 </div>
                             </div>
@@ -79,8 +74,8 @@
                 <br>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-8"></div>
-                        <div class="col-4">
+                        <div class="col-9"></div>
+                        <div class="col-3">
                             <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=white>voltar</font></a></button>
                             <button class="btn btn-primary" type="submit"><font color=white>Salvar</font></button>
                         </div>
