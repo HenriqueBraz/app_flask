@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /home/sites-python/ && (
-        chown -R novorumo.areadetestes.com.br:www-data novorumo.areadetestes.com.br
+        chown novorumo.areadetestes.com.br:www-data novorumo.areadetestes.com.br
 )
 
 cd /home/sites-python/novorumo.areadetestes.com.br && (
