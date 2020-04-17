@@ -18,7 +18,7 @@ deploy_staging:
   script:
     - ssh -p 22345 root@iris.blisk.solutions "cd /home/sites-python/novorumo.areadetestes.com.br && BRANCH=\$(git symbolic-ref --short HEAD) && git reset --hard HEAD && git clean -f -d; git checkout \$BRANCH && git pull origin \$BRANCH && exit"
     - ssh -p 22345 root@iris.blisk.solutions "/bin/bash /home/sites-python/novorumo.areadetestes.com.br/deploy-staging.sh && exit"
-    - ssh -p 22345 root@iris.blisk.solutions "/bin/systemctl try-restart novorumo-hom"
+    - ssh -p 22345 root@iris.blisk.solutions "/bin/systemctl restart novorumo-hom"
 
   only:
     - master
