@@ -2,6 +2,6 @@
 venv/
 novorumo.sock
 project.ini
-<<<<<<< HEAD
 app/uploads
-front-end/_pycache_/
+/__pycache__/
+*/__pycache__/
