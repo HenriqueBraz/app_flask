@@ -32,16 +32,8 @@
     <tr>
         <td> {{ row[1] }}</td>
         <td> {{ row[2] }}</td>
-        <td><div class="btn-group dropleft">
-            <a class="btn btn-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Ações
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{{ url_for('inativar_financeiro', id = row[0]) }}">Inativar</a>
-                <a class="dropdown-item" href="{{ url_for('select_financeiro', id = row[0], nome = row[1]) }}">Cobrança</a>
-            </div>
-        </div>
+        <td>
+            <a class="btn btn-link" type="button"  href="{{ url_for('select_financeiro', id = row[0], nome = row[1]) }}">Listar Cobranças</a>
         </td>
     </tr>
     {% endfor %}

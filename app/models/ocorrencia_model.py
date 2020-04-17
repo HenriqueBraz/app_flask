@@ -32,7 +32,7 @@ class OcorrenciaModel(object):
     def get_occurrences_sn(self):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, eo.updated, eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'SIMPLES NACIONAL' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'SIMPLES NACIONAL' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
             result = self.cur.fetchall()
             return result
         except Exception as e:
@@ -41,7 +41,7 @@ class OcorrenciaModel(object):
     def get_occurrences_lp(self):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, eo.updated, eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'PRESUMIDO' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'PRESUMIDO' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
             result = self.cur.fetchall()
             return result
         except Exception as e:
@@ -50,7 +50,7 @@ class OcorrenciaModel(object):
     def get_occurrences_r(self):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, eo.updated, eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'REAL' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'REAL' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
             result = self.cur.fetchall()
             return result
         except Exception as e:
@@ -72,7 +72,7 @@ class OcorrenciaModel(object):
     def get_occurrence(self, id):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, eo.updated, eo.responsavel, eo.descritivo, eo.id FROM empresas e "
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.descritivo, eo.id FROM empresas e "
                 "INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND eo.id_empresa = '{}';".format(
                     id))
             result = self.cur.fetchone()

@@ -20,13 +20,26 @@
 <br>
 
 <h4>Empresa:&nbsp; {{nome}}</h4>
-<br>
+<br><br>
+<form method="post">
+    {{ form.csrf_token }}
+    <div class="row">
+        <label class="control-label col-1"><h4>Mês:</h4></label>
+        <div class="col-0">
+            <h4>{{form.mes(class="form-control")}} {{form.errors.mes }}</h4>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-primary"  type="submit">Atualizar</button>
+        </div>
+    </div>
+</form>
+<br><br>
 <table id="table_id" class="display">
     <thead>
     <tr>
         <th>Data</th>
         <th>Serviço</th>
-        <th>Valor</th>
+        <th>Valor R$</th>
         <th></th>
     </tr>
     </thead>
@@ -44,7 +57,7 @@
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="{{ url_for('editar_cobranca', id=id, nome=nome )}}">Editar Cobrança</a>
-                 <a class="dropdown-item" href="{{ url_for('excluir_cobranca', id=id, nome=nome)}}">Excluir Cobrança</a>
+                <a class="dropdown-item" href="{{ url_for('excluir_cobranca', id=id, nome=nome)}}">Excluir Cobrança</a>
             </div>
         </div>
         </td>

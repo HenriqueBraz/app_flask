@@ -31,7 +31,8 @@ class UsuarioModel(object):
 
     def get_users(self):
         try:
-            self.cur.execute("SELECT u.id, u.username, u.nome,u.email, u.created, u.updated, g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario WHERE u.status = 'Ativo';")
+            #DATE_FORMAT( u.updated, '%d/%m/%Y  %H:%m')
+            self.cur.execute("SELECT u.id, u.username, u.nome,u.email, DATE_FORMAT( u.created, '%d/%m/%Y  %H:%m'), DATE_FORMAT( u.updated, '%d/%m/%Y  %H:%m'), g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario WHERE u.status = 'Ativo';")
             result = self.cur.fetchall()
             return result
         except Exception as e:
@@ -39,7 +40,7 @@ class UsuarioModel(object):
 
     def get_user(self, id):
         try:
-            self.cur.execute("SELECT u.id, u.username, u.nome,u.email, u.created, u.updated, g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE u.id = '{}' and u.status = 'Ativo';".format(id))
+            self.cur.execute("SELECT u.id, u.username, u.nome,u.email, DATE_FORMAT( u.created, '%d/%m/%Y  %H:%m'), DATE_FORMAT( u.updated, '%d/%m/%Y  %H:%m'), g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE u.id = '{}' and u.status = 'Ativo';".format(id))
             result = self.cur.fetchone()
             return result
         except Exception as e:

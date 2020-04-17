@@ -32,7 +32,7 @@ class AnexoModel(object):
     def get_anexos(self, id):
         try:
             self.cur.execute(
-                "SELECT e.id, a.id,  a.filename, a.titulo, a.descricao, a.type, a.created, a.updated, e.empresa  FROM anexos a  LEFT "
+                "SELECT e.id, a.id,  a.filename, a.titulo, a.descricao, a.type, DATE_FORMAT(a.created, '%d/%m/%Y  %H:%m'), DATE_FORMAT(a.updated, '%d/%m/%Y  %H:%m'), e.empresa  FROM anexos a  LEFT "
                 "JOIN  empresas e ON e.id = a.id_empresa  WHERE  1=1 AND "
                 "a.id_empresa = '{}' AND  a.status = 'Ativo' AND e.status = 'Ativo';".format(id))
             result = self.cur.fetchall()

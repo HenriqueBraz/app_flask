@@ -45,7 +45,8 @@ def ver_ocorrencia(id, flag):
 def incluir_ocorrencia():
     form = occurrences_forms.OccurrencesRegisterForm()
     db = ClienteModel()
-    result = db.get_companies()
+    user_id = session['user_id']
+    result = db.get_companies(user_id)
     form.cliente.choices = [(row[0], row[1]) for row in result]
     db = OcorrenciaModel()
     if form.validate_on_submit():

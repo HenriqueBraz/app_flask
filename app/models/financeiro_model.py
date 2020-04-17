@@ -37,7 +37,7 @@ class FinanceiroModel(object):
     def get_levying(self, id):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, c.data, c.servico, c.valor, c.tipo_cobranca, c.id FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, c.valor, c.tipo_cobranca, c.id FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
                 "c.id_empresa  WHERE e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
             result = self.cur.fetchone()
             return result
@@ -45,21 +45,21 @@ class FinanceiroModel(object):
             logging.error('Erro em  FinanceiroModel, método get_levyings_sum: ' + str(e) + '\n')
 
 
-    def get_levyings(self, id):
+    def get_levyings(self, id, mes):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, c.data, c.servico, c.valor FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
-                "c.id_empresa  WHERE e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
+                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, c.valor FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "c.id_empresa  WHERE MONTH(data) = '{}' AND e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(mes, id))
             result = self.cur.fetchall()
             return result
         except Exception as e:
             logging.error('Erro em  FinanceiroModel, método get_levyings_sum: ' + str(e) + '\n')
 
 
-    def get_levyings_sum(self, id):
+    def get_levyings_sum(self, id, mes):
         try:
             self.cur.execute("SELECT SUM(c.valor)  FROM  empresas e LEFT JOIN  cobrancas c ON e.id = "
-                             "c.id_empresa WHERE  e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
+                             "c.id_empresa WHERE MONTH(data) = '{}'  AND  e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(mes, id))
             result = self.cur.fetchone()
             return result
         except Exception as e:
