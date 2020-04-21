@@ -6,6 +6,13 @@ from app.forms.finantial_forms import finantial_forms
 from app.models.financeiro_model import FinanceiroModel
 
 
+def real_br_money_mask(my_value):
+    a = '{:,.2f}'.format(float(my_value))
+    b = a.replace(',','v')
+    c = b.replace('.',',')
+    return c.replace('v','.')
+
+
 @app.route('/listar_financeiro', methods=["GET"])
 def listar_financeiro():
     db = FinanceiroModel()
@@ -42,8 +49,7 @@ def listar_cobrancas(id, nome):
     result = db.get_levyings(id, mes)
     soma = db.get_levyings_sum(id, mes)
     if soma[0]:
-        soma = ("%.2f" % soma[0])
-        soma = soma.replace('.',',')
+        soma = real_br_money_mask(soma[0])
     else:
         soma = 0
 
@@ -83,7 +89,6 @@ def editar_cobranca(id, nome, id_cobranca):
     flag = 0
     db = FinanceiroModel()
     result = db.get_levying(id_cobranca)
-    print(result)
     valor = str(result[4])
     tipo_cobranca = result[5]
     id_cobranca = result[6]
@@ -95,22 +100,14 @@ def editar_cobranca(id, nome, id_cobranca):
     )
     if request.method == 'POST':
 
-        print(request.form['valor'])
-        print(request.form['tipo_cobranca']) #
-        print(request.form['data'])
-        print(request.form['servico']) #
-
         if (request.form['valor']):
             valor = request.form['valor']
             valor = valor.replace('.', '')
             valor = valor.replace(',', '.')
-            valor = float(valor)
-            print(valor)
             flag = 1
 
         if(request.form['tipo_cobranca'] != tipo_cobranca):
             tipo_cobranca = request.form['tipo_cobranca']
-            print(tipo_cobranca)
             flag = 1
 
         if(request.form['data']) :
@@ -120,7 +117,6 @@ def editar_cobranca(id, nome, id_cobranca):
 
         if (request.form['servico'] != servico):
             servico = request.form['servico']
-            print(servico)
             flag = 1
 
         if flag == 1:
