@@ -34,11 +34,11 @@ class FinanceiroModel(object):
         except Exception as e:
             logging.error('Erro em  FinanceiroModel, método get_companies: ' + str(e) + '\n')
 
-    def get_levying(self, id):
+    def get_levying(self, id_cobranca):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, c.valor, c.tipo_cobranca, c.id FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
-                "c.id_empresa  WHERE e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
+                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, FORMAT(c.valor,2,'de_DE'), c.tipo_cobranca, c.id FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "c.id_empresa  WHERE c.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id_cobranca))
             result = self.cur.fetchone()
             return result
         except Exception as e:
@@ -48,7 +48,7 @@ class FinanceiroModel(object):
     def get_levyings(self, id, mes):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, c.valor FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
                 "c.id_empresa  WHERE MONTH(data) = '{}' AND e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(mes, id))
             result = self.cur.fetchall()
             return result
