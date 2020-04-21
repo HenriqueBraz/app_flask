@@ -90,6 +90,8 @@ def editar_cobranca(id, nome, id_cobranca):
     db = FinanceiroModel()
     result = db.get_levying(id_cobranca)
     valor = str(result[4])
+    valor_input = valor.replace('.', '')
+    valor_input = valor_input.replace(',', '.')
     tipo_cobranca = result[5]
     id_cobranca = result[6]
     data_place_holder = result[2]
@@ -101,9 +103,9 @@ def editar_cobranca(id, nome, id_cobranca):
     if request.method == 'POST':
 
         if (request.form['valor']):
-            valor = request.form['valor']
-            valor = valor.replace('.', '')
-            valor = valor.replace(',', '.')
+            valor_input = request.form['valor']
+            valor_input = valor_input.replace('.', '')
+            valor_input = valor_input.replace(',', '.')
             flag = 1
 
         if(request.form['tipo_cobranca'] != tipo_cobranca):
@@ -120,7 +122,7 @@ def editar_cobranca(id, nome, id_cobranca):
             flag = 1
 
         if flag == 1:
-            if db.update_finantal_levying(data, servico, valor, tipo_cobranca, id_cobranca):
+            if db.update_finantal_levying(data, servico, valor_input, tipo_cobranca, id_cobranca):
                 message = 'Cobrança editada com sucesso!'
                 flash(message)
                 return redirect(url_for('listar_cobrancas', id=id, nome=nome))
