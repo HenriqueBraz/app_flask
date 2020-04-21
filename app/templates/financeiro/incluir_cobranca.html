@@ -51,7 +51,7 @@
                 <div class="row">
                     <label class="control-label col-4 text-right">Valor</label>
                     <div class="col-4">
-                        {{form.valor(class="form-control")}} {{form.errors.valor }}
+                        <input type="text" id="dinheiro" name="valor" class="dinheiro form-control" style="display:inline-block" />
                     </div>
                 </div>
             </div>
@@ -90,11 +90,13 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+
+
 
 
 
 <script>
-
 
     jQuery.noConflict();
 
@@ -104,6 +106,10 @@
     format: 'dd/mm/yyyy',
     locales: 'pt-br',
     });
+})( jQuery );
+
+(function( $ ) {
+$('.dinheiro').mask('#.##0,00', {reverse: true});
 })( jQuery );
 
 </script>
