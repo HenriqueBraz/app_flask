@@ -24,13 +24,13 @@
         {{ form.csrf_token }}
         <div class="card">
             <div class="card-header">
-                Simples Nacional
+                Simples Nacional - Selecionar Clientes
             </div>
             <br>
             <div class="row">
-                <label class="control-label col-4 text-right">Cliente</label>
-                <div class="col-4">
-                    {{form.cliente(class="form-control")}} {{form.errors.cliente }}
+                <label class="control-label col-4 text-right">Clientes</label>
+                <div class="col-0">
+                    {{form.letra(class="form-control")}} {{form.errors.letra }}
                 </div>
             </div>
             <br>
@@ -46,17 +46,8 @@
             <div class="form-group">
                 <div class="row">
                     <label class="control-label col-4 text-right">Ano</label>
-                    <div class="col-1">
+                    <div class="col-2">
                         {{form.ano(class="form-control")}} {{form.errors.ano}}
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <div class="row">
-                    <label class="control-label col-4 text-right">Valor</label>
-                    <div class="col-4">
-                        {{form.valor(class="form-control")}} {{form.errors.valor}}
                     </div>
                 </div>
             </div>
@@ -74,7 +65,6 @@
         </div>
     </form>
 </div>
-
 </div>
 
 {% if messages %}

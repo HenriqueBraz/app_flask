@@ -59,29 +59,40 @@ def listar_cobrancas(id, nome):
 
 @app.route('/incluir_cobranca/<int:id>/<string:nome>', methods=["GET", "POST"])
 def incluir_cobranca(id, nome):
+    flag = 0
     db = FinanceiroModel()
     form = finantial_forms.FinantialForms()
     if request.method == 'POST':
-        data = request.form['data']
-        if data == '':
-            flash('Por favor, insira uma data para o campo Dia do Vencimento!')
-            return redirect(url_for('editar_cobranca', id=id, nome=nome))
-
-        else:
-            data = datetime.strptime(data, "%m/%d/%Y")
-            servico = request.form['servico']
+        if (request.form['valor']):
             valor = request.form['valor']
-            valor = valor.replace(' ', '')
-            valor = valor.replace(',','.')
-            tipo_cobranca  = request.form['tipo_cobranca']
+            valor = valor.replace('.', '')
+            valor = valor.replace(',', '.')
+            flag += 1
+
+        if (request.form['tipo_cobranca']):
+            tipo_cobranca = request.form['tipo_cobranca']
+            flag += 1
+
+        if (request.form['data']):
+            data = request.form['data']
+            data = datetime.strptime(data, '%d/%m/%Y').date()
+            flag += 1
+
+        if (request.form['servico']):
+            servico = request.form['servico']
+            flag += 1
+
+        if flag == 4:
             if db.insert_finantal_levying(id, data, servico, valor, tipo_cobranca):
-                message = 'Cobrança cadastrada com sucesso!'
-                flash(message)
+                flash('Cobrança cadastrada com sucesso!')
                 return redirect(url_for('listar_cobrancas', id=id, nome=nome))
 
             else:
-                message = 'Houve um erro ao inserir a cobrança, contate o administrador do sistema'
-                flash(message)
+                flash('Houve um erro ao inserir a cobrança, contate o administrador do sistema')
+
+        else:
+            flash('Escolha uma data!')
+
     return render_template('/financeiro/incluir_cobranca.html', form=form, id=id, nome=nome)
 
 @app.route('/editar_cobranca/<int:id>/<string:nome>/<id_cobranca>', methods=["GET", "POST"])
@@ -114,7 +125,7 @@ def editar_cobranca(id, nome, id_cobranca):
 
         if(request.form['data']) :
             data = request.form['data']
-            data = datetime.strptime(data, '%m/%d/%Y').date()
+            data = datetime.strptime(data, '%d/%m/%Y').date()
             flag = 1
 
         if (request.form['servico'] != servico):
@@ -123,14 +134,14 @@ def editar_cobranca(id, nome, id_cobranca):
 
         if flag == 1:
             if db.update_finantal_levying(data, servico, valor_input, tipo_cobranca, id_cobranca):
-                message = 'Cobrança editada com sucesso!'
-                flash(message)
+                flash('Cobrança editada com sucesso!')
                 return redirect(url_for('listar_cobrancas', id=id, nome=nome))
 
             else:
                 message = 'Houve um erro ao editar a cobrança, contate o administrador do sistema'
                 flash(message)
         else:
+            flash('Nenhum campo foi modificado, cobrança não alterada!')
             return redirect(url_for('editar_cobranca', id=id, nome=nome, id_cobranca=id_cobranca))
 
     print(flag)

@@ -116,8 +116,10 @@
 
 (function( $ ) {
     $('#data').datepicker({
-    minDate: "-1m",
-    format: 'dd/mm/yyyy',
+    monthNames: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julio", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
+    minDate: "0",
+    dateFormat: 'dd/mm/yy',
+    dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb" ],
     locales: 'pt-br',
     });
 })( jQuery );

@@ -40,6 +40,14 @@ class BillingForm(FlaskForm):
     mes = SelectField("mes", validators=[DataRequired()],
                       choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'),
                                ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10'), ('11', '11'), ('12', '12')])
-    ano = DateField("dataEntrada", validators=[DataRequired(message="ano!")], format='%Y',render_kw={"placeholder": 'AAAA'})
+
+    letra = SelectField("letra", validators=[DataRequired()],
+                      choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('E', 'E'), ('F', 'F'),
+                               ('G', 'G'), ('H', 'H'), ('I', 'I'), ('J', 'J'), ('K', 'K'), ('L', 'L'),
+                               ('M', 'M'), ('N', 'N'), ('O', 'O'), ('P', 'P'), ('Q', 'Q'), ('R', 'R'),
+                               ('S', 'S'), ('T', 'T'), ('U', 'U'), ('V', 'V'), ('X', 'X'), ('Y', 'Y'), ('Z', 'Z'),
+                               ('0', '0'), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'),
+                               ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9')])
+    ano = DateField("dataEntrada", validators=[DataRequired(message="ano inválido!")], format='%Y')
 
     valor = BetterDecimalField(round_always=True,  render_kw={"placeholder": '0.00'})
