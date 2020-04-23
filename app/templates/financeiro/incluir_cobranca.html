@@ -35,7 +35,7 @@
                 <div class="row">
                     <label class="control-label col-4 text-right">Dia do Vencimento</label>
                     <div class="col-3">
-                        <input type="text" name="data" id="data" readonly="readonly" />
+                        <input type="text" name="data" id="data" readonly="readonly" required />
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 <div class="row">
                     <label class="control-label col-4 text-right">Valor</label>
                     <div class="col-4">
-                        <input type="text" id="dinheiro" name="valor" class="dinheiro form-control" style="display:inline-block" />
+                        <input type="text" id="dinheiro" name="valor" class="dinheiro form-control"  style="display:inline-block" required />
                     </div>
                 </div>
             </div>
@@ -102,8 +102,10 @@
 
 (function( $ ) {
     $('#data').datepicker({
-    minDate: "-1m",
-    format: 'dd/mm/yyyy',
+    monthNames: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julio", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
+    minDate: "0",
+    dateFormat: 'dd/mm/yy',
+    dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb" ],
     locales: 'pt-br',
     });
 })( jQuery );
