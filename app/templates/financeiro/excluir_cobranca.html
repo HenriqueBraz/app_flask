@@ -35,6 +35,7 @@
         <th>Data</th>
         <th>Serviço</th>
         <th>Valor R$</th>
+         <th>Tipo de Cobrança</th>
     </tr>
 
     <tr>
@@ -42,6 +43,11 @@
         <td> {{ result[2] }} </td>
         <td> {{ result[3] }} </td>
         <td> {{ result[4] }} </td>
+         {% if result[7] == "Continuo"%}
+        <td> {{ "Contínuo" }}</td>
+        {% else %}
+        <td> {{ "Não Contínuo" }}</td>
+        {% endif %}
     </tr>
 
     </tbody></table>
@@ -66,10 +72,12 @@
             <th>Data</th>
             <th>Serviço</th>
             <th>Valor R$</th>
+         <th>Tipo de Cobrança </th>
         </tr>
         </tr>
 
         <tr>
+            <td> {{''}}</td>
             <td> {{''}}</td>
             <td> {{''}}</td>
             <td> {{''}}</td>

@@ -47,9 +47,9 @@ def listar_cobrancas(id, nome):
         mes = request.form['mes']
 
     result = db.get_levyings(id, mes)
+    print(result)
 
     soma1 = db.get_levyings_sum(id, mes, 1)
-    print(result)
     soma1 = soma1[0]
     if not soma1:
         soma1 = 0
@@ -105,6 +105,7 @@ def incluir_cobranca(id, nome):
 
 @app.route('/editar_cobranca/<int:id>/<string:nome>/<id_cobranca>', methods=["GET", "POST"])
 def editar_cobranca(id, nome, id_cobranca):
+    print(id_cobranca)
     flag = 0
     db = FinanceiroModel()
     result = db.get_levying(id_cobranca)
@@ -164,6 +165,7 @@ def inativar_financeiro():
 def excluir_cobranca(id, nome, id_cobranca):
     db = FinanceiroModel()
     result = db.get_levying(id_cobranca)
+    print(result)
     flag = 1
     if request.method == 'POST':
         if request.form['submit_button'] == 'Excluir Cobrança':

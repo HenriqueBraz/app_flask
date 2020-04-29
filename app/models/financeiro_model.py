@@ -37,7 +37,7 @@ class FinanceiroModel(object):
     def get_levying(self, id_cobranca):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, FORMAT(c.valor,2,'de_DE'), c.tipo_cobranca, c.id FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, FORMAT(c.valor,2,'de_DE'), c.tipo_cobranca, c.id, c.tipo_cobranca FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
                 "c.id_empresa  WHERE c.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id_cobranca))
             result = self.cur.fetchone()
             return result
@@ -54,7 +54,7 @@ class FinanceiroModel(object):
             result1 = self.cur.fetchall()
             self.cur.execute(
                 "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id, tipo_cobranca  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
-                "c.id_empresa  WHERE  c.tipo_cobranca = 'Continuo' AND e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
+                "c.id_empresa  WHERE  DATE_FORMAT(c.created, '%m') <= {} AND c.tipo_cobranca = 'Continuo' AND e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(mes,id))
             result = self.cur.fetchall()
             return result + result1
         except Exception as e:
@@ -73,7 +73,7 @@ class FinanceiroModel(object):
         else:
             try:
                 self.cur.execute("SELECT SUM(c.valor)  FROM  empresas e LEFT JOIN  cobrancas c ON e.id = "
-                                 "c.id_empresa WHERE  e.id = '{}' AND c.tipo_cobranca = 'Continuo' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
+                                 "c.id_empresa WHERE DATE_FORMAT(c.created, '%m') <= {} AND  e.id = '{}' AND c.tipo_cobranca = 'Continuo' AND c.status='Ativo' AND e.status = 'Ativo';".format(mes, id))
                 result = self.cur.fetchone()
                 return result
             except Exception as e:
