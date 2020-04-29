@@ -48,12 +48,12 @@ class FinanceiroModel(object):
     def get_levyings(self, id, mes):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id, c.tipo_cobranca  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id, c.tipo_cobranca  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
                 "c.id_empresa  WHERE MONTH(data) = '{}' AND c.tipo_cobranca = 'Nao_Continuo' AND e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(
                     mes, id))
             result1 = self.cur.fetchall()
             self.cur.execute(
-                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id, tipo_cobranca  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id, tipo_cobranca  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
                 "c.id_empresa  WHERE  DATE_FORMAT(c.created, '%m') <= {} AND c.tipo_cobranca = 'Continuo' AND e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(mes,id))
             result = self.cur.fetchall()
             return result + result1

@@ -37,7 +37,7 @@
 <table id="table_id" class="display">
     <thead>
     <tr>
-        <th>Data</th>
+        <th>Data da Cobrança</th>
         <th>Serviço</th>
         <th>Valor R$</th>
         <th>Tipo de Cobrança</th>
@@ -48,9 +48,9 @@
     {% if result %}
     {% for row in result %}
     <tr>
-        <td> {{ row[2] }}</td>
-        <td> {{ row[3] }}</td>
-        <td> {{ row[4] }}</td>
+        <td align=center> {{ row[2] }} </td>
+        <td> {{ row[3] }} </td>
+        <td> {{ row[4] }} </td>
         {% if row[6] == "Continuo"%}
         <td> {{ "Contínuo" }}</td>
         {% else %}

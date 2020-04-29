@@ -47,8 +47,6 @@ def listar_cobrancas(id, nome):
         mes = request.form['mes']
 
     result = db.get_levyings(id, mes)
-    print(result)
-
     soma1 = db.get_levyings_sum(id, mes, 1)
     soma1 = soma1[0]
     if not soma1:
