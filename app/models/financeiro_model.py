@@ -48,22 +48,37 @@ class FinanceiroModel(object):
     def get_levyings(self, id, mes):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
-                "c.id_empresa  WHERE MONTH(data) = '{}' AND e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(mes, id))
+                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id, c.tipo_cobranca  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "c.id_empresa  WHERE MONTH(data) = '{}' AND c.tipo_cobranca = 'Nao_Continuo' AND e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(
+                    mes, id))
+            result1 = self.cur.fetchall()
+            self.cur.execute(
+                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m/%Y'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id, tipo_cobranca  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "c.id_empresa  WHERE  c.tipo_cobranca = 'Continuo' AND e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
             result = self.cur.fetchall()
-            return result
+            return result + result1
         except Exception as e:
-            logging.error('Erro em  FinanceiroModel, método get_levyings_sum: ' + str(e) + '\n')
+            logging.error('Erro em  FinanceiroModel, método get_levyings: ' + str(e) + '\n')
 
 
-    def get_levyings_sum(self, id, mes):
-        try:
-            self.cur.execute("SELECT SUM(c.valor)  FROM  empresas e LEFT JOIN  cobrancas c ON e.id = "
-                             "c.id_empresa WHERE MONTH(data) = '{}'  AND  e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(mes, id))
-            result = self.cur.fetchone()
-            return result
-        except Exception as e:
-            logging.error('Erro em  FinanceiroModel, método get_levyings_sum: ' + str(e) + '\n')
+    def get_levyings_sum(self, id, mes, flag):
+        if flag == 1:
+            try:
+                self.cur.execute("SELECT SUM(c.valor)  FROM  empresas e LEFT JOIN  cobrancas c ON e.id = "
+                                "c.id_empresa WHERE MONTH(data) = '{}'  AND  e.id = '{}' AND c.tipo_cobranca = 'Nao_Continuo' AND c.status='Ativo' AND e.status = 'Ativo';".format(mes, id))
+                result = self.cur.fetchone()
+                return result
+            except Exception as e:
+                logging.error('Erro em  FinanceiroModel, método get_levyings_sum, flag == 0: ' + str(e) + '\n')
+        else:
+            try:
+                self.cur.execute("SELECT SUM(c.valor)  FROM  empresas e LEFT JOIN  cobrancas c ON e.id = "
+                                 "c.id_empresa WHERE  e.id = '{}' AND c.tipo_cobranca = 'Continuo' AND c.status='Ativo' AND e.status = 'Ativo';".format(id))
+                result = self.cur.fetchone()
+                return result
+            except Exception as e:
+                logging.error('Erro em  FinanceiroModel, método get_levyings_sum, flag == 1: ' + str(e) + '\n')
+
 
 
     def insert_finantal_levying(self, id, data, servico, valor, tipo_cobranca):

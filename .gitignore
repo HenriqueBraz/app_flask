@@ -5,3 +5,4 @@ project.ini
 app/uploads
 /__pycache__/
 */__pycache__/
+config.json

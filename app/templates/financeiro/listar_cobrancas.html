@@ -40,6 +40,7 @@
         <th>Data</th>
         <th>Serviço</th>
         <th>Valor R$</th>
+        <th>Tipo de Cobrança</th>
         <th></th>
     </tr>
     </thead>
@@ -50,6 +51,12 @@
         <td> {{ row[2] }}</td>
         <td> {{ row[3] }}</td>
         <td> {{ row[4] }}</td>
+        {% if row[6] == "Continuo"%}
+        <td> {{ "Contínuo" }}</td>
+        {% else %}
+        <td> {{ "Não Contínuo" }}</td>
+        {% endif %}
+
         <td><div class="btn-group dropleft">
             <a class="btn btn-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ações

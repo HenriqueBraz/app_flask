@@ -47,12 +47,20 @@ def listar_cobrancas(id, nome):
         mes = request.form['mes']
 
     result = db.get_levyings(id, mes)
-    soma = db.get_levyings_sum(id, mes)
-    if soma[0]:
-        soma = real_br_money_mask(soma[0])
-    else:
-        soma = 0
 
+    soma1 = db.get_levyings_sum(id, mes, 1)
+    print(result)
+    soma1 = soma1[0]
+    if not soma1:
+        soma1 = 0
+
+    soma2 = db.get_levyings_sum(id, mes, 0)
+    soma2 = soma2[0]
+    if not soma2:
+        soma2 = 0
+
+    soma = soma1 + soma2
+    soma = real_br_money_mask(soma)
     valor = 0
     return render_template('/financeiro/listar_cobrancas.html', result=result, form=form, id=id, nome=nome, soma=soma, valor=valor)
 
@@ -144,7 +152,6 @@ def editar_cobranca(id, nome, id_cobranca):
             flash('Nenhum campo foi modificado, cobrança não alterada!')
             return redirect(url_for('editar_cobranca', id=id, nome=nome, id_cobranca=id_cobranca))
 
-    print(flag)
     return render_template('/financeiro/editar_cobranca.html', form=form, id=id, nome=nome, data_place_holder=data_place_holder, tipo_cobranca=tipo_cobranca, valor=valor)
 
 
