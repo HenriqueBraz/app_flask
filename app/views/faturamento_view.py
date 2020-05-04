@@ -60,5 +60,29 @@ def inserir_faturamento_coletivo_r():
         mes = request.form['mes']
         valor = session.get('valor')
 
-    print(form.errors)
     return render_template('faturamentos/faturamento_individual_r.html', form=form)
+
+
+@app.route('/listar_faturamento_sn', methods=["GET", "POST"])
+def listar_faturamento_sn():
+    #form = billings_forms.BillingForm()
+    db = FaturamentoModel()
+    result = ['teste','teste','teste','teste','teste', 'teste']
+
+    return render_template('/faturamentos/listar_faturamento_sn.html', resul=result)
+
+
+@app.route('/listar_faturamento_lp', methods=["GET", "POST"])
+def listar_faturamento_lp():
+    # form = billings_forms.BillingForm()
+    db = FaturamentoModel()
+
+    return render_template('/faturamentos/listar_faturamento_lp.html')
+
+
+@app.route('/listar_faturamento_r', methods=["GET", "POST"])
+def listar_faturamento_r():
+    # form = billings_forms.BillingForm()
+    db = FaturamentoModel()
+
+    return render_template('/faturamentos/listar_faturamento_r.html')

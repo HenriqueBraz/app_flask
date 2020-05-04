@@ -3,7 +3,7 @@
 {% block page %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Faturamento por Cliente</a></li>
-<li class="breadcrumb-item active" aria-current="page">Faturamento Coletivo Real</li>
+<li class="breadcrumb-item active" aria-current="page">Faturamento Real</li>
 {% endblock %}
 
 
@@ -60,7 +60,7 @@
         <div class="col-9"></div>
         <div class="col-3">
             <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
-            <button class="btn btn-primary"  type="submit">Enviar</button>
+             <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_faturamento_r') }}" ><font color=white>Enviar</font></a></button>
         </div>
     </div>
 </div>

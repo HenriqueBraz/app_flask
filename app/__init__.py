@@ -1,4 +1,6 @@
 import os
+
+import flask_heroku
 from flask import Flask
 import json
 from flask_wtf import CSRFProtect
@@ -33,7 +35,7 @@ csrf = CSRFProtect(app)
 csrf.init_app(app)
 app.register_blueprint(auth_view.bp)
 babel = Babel(app)
-# flask_heroku.settings(locals())
+flask_heroku.settings(locals())
 bootstrap = Bootstrap(app)
 
 
