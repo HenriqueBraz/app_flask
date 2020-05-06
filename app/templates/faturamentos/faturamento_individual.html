@@ -56,7 +56,7 @@
                 <div class="row">
                     <label class="control-label col-4 text-right">Valor</label>
                     <div class="col-4">
-                        {{form.valor(class="form-control")}} {{form.errors.valor}}
+                          <input type="text"  id="ano" name="ano" class="form-control" placeholder="{{valor}}" data-mask="0000" maxlength="10" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -79,6 +79,8 @@
 </div>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
 {% if messages %}
 {% endif %}

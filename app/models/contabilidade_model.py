@@ -85,3 +85,13 @@ class ContabilidadeModel(object):
 
         except Exception as e:
             logging.error('Erro em ContabilidadeModel, método update_status_accounting' + str(e) + '\n')
+
+
+    def select_clients(self, letra):
+        try:
+            self.cur.execute("UPDATE empresas_contabilidade_anterior SET status = 'Inativo' WHERE id = {}".format(id))
+            self.con.commit()
+            return True
+
+        except Exception as e:
+            logging.error('Erro em ContabilidadeModel, método update_status_accounting' + str(e) + '\n')

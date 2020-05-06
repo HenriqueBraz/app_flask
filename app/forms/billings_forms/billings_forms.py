@@ -38,8 +38,8 @@ class BetterDecimalField(DecimalField):
 class BillingForm(FlaskForm):
     cliente = SelectField("cliente", coerce=int, render_kw={'readonly': True}, choices=[])
     mes = SelectField("mes", validators=[DataRequired()],
-                      choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'),
-                               ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10'), ('11', '11'), ('12', '12')])
+                      choices=[('01', 'jan'), ('02', 'fev'), ('03', 'mar'), ('04', 'abr'), ('05', 'mai'), ('06', 'jun'),
+                               ('07', 'jul'), ('08', 'ago'), ('09', 'set'), ('10', 'out'), ('11', 'nov'), ('12', 'dez')])
 
     letra = SelectField("letra", validators=[DataRequired()],
                       choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('E', 'E'), ('F', 'F'),
@@ -50,4 +50,4 @@ class BillingForm(FlaskForm):
                                ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9')])
     ano = DateField("dataEntrada", validators=[DataRequired(message="ano inválido!")], format='%Y')
 
-    valor = BetterDecimalField(round_always=True,  render_kw={"placeholder": '0.00'})
+    #valor = BetterDecimalField(round_always=True,  render_kw={"placeholder": '0.00'})
