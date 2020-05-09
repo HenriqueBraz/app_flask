@@ -47,7 +47,7 @@
                 <div class="row">
                     <label class="control-label col-4 text-right">Ano</label>
                     <div class="col-2">
-                        {{form.ano(class="form-control")}} {{form.errors.ano}}
+                        <input type="text"  id="ano" name="ano" class="form-control" placeholder="{{valor}}" data-mask="0000" maxlength="10" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -59,13 +59,15 @@
                 <div class="col-9"></div>
                 <div class="col-3">
                     <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
-                    <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_faturamento_sn') }}" ><font color=white>Enviar</font></a></button>
+                    <button class="btn btn-primary"  type="submit">Enviar</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
 {% if messages %}
 {% endif %}

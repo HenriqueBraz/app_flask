@@ -29,15 +29,26 @@ class FaturamentoModel(object):
         self.cur.close()
         self.con.close()
 
-    def get_companies(self):
+    def get_companies(self, letra, user_id, tipo):
+        letra = letra + '%'
+        if tipo == 'sn':
+            tipo = 'SIMPLES NACIONAL'
+        elif tipo == 'lp':
+            tipo = 'PRESUMIDO'
+        else:
+            tipo = 'REAL'
         try:
-            self.cur.execute(
-                "SELECT e.id, e.empresa  FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE  "
-                "e.status = 'Ativo';")
+            self.cur.execute("SELECT f.id, DATE_FORMAT(f.data, '%m/%Y'), e.empresa, e.cnpj, e.ccm, a.senhaprefeitura,"
+                        "FORMAT(f.faturamento,2,'de_DE') FROM empresas e  LEFT JOIN faturamentos f ON "
+                        "f.id_empresa=e.id LEFT JOIN acessos a  ON a.id_empresa = e.id  WHERE "
+                        "e.id_responsavel = '{}' AND e.tributacao = '{}' AND e.status = 'Ativo'"
+                        "AND e.empresa LIKE '{}';".format(user_id, tipo, letra))
             result = self.cur.fetchall()
             return result
         except Exception as e:
-            logging.error('Erro em  EmpresaModel, método get_companies: ' + str(e) + '\n')
+                logging.error('Erro em  EmpresaModel, método get_companies: ' + str(e) + '\n')
+
+
 
     def get_companies_sn(self):
         try:

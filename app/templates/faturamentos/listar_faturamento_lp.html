@@ -1,5 +1,13 @@
 {% extends 'base/base.html' %}
 
+<style>
+.display .celulaEmEdicao input[type=text]{
+    width:100%;
+    border:0;
+    background-color:rgb(255,253,210);
+}
+</style>
+
 {% block page %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Faturamento por Cliente</a></li>
@@ -35,25 +43,68 @@
     {% if result %}
     {% for row in result %}
     <tr>
+        {% if row[1] == None %}
+        <td> {{ data_mes_ano }}</td>
+        {% else %}
         <td> {{ row[1] }}</td>
+        {% endif %}
         <td> {{ row[2] }}</td>
         <td> {{ row[3] }}</td>
         <td> {{ row[4] }}</td>
         <td> {{ row[5] }}</td>
-        <td><a href="{{ url_for('edita_usuario', id = row[0]) }}">Gravar</a>
+        {% if row[1] == None %}
+        <td> {{ 'R$ 0,00' }}</td>
+        {% else %}
+        <td> {{ 'R$ ' + row[6] }}</td>
+        {% endif %}
+
     </tr>
     {% endfor %}
     {% endif %}
     </tbody>
 </table>
 <br><br>
-<div class="botao">
-    <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>Gravar</font></a></button>
+<div class="form-group">
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('inserir_faturamento_coletivo_lp') }}" ><font color=white>voltar</font></a></button>
+            <button class="btn btn-primary"  type="submit">Gravar</button>
+        </div>
+    </div>
 </div>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <script type=text/javascript src="{{url_for('static', filename='js/scripts.js') }}"></script>
+
+
+
+<script>
+(function () {
+    $("td").dblclick(function () {
+        var conteudoOriginal = $(this).text();
+
+        $(this).addClass("celulaEmEdicao");
+        $(this).html("<input type='text' value='" + conteudoOriginal + "' />");
+        $(this).children().first().focus();
+
+        $(this).children().first().keypress(function (e) {
+            if (e.which == 13) {
+                var novoConteudo = $(this).val();
+                $(this).parent().text(novoConteudo);
+                $(this).parent().removeClass("celulaEmEdicao");
+            }
+        });
+
+    $(this).children().first().blur(function(){
+        $(this).parent().text(conteudoOriginal);
+        $(this).parent().removeClass("celulaEmEdicao");
+    });
+    });
+});
+
+</script>
 
 {% if messages %}
 {% endif %}

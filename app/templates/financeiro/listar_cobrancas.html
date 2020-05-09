@@ -39,7 +39,7 @@
     <tr>
         <th>Data da Cobrança</th>
         <th>Serviço</th>
-        <th>Valor R$</th>
+        <th>Valor</th>
         <th>Tipo de Cobrança</th>
         <th></th>
     </tr>
@@ -50,24 +50,14 @@
     <tr>
         <td align=center> {{ row[2] }} </td>
         <td> {{ row[3] }} </td>
-        <td> {{ row[4] }} </td>
+        <td> {{ 'R$ ' + row[4] }} </td>
         {% if row[6] == "Continuo"%}
         <td> {{ "Contínuo" }}</td>
         {% else %}
         <td> {{ "Não Contínuo" }}</td>
         {% endif %}
 
-        <td><div class="btn-group dropleft">
-            <a class="btn btn-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Ações
-            </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{{ url_for('editar_cobranca', id=id, nome=nome, id_cobranca=row[5])}}">Editar Cobrança</a>
-                <a class="dropdown-item" href="{{ url_for('excluir_cobranca', id=id, nome=nome, id_cobranca=row[5])}}">Excluir Cobrança</a>
-            </div>
-        </div>
-        </td>
     </tr>
     {% endfor %}
     {% endif %}
