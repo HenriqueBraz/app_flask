@@ -12,33 +12,46 @@ def real_br_money_mask(my_value):
     c = b.replace('.',',')
     return c.replace('v','.')
 
+@app.route('/selecionar_clientes', methods=["GET","POST"])
+def selecionar_clientes():
+    form = finantial_forms.FinantialForms()
+    if request.method == 'POST':
+        letra = request.form['letra']
+        return redirect(url_for('listar_financeiro', letra=letra))
 
-@app.route('/listar_financeiro', methods=["GET"])
-def listar_financeiro():
+    return render_template('/financeiro/selecionar_clientes.html', form=form)
+
+
+@app.route('/listar_financeiro/<string:letra>', methods=["GET", "POST"])
+def listar_financeiro(letra):
     db = FinanceiroModel()
     user_id = session['user_id']
-    result = db.get_companies(user_id)
+    result = db.get_companies(user_id, letra)
+    if result:
+        return render_template('/financeiro/listar_clientes.html', result=result, letra=letra)
+    else:
+        flash('Não existem empresas cadastradas que comecem com a letra {}'.format(letra))
+        return redirect(url_for('selecionar_clientes'))
 
-    return render_template('/financeiro/listar_clientes.html', result=result)
 
-
-@app.route('/select_financeiro/<int:id>/<string:nome>', methods=["GET"])
-def select_financeiro(id, nome):
+@app.route('/select_financeiro/<int:id>/<string:nome>/<string:letra>', methods=["GET", "POST"])
+def select_financeiro(id, nome, letra):
     db = FinanceiroModel()
     now = datetime.now()
     data = now.strftime('%m')
     result = db.get_levyings(id, data)
     if result:
-        return redirect(url_for('listar_cobrancas', id=id, nome=nome))
+        return redirect(url_for('listar_cobrancas', id=id, nome=nome, letra=letra))
 
-    return redirect(url_for('incluir_cobranca', id=id, nome=nome))
+    return redirect(url_for('incluir_cobranca', id=id, nome=nome, letra=letra))
 
 
-@app.route('/listar_cobrancas/<int:id>/<string:nome>', methods=["GET", "POST"])
-def listar_cobrancas(id, nome):
+@app.route('/listar_cobrancas/<int:id>/<string:nome>/<string:letra>', methods=["GET", "POST"])
+def listar_cobrancas(id, nome, letra):
     db = FinanceiroModel()
     now = datetime.now()
     data = now.strftime('%m')
+    mes_ano = now.strftime('%m/%Y')
     mes = data
     form = finantial_forms.FinantialForms(
         mes=data
@@ -60,11 +73,11 @@ def listar_cobrancas(id, nome):
     soma = soma1 + soma2
     soma = real_br_money_mask(soma)
     valor = 0
-    return render_template('/financeiro/listar_cobrancas.html', result=result, form=form, id=id, nome=nome, soma=soma, valor=valor)
+    return render_template('/financeiro/listar_cobrancas.html', result=result, form=form, id=id, nome=nome, soma=soma, valor=valor, mes_ano=mes_ano, letra=letra)
 
 
-@app.route('/incluir_cobranca/<int:id>/<string:nome>', methods=["GET", "POST"])
-def incluir_cobranca(id, nome):
+@app.route('/incluir_cobranca/<int:id>/<string:nome>/<string:letra>', methods=["GET", "POST"])
+def incluir_cobranca(id, nome, letra):
     flag = 0
     db = FinanceiroModel()
     form = finantial_forms.FinantialForms()
@@ -91,7 +104,7 @@ def incluir_cobranca(id, nome):
         if flag == 4:
             if db.insert_finantal_levying(id, data, servico, valor, tipo_cobranca):
                 flash('Cobrança cadastrada com sucesso!')
-                return redirect(url_for('listar_cobrancas', id=id, nome=nome))
+                return redirect(url_for('listar_cobrancas', id=id, nome=nome, letra=letra))
 
             else:
                 flash('Houve um erro ao inserir a cobrança, contate o administrador do sistema')
@@ -99,7 +112,7 @@ def incluir_cobranca(id, nome):
         else:
             flash('Escolha uma data!')
 
-    return render_template('/financeiro/incluir_cobranca.html', form=form, id=id, nome=nome)
+    return render_template('/financeiro/incluir_cobranca.html', form=form, id=id, nome=nome, letra=letra)
 
 @app.route('/editar_cobranca/<int:id>/<string:nome>/<id_cobranca>', methods=["GET", "POST"])
 def editar_cobranca(id, nome, id_cobranca):

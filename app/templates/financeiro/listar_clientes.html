@@ -3,6 +3,7 @@
 {% block page %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Financeiro</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('selecionar_clientes') }}">Selecionar Clientes</a></li>
 <li class="breadcrumb-item active" aria-current="page">Listar Clientes</li>
 {% endblock %}
 
@@ -33,7 +34,7 @@
         <td> {{ row[1] }}</td>
         <td> {{ row[2] }}</td>
         <td>
-            <a class="btn btn-link" type="button"  href="{{ url_for('select_financeiro', id = row[0], nome = row[1]) }}">Listar Cobranças</a>
+            <a class="btn btn-link" type="button"  href="{{ url_for('select_financeiro', id = row[0], nome = row[1], letra=letra) }}">Listar Cobranças</a>
         </td>
     </tr>
     {% endfor %}
@@ -45,9 +46,9 @@
 <div class="form-group">
     <div class="row">
         <div class="col-11"></div>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('index') }}" ><font color=white>voltar</font></a></button>
-        </div>
+        <button class="btn btn-primary" type="button"><a href="{{ url_for('selecionar_clientes') }}" ><font color=white>voltar</font></a></button>
     </div>
+</div>
 </div>
 
 
@@ -57,4 +58,3 @@
 
 
 {% endblock %}
-</html>
