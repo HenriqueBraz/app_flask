@@ -3,7 +3,7 @@
   "SECRET_KEY" : "a616f69fdfc0d33c3733749143c072d9",
 
   "mysql": {
-    "host": "168.227.251.249",
+    "host": "sigma.blisk.solutions",
     "port": 9906,
     "user": "root",
     "schema": "novo_rumo",

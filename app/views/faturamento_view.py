@@ -14,7 +14,8 @@ def faturamento_individual_sn():
     data_mes = now.strftime('%m')
     data_ano = now.strftime('%Y')
     form = billings_forms.BillingForm(
-        mes=data_mes
+        mes=data_mes,
+        ano = data_ano
     )
     result = db.get_companies_sn()
     form.cliente.choices = [(row[0], row[1]) for row in result]
@@ -22,7 +23,7 @@ def faturamento_individual_sn():
         letra = request.form['letra']
         mes = request.form['mes']
         if request.form['ano']:
-            ano = request.form['ano']
+            ano = data_ano
         else:
             ano = data_ano
         return redirect(url_for('listar_faturamento', letra = letra, mes = mes, ano=ano, tipo = tipo))
@@ -46,7 +47,7 @@ def faturamento_individual_lp():
         letra = request.form['letra']
         mes = request.form['mes']
         if request.form['ano']:
-            ano = request.form['ano']
+            ano = data_ano
         else:
             ano = data_ano
 
@@ -71,7 +72,7 @@ def faturamento_individual_r():
         letra = request.form['letra']
         mes = request.form['mes']
         if request.form['ano']:
-            ano = request.form['ano']
+            ano = data_ano
         else:
             ano = data_ano
 

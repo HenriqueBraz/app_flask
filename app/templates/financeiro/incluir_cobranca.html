@@ -3,8 +3,9 @@
 {% block page %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Financeiro</a>
-<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro') }}">Listar Clientes</a>
-<li class="breadcrumb-item"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome) }}">Listar Cobranças</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('selecionar_clientes') }}">Selecionar Clientes</a>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro', letra=letra) }}">Listar Clientes</a>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome, letra=letra) }}">Listar Cobranças</a></li>
 <li class="breadcrumb-item active" aria-current="page">Incluir Cobrança</li>
 {% endblock %}
 
@@ -73,7 +74,7 @@
                 <div class="row">
                     <div class="col-8"></div>
                     <div class="col-4">
-                        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome) }}" ><font color=white>voltar</font></a></button>
+                        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome, letra=letra) }}" ><font color=white>voltar</font></a></button>
                         &nbsp;&nbsp;&nbsp;<button class="btn btn-primary"  type="submit">Enviar</button>
                     </div>
                 </div>

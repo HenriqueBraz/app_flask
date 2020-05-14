@@ -21,7 +21,12 @@ def index():
     email = session.get('email')
     return render_template('index/index.html', content_type='application/json', email=email, form=form, pagina='')
 
+@app.route('/ping')
+def ping():
+    return 'sbphqk, sbphqk, Novo Rumo chamando...'
 
+'''
 @app.route('/teste')
 def teste():
     return render_template('teste.html')
+'''

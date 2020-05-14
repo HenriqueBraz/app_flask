@@ -3,8 +3,10 @@
 {% block page %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Financeiro</a></li>
-<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro') }}">Listar Clientes</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('selecionar_clientes') }}">Selecionar Clientes</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro', letra=letra) }}">Listar Clientes</a></li>
 <li class="breadcrumb-item active" aria-current="page">Listar Cobranças</li>
+
 {% endblock %}
 
 
@@ -41,14 +43,13 @@
         <th>Serviço</th>
         <th>Valor</th>
         <th>Tipo de Cobrança</th>
-        <th></th>
     </tr>
     </thead>
     <tbody>
     {% if result %}
     {% for row in result %}
     <tr>
-        <td align=center> {{ row[2] }} </td>
+        <td align=center> {{ row[2] + '/' + mes_ano}} </td>
         <td> {{ row[3] }} </td>
         <td> {{ 'R$ ' + row[4] }} </td>
         {% if row[6] == "Continuo"%}
@@ -70,8 +71,8 @@
     <div class="row">
         <div class="col-9"></div>
         <div class="col-3">
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_financeiro') }}" ><font color=white>voltar</font></a></button>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('incluir_cobranca', id=id, nome=nome) }}" ><font color=white>Incluir Cobrança</font></a></button>
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_financeiro', letra=letra) }}" ><font color=white>voltar</font></a></button>
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('incluir_cobranca', id=id, nome=nome, letra=letra) }}" ><font color=white>Incluir Cobrança</font></a></button>
         </div>
     </div>
 </div>

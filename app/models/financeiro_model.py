@@ -25,10 +25,13 @@ class FinanceiroModel(object):
         logging.info('Construtor do FinanceiroModel chamado com sucesso\n')
         logging.disable(logging.DEBUG)
 
-    def get_companies(self, user_id):
+
+
+    def get_companies(self, user_id, letra):
+        letra = letra + '%'
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE u.id = '{}' AND e.status = 'Ativo';".format(user_id))
+                "SELECT e.id, e.empresa, e.cnpj FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE u.id = '{}' AND e.empresa LIKE '{}' AND e.status = 'Ativo';".format(user_id, letra))
             result = self.cur.fetchall()
             return result
         except Exception as e:
@@ -48,7 +51,7 @@ class FinanceiroModel(object):
     def get_levyings(self, id, mes):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d/%m'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id, c.tipo_cobranca  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
+                "SELECT e.id, e.empresa, DATE_FORMAT(c.data, '%d'), c.servico, FORMAT(c.valor,2,'de_DE'), c.id, c.tipo_cobranca  FROM empresas e LEFT JOIN  cobrancas c  ON e.id = "
                 "c.id_empresa  WHERE MONTH(data) = '{}' AND c.tipo_cobranca = 'Nao_Continuo' AND e.id = '{}' AND c.status='Ativo' AND e.status = 'Ativo';".format(
                     mes, id))
             result1 = self.cur.fetchall()
