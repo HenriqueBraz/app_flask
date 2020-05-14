@@ -23,7 +23,7 @@ def index():
 
 @app.route('/ping')
 def ping():
-    return 'sbphqk, sbphqk, Novo Rumo chamando...'
+    return 'sbphqk, sbphqk, Novo Rumo chamando......'
 
 '''
 @app.route('/teste')
