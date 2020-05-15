@@ -47,19 +47,20 @@ def cadastrar_cliente():
         observacoes = request.form['observacoes']
         id_responsavel = nome_responsavel
 
+        if db.search_cnpj(cnpj) == 0:
+            if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro,
+                                 cidade, estado,
+                                 capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
+                                 tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
+                                 telefone, email):
 
-        if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro,
-                             cidade, estado,
-                             capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
-                             tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
-                             telefone, email):
+                flash('Empresa cadastrada com sucesso!')
+                return redirect(url_for('cadastrar_cliente', form=form))
 
-
-            flash('Empresa cadastrada com sucesso!')
-            return redirect(url_for('cadastrar_cliente', form=form))
-
+            else:
+                flash('Houve um erro ao inserir a cliente, contate o administrador do sistema')
         else:
-           flash('Houve um erro ao inserir a cliente, contate o administrador do sistema')
+            flash('Empresa não cadastrada, CNPJ já existe no sistema!')
 
     return render_template('cliente/cadastrar_cliente.html', form=form, pagina='')
 
@@ -102,11 +103,11 @@ def editar_cliente(id):
         telefone=result[26],
         email=result[27]
     )
-
+    user_id = result[3]
     db = UsuarioModel()
     result = db.get_users()
     form.nome_responsavel.choices = [(row[0], row[2]) for row in result]
-    form.nome_responsavel.choices.insert(0, (1, result_a[2]))
+    form.nome_responsavel.choices.insert(0, (user_id, result_a[2]))
 
     db = ClienteModel()
     result = db.get_info_nj()
@@ -145,12 +146,13 @@ def editar_cliente(id):
                              cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria,
                              dia_faturamento, folha_pagamento, certificado_digital, observacoes, id_responsavel, id,
                              nome, telefone, email):
+
             flash('Alterações salvas com sucesso!')
 
         else:
             flash('Erro ao realizar as alterações, contate o administrador do sistema.')
 
-    return render_template('cliente/editar_cliente.html', form=form, pagina='')
+    return render_template('cliente/editar_cliente.html', form=form)
 
 
 @app.route('/excluir_cliente/<int:id>"', methods=["GET", "POST"])
