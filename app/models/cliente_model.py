@@ -29,6 +29,15 @@ class ClienteModel(object):
         self.cur.close()
         self.con.close()
 
+    def search_cnpj(self, cnpj):
+        try:
+            self.cur.execute(
+                "SELECT(SELECT COUNT(*) FROM empresas e WHERE e.cnpj = '{}') > 0;".format(cnpj))
+            result = self.cur.fetchone()
+            return result[0]
+        except Exception as e:
+            logging.error('Erro em  EmpresaModel, método search_cnpj(: ' + str(e) + '\n')
+
     def get_nj_porte_nome(self, id):
         try:
             self.cur.execute(
@@ -64,7 +73,9 @@ class ClienteModel(object):
 
     def get_companies(self, user_id):
         try:
-            self.cur.execute("SELECT e.id, e.empresa, DATE_FORMAT(e.created, '%d/%m/%Y  %H:%m'), u.nome, e.cnpj, e.ccm, e.endereco, e.bairro, e.cidade, e.estado FROM empresas e LEFT JOIN  usuarios u  ON u.id = e.id_responsavel  WHERE u.id = '{}' AND e.status = 'Ativo';".format(user_id))
+            self.cur.execute("SELECT e.id, e.empresa, DATE_FORMAT(e.created, '%d/%m/%Y  %H:%m'), u.nome, e.cnpj, "
+                             "e.ccm, e.endereco, e.bairro, e.cidade, e.estado FROM empresas e LEFT JOIN  usuarios u  "
+                             "ON u.id = e.id_responsavel  WHERE u.id = '{}' AND e.status = 'Ativo';".format(user_id))
             result = self.cur.fetchall()
             return result
         except Exception as e:
