@@ -444,12 +444,14 @@ button::-moz-focus-inner,
   padding: 0;
   border-style: none; }
 
+
 input[type="radio"],
 input[type="checkbox"] {
   box-sizing: border-box;
   padding: 0; }
 
 input[type="date"],
+input[type="text"],
 input[type="time"],
 input[type="datetime-local"],
 input[type="month"] {
@@ -17735,3 +17737,7 @@ html body .waves-notransition {
 
 .waves-block {
   display: block; }
+
+
+
+

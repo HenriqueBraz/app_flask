@@ -51,7 +51,7 @@ class ClientForm(FlaskForm):
         validate_phone(region='BR', message="Você precisa entrar com uma telefone válido.")],
                            render_kw={"placeholder": '(dd)ddddd-dddd'})
     email = EmailField("email", validators=[Email(), DataRequired()], render_kw={"placeholder": 'Email'})
-    capital_social = DecimalField(places=0, validators=[DataRequired()], render_kw={"placeholder": 'Capital Social'})
+    capital_social = DecimalField(places=0, validators=[DataRequired()], render_kw={"placeholder": 'Digite o Capital Social'})
     nire = StringField("nire", validators=[DataRequired()], render_kw={"placeholder": 'NIRE'})
     cnpj = StringField("cnpj", validators=[DataRequired()], render_kw={"placeholder": 'CNPJ'})
     inscricao_estadual = StringField("inscricao_estadual", validators=[DataRequired()],

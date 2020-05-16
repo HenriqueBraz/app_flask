@@ -21,17 +21,18 @@ def cadastrar_cliente():
     result = db.get_info_porte()
     form.porte.choices = [(row[0], row[1]) for row in result]
 
-    if form.validate_on_submit():
+    if request.method == 'POST':
         nome_responsavel = request.form['nome_responsavel']
         empresa = request.form['empresa']
-        natureza_juridica = request.form['natureza_juridica']
-        porte = request.form['porte']
+        natureza_juridica = int(request.form['natureza_juridica'])
+        porte = int(request.form['porte'])
         endereco = request.form['endereco']
         cidade = request.form['cidade']
         bairro = request.form['bairro']
         estado = request.form['estado']
         nome = request.form['nome']
         telefone = request.form['telefone']
+        celular = request.form['celular']
         email = request.form['email']
         capital_social = request.form['capital_social']
         nire = request.form['nire']
@@ -45,14 +46,14 @@ def cadastrar_cliente():
         folha_pagamento = request.form['folha_pagamento']
         certificado_digital = request.form['certificado_digital']
         observacoes = request.form['observacoes']
-        id_responsavel = nome_responsavel
+        id_responsavel = int(nome_responsavel)
 
         if db.search_cnpj(cnpj) == 0:
             if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro,
                                  cidade, estado,
                                  capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
                                  tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
-                                 telefone, email):
+                                 telefone, email, celular):
 
                 flash('Empresa cadastrada com sucesso!')
                 return redirect(url_for('cadastrar_cliente', form=form))
@@ -87,22 +88,25 @@ def editar_cliente(id):
         cidade=result[8],
         bairro=result[7],
         estado=result[9],
-        capital_social=result[10],
-        nire=result[11],
-        cnpj=result[12],
+        #capital_social=result[10],
+        #nire=result[11],
+        #cnpj=result[12],
         inscricao_estadual=result[13],
-        ccm=result[14],
+        #ccm=result[14],
         tributacao=result[17],
-        cnae_principal=result[15],
-        cnae_secundaria=result[16],
+        #cnae_principal=result[15],
+        #cnae_secundaria=result[16],
         dia_faturamento=result[18],
         folha_pagamento=result[19],
         certificado_digital=result[20],
         observacoes=result[21],
         nome=result[25],
-        telefone=result[26],
-        email=result[27]
+        #telefone=result[26],
+        email=result[27],
+        #celular = result[28]
     )
+    #lista = telefone, celular, capital_social, nire, cnpj, ccm, cnae_principal, cnae_secundaria
+    lista = result[26], result[28], result[10], result[11], result[12], result[14], result[15], result[16]
     user_id = result[3]
     db = UsuarioModel()
     result = db.get_users()
@@ -117,7 +121,7 @@ def editar_cliente(id):
     form.porte.choices = [(row[0], row[1]) for row in result]
     form.porte.choices.insert(0, (1, result_a[1]))
 
-    if form.validate_on_submit():
+    if request.method == 'POST':
         nome_responsavel = request.form['nome_responsavel']
         empresa = request.form['empresa']
         natureza_juridica = request.form['natureza_juridica']
@@ -140,19 +144,20 @@ def editar_cliente(id):
         observacoes = request.form['observacoes']
         id_responsavel = nome_responsavel
         nome = request.form['nome']
-        telefone = request.form['telefone']
         email = request.form['email']
+        telefone = request.form['telefone']
+        celular = request.form['celular']
         if db.update_company(empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire,
                              cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria,
                              dia_faturamento, folha_pagamento, certificado_digital, observacoes, id_responsavel, id,
-                             nome, telefone, email):
+                             nome, email, telefone, celular):
 
             flash('Alterações salvas com sucesso!')
 
         else:
             flash('Erro ao realizar as alterações, contate o administrador do sistema.')
 
-    return render_template('cliente/editar_cliente.html', form=form)
+    return render_template('cliente/editar_cliente.html', form=form, lista=lista )
 
 
 @app.route('/excluir_cliente/<int:id>"', methods=["GET", "POST"])
