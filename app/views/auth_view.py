@@ -57,11 +57,13 @@ def login(flag):
                         flash(error)
 
                     if error is None:
+                        print(result)
                         session.clear()
                         session['user_id'] = result[0]
                         session['group'] = result[9]
                         session['username'] = result[1]
                         session['email'] = result[4]
+                        session['nome'] = result[3]
                         return redirect(url_for('index'))
 
             elif request.form['action'] == 'Resetar':

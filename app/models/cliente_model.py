@@ -73,7 +73,7 @@ class ClienteModel(object):
 
     def get_companies(self, user_id):
         try:
-            self.cur.execute("SELECT e.id, e.empresa, DATE_FORMAT(e.created, '%d/%m/%Y  %H:%m'), u.nome, e.cnpj, "
+            self.cur.execute("SELECT e.id, e.empresa, DATE_FORMAT(e.created, '%d/%m/%Y  %H:%i'), u.nome, e.cnpj, "
                              "e.ccm, e.endereco, e.bairro, e.cidade, e.estado FROM empresas e LEFT JOIN  usuarios u  "
                              "ON u.id = e.id_responsavel  WHERE u.id = '{}' AND e.status = 'Ativo';".format(user_id))
             result = self.cur.fetchall()

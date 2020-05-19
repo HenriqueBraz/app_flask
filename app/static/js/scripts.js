@@ -28,6 +28,7 @@ $(document).ready( function () {
   $('.celular').mask('(00) 00000-0000');
   $('.capital_social').mask('#.##0,00', {reverse: true});
   $('.dinheiro').mask('#.##0,00', {reverse: true});
+  $('.inscricao_estadual').mask('000.000.000.000');
 
 });
 
