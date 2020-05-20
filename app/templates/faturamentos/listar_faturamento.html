@@ -57,11 +57,10 @@
         <td> {{ row[4] }}</td>
         <td> {{ row[5] }}</td>
         {% if row[1] == None %}
-        <td> {{ 'R$ 0,00' }}</td>
+        <td class="valor_faturamento"> {{ 'R$ 0,00' }}</td>
         {% else %}
-        <td> {{ 'R$ ' + row[6] }}</td>
+        <td class="valor_faturamento"> {{ 'R$ ' + row[6] }}</td>
         {% endif %}
-
     </tr>
     {% endfor %}
     {% endif %}
@@ -87,13 +86,10 @@
     </form>
 </div>
 
-
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <script type=text/javascript src="{{url_for('static', filename='js/scripts.js') }}"></script>
 
 
 
-{% if messages %}
-{% endif %}
 {% endblock %}
