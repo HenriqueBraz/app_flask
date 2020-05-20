@@ -134,7 +134,7 @@ def listar_faturamento(letra, mes, ano, tipo):
             elif tipo == 'lp':
                 return redirect(url_for('faturamento_individual_lp'))
             elif tipo == 'r':
-                return redirect(url_for('faturamento_individual_r'))
+                return redirect(url_for('faturamento_individual_r')) #pass
 
     else:
         result = db.get_companies(letra, user_id, tipo)
