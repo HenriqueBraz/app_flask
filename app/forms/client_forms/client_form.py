@@ -47,23 +47,20 @@ class ClientForm(FlaskForm):
                                   ('SC', 'Santa Catarina'), ('SP', 'São Paulo'),
                                   ('SE', 'Sergipe'), ('TO', 'Tocantins')])
     nome = StringField("nome", validators=[DataRequired()], render_kw={"placeholder": 'Nome'})
-    telefone = StringField("telefone", validators=[
-        validate_phone(region='BR', message="Você precisa entrar com uma telefone válido.")],
-                           render_kw={"placeholder": '(dd)ddddd-dddd'})
-    email = EmailField("email", validators=[Email(), DataRequired()], render_kw={"placeholder": 'Email'})
-    capital_social = DecimalField(places=0, validators=[DataRequired()], render_kw={"placeholder": 'Digite o Capital Social'})
-    nire = StringField("nire", validators=[DataRequired()], render_kw={"placeholder": 'NIRE'})
-    cnpj = StringField("cnpj", validators=[DataRequired()], render_kw={"placeholder": 'CNPJ'})
+    telefone = StringField("telefone", validators=[validate_phone(region='BR', message="Você precisa entrar com uma telefone válido.")],render_kw={"placeholder": 'Telefone'})
+    celular = StringField("celular", validators=[validate_phone(region='BR', message="Você precisa entrar com uma telefone válido.")],render_kw={"placeholder": 'Celular'})
+    email = EmailField("email", validators=[Email(), DataRequired()], render_kw={"placeholder": 'Digite o Email'})
+    capital_social = StringField("capital_social", validators=[DataRequired()], render_kw={"placeholder": 'Digite o Capital Social'})
+    nire = StringField("nire", validators=[DataRequired()], render_kw={"placeholder": 'Digite o NIRE'})
+    cnpj = StringField("cnpj", validators=[DataRequired()], render_kw={"placeholder": 'Digite o CNPJ'})
     inscricao_estadual = StringField("inscricao_estadual", validators=[DataRequired()],
                                      render_kw={"placeholder": 'Inscrição Estadual'})
-    ccm = StringField("ccm", validators=[DataRequired()], render_kw={"placeholder": 'CCM'})
+    ccm = StringField("ccm", validators=[DataRequired()], render_kw={"placeholder": 'Digite o CCM'})
     tributacao = SelectField("tributacao", validators=[DataRequired()],
                              choices=[('SIMPLES NACIONAL', 'Simples Nacional'), ('PRESUMIDO', 'Presumido'),
                                       ('REAL', 'Real')])
-    cnae_principal = StringField("cnae_principal", validators=[DataRequired()],
-                                 render_kw={"placeholder": 'cnae_principal'})
-    cnae_secundaria = StringField("cnae_secundaria", validators=[DataRequired()],
-                                  render_kw={"placeholder": 'cnae_secundaria'})
+    cnae_principal = StringField("cnae_principal", validators=[DataRequired()], render_kw={"placeholder": 'Digite o CNAE principal'})
+    cnae_secundaria = StringField("cnae_secundaria", render_kw={"placeholder": 'Digite o CNAE secundario'})
     dia_faturamento = SelectField("dia_faturamento", validators=[DataRequired()],
                                   choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'),
                                            ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10'), ('11', '11'),

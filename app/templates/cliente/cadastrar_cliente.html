@@ -102,7 +102,7 @@
                     </div>
                     <label class="control-label col-2 text-right">Telefone</label>
                     <div class="col-3">
-                        <input type="text" name="telefone" class="telefone form-control" placeholder="Digite o telefone" required />
+                        {{form.telefone(class="telefone form-control")}} {{form.errors.telefone}}
                     </div>
                 </div>
                 <br>
@@ -114,7 +114,7 @@
                         </div>
                         <label class="control-label col-2 text-right">Celular</label>
                         <div class="col-3">
-                            <input type="text" name="celular" class="celular form-control" placeholder="Digite o celular" required />
+                            {{form.celular(class="celular form-control")}} {{form.errors.celular}}
                         </div>
                     </div>
                 </div>
@@ -126,12 +126,12 @@
             <div class="row">
                 <label class="control-label col-2 text-right">Capital Social</label>
                 <div class="col-4">
-                    <input type="text" name="capital_social" class="capital_social form-control" placeholder="Digite o Capital Social"  required/>
+                    {{form.capital_social(class="capital_social form-control")}} {{form.errors.capital_social}}
                 </div>
 
                 <label class="control-label col-1 text-right">NIRE</label>
                 <div class="col-5">
-                    <input type="text" name="nire" class="nire form-control" placeholder="Digite o NIRE"  required/>
+                    {{form.nire(class="nire form-control")}} {{form.errors.nire}}
                 </div>
             </div>
         </div>
@@ -139,7 +139,7 @@
             <div class="row">
                 <label class="control-label col-2 text-right">CNPJ</label>
                 <div class="col-4">
-                    <input type="text" name="cnpj" class="cnpj form-control" placeholder="Digite o CNPJ" required />
+                    {{form.cnpj(class="cnpj form-control")}} {{form.errors.cnpj}}
                 </div>
 
                 <label class="control-label col-1 text-right">I/E</label>
@@ -154,7 +154,7 @@
             <div class="row">
                 <label class="control-label col-2 text-right">CCM</label>
                 <div class="col-4">
-                    <input type="text" name="ccm" class="ccm form-control" placeholder="Digite o CCM" required />
+                    {{form.ccm(class="ccm form-control")}} {{form.errors.ccm}}
                 </div>
 
                 <label class="control-label col-1 text-right">Tributacao</label>
@@ -168,12 +168,12 @@
             <div class="row">
                 <label class="control-label col-2 text-right">CNAE</label>
                 <div class="col-4">
-                    <input type="text" name="cnae_principal" class="cnae_principal form-control" placeholder="Digite o CNAE principal" required/>
+                    {{form.cnae_principal(class="cnae_principal form-control")}} {{form.errors.cnae_principal}}
                 </div>
 
                 <label class="control-label col-1 text-right">CNAE</label>
                 <div class="col-4">
-                    <input type="text" name="cnae_secundaria" class="cnae_secundaria form-control" placeholder="Digite o CNAE secundário" required />
+                    {{form.cnae_secundaria(class="cnae_secundaria form-control")}} {{form.errors.cnae_secundaria}}
                 </div>
             </div>
         </div>

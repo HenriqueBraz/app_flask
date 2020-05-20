@@ -1,3 +1,4 @@
+import datetime
 import functools
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
@@ -40,6 +41,7 @@ def login(flag):
     else:
         form = login_form.LoginForm(username=session.get('username'))
         form2 = login_form.LoginFormForgotPass()
+        now = datetime.datetime.now()
         if request.method == 'POST':
             if request.form['action'] == 'Entrar':
                 if form.validate_on_submit():
@@ -64,6 +66,7 @@ def login(flag):
                         session['username'] = result[1]
                         session['email'] = result[4]
                         session['nome'] = result[3]
+                        session['last_active'] = now
                         return redirect(url_for('index'))
 
             elif request.form['action'] == 'Resetar':
@@ -85,15 +88,20 @@ def login(flag):
     return render_template('auth/login.html', content_type='application/json', flag=flag, form=form, form2=form2, pagina='')
 
 
-@bp.before_app_request
-def load_logged_in_user():
-    db = UsuarioModel()
-    user_id = session.get('user_id')
-    if user_id is None:
-        g.user = None
+@app.before_request
+def before_request():
+    now = datetime.datetime.now()
+    try:
+        last_active = session['last_active']
+        delta = now - last_active
+        if delta.seconds > 900: #desloga após 15 min
+            session['last_active'] = now
+            return redirect(url_for('logout'))
+        else:
+            session['last_active'] = now
+    except:
+        pass
 
-    else:
-        g.user = db.find_one_id(user_id)
 
 
 @app.route('/logout')

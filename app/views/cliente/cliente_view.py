@@ -88,7 +88,6 @@ def listar_clientes():
     db = ClienteModel()
     user_id = session['user_id']
     lista_clientes = db.get_companies(user_id)
-    print(lista_clientes)
     return render_template('cliente/listar_clientes.html', result=lista_clientes, pagina='Listar Clientes')
 
 
@@ -106,25 +105,23 @@ def editar_cliente(id):
         cidade=result[8],
         bairro=result[7],
         estado=result[9],
-        #capital_social=result[10],
-        #nire=result[11],
-        #cnpj=result[12],
+        capital_social=result[10],
+        nire=result[11],
+        cnpj=result[12],
         inscricao_estadual=result[13],
-        #ccm=result[14],
+        ccm=result[14],
         tributacao=result[17],
-        #cnae_principal=result[15],
-        #cnae_secundaria=result[16],
+        cnae_principal=result[15],
+        cnae_secundaria=result[16],
         dia_faturamento=result[18],
         folha_pagamento=result[19],
         certificado_digital=result[20],
         observacoes=result[21],
         nome=result[25],
-        #telefone=result[26],
+        telefone=result[26],
         email=result[27],
-        #celular = result[28]
+        celular = result[28]
     )
-    #lista = telefone, celular, capital_social, nire, cnpj, ccm, cnae_principal, cnae_secundaria
-    lista = result[26], result[28], result[10], result[11], result[12], result[14], result[15], result[16]
     user_id = result[3]
     db = UsuarioModel()
     result = db.get_users()
@@ -190,7 +187,7 @@ def editar_cliente(id):
         else:
             flash('Erro de CNPJ! Entre com um CNPJ válido.')
 
-    return render_template('cliente/editar_cliente.html', form=form, lista=lista )
+    return render_template('cliente/editar_cliente.html', form=form )
 
 
 @app.route('/excluir_cliente/<int:id>"', methods=["GET", "POST"])
