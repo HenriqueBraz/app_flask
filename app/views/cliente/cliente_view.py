@@ -162,10 +162,8 @@ def editar_cliente(id):
         email = request.form['email']
         telefone = request.form['telefone']
         celular = request.form['celular']
-
         validadores = Validadores()
         cnae = validadores.valida_cnae("https://servicodados.ibge.gov.br/api/v2/cnae/subclasses/", cnae_principal, cnae_secundaria)
-
         if cnae == 1:
             flash('Erro de CNAE Secundário! Entre com um CNAE Secundário válido.')
             return redirect(url_for('editar_cliente', id=id))

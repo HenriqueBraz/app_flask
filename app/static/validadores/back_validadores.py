@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import re
-
-import requests
+from requests import get
 
 
 class Validadores(object):
@@ -116,16 +115,17 @@ class Validadores(object):
         Retorna 1 ou 2 significa que uma das cnae é inválida
         Caso não exista a cnae2, verifica só a cnae1
         '''
-
+        print(cnae1)
+        print(cnae2)
         cnae1 = cnae1.replace("-", "")
         cnae1 = cnae1.replace("/", "")
-        cnae1 = requests.get(link + cnae1)
+        cnae1 = get(link + cnae1)
         cnae1.raise_for_status()
         cnae1 = cnae1.json()
-        if cnae2:
+        if cnae2 != None:
             cnae2 = cnae2.replace("-", "")
             cnae2 = cnae2.replace("/", "")
-            cnae2 = requests.get(link + cnae2)
+            cnae2 = get(link + cnae2)
             cnae2.raise_for_status()
             cnae2 = cnae2.json()
 
