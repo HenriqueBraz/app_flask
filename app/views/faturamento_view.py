@@ -100,7 +100,7 @@ def listar_faturamento(letra, mes, ano, tipo):
                     result2.append(result[i])
 
             if request.method == 'POST':
-                flash('codar post')
+                flash('codar post teste')
 
             return render_template('faturamentos/listar_faturamento.html', result=result2, tipo=tipo,
                                    data_mes_ano=data_mes_ano)
@@ -123,7 +123,7 @@ def listar_faturamento(letra, mes, ano, tipo):
                     result2.append(result[i])
 
             if request.method == 'POST':
-                flash('codar post')
+                flash('codar post teste')
 
             return render_template('faturamentos/listar_faturamento.html', result=result2, tipo=tipo,
                                    data_mes_ano=data_mes_ano)
@@ -140,7 +140,7 @@ def listar_faturamento(letra, mes, ano, tipo):
         result = db.get_companies(letra, user_id, tipo)
         if result:
             if request.method == 'POST':
-                flash('codar post')
+                flash('codar post teste')
 
             return render_template('faturamentos/listar_faturamento.html', result=result, tipo=tipo,
                                    data_mes_ano=data_mes_ano)
