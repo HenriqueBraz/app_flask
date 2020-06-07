@@ -6,13 +6,6 @@ $(document).ready( function () {
     $('#table_id2').DataTable();
 } );
 
-$(document).ready( function () {
-
-    $(".estado").focusout(function(){
-        var estado = $(this).val();
-        alert(estado);
-    });
-} );
 
  $(document).ready(function(){
   $('.cnpj').mask('00.000.000/0000-00');
@@ -33,16 +26,20 @@ $(document).ready( function () {
 });
 
 $(document).ready(function(){
-    $('.valor_faturamento').dblclick(function(){
+    var conteudoNovo = "";
+    var conteudoOriginal = "";
+    var input1 = "";
+    var input2 = "";
+    $('td.valor_faturamento').click(function(){
         if ($('td > input').length > 0){
         return;
         }
-        var conteudoOriginal = $(this).text();
-        var novoElemento = $('<input/>',{type:'text', value:conteudoOriginal});
+        conteudoOriginal = $(this).text();
+        var novoElemento = $('<input/>',{type:'text', name:"faturamento", id:"faturamento", value:conteudoOriginal}).mask('#.##0,00', {reverse: true});
         $(this).html(novoElemento.bind('blur keydown',function(e){
             var keyCode = e.which;
             if( keyCode == 13){
-                var conteudoNovo = $(this).val();
+                conteudoNovo = $(this).val();
                 if( conteudoNovo != "" ){
                     $(this).parent().html(conteudoNovo);
                 }
@@ -53,7 +50,26 @@ $(document).ready(function(){
         }));
         $(this).children().select();
     });
+
 });
+
+function salva_dados(){
+    var nomes = [];
+    var faturamentos = "";
+    input = document.querySelector('[name="faturamento"]');
+    $('#table_id tbody tr').each(function() {
+        var temp = $(this).find('td').eq(5).text();
+        faturamentos += temp + "@";
+    });
+
+    input.value = faturamentos; // Valor da coluna faturamento
+};
+
+
+
+
+
+
 
 
 

@@ -39,7 +39,7 @@ class FaturamentoModel(object):
             tipo = 'REAL'
         try:
             self.cur.execute("SELECT f.id, DATE_FORMAT(f.data, '%m/%Y'), e.empresa, e.cnpj, e.ccm, a.senhaprefeitura,"
-                        "FORMAT(f.faturamento,2,'de_DE') FROM empresas e  LEFT JOIN faturamentos f ON "
+                        "FORMAT(f.faturamento,2,'de_DE'), e.id FROM empresas e  LEFT JOIN faturamentos f ON "
                         "f.id_empresa=e.id LEFT JOIN acessos a  ON a.id_empresa = e.id  WHERE "
                         "e.id_responsavel = '{}' AND e.tributacao = '{}' AND e.status = 'Ativo'"
                         "AND e.empresa LIKE '{}';".format(user_id, tipo, letra))
@@ -80,3 +80,29 @@ class FaturamentoModel(object):
             return result
         except Exception as e:
             logging.error('Erro em  EmpresaModel, método get_companies_r: ' + str(e) + '\n')
+
+
+    def update_billing_company(self, username, name, email, password, group, id):
+        try:
+            self.cur.execute("UPDATE usuarios SET  username = '{}', nome = '{}',  email = '{}', passwd = '{}' WHERE id = {}".format(username, name, email, password, id))
+            self.con.commit()
+            return True
+        except Exception as e:
+            logging.error('Erro em  EmpresaModel, método update_billing_company: ' + str(e) + '\n')
+
+
+    def update_faturamentos(self, id_empresa, faturamento):
+        try:
+            now = datetime.now()
+            data = now.strftime('%Y-%m-%d')
+            data1 = now.strftime('%Y-%m-%d %H:%M:%S')
+            sql_data = (id_empresa, faturamento, data, data1, data1, 'Ativo')
+            sql = "INSERT INTO faturamentos (id_empresa, faturamento, data, created, updated, status) VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE faturamento = '{}', updated = '{}';".format(faturamento, data1)
+            self.cur.execute(sql, sql_data)
+            self.con.commit()
+            return True
+        except Exception as e:
+            logging.error('Erro em   EmpresaModel, método update_faturamentos(: ' + str(e) + '\n')
+
+         # INSERT INTO customers(id, name) VALUES(5, 'André Marcos') ON DUPLICATE KEY UPDATE name = 'André Marcos';
+        # FORMAT(c.valor,2,'de_DE')

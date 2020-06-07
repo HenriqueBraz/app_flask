@@ -5,6 +5,11 @@ from flask import render_template, request, flash, url_for, session
 from app.forms.billings_forms import billings_forms
 from app.models.faturamento_model import FaturamentoModel
 
+def real_br_money_mask(my_value): # converte string 20.000,00 para 20000.00
+    b = my_value.replace(',', 'v')
+    c = b.replace('.', '')
+    return c.replace('v', '.')
+
 
 @app.route('/faturamento_individual_sn', methods=["GET", "POST"])
 def faturamento_individual_sn():
@@ -15,7 +20,7 @@ def faturamento_individual_sn():
     data_ano = now.strftime('%Y')
     form = billings_forms.BillingForm(
         mes=data_mes,
-        ano = data_ano
+        ano=data_ano
     )
     result = db.get_companies_sn()
     form.cliente.choices = [(row[0], row[1]) for row in result]
@@ -26,7 +31,7 @@ def faturamento_individual_sn():
             ano = data_ano
         else:
             ano = data_ano
-        return redirect(url_for('listar_faturamento', letra = letra, mes = mes, ano=ano, tipo = tipo))
+        return redirect(url_for('listar_faturamento', letra=letra, mes=mes, ano=ano, tipo=tipo))
 
     return render_template('faturamentos/faturamento_individual_sn.html', form=form, valor=data_ano)
 
@@ -81,7 +86,6 @@ def faturamento_individual_r():
     return render_template('faturamentos/faturamento_individual_r.html', form=form, valor=data_ano)
 
 
-
 @app.route('/listar_faturamento/<string:letra>/<string:mes>/<string:ano>/<string:tipo>', methods=["GET", "POST"])
 def listar_faturamento(letra, mes, ano, tipo):
     db = FaturamentoModel()
@@ -100,7 +104,18 @@ def listar_faturamento(letra, mes, ano, tipo):
                     result2.append(result[i])
 
             if request.method == 'POST':
-                flash('codar post teste')
+                if request.form['submit_button'] == 'Gravar':
+                    faturamento = request.form['faturamento']
+                    faturamento = faturamento.replace("R$", "")
+                    faturamento = faturamento.replace(" ", "")
+                    faturamento = faturamento.split("@")
+                    for i in range(len(result)):
+                        if result[i][6] != faturamento[i]:
+                            if db.update_faturamentos(result[i][7], float(real_br_money_mask(faturamento[i]))):  # id_empresa, valor do faturamento
+                                flash("Faturamento(s) salvos com sucesso!")
+                                return redirect(url_for('listar_faturamento', letra=letra, mes=mes, ano=ano, tipo=tipo))
+                            else:
+                                flash('Houve um erro ao salvar o(s) faturamento(s), contate o administrador do sistema')
 
             return render_template('faturamentos/listar_faturamento.html', result=result2, tipo=tipo,
                                    data_mes_ano=data_mes_ano)
@@ -123,7 +138,18 @@ def listar_faturamento(letra, mes, ano, tipo):
                     result2.append(result[i])
 
             if request.method == 'POST':
-                flash('codar post teste')
+                if request.form['submit_button'] == 'Gravar':
+                    faturamento = request.form['faturamento']
+                    faturamento = faturamento.replace("R$", "")
+                    faturamento = faturamento.replace(" ", "")
+                    faturamento = faturamento.split("@")
+                    for i in range(len(result)):
+                        if result[i][6] != faturamento[i]:
+                            if db.update_faturamentos(result[i][7], float(real_br_money_mask(faturamento[i]))):  # id_empresa, valor do faturamento
+                                flash("Faturamento(s) salvos com sucesso!")
+                                return redirect(url_for('listar_faturamento', letra=letra, mes=mes, ano=ano, tipo=tipo))
+                            else:
+                                flash('Houve um erro ao salvar o(s) faturamento(s), contate o administrador do sistema')
 
             return render_template('faturamentos/listar_faturamento.html', result=result2, tipo=tipo,
                                    data_mes_ano=data_mes_ano)
@@ -140,7 +166,19 @@ def listar_faturamento(letra, mes, ano, tipo):
         result = db.get_companies(letra, user_id, tipo)
         if result:
             if request.method == 'POST':
-                flash('codar post teste')
+                if request.form['submit_button'] == 'Gravar':
+                    faturamento = request.form['faturamento']
+                    faturamento = faturamento.replace("R$", "")
+                    faturamento = faturamento.replace(" ", "")
+                    faturamento = faturamento.split("@")
+                    for i in range(len(result)):
+                        if result[i][6] != faturamento[i]:
+                            if db.update_faturamentos(result[i][7], float(real_br_money_mask(faturamento[i]))):  # id_empresa, valor do faturamento
+                                flash("Faturamento(s) salvos com sucesso!")
+                                return redirect(url_for('listar_faturamento', letra=letra, mes=mes, ano=ano, tipo=tipo))
+                            else:
+                                flash('Houve um erro ao salvar o(s) faturamento(s), contate o administrador do sistema')
+
 
             return render_template('faturamentos/listar_faturamento.html', result=result, tipo=tipo,
                                    data_mes_ano=data_mes_ano)
@@ -152,8 +190,3 @@ def listar_faturamento(letra, mes, ano, tipo):
                 return redirect(url_for('faturamento_individual_lp'))
             elif tipo == 'r':
                 return redirect(url_for('faturamento_individual_r'))
-
-
-
-
-

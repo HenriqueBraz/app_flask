@@ -31,45 +31,49 @@
 {% endwith %}
 
 
+<h5>Clique no campo Faturamento para editar &nbsp:</h5>
 <br>
-<table id="table_id" class="display">
-    <thead>
-    <tr>
-        <th>Data</th>
-        <th>Nome</th>
-        <th>CNPJ</th>
-        <th>CCM</th>
-        <th>Senha</th>
-        <th>Faturamento</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% if result %}
-    {% for row in result %}
-    <tr>
-        {% if row[1] == None %}
-        <td> {{ data_mes_ano }}</td>
-        {% else %}
-        <td> {{ row[1] }}</td>
-        {% endif %}
-        <td> {{ row[2] }}</td>
-        <td> {{ row[3] }}</td>
-        <td> {{ row[4] }}</td>
-        <td> {{ row[5] }}</td>
-        {% if row[1] == None %}
-        <td class="valor_faturamento"> {{ 'R$ 0,00' }}</td>
-        {% else %}
-        <td class="valor_faturamento"> {{ 'R$ ' + row[6] }}</td>
-        {% endif %}
-    </tr>
-    {% endfor %}
-    {% endif %}
-    </tbody>
-</table>
-<br><br>
+<br>
+
 <div class="form-group">
     <form method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <table id="table_id" class="display">
+            <thead>
+            <tr>
+                <th>Data</th>
+                <th>Nome</th>
+                <th>CNPJ</th>
+                <th>CCM</th>
+                <th>Senha</th>
+                <th>Faturamento</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if result %}
+            {% for row in result %}
+            <tr>
+                {% if row[1] == None %}
+                <td> {{ data_mes_ano }}</td>
+                {% else %}
+                <td> {{ row[1] }}</td>
+                {% endif %}
+                <td class="nome_empresa", id="nome_empresa"> {{ row[2] }}</td>
+                <td> {{ row[3] }}</td>
+                <td> {{ row[4] }}</td>
+                <td> {{ row[5] }}</td>
+                {% if row[1] == None %}
+                <td class="valor_faturamento"> {{ 'R$ 0,00' }}</td>
+                {% else %}
+                <td class="valor_faturamento"> {{ 'R$ ' + row[6] }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+        <br><br>
+        <input type="hidden" name="faturamento" />
         <div class="row">
             <div class="col-9"></div>
             <div class="col-3">
@@ -80,7 +84,7 @@
                 {% elif tipo == 'r' %}
                 <button class="btn btn-primary" type="button"><a href="{{ url_for('faturamento_individual_r') }}" ><font color=white>voltar</font></a></button>
                 {% endif %}
-                <button class="btn btn-primary"  type="submit">Gravar</button>
+                <input class="btn btn-primary" type="submit" name="submit_button" value="Gravar" onClick="salva_dados()">
             </div>
         </div>
     </form>
@@ -88,6 +92,7 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="{{ url_for('static', filename='jquery-mask-plugin/src/jquery.mask.js') }}"></script>
 <script type=text/javascript src="{{url_for('static', filename='js/scripts.js') }}"></script>
 
 
