@@ -1,4 +1,3 @@
-from pygal.graph import time
 from werkzeug.utils import redirect
 from app import app
 from app.forms.auth_forms import login_form
