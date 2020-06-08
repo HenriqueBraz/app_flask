@@ -1,7 +1,10 @@
+from pygal.graph import time
 from werkzeug.utils import redirect
 from app import app
 from app.forms.auth_forms import login_form
 from flask import render_template, url_for, session
+import pygal
+import json
 
 
 @app.route("/")
@@ -19,7 +22,29 @@ def favicon():
 def index():
     form = login_form.LoginForm()
     email = session.get('email')
-    return render_template('index/index.html', content_type='application/json', email=email, form=form, pagina='')
+    with open('/home/henrique/novo-rumo-py/bar.json', 'r') as bar_file:
+        data = json.load(bar_file)
+
+    chart = pygal.Pie()
+    chart.force_uri_protocol = 'http'
+    chart.title = 'Gráfico em Pizza'
+    mark_list = [x['mark'] for x in data]
+    chart.add('Annual Mark List', mark_list)
+    chart.x_labels = [x['year'] for x in data]
+    graph_data = chart.render_data_uri()
+
+    chart = pygal.Bar()
+    chart.force_uri_protocol = 'http'
+    chart.title = 'Gráfico em Barras'
+    chart.add('IE', 19.5)
+    chart.add('Firefox', 36.6)
+    chart.add('Chrome', 36.3)
+    chart.add('Safari', 4.5)
+    chart.add('Opera', 2.3)
+    graph_data2 = chart.render_data_uri()
+
+    return render_template('index/index.html', email=email, form=form, pagina='', graph_data=graph_data2, graph_data2=graph_data)
+
 
 @app.route('/ping')
 def ping():
