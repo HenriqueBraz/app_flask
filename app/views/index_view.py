@@ -21,8 +21,6 @@ def favicon():
 def index():
     form = login_form.LoginForm()
     email = session.get('email')
-    with open('/home/henrique/novo-rumo-py/bar.json', 'r') as bar_file:
-        data = json.load(bar_file)
 
     chart = pygal.Pie()
     chart.force_uri_protocol = 'http'
