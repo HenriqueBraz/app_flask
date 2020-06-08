@@ -23,7 +23,7 @@ def index():
 
     chart = pygal.Pie()
     chart.force_uri_protocol = 'http'
-    chart.title = 'Gráfico em Barras'
+    chart.title = 'Gráfico em Pizza'
     chart.add('IE', 19.5)
     chart.add('Firefox', 36.6)
     chart.add('Chrome', 36.3)
