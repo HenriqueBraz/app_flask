@@ -26,10 +26,12 @@ def index():
 
     chart = pygal.Pie()
     chart.force_uri_protocol = 'http'
-    chart.title = 'Gráfico em Pizza'
-    mark_list = [x['mark'] for x in data]
-    chart.add('Annual Mark List', mark_list)
-    chart.x_labels = [x['year'] for x in data]
+    chart.title = 'Gráfico em Barras'
+    chart.add('IE', 19.5)
+    chart.add('Firefox', 36.6)
+    chart.add('Chrome', 36.3)
+    chart.add('Safari', 4.5)
+    chart.add('Opera', 2.3)
     graph_data = chart.render_data_uri()
 
     chart = pygal.Bar()
