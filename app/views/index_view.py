@@ -56,4 +56,3 @@ def ping():
 def teste():
     return render_template('teste.html')
 '''
-'''tetee'''
