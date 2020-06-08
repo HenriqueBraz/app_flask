@@ -3,7 +3,6 @@ from app import app
 from app.forms.auth_forms import login_form
 from flask import render_template, url_for, session
 import pygal
-import json
 
 
 @app.route("/")
