@@ -41,12 +41,14 @@ def index():
     chart.add('Opera', 2.3)
     graph_data2 = chart.render_data_uri()
 
-    return render_template('index/index.html', email=email, form=form, pagina='', graph_data=graph_data, graph_data2=graph_data2)
+    return render_template('index/index.html', email=email, form=form, pagina='', graph_data=graph_data,
+                           graph_data2=graph_data2)
 
 
 @app.route('/ping')
 def ping():
     return 'sbphqk, sbphqk, Novo Rumo chamando......'
+
 
 '''
 @app.route('/teste')
