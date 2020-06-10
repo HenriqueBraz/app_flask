@@ -20,11 +20,11 @@ with open('config.json') as f:
 JWTManager(app)
 
 from app.static.validadores import back_validadores
-from .views import usuario_view, auth_view, index_view, faturamento_view
+from app.views import usuario_view, auth_view, index_view, faturamento_view
 from app.views.cliente.acoes_cliente import contabilidade_view, socios_view, acesso_view, anexos_view
 from app.views.cliente import cliente_view
 from app.views import ocorrencia_view, financeiro_view
-from .models import usuario_model, cliente_model, contabilidade_model, socios_model, acesso_model, faturamento_model, anexos_model, financeiro_model
+from app.models import usuario_model, cliente_model, contabilidade_model, socios_model, acesso_model, faturamento_model, anexos_model, financeiro_model, graficos_model
 
 DEBUG = True
 app.config['SECRET_KEY'] = conf["SECRET_KEY"]
