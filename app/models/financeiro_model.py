@@ -25,6 +25,9 @@ class FinanceiroModel(object):
         logging.info('Construtor do FinanceiroModel chamado com sucesso\n')
         logging.disable(logging.DEBUG)
 
+    def __del__(self):
+        self.cur.close()
+        self.con.close()
 
 
     def get_companies(self, user_id, letra):
