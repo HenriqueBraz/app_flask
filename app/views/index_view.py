@@ -45,6 +45,8 @@ def index():
 
     result1 = db.get_cobrancas('Continuo')
     result2 = db.get_cobrancas('Nao_Continuo')
+    print(result1)
+    print(result2)
     chart = pygal.Line()
     chart.title = 'Cobranças, ano ' + str(ano) + ':'
     chart.x_labels = ('Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez')
