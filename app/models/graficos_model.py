@@ -60,7 +60,7 @@ class GraficoModel(object):
         try:
             for i in range(1, 13):
                 self.cur.execute(
-                "SELECT COUNT(c.tipo_cobranca ) FROM cobrancas c WHERE  DATE_FORMAT(c.created, '%m') = {} AND DATE_FORMAT(c.created, '%Y') = {} AND c.tipo_cobranca = '{}' ".format(i, ano, tipo))
+                "SELECT COUNT(c.tipo_cobranca ) FROM cobrancas c WHERE  DATE_FORMAT(c.data, '%m') = {} AND DATE_FORMAT(c.created, '%Y') = {} AND c.tipo_cobranca = '{}' ".format(i, ano, tipo))
                 result += self.cur.fetchone()
 
 
