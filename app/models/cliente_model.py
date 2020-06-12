@@ -83,21 +83,21 @@ class ClienteModel(object):
 
     def insert_company(self, nome_responsavel, id_natureza_juridica, id_porte_empresa, id_responsavel, empresa,
                        endereco,
-                       bairro, cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, cnaeSecundaria,
+                       bairro, cep, cidade, numero, complemento, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, cnaeSecundaria,
                        tributacao, diaFaturamento, folhaPagamento, certificadoDigital, observacoes, nome, telefone,
                        email, celular):
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
             sql_data = (
-                id_natureza_juridica, id_porte_empresa, id_responsavel, data, empresa, endereco, bairro,
+                id_natureza_juridica, id_porte_empresa, id_responsavel, data, empresa, cep, endereco, numero, complemento, bairro,
                 cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, cnaeSecundaria, tributacao,
                 diaFaturamento,
                 folhaPagamento, certificadoDigital, observacoes, data, data, 'Ativo')
             sql = "INSERT INTO empresas ( id_natureza_juridica, id_porte_empresa, id_responsavel, dataResponsavel, " \
-                  "empresa, endereco, bairro, cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, " \
+                  "empresa, cep, endereco, numero, complemento, bairro, cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, " \
                   "cnaeSecundaria,tributacao, diaFaturamento, folhaPagamento, certificadoDigital, observacoes, " \
-                  "created, updated,status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, " \
+                  "created, updated,status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, " \
                   "%s, %s, %s, %s, %s, %s, %s, %s)"
             self.cur.execute(sql, sql_data)
             self.con.commit()
@@ -126,13 +126,13 @@ class ClienteModel(object):
         except Exception as e:
             logging.error('Erro em ClienteModel, método find_one_id: ' + str(e) + '\n')
 
-    def update_company(self, empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire,
+    def update_company(self, empresa, natureza_juridica, porte, cep, endereco, numero, complemento, cidade, bairro, estado, capital_social, nire,
                        cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria, dia_faturamento,
                        folha_pagamento, certificado_digital, observacoes, id_responsavel, id, nome, email, telefone, celular):
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
-            self.cur.execute("UPDATE empresas SET  id_natureza_juridica = '{}', id_porte_empresa = '{}',  id_responsavel = '{}',  empresa = '{}', endereco = '{}', bairro = '{}', cidade = '{}', estado = '{}', capitalSocial = '{}', nire = '{}', cnpj = '{}', ie = '{}', ccm = '{}', cnaePrincipal = '{}', cnaeSecundaria = '{}',  tributacao = '{}', diaFaturamento = '{}', folhaPagamento = '{}', certificadoDigital = '{}', observacoes = '{}',  updated = '{}'  WHERE id = {}".format(natureza_juridica, porte, id_responsavel, empresa, endereco, bairro, cidade, estado, capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria, tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, data, id))
+            self.cur.execute("UPDATE empresas SET  id_natureza_juridica = '{}', id_porte_empresa = '{}',  id_responsavel = '{}',  empresa = '{}', cep = '{}', endereco = '{}', numero = '{}', complemento = '{}',  bairro = '{}', cidade = '{}', estado = '{}', capitalSocial = '{}', nire = '{}', cnpj = '{}', ie = '{}', ccm = '{}', cnaePrincipal = '{}', cnaeSecundaria = '{}',  tributacao = '{}', diaFaturamento = '{}', folhaPagamento = '{}', certificadoDigital = '{}', observacoes = '{}',  updated = '{}'  WHERE id = {}".format(natureza_juridica, porte, id_responsavel, empresa, cep, endereco, numero, complemento, bairro, cidade, estado, capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria, tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, data, id))
             self.con.commit()
             self.cur.execute("UPDATE empresas_contato SET  nome = '{}', telefone = '{}', celular = '{}',  email = '{}', updated = '{}' WHERE id_empresa = '{}'".format(nome, telefone, celular, email, data, id))
             self.con.commit()

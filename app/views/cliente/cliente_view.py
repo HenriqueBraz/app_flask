@@ -30,7 +30,10 @@ def cadastrar_cliente():
         empresa = request.form['empresa']
         natureza_juridica = int(request.form['natureza_juridica'])
         porte = int(request.form['porte'])
+        cep = request.form['cep']
         endereco = request.form['endereco']
+        numero = request.form['numero']
+        complemento = request.form['complemento']
         cidade = request.form['cidade']
         bairro = request.form['bairro']
         estado = request.form['estado']
@@ -64,7 +67,7 @@ def cadastrar_cliente():
         if db.search_cnpj(cnpj) == 0:
             if validadores.validar_cnpj(cnpj):
                 if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro,
-                                 cidade, estado,
+                                 cep, cidade, numero, complemento, estado,
                                  capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
                                  tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
                                  telefone, email, celular):
@@ -96,31 +99,35 @@ def editar_cliente(id):
     db = ClienteModel()
     result_a = db.get_nj_porte_nome(id)
     result = db.find_one_id(id)
+    print(result)
     form = client_form.ClientForm(
         nome_responsavel=result_a[2],
         empresa=result[5],
         natureza_juridica=result_a[0],
         porte=result_a[1],
-        endereco=result[6],
-        cidade=result[8],
-        bairro=result[7],
-        estado=result[9],
-        capital_social=result[10],
-        nire=result[11],
-        cnpj=result[12],
-        inscricao_estadual=result[13],
-        ccm=result[14],
-        tributacao=result[17],
-        cnae_principal=result[15],
-        cnae_secundaria=result[16],
-        dia_faturamento=result[18],
-        folha_pagamento=result[19],
-        certificado_digital=result[20],
-        observacoes=result[21],
-        nome=result[25],
-        telefone=result[26],
-        email=result[27],
-        celular = result[28]
+        cep=result[6],
+        endereco=result[7],
+        numero=result[8],
+        complemento=result[9],
+        cidade=result[10],
+        bairro=result[11],
+        estado=result[12],
+        capital_social=result[13],
+        nire=result[14],
+        cnpj=result[15],
+        inscricao_estadual=result[16],
+        ccm=result[17],
+        tributacao=result[20],
+        cnae_principal=result[18],
+        cnae_secundaria=result[19],
+        dia_faturamento=result[21],
+        folha_pagamento=result[22],
+        certificado_digital=result[23],
+        observacoes=result[24],
+        nome=result[28],
+        telefone=result[29],
+        email=result[30],
+        celular=result[31]
     )
     user_id = result[3]
     db = UsuarioModel()
@@ -141,7 +148,10 @@ def editar_cliente(id):
         empresa = request.form['empresa']
         natureza_juridica = request.form['natureza_juridica']
         porte = request.form['porte']
+        cep = request.form['cep']
         endereco = request.form['endereco']
+        numero = request.form['numero']
+        complemento = request.form['complemento']
         cidade = request.form['cidade']
         bairro = request.form['bairro']
         estado = request.form['estado']
@@ -173,7 +183,7 @@ def editar_cliente(id):
             return redirect(url_for('editar_cliente', id=id))
 
         if validadores.validar_cnpj(cnpj):
-            if db.update_company(empresa, natureza_juridica, porte, endereco, cidade, bairro, estado, capital_social, nire,
+            if db.update_company(empresa, natureza_juridica, porte, cep, endereco, numero, complemento, cidade, bairro, estado, capital_social, nire,
                              cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria,
                              dia_faturamento, folha_pagamento, certificado_digital, observacoes, id_responsavel, id,
                              nome, email, telefone, celular):
