@@ -29,7 +29,10 @@ class ClientForm(FlaskForm):
     empresa = StringField("cliente", validators=[DataRequired()], render_kw={"placeholder": 'Empresa'})
     natureza_juridica = SelectField("natureza_juridica", coerce=int, render_kw={'readonly': True}, choices=[])
     porte = SelectField("porte", coerce=int, render_kw={'readonly': True}, choices=[])
+    cep = StringField("cep", validators=[DataRequired()], render_kw={"placeholder": 'CEP'})
     endereco = StringField("endereco", validators=[DataRequired()], render_kw={"placeholder": 'Endereço'})
+    numero = StringField("numero", validators=[DataRequired()], render_kw={"placeholder": ''})
+    complemento = StringField("complemento", render_kw={"placeholder": ''})
     cidade = StringField("cidade", validators=[DataRequired()], render_kw={"placeholder": 'Cidade'})
     bairro = StringField("bairro", validators=[DataRequired()], render_kw={"placeholder": 'Bairro'})
     estado = SelectField("estado", validators=[DataRequired()],

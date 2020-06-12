@@ -65,28 +65,44 @@
 
             <div class="form-group">
                 <div class="row">
-                    <label class="control-label col-2 text-right">Endereço</label>
-                    <div class="col-10">
-                        {{form.endereco(class="form-control")}} {{form.errors.endereco}}
+                    <label class="control-label col-2 text-right">CEP</label>
+                    <div class="col-2">
+                        {{form.cep(class="cep form-control")}} {{form.errors.cep}}
                     </div>
                 </div>
+                <br>
+                <div class="row">
+                    <label class="control-label col-2 text-right">Endereço</label>
+                    <div class="col-5">
+                        {{form.endereco(class=" endereco form-control")}} {{form.errors.endereco}}
+                    </div>
 
+                     <label class="control-label col-1 text-right">N°</label>
+                    <div class="col-1">
+                        {{form.numero(class="numero form-control")}} {{form.errors.numero}}
+                    </div>
+
+                    <label class="control-label col-1 text-right">Comp.</label>
+                    <div class="col-2">
+                        {{form.complemento(class="complemento form-control")}} {{form.errors.complemento}}
+                    </div>
+                </div>
                 <br>
                 <div class="form-group">
                     <div class="row">
-                        <label class="control-label col-2 text-right">Cidade</label>
+                        <label class="control-label col-2 text-right">Bairro</label>
                         <div class="col-3">
-                            {{form.cidade(class="form-control")}} {{form.errors.cidade}}
+                            {{form.bairro(class="bairro form-control")}} {{form.errors.bairro}}
                         </div>
 
-                        <label class="control-label col-1 text-right">Bairro</label>
-                        <div class="col-3">
-                            {{form.bairro(class="form-control")}} {{form.errors.bairro}}
+                        <label class="control-label col-1 text-right">Cidade</label>
+                        <div class="col-2">
+                            {{form.cidade(class="cidade form-control")}} {{form.errors.cidade}}
                         </div>
 
                         <label class="control-label col-1 text-right">Estado</label>
-                        <div class="col-2">
-                            {{form.estado(class="form-control")}} {{form.errors.estado}}
+                        <div class="col-3">
+                            {{form.estado(class="estado form-control")}} {{form.errors.estado}}
                         </div>
                     </div>
 
