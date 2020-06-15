@@ -134,7 +134,9 @@ class ClienteModel(object):
             data = now.strftime('%Y-%m-%d %H:%M:%S')
             self.cur.execute("UPDATE empresas SET  id_natureza_juridica = '{}', id_porte_empresa = '{}',  id_responsavel = '{}',  empresa = '{}', cep = '{}', endereco = '{}', numero = '{}', complemento = '{}',  bairro = '{}', cidade = '{}', estado = '{}', capitalSocial = '{}', nire = '{}', cnpj = '{}', ie = '{}', ccm = '{}', cnaePrincipal = '{}', cnaeSecundaria = '{}',  tributacao = '{}', diaFaturamento = '{}', folhaPagamento = '{}', certificadoDigital = '{}', observacoes = '{}',  updated = '{}'  WHERE id = {}".format(natureza_juridica, porte, id_responsavel, empresa, cep, endereco, numero, complemento, bairro, cidade, estado, capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria, tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, data, id))
             self.con.commit()
-            self.cur.execute("UPDATE empresas_contato SET  nome = '{}', telefone = '{}', celular = '{}',  email = '{}', updated = '{}' WHERE id_empresa = '{}'".format(nome, telefone, celular, email, data, id))
+            sql_data = (id, nome, email, telefone, celular, data, data, 'Ativo')
+            sql = ("INSERT INTO empresas_contato (id_empresa, nome, email, telefone, celular, created, updated, status ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)  ON DUPLICATE KEY UPDATE telefone = '{}', celular = '{}', email = '{}', updated = '{}'".format(telefone, celular, email, data))
+            self.cur.execute(sql, sql_data)
             self.con.commit()
             return True
 
