@@ -63,7 +63,6 @@ class GraficoModel(object):
                 "SELECT COUNT(c.tipo_cobranca ) FROM cobrancas c WHERE  DATE_FORMAT(c.data, '%m') = {} AND DATE_FORMAT(c.created, '%Y') = {} AND c.tipo_cobranca = '{}' ".format(i, ano, tipo))
                 result += self.cur.fetchone()
 
-
             return result
         except Exception as e:
             logging.error('Erro em  GraficoModel, método get_pizza: ' + str(e) + '\n')
