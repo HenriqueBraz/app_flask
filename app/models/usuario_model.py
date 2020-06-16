@@ -65,7 +65,7 @@ class UsuarioModel(object):
     def find_one_id(self, user_id):
         try:
             self.cur.execute(
-                "SELECT u.username, u.nome, u.email, u.passwd,  g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE  u.id = '{}';".format(user_id))
+                "SELECT u.username, u.nome, u.email, u.passwd, g.grupo FROM usuarios u LEFT JOIN grupos g ON u.id = g.id_usuario  WHERE  u.id = '{}';".format(user_id))
             result = self.cur.fetchone()
             return result
         except Exception as e:
@@ -102,6 +102,19 @@ class UsuarioModel(object):
 
         except Exception as e:
             logging.error('Erro em UsuarioModel, método update_user ' + str(e) + '\n')
+
+    def update_user_2(self, username, name, email, group, id):
+        try:
+            now = datetime.now()
+            data = now.strftime('%Y-%m-%d %H:%M:%S')
+            self.cur.execute("UPDATE usuarios SET  username = '{}', nome = '{}',  email = '{}' WHERE id = {}".format(username, name, email, id))
+            self.con.commit()
+            self.cur.execute("UPDATE grupos SET  grupo = '{}'  WHERE id_usuario = {}".format(group, id))
+            self.con.commit()
+            return True
+
+        except Exception as e:
+            logging.error('Erro em UsuarioModel, método update_user_2 ' + str(e) + '\n')
 
     def update_status_user(self, id):
         try:

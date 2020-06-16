@@ -20,13 +20,15 @@ def favicon():
 
 @app.route('/index', methods=["GET"])
 def index():
+    user_id = session.get('user_id')
+    user_name = session.get('username')
     form = login_form.LoginForm()
     email = session.get('email')
     db = GraficoModel()
     now = datetime.now()
     ano = now.strftime('%Y')
 
-    result = db.get_tributacao('SIMPLES NACIONAL', 'PRESUMIDO', 'REAL')
+    result = db.get_tributacao('SIMPLES NACIONAL', 'PRESUMIDO', 'REAL', user_id)
     chart = pygal.Pie()
     chart.force_uri_protocol = 'http'
     chart.title = 'Faturamento por Cliente'
@@ -35,7 +37,7 @@ def index():
     chart.add('Lucro Real', result[2])
     graph_data = chart.render_data_uri()
 
-    result = db.get_ocorrencias()
+    result = db.get_ocorrencias(user_name)
     chart = pygal.Bar()
     chart.force_uri_protocol = 'http'
     chart.title = 'Ocorrências em Aberto / Fechado'
@@ -45,9 +47,7 @@ def index():
 
     result1 = db.get_cobrancas('Continuo')
     result2 = db.get_cobrancas('Nao_Continuo')
-    print(result1)
-    print(result2)
-    chart = pygal.Line()
+
     chart.title = 'Cobranças, ano ' + str(ano) + ':'
     chart.x_labels = ('Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez')
     chart.add('Contínuo', result1)
