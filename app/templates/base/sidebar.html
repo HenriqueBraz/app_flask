@@ -14,13 +14,13 @@
                         <span class="hide-menu">Clientes </span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Listar Clientes">
                             <a href="{{ url_for('listar_clientes') }}" class="sidebar-link">
 
                                 <span class="hide-menu">Listar Clientes</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Cadastrar novo Cliente">
                             <a href="{{ url_for('cadastrar_cliente') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Cadastrar novo Cliente</span>
@@ -34,19 +34,19 @@
                         <span class="hide-menu">Faturamentos por Clientes</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Simples Nacional">
                             <a href="{{ url_for('faturamento_individual_sn') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Simples Nacional</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Lucro Presumido">
                             <a href="{{ url_for('faturamento_individual_lp') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Lucro Presumido</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Lucro Real">
                             <a href="{{ url_for('faturamento_individual_r') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Lucro Real</span>
@@ -60,25 +60,25 @@
                         <span class="hide-menu">Ocorrências por Cliente</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Listar Simples Nacional">
                             <a href="{{ url_for('listar_ocorrencias_sn') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Simples Nacional</span>
+                                <span class="hide-menu">Listar Simples Nacional</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item"  title="Listar Lucro Presumido">
                             <a href="{{ url_for('listar_ocorrencias_lp') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Lucro Presumido</span>
+                                <span class="hide-menu">Listar Lucro Presumido</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Listar Lucro Real">
                             <a href="{{ url_for('listar_ocorrencias_r') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu">Lucro Real</span>
+                                <span class="hide-menu">Listar Lucro Real</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Incluir Ocorrência">
                             <a href="{{ url_for('incluir_ocorrencia') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Incluir Ocorrência</span>
@@ -106,13 +106,13 @@
                         <span class="hide-menu">Usuários</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Listar Usuários">
                             <a href="{{ url_for('usuarios') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Listar Usuários</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Cadastrar novo usuario">
                             <a href="{{ url_for('register') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Cadastrar novo usuario</span>
@@ -126,7 +126,7 @@
                         <span class="hide-menu">Financeiro</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Selecionar Clientes">
                             <a href="{{ url_for('selecionar_clientes') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Selecionar Clientes</span>
