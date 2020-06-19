@@ -84,7 +84,7 @@ $(document).ready( function () {
 				//Agora basta definir os valores que você deseja preencher
 				//automaticamente nos campos acima.
 				$(".endereco").val(resposta.logradouro);
-				$(".complemento").val(resposta.complemento);
+				//$(".complemento").val(resposta.complemento);
 				$(".bairro").val(resposta.bairro);
 				$(".cidade").val(resposta.localidade);
 				$(".estado").val(resposta.uf);

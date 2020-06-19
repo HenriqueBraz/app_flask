@@ -52,6 +52,7 @@ def cadastrar_cliente():
         dia_faturamento = request.form['dia_faturamento']
         folha_pagamento = request.form['folha_pagamento']
         certificado_digital = request.form['certificado_digital']
+        impugnacao = request.form['impugnacao']
         observacoes = request.form['observacoes']
         id_responsavel = int(nome_responsavel)
         validadores = Validadores()
@@ -69,7 +70,7 @@ def cadastrar_cliente():
                 if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro,
                                  cep, cidade, numero, complemento, estado,
                                  capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
-                                 tributacao, dia_faturamento, folha_pagamento, certificado_digital, observacoes, nome,
+                                 tributacao, dia_faturamento, folha_pagamento, certificado_digital, impugnacao, observacoes, nome,
                                  telefone, email, celular):
 
                     flash('Empresa cadastrada com sucesso!')
@@ -123,11 +124,12 @@ def editar_cliente(id):
         dia_faturamento=result[21],
         folha_pagamento=result[22],
         certificado_digital=result[23],
-        observacoes=result[24],
-        nome=result[28],
-        telefone=result[29],
-        email=result[30],
-        celular=result[31]
+        impugnacao=result[24],
+        observacoes=result[25],
+        nome=result[29],
+        telefone=result[30],
+        email=result[31],
+        celular=result[32]
     )
     user_id = result[3]
     db = UsuarioModel()
@@ -166,6 +168,7 @@ def editar_cliente(id):
         dia_faturamento = request.form['dia_faturamento']
         folha_pagamento = request.form['folha_pagamento']
         certificado_digital = request.form['certificado_digital']
+        impugnacao = request.form['impugnacao']
         observacoes = request.form['observacoes']
         id_responsavel = nome_responsavel
         nome = request.form['nome']
@@ -185,7 +188,7 @@ def editar_cliente(id):
         if validadores.validar_cnpj(cnpj):
             if db.update_company(empresa, natureza_juridica, porte, cep, endereco, numero, complemento, cidade, bairro, estado, capital_social, nire,
                              cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria,
-                             dia_faturamento, folha_pagamento, certificado_digital, observacoes, id_responsavel, id,
+                             dia_faturamento, folha_pagamento, certificado_digital, impugnacao, observacoes, id_responsavel, id,
                              nome, email, telefone, celular):
 
                 flash('Alterações salvas com sucesso!')
