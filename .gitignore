@@ -6,3 +6,4 @@ app/uploads
 /__pycache__/
 */__pycache__/
 config.json
+app.log
