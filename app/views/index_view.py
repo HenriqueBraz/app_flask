@@ -55,7 +55,7 @@ def index():
     chart.add('Não Contínuo', result2)
     graph_data3 = chart.render_data_uri()
 
-    return render_template('index/index.html', email=email, form=form, pagina='', graph_data=graph_data,
+    return render_template('index/index.html', user_name=user_name, email=email, form=form, pagina='', graph_data=graph_data,
                            graph_data2=graph_data2, graph_data3=graph_data3)
 
 

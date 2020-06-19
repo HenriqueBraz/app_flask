@@ -75,6 +75,7 @@ class ClientForm(FlaskForm):
                                   choices=[('sim', 'Sim'), ('nao', 'Não')])
     certificado_digital = SelectField("folha_pagamento", validators=[DataRequired()],
                                       choices=[('sim', 'Sim'), ('nao', 'Não')])
+    impugnacao = StringField("impugnacao", render_kw={"placeholder": 'Impugnação'})
     observacoes = TextAreaField(u'observacoes', [validators.length(min=0, max=200)])
 
 
