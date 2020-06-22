@@ -32,11 +32,17 @@ class GraficoModel(object):
     def get_tributacao(self, tributacao1, tributacao2, tributacao3, user_id):
         result = []
         try:
-            self.cur.execute("SELECT COUNT(e.id) FROM empresas e  WHERE e.tributacao = '{}' AND e.id_responsavel = '{}' AND e.status = 'Ativo';".format(tributacao1, user_id))
+            self.cur.execute(
+                "SELECT COUNT(e.id) FROM empresas e  WHERE e.tributacao = '{}' AND e.id_responsavel = '{}' AND e.status = 'Ativo';".format(
+                    tributacao1, user_id))
             result += self.cur.fetchone()
-            self.cur.execute("SELECT COUNT(e.id) FROM empresas e  WHERE e.tributacao = '{}' AND e.id_responsavel = '{}' AND e.status = 'Ativo';".format(tributacao2, user_id))
+            self.cur.execute(
+                "SELECT COUNT(e.id) FROM empresas e  WHERE e.tributacao = '{}' AND e.id_responsavel = '{}' AND e.status = 'Ativo';".format(
+                    tributacao2, user_id))
             result += self.cur.fetchone()
-            self.cur.execute("SELECT COUNT(e.id) FROM empresas e  WHERE e.tributacao = '{}' AND e.id_responsavel = '{}' AND e.status = 'Ativo';".format(tributacao3, user_id))
+            self.cur.execute(
+                "SELECT COUNT(e.id) FROM empresas e  WHERE e.tributacao = '{}' AND e.id_responsavel = '{}' AND e.status = 'Ativo';".format(
+                    tributacao3, user_id))
             result += self.cur.fetchone()
             return result
         except Exception as e:
@@ -45,9 +51,13 @@ class GraficoModel(object):
     def get_ocorrencias(self, user_name):
         result = []
         try:
-            self.cur.execute("SELECT COUNT(eo.id_empresa) FROM empresas_ocorrencias eo  WHERE eo.responsavel = '{}' AND eo.status = 'Aberto';".format(user_name))
+            self.cur.execute(
+                "SELECT COUNT(eo.id_empresa) FROM empresas_ocorrencias eo  WHERE eo.responsavel = '{}' AND eo.status = 'Aberto';".format(
+                    user_name))
             result += self.cur.fetchone()
-            self.cur.execute("SELECT COUNT(eo.id_empresa) FROM empresas_ocorrencias eo  WHERE eo.responsavel = '{}' AND eo.status = 'Fechado';".format(user_name))
+            self.cur.execute(
+                "SELECT COUNT(eo.id_empresa) FROM empresas_ocorrencias eo  WHERE eo.responsavel = '{}' AND eo.status = 'Fechado';".format(
+                    user_name))
             result += self.cur.fetchone()
             return result
         except Exception as e:
@@ -67,3 +77,17 @@ class GraficoModel(object):
             return result
         except Exception as e:
             logging.error('Erro em  GraficoModel, método get_pizza: ' + str(e) + '\n')
+
+    def get_numero_empresas(self, user_id):
+        result = []
+        try:
+            self.cur.execute(
+                "SELECT COUNT(e.id) FROM empresas e  WHERE  e.id_responsavel = '{}' AND e.status = 'Ativo';".format(
+                    user_id))
+            result += self.cur.fetchone()
+            self.cur.execute(
+                "SELECT COUNT(e.id) FROM empresas e  WHERE   e.status = 'Ativo';".format(user_id))
+            result += self.cur.fetchone()
+            return result
+        except Exception as e:
+            logging.error('Erro em  GraficoModel, método get_numero_empresas: ' + str(e) + '\n')

@@ -5,25 +5,48 @@
 {% endblock %}
 
 {% block content %}
+
+
 <div class="row">
-    <div class="col-sm">
+    <div class="col-md-8 col-lg-3">
+        <div class="card card-body">
+            <div class="row">
+                <!-- Column -->
+                <div class="col pr-0 align-self-center">
+                    <h2 class="font-weight-light mb-0 ">{{numero_clientes}}</h2>
+                    <h6 class="text-muted">Clientes</h6>
+                </div>
+                <!-- Column -->
+                <div class="col text-right align-self-center">
+                    <div data-label={{porcentagem}}% class="css-bar mb-0 css-bar-info css-bar-{{porcentagem}}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row text-center">
+    <div class="col pr-0 align-self-center">
         <embed type="image/svg+xml" src={{graph_data2|safe}} style='max-width:500px'/>
     </div>
-    <div class="col-sm">
+    <div class="col pr-0 align-self-center">
         <embed type="image/svg+xml" src={{graph_data|safe}} style='max-width:500px'/>
     </div>
 </div>
-<br> <br>
-<div class="row">
-    <div class="col-sm">
+<br>
+<div class="row text-center">
+    <div class="col pr-0 align-self-center">
         <embed type="image/svg+xml" src={{graph_data3|safe}} style='max-width:500px'/>
     </div>
+    <div class="col-sm">
+
+    </div>
 </div>
-<br><br>
+<br>
 
 {% endblock %}
 
 {% block sidebar %}
 {% include "base/sidebar.html" %}
-<br><br><br>
 {% endblock %}
