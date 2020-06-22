@@ -27,7 +27,6 @@ def index():
     email = session.get('email')
     print(user_name)
     print(email)
-    print(#)
     form = login_form.LoginForm()
     db = GraficoModel()
     now = datetime.now()
