@@ -3,8 +3,6 @@ venv/
 novorumo.sock
 project.ini
 app/uploads
-/__pycache__/
-*/__pycache__/
 config.json
 *.log
 *.pot
