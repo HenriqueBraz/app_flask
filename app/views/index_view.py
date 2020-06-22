@@ -1,3 +1,5 @@
+from pygal.style import CleanStyle, DarkSolarizedStyle, LightColorizedStyle
+
 from app.models.graficos_model import GraficoModel
 from werkzeug.utils import redirect
 from app import app
@@ -22,11 +24,22 @@ def favicon():
 def index():
     user_id = session.get('user_id')
     user_name = session.get('username')
-    form = login_form.LoginForm()
     email = session.get('email')
+    print(user_name)
+    print(email)
+    form = login_form.LoginForm()
     db = GraficoModel()
     now = datetime.now()
     ano = now.strftime('%Y')
+
+    result = db.get_numero_empresas(user_id)
+    numero_clientes = result[0]
+    if not numero_clientes:
+        numero_clientes = "0"
+
+    total_clientes = result[1]
+    porcentagem = int((numero_clientes * 100) / total_clientes)
+    porcentagem = porcentagem - (porcentagem % 10)
 
     result = db.get_tributacao('SIMPLES NACIONAL', 'PRESUMIDO', 'REAL', user_id)
     chart = pygal.Pie()
@@ -55,8 +68,9 @@ def index():
     chart.add('Não Contínuo', result2)
     graph_data3 = chart.render_data_uri()
 
-    return render_template('index/index.html', user_name=user_name, email=email, form=form, pagina='', graph_data=graph_data,
-                           graph_data2=graph_data2, graph_data3=graph_data3)
+    return render_template('index/index.html', user_name=user_name, email=email, form=form, graph_data=graph_data,
+                           graph_data2=graph_data2, graph_data3=graph_data3, numero_clientes=numero_clientes,
+                           porcentagem=porcentagem)
 
 
 @app.route('/ping')
