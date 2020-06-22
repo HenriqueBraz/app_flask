@@ -1,4 +1,4 @@
-from pygal.style import CleanStyle, DarkSolarizedStyle, LightColorizedStyle
+from pygal.style import CleanStyle, DarkSolarizedStyle, LightColorizedStyle, LightStyle
 
 from app.models.graficos_model import GraficoModel
 from werkzeug.utils import redirect
@@ -27,6 +27,7 @@ def index():
     email = session.get('email')
     print(user_name)
     print(email)
+    print(user_id)
     form = login_form.LoginForm()
     db = GraficoModel()
     now = datetime.now()
@@ -42,7 +43,7 @@ def index():
     porcentagem = porcentagem - (porcentagem % 10)
 
     result = db.get_tributacao('SIMPLES NACIONAL', 'PRESUMIDO', 'REAL', user_id)
-    chart = pygal.Pie()
+    chart = pygal.Pie(style=CleanStyle)
     chart.force_uri_protocol = 'http'
     chart.title = 'Faturamento por Cliente'
     chart.add('Simples Nacional', result[0])
@@ -51,7 +52,7 @@ def index():
     graph_data = chart.render_data_uri()
 
     result = db.get_ocorrencias(user_name)
-    chart = pygal.Bar()
+    chart = pygal.Bar(style=CleanStyle)
     chart.force_uri_protocol = 'http'
     chart.title = 'Ocorrências em Aberto / Fechado'
     chart.add('Aberto', result[0])
@@ -60,7 +61,7 @@ def index():
 
     result1 = db.get_cobrancas('Continuo')
     result2 = db.get_cobrancas('Nao_Continuo')
-    chart = pygal.Bar()
+    chart = pygal.Bar(style=CleanStyle)
     chart.force_uri_protocol = 'http'
     chart.title = 'Cobranças, ano ' + str(ano) + ':'
     chart.x_labels = ('Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez')
@@ -68,7 +69,7 @@ def index():
     chart.add('Não Contínuo', result2)
     graph_data3 = chart.render_data_uri()
 
-    return render_template('index/index.html', user_name=user_name, email=email, form=form, graph_data=graph_data,
+    return render_template('index/index.html', user_id=user_id, user_name=user_name, email=email, form=form, graph_data=graph_data,
                            graph_data2=graph_data2, graph_data3=graph_data3, numero_clientes=numero_clientes,
                            porcentagem=porcentagem)
 

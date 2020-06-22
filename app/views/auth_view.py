@@ -90,6 +90,12 @@ def login(flag):
 
 @app.before_request
 def before_request():
+    try:
+        g.user = session['username']
+        g.id = session['user_id']
+        g.email = session['email']
+    except Exception:
+        pass
     now = datetime.datetime.now()
     try:
         last_active = session['last_active']
