@@ -6,7 +6,6 @@ from wtforms.validators import DataRequired
 class OccurrencesRegisterForm(FlaskForm):
     cliente = SelectField("cliente", coerce=int, render_kw={'readonly': True}, choices=[])
     observacoes = TextAreaField(u'observacoes', [validators.length(min=0, max=500, message='O campo precisa ser menor que 500 caracteres')])
-    status = SelectField("cliente", coerce=int, render_kw={'readonly': True}, choices=[])
 
 class OccurrencesViewForm(FlaskForm):
     cliente = StringField("cliente", render_kw={'readonly': True}, validators=[DataRequired()])

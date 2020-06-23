@@ -20,7 +20,6 @@ def listar_ocorrencias_lp():
 def listar_ocorrencias_sn():
     db = OcorrenciaModel()
     lista_ocorrencias = db.get_occurrences_sn()
-    print(lista_ocorrencias)
     flag = 1
     return render_template('ocorrencias/listar_ocorrencias_sn.html', flag=flag, result=lista_ocorrencias,
                            pagina='Listar Ocorrencias')
@@ -35,10 +34,9 @@ def listar_ocorrencias_r():
                            pagina='Listar Ocorrencias')
 
 
-@app.route('/ver_ocorrencia<int:id>/<int:id_ocorrencia>/<int:flag>', methods=["GET", "POST"])
-def ver_ocorrencia(id, id_ocorrencia, flag):
+@app.route('/ver_ocorrencia/<int:id_ocorrencia>/<int:flag>', methods=["GET", "POST"])
+def ver_ocorrencia(id_ocorrencia, flag):
     db = OcorrenciaModel()
-    print(id_ocorrencia)
     result = db.get_occurrence_edit(id_ocorrencia)
     form = occurrences_forms.OccurrencesViewForm(
         cliente=result[3],
@@ -75,8 +73,8 @@ def incluir_ocorrencia():
     return render_template('ocorrencias/incluir_ocorrencia.html', form=form, pagina='Incluir Ocorrencia')
 
 
-@app.route('/alterar_ocorrencia<int:id>/<int:id_ocorrencia>/<int:flag>', methods=["GET", "POST"])
-def alterar_ocorrencia(id, id_ocorrencia, flag):
+@app.route('/alterar_ocorrencia/<int:id_ocorrencia>/<int:flag>', methods=["GET", "POST"])
+def alterar_ocorrencia(id_ocorrencia, flag):
     db = OcorrenciaModel()
     result = db.get_occurrence_edit(id_ocorrencia)
     form = occurrences_forms.OccurrencesEditForm(
@@ -100,8 +98,8 @@ def alterar_ocorrencia(id, id_ocorrencia, flag):
     return render_template('ocorrencias/alterar_ocorrencia.html', flag=flag, form=form, pagina='Alterar Ocorrencia')
 
 
-@app.route('/excluir_ocorrencia<int:id>/<int:id_ocorrencia>,<int:flag>', methods=["GET", "POST"])
-def excluir_ocorrencia(id, id_ocorrencia, flag):
+@app.route('/excluir_ocorrencia/<int:id_ocorrencia>/<int:flag>', methods=["GET", "POST"])
+def excluir_ocorrencia(id_ocorrencia, flag):
     db = OcorrenciaModel()
     result = db.get_occurrence(id_ocorrencia)
     flag1 = 1

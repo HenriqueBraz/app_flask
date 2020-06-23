@@ -41,7 +41,7 @@ class OcorrenciaModel(object):
     def get_occurrences_lp(self):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.status, eo.id FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'PRESUMIDO' AND  e.status='Ativo;")
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.status, eo.id FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'PRESUMIDO' AND  e.status='Ativo';")
             result = self.cur.fetchall()
             return result
         except Exception as e:
