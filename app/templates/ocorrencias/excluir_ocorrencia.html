@@ -29,12 +29,12 @@
 {% endif %}
 {% endwith %}
 
-<div class="descadastro">
-    <table class = "table"><tbody>
 
-    {% if flag1 %}
-    {% if result %}
-    <h1>A seguinte ocorrência será excluída:</h1><br><br>
+{% if flag1 %}
+{% if result %}
+<h1>A seguinte ocorrência será excluída:</h1><br><br>
+<div class="card" id="descadastro">
+    <table class = "table"><tbody>
 
     {% else %}
     <h1></h1><br><br>
@@ -60,7 +60,7 @@
     </tr>
 
     </tbody></table>
-
+    </div>
     <div class ="frase_botao">
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
@@ -89,12 +89,12 @@
         <td> {{''}}</td>
     </tr>
     </tbody></table>
+    </div>
     <div class ="frase_botao">
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_sn') }}" ><font color=white>voltar</font></a></button>
         </form>
-    </div>
     {% endif %}
 
 
