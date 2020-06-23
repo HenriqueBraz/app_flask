@@ -100,7 +100,6 @@ def editar_cliente(id):
     db = ClienteModel()
     result_a = db.get_nj_porte_nome(id)
     result = db.find_one_id(id)
-    print(result)
     form = client_form.ClientForm(
         nome_responsavel=result_a[2],
         empresa=result[5],

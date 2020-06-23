@@ -32,7 +32,7 @@ class OcorrenciaModel(object):
     def get_occurrences_sn(self):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'SIMPLES NACIONAL' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.status, eo.id FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'SIMPLES NACIONAL' AND  e.status='Ativo';")
             result = self.cur.fetchall()
             return result
         except Exception as e:
@@ -41,7 +41,7 @@ class OcorrenciaModel(object):
     def get_occurrences_lp(self):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'PRESUMIDO' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.status, eo.id FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'PRESUMIDO' AND  e.status='Ativo;")
             result = self.cur.fetchall()
             return result
         except Exception as e:
@@ -50,7 +50,7 @@ class OcorrenciaModel(object):
     def get_occurrences_r(self):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.descritivo FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'REAL' AND  e.status='Ativo' AND  eo.status = 'Aberto';")
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.status, eo.id FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'REAL' AND  e.status='Ativo';")
             result = self.cur.fetchall()
             return result
         except Exception as e:
@@ -69,35 +69,33 @@ class OcorrenciaModel(object):
         except Exception as e:
             logging.error('Erro em  OcorrenciaModel, método insert_ocorrencia(: ' + str(e) + '\n')
 
-    def get_occurrence(self, id):
+    def get_occurrence(self, id_ocorrencia):
         try:
             self.cur.execute(
                 "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.descritivo, eo.id FROM empresas e "
-                "INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND eo.id_empresa = '{}';".format(
-                    id))
+                "INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND eo.id = '{}';".format(id_ocorrencia))
             result = self.cur.fetchone()
             return result
         except Exception as e:
             logging.error('Erro em  EmpresaModel, método get_occurrence: ' + str(e) + '\n')
 
-    def get_occurrence_edit(self, id):
+    def get_occurrence_edit(self, id_ocorrencia):
         try:
             self.cur.execute(
-                "SELECT eo.id_empresa, eo.responsavel, eo.descritivo, e.empresa, eo.id  FROM empresas e INNER JOIN empresas_ocorrencias "
-                "eo WHERE e.id=eo.id_empresa AND eo.id_empresa = '{}';".format(
-                    id))
+                "SELECT eo.id_empresa, eo.responsavel, eo.descritivo, e.empresa, eo.id, eo.status  FROM empresas e INNER JOIN empresas_ocorrencias "
+                "eo WHERE eo.id = '{}';".format(id_ocorrencia))
             result = self.cur.fetchone()
             return result
         except Exception as e:
             logging.error('Erro em  OcorrenciaModel, método get_occurrence: ' + str(e) + '\n')
 
-    def update_occurrence(self, id_cliente, responsavel, observacoes, id_ocorrencia):
+    def update_occurrence(self, id_cliente, responsavel, observacoes, id_ocorrencia, status):
         try:
             now = datetime.now()
             data = now.strftime('%Y-%m-%d %H:%M:%S')
             self.cur.execute(
-                "UPDATE empresas_ocorrencias SET id_empresa = '{}', responsavel = '{}', descritivo = '{}', updated = '{}' WHERE empresas_ocorrencias.id = {}".format(
-                    id_cliente, responsavel, observacoes,  data,  id_ocorrencia))
+                "UPDATE empresas_ocorrencias SET id_empresa = '{}', responsavel = '{}', descritivo = '{}', updated = '{}', status = '{}' WHERE empresas_ocorrencias.id = {}".format(
+                    id_cliente, responsavel, observacoes,  data, status, id_ocorrencia))
             self.con.commit()
             return True
 

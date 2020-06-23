@@ -20,6 +20,7 @@ def listar_ocorrencias_lp():
 def listar_ocorrencias_sn():
     db = OcorrenciaModel()
     lista_ocorrencias = db.get_occurrences_sn()
+    print(lista_ocorrencias)
     flag = 1
     return render_template('ocorrencias/listar_ocorrencias_sn.html', flag=flag, result=lista_ocorrencias,
                            pagina='Listar Ocorrencias')
@@ -34,11 +35,18 @@ def listar_ocorrencias_r():
                            pagina='Listar Ocorrencias')
 
 
-@app.route('/ver_ocorrencia<int:id><int:flag>', methods=["GET", "POST"])
-def ver_ocorrencia(id, flag):
+@app.route('/ver_ocorrencia<int:id>/<int:id_ocorrencia>/<int:flag>', methods=["GET", "POST"])
+def ver_ocorrencia(id, id_ocorrencia, flag):
     db = OcorrenciaModel()
-    result = db.get_occurrence(id)
-    return render_template('ocorrencias/ver_ocorrencia.html', result=result, flag=flag, pagina='Ver Ocorrencia')
+    print(id_ocorrencia)
+    result = db.get_occurrence_edit(id_ocorrencia)
+    form = occurrences_forms.OccurrencesViewForm(
+        cliente=result[3],
+        observacoes=result[2],
+        responsavel=result[1],
+        status=result[5],
+    )
+    return render_template('ocorrencias/ver_ocorrencia.html', flag=flag, form=form, pagina='Alterar Ocorrencia')
 
 
 @app.route('/incluir_ocorrencia', methods=["GET", "POST"])
@@ -67,22 +75,23 @@ def incluir_ocorrencia():
     return render_template('ocorrencias/incluir_ocorrencia.html', form=form, pagina='Incluir Ocorrencia')
 
 
-@app.route('/alterar_ocorrencia<int:id><int:flag>', methods=["GET", "POST"])
-def alterar_ocorrencia(id, flag):
+@app.route('/alterar_ocorrencia<int:id>/<int:id_ocorrencia>/<int:flag>', methods=["GET", "POST"])
+def alterar_ocorrencia(id, id_ocorrencia, flag):
     db = OcorrenciaModel()
-    result = db.get_occurrence_edit(id)
-    id_ocorrencia = result[4]
+    result = db.get_occurrence_edit(id_ocorrencia)
     form = occurrences_forms.OccurrencesEditForm(
         cliente=result[3],
         observacoes=result[2],
         responsavel=result[1],
+        status=result[5]
     )
     if form.validate_on_submit():
         id_cliente = result[0]
         responsavel = session.get('username')
         observacoes = request.form['observacoes']
+        status = request.form['status']
 
-        if db.update_occurrence(id_cliente, responsavel, observacoes, id_ocorrencia):
+        if db.update_occurrence(id_cliente, responsavel, observacoes, id_ocorrencia, status):
             flash('Alterações salvas com sucesso!')
 
         else:
@@ -91,10 +100,10 @@ def alterar_ocorrencia(id, flag):
     return render_template('ocorrencias/alterar_ocorrencia.html', flag=flag, form=form, pagina='Alterar Ocorrencia')
 
 
-@app.route('/excluir_ocorrencia<int:id><int:flag>', methods=["GET", "POST"])
-def excluir_ocorrencia(id, flag):
+@app.route('/excluir_ocorrencia<int:id>/<int:id_ocorrencia>,<int:flag>', methods=["GET", "POST"])
+def excluir_ocorrencia(id, id_ocorrencia, flag):
     db = OcorrenciaModel()
-    result = db.get_occurrence(id)
+    result = db.get_occurrence(id_ocorrencia)
     flag1 = 1
     if request.method == 'POST':
         if request.form['submit_button'] == 'Excluir ocorrencia':

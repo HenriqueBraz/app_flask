@@ -1,13 +1,13 @@
 {% extends 'base/base.html' %}
 
-{% block page %}
+{% block page%}
 
-{% if  flag == 1  %}
+{% if flag == 1 %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Ocorrências por Cliente</a></li>
-<li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples Nacional</a></li>
-{% elif  flag == 0  %}
-<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_sn') }}">Listar Ocorrências - Simples nacional</a></li>
+{% elif flag == 0 %}
+<li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Ocorrências por Cliente</a></li>
 <li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_lp') }}">Listar Ocorrências - Lucro Presumido</a></li>
 {% else %}
@@ -16,9 +16,7 @@
 <li class="breadcrumb-item"><a href="{{ url_for('listar_ocorrencias_r') }}">Listar Ocorrências - Lucro Real</a></li>
 {% endif %}
 
-<li class="breadcrumb-item active" aria-current="page">Ver ocorrência</li>
-
-
+<li class="breadcrumb-item active" aria-current="page">Ver Ocorrência</li>
 {% endblock %}
 
 
@@ -33,52 +31,65 @@
 {% endwith %}
 
 <br>
-<table id="table_id" class="display">
-    <thead>
-    <tr>
-        <th>Empresa</th>
-        <th>CNPJ</th>
-        <th>CCM</th>
-        <th>Data</th>
-        <th>Responsável</th>
-        <th>Ocorrência</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% if result %}
-    <tr>
-        <td> {{ result[1] }} </td>
-        <td> {{ result[2] }} </td>
-        <td> {{ result[3] }} </td>
-        <td> {{ result[4] }} </td>
-        <td> {{ result[5] }} </td>
-        <td> {{ result[6] }} </td>
-    </tr>
-    {% endif %}
-    </tbody>
-</table>
+<div class="bloco">
 
-<br><br>
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="card">
+            <div class="card-header">
+                Ver Ocorrência
+            </div>
+            <br>
+            <div class="row">
+                <label class="control-label col-4 text-right">Cliente</label>
+                <div class="col-4">
+                    {{form.cliente(class="form-control")}} {{form.errors.cliente }}
+                </div>
+            </div>
+            <br>
+            <br><br>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-4 text-right">Observações</label>
+                    <div class="col-4">
+                        {{form.observacoes(class="form-control")}} {{form.errors.observacoes}}
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-4 text-right">Status</label>
+                    <div class="col-2">
+                        {{form.status(class="form-control")}} {{form.errors.status}}
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+</div>
+</br>
 <div class="form-group">
     <div class="row">
-        <div class="col-11"></div>
-        {% if flag == 1 %}
-        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_sn') }}" ><font color=white>voltar</font></a></button>
-        {% elif flag == 0 %}
-        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_lp') }}" ><font color=white>voltar</font></a></button>
-        {% else %}
-        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_r') }}" ><font color=white>voltar</font></a></button>
-        {% endif %}
+        <div class="col-9"></div>
+        <div class="col-3">
+            {% if flag == 1 %}
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_sn') }}" ><font color=white>voltar</font></a></button>
+            {% elif flag == 0 %}
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_lp') }}" ><font color=white>voltar</font></a></button>
+            {% else %}
+            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_r') }}" ><font color=white>voltar</font></a></button>
+            {% endif %}
+        </div>
     </div>
 </div>
+
+</div>
+</form>
 </div>
 
+</div>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-<script type=text/javascript src="{{url_for('static', filename='js/scripts.js') }}"></script>
-
-
-
-
+{% if messages %}
+{% endif %}
 {% endblock %}

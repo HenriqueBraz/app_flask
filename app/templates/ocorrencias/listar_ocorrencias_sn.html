@@ -27,7 +27,7 @@
         <th>CCM</th>
         <th>Data</th>
         <th>Responsável</th>
-        <th>Ocorrência</th>
+        <th>Status</th>
         <th></th>
     </tr>
     </thead>
@@ -47,9 +47,9 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{{ url_for('ver_ocorrencia', id = row[0], flag=flag) }}">Ver</a>
-                <a class="dropdown-item" href="{{ url_for('alterar_ocorrencia', id = row[0], flag=flag) }}">Alterar</a>
-                <a class="dropdown-item" href="{{ url_for('excluir_ocorrencia', id = row[0], flag=flag) }}">Excluir</a>
+                <a class="dropdown-item" href="{{ url_for('ver_ocorrencia', id = row[0], id_ocorrencia = row[7], flag=flag) }}">Ver</a>
+                <a class="dropdown-item" href="{{ url_for('alterar_ocorrencia', id = row[0], id_ocorrencia = row[7], flag=flag) }}">Alterar</a>
+                <a class="dropdown-item" href="{{ url_for('excluir_ocorrencia', id = row[0], id_ocorrencia = row[7], flag=flag) }}">Excluir</a>
             </div>
         </div>
         </td>

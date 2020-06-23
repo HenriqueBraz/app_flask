@@ -1,5 +1,4 @@
-from pygal.style import CleanStyle, DarkSolarizedStyle, LightColorizedStyle, LightStyle
-
+from pygal.style import CleanStyle
 from app.models.graficos_model import GraficoModel
 from werkzeug.utils import redirect
 from app import app
@@ -25,9 +24,6 @@ def index():
     user_id = session.get('user_id')
     user_name = session.get('username')
     email = session.get('email')
-    print(user_name)
-    print(email)
-    print(user_id)
     form = login_form.LoginForm()
     db = GraficoModel()
     now = datetime.now()
@@ -69,7 +65,7 @@ def index():
     chart.add('Não Contínuo', result2)
     graph_data3 = chart.render_data_uri()
 
-    return render_template('index/index.html', user_id=user_id, user_name=user_name, email=email, form=form, graph_data=graph_data,
+    return render_template('index/index.html', form=form, graph_data=graph_data,
                            graph_data2=graph_data2, graph_data3=graph_data3, numero_clientes=numero_clientes,
                            porcentagem=porcentagem)
 
