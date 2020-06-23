@@ -9,8 +9,9 @@ from app.models.ocorrencia_model import OcorrenciaModel
 
 @app.route('/listar_ocorrencias_lp', methods=["GET"])
 def listar_ocorrencias_lp():
+    user_id = session['user_id']
     db = OcorrenciaModel()
-    lista_ocorrencias = db.get_occurrences_lp()
+    lista_ocorrencias = db.get_occurrences_lp(user_id)
     flag = 0
     return render_template('ocorrencias/listar_ocorrencias_lp.html', flag=flag, result=lista_ocorrencias,
                            pagina='Listar Ocorrencias')
@@ -18,8 +19,9 @@ def listar_ocorrencias_lp():
 
 @app.route('/listar_ocorrencias_sn', methods=["GET"])
 def listar_ocorrencias_sn():
+    user_id = session['user_id']
     db = OcorrenciaModel()
-    lista_ocorrencias = db.get_occurrences_sn()
+    lista_ocorrencias = db.get_occurrences_sn(user_id)
     flag = 1
     return render_template('ocorrencias/listar_ocorrencias_sn.html', flag=flag, result=lista_ocorrencias,
                            pagina='Listar Ocorrencias')
@@ -27,8 +29,9 @@ def listar_ocorrencias_sn():
 
 @app.route('/listar_ocorrencias_r', methods=["GET"])
 def listar_ocorrencias_r():
+    user_id = session['user_id']
     db = OcorrenciaModel()
-    lista_ocorrencias = db.get_occurrences_r()
+    lista_ocorrencias = db.get_occurrences_r(user_id)
     flag = 2
     return render_template('ocorrencias/listar_ocorrencias_r.html', flag=flag, result=lista_ocorrencias,
                            pagina='Listar Ocorrencias')
@@ -41,7 +44,6 @@ def ver_ocorrencia(id_ocorrencia, flag):
     form = occurrences_forms.OccurrencesViewForm(
         cliente=result[3],
         observacoes=result[2],
-        responsavel=result[1],
         status=result[5],
     )
     return render_template('ocorrencias/ver_ocorrencia.html', flag=flag, form=form, pagina='Alterar Ocorrencia')
@@ -58,7 +60,7 @@ def incluir_ocorrencia():
     if form.validate_on_submit():
         id_cliente = request.form['cliente']
         observacoes = request.form['observacoes']
-        responsavel = session.get('username')
+        responsavel = session.get('user_id')
 
         if db.insert_occurrence(id_cliente, responsavel, observacoes):
 
@@ -85,7 +87,7 @@ def alterar_ocorrencia(id_ocorrencia, flag):
     )
     if form.validate_on_submit():
         id_cliente = result[0]
-        responsavel = session.get('username')
+        responsavel = session.get('user_id')
         observacoes = request.form['observacoes']
         status = request.form['status']
 

@@ -29,28 +29,28 @@ class OcorrenciaModel(object):
         self.cur.close()
         self.con.close()
 
-    def get_occurrences_sn(self):
+    def get_occurrences_sn(self, user_id):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.status, eo.id FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'SIMPLES NACIONAL' AND  e.status='Ativo';")
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), u.nome, eo.status, eo.id FROM usuarios u INNER JOIN empresas e ON u.id=e.id_responsavel  INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'SIMPLES NACIONAL' AND eo.responsavel = {}  AND e.status='Ativo';".format(user_id))
             result = self.cur.fetchall()
             return result
         except Exception as e:
             logging.error('Erro em  OcorrenciaModel, método get_occurrences_sn: ' + str(e) + '\n')
 
-    def get_occurrences_lp(self):
+    def get_occurrences_lp(self, user_id):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.status, eo.id FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'PRESUMIDO' AND  e.status='Ativo';")
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), u.nome, eo.status, eo.id FROM usuarios u INNER JOIN empresas e ON u.id=e.id_responsavel  INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'PRESUMIDO' AND eo.responsavel = {}  AND e.status='Ativo';".format(user_id))
             result = self.cur.fetchall()
             return result
         except Exception as e:
             logging.error('Erro em  OcorrenciaModel, método get_occurrences_lp: ' + str(e) + '\n')
 
-    def get_occurrences_r(self):
+    def get_occurrences_r(self, user_id):
         try:
             self.cur.execute(
-                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), eo.responsavel, eo.status, eo.id FROM empresas e INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'REAL' AND  e.status='Ativo';")
+                "SELECT e.id, e.empresa, e.cnpj, e.ccm, DATE_FORMAT(eo.updated, '%d/%m/%Y  %H:%m'), u.nome, eo.status, eo.id FROM usuarios u INNER JOIN empresas e ON u.id=e.id_responsavel  INNER JOIN empresas_ocorrencias eo WHERE e.id=eo.id_empresa AND e.tributacao = 'REAL' AND eo.responsavel = {}  AND e.status='Ativo';".format(user_id))
             result = self.cur.fetchall()
             return result
         except Exception as e:
@@ -83,7 +83,7 @@ class OcorrenciaModel(object):
         try:
             self.cur.execute(
                 "SELECT eo.id_empresa, eo.responsavel, eo.descritivo, e.empresa, eo.id, eo.status  FROM empresas e INNER JOIN empresas_ocorrencias "
-                "eo WHERE eo.id = '{}';".format(id_ocorrencia))
+                "eo WHERE eo.id = '{}' AND eo.id_empresa=e.id;".format(id_ocorrencia))
             result = self.cur.fetchone()
             return result
         except Exception as e:
