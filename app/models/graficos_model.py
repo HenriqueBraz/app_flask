@@ -48,16 +48,16 @@ class GraficoModel(object):
         except Exception as e:
             logging.error('Erro em  GraficoModel, método get_pizza: ' + str(e) + '\n')
 
-    def get_ocorrencias(self, user_name):
+    def get_ocorrencias(self, user_id):
         result = []
         try:
             self.cur.execute(
                 "SELECT COUNT(eo.id_empresa) FROM empresas_ocorrencias eo  WHERE eo.responsavel = '{}' AND eo.status = 'Aberto';".format(
-                    user_name))
+                    user_id))
             result += self.cur.fetchone()
             self.cur.execute(
                 "SELECT COUNT(eo.id_empresa) FROM empresas_ocorrencias eo  WHERE eo.responsavel = '{}' AND eo.status = 'Fechado';".format(
-                    user_name))
+                    user_id))
             result += self.cur.fetchone()
             return result
         except Exception as e:

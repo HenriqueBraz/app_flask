@@ -60,45 +60,46 @@
     </tr>
 
     </tbody></table>
-    </div>
-    <div class ="frase_botao">
-        <form method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_sn') }}" ><font color=white>voltar</font></a></button>
-            <input class="btn btn-primary" type="submit" name="submit_button" value="Excluir ocorrencia">
-        </form>
-    </div>
-
-    {% else %}
-    <h1></h1><br><br>
-    <tr>
-        <th>Empresa</th>
-        <th>CNPJ</th>
-        <th>CCM</th>
-        <th>Data</th>
-        <th>Responsável</th>
-        <th>Ocorrência</th>
-    </tr>
-
-    <tr>
-        <td> {{''}}</td>
-        <td> {{''}}</td>
-        <td> {{''}}</td>
-        <td> {{''}}</td>
-        <td> {{''}}</td>
-        <td> {{''}}</td>
-    </tr>
-    </tbody></table>
-    </div>
-    <div class ="frase_botao">
-        <form method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_sn') }}" ><font color=white>voltar</font></a></button>
-        </form>
-    {% endif %}
-
-
 </div>
+<div class ="frase_botao">
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_sn') }}" ><font color=white>voltar</font></a></button>
+        <input class="btn btn-primary" type="submit" name="submit_button" value="Excluir ocorrencia">
+    </form>
+</div>
+
+{% else %}
+<h1></h1><br><br>
+<div class="card" id="">
+    <table class = "table"><tbody>
+<tr>
+    <th>Empresa</th>
+    <th>CNPJ</th>
+    <th>CCM</th>
+    <th>Data</th>
+    <th>Responsável</th>
+    <th>Ocorrência</th>
+</tr>
+
+<tr>
+    <td> {{''}}</td>
+    <td> {{''}}</td>
+    <td> {{''}}</td>
+    <td> {{''}}</td>
+    <td> {{''}}</td>
+    <td> {{''}}</td>
+</tr>
+</tbody></table>
+</div>
+<div class ="frase_botao">
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_ocorrencias_sn') }}" ><font color=white>voltar</font></a></button>
+    </form>
+</div>
+{% endif %}
+
 <br><br><br><br><br><br>
 <br><br><br><br><br>
 

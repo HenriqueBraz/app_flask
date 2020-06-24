@@ -3,7 +3,7 @@ $(document).ready( function () {
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese-Brasil.json"
         }
-    } );
+    });
 } );
 
 
@@ -75,6 +75,14 @@ $(document).ready( function () {
             }
         }));
         $(this).children().select();
+    });
+
+    $('#data_financeiro').datepicker({
+    monthNames: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julio", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
+    minDate: "0",
+    dateFormat: 'dd/mm/yy',
+    dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb" ],
+    locales: 'pt-br',
     });
 
 });

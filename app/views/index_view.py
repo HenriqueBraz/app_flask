@@ -47,7 +47,8 @@ def index():
     chart.add('Lucro Real', result[2])
     graph_data = chart.render_data_uri()
 
-    result = db.get_ocorrencias(user_name)
+    result = db.get_ocorrencias(user_id)
+    print(result)
     chart = pygal.Bar(style=CleanStyle)
     chart.force_uri_protocol = 'http'
     chart.title = 'Ocorrências em Aberto / Fechado'
