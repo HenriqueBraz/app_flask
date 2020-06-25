@@ -77,6 +77,7 @@ $(document).ready( function () {
         $(this).children().select();
     });
 
+
     $('#data_financeiro').datepicker({
     monthNames: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julio", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
     minDate: "0",

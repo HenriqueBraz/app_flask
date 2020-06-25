@@ -51,9 +51,10 @@ def index():
     print(result)
     chart = pygal.Bar(style=CleanStyle)
     chart.force_uri_protocol = 'http'
-    chart.title = 'Ocorrências em Aberto / Fechado'
+    chart.title = 'Ocorrências em Aberto / Fechado / Andamento'
     chart.add('Aberto', result[0])
     chart.add('Fechado', result[1])
+    chart.add('Andamento', result[2])
     graph_data2 = chart.render_data_uri()
 
     result1 = db.get_cobrancas('Continuo')

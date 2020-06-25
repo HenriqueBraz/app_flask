@@ -59,6 +59,10 @@ class GraficoModel(object):
                 "SELECT COUNT(eo.id_empresa) FROM empresas_ocorrencias eo  WHERE eo.responsavel = '{}' AND eo.status = 'Fechado';".format(
                     user_id))
             result += self.cur.fetchone()
+            self.cur.execute(
+                "SELECT COUNT(eo.id_empresa) FROM empresas_ocorrencias eo  WHERE eo.responsavel = '{}' AND eo.status = 'Andamento';".format(
+                    user_id))
+            result += self.cur.fetchone()
             return result
         except Exception as e:
             logging.error('Erro em  GraficoModel, método get_pizza: ' + str(e) + '\n')
