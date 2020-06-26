@@ -113,10 +113,12 @@
                             </a>
                         </li>
                         <li class="sidebar-item" title="Cadastrar novo usuario">
+                            {% if g.group == "Administrador" %}
                             <a href="{{ url_for('register') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
                                 <span class="hide-menu">Cadastrar novo usuario</span>
                             </a>
+                            {% endif %}
                         </li>
                     </ul>
                 </li>

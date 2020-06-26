@@ -49,7 +49,9 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="{{ url_for('ver_ocorrencia', id_ocorrencia=row[7], flag=flag) }}">Ver</a>
                 <a class="dropdown-item" href="{{ url_for('alterar_ocorrencia', id_ocorrencia=row[7], flag=flag) }}">Alterar</a>
+                {% if grupo == 'Administrador' %}
                 <a class="dropdown-item" href="{{ url_for('excluir_ocorrencia', id_ocorrencia=row[7], flag=flag) }}">Excluir</a>
+                {% endif %}
             </div>
         </div>
         </td>

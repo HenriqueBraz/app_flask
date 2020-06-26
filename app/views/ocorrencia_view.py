@@ -9,32 +9,32 @@ from app.models.ocorrencia_model import OcorrenciaModel
 
 @app.route('/listar_ocorrencias_lp', methods=["GET"])
 def listar_ocorrencias_lp():
+    grupo = session['group']
     user_id = session['user_id']
     db = OcorrenciaModel()
     lista_ocorrencias = db.get_occurrences_lp(user_id)
     flag = 0
-    return render_template('ocorrencias/listar_ocorrencias_lp.html', flag=flag, result=lista_ocorrencias,
-                           pagina='Listar Ocorrencias')
+    return render_template('ocorrencias/listar_ocorrencias_lp.html', flag=flag, result=lista_ocorrencias, grupo=grupo)
 
 
 @app.route('/listar_ocorrencias_sn', methods=["GET"])
 def listar_ocorrencias_sn():
+    grupo = session['group']
     user_id = session['user_id']
     db = OcorrenciaModel()
     lista_ocorrencias = db.get_occurrences_sn(user_id)
     flag = 1
-    return render_template('ocorrencias/listar_ocorrencias_sn.html', flag=flag, result=lista_ocorrencias,
-                           pagina='Listar Ocorrencias')
+    return render_template('ocorrencias/listar_ocorrencias_sn.html', flag=flag, result=lista_ocorrencias, grupo=grupo)
 
 
 @app.route('/listar_ocorrencias_r', methods=["GET"])
 def listar_ocorrencias_r():
+    grupo = session['group']
     user_id = session['user_id']
     db = OcorrenciaModel()
     lista_ocorrencias = db.get_occurrences_r(user_id)
     flag = 2
-    return render_template('ocorrencias/listar_ocorrencias_r.html', flag=flag, result=lista_ocorrencias,
-                           pagina='Listar Ocorrencias')
+    return render_template('ocorrencias/listar_ocorrencias_r.html', flag=flag, result=lista_ocorrencias, grupo=grupo)
 
 
 @app.route('/ver_ocorrencia/<int:id_ocorrencia>/<int:flag>', methods=["GET", "POST"])

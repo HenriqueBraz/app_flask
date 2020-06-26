@@ -51,7 +51,7 @@ def listar_cobrancas(id, nome, letra):
     db = FinanceiroModel()
     now = datetime.now()
     data = now.strftime('%m')
-    mes_ano = now.strftime('%m/%Y')
+    ano = now.strftime('%Y')
     mes = data
     form = finantial_forms.FinantialForms(
         mes=data
@@ -73,7 +73,7 @@ def listar_cobrancas(id, nome, letra):
     soma = soma1 + soma2
     soma = real_br_money_mask(soma)
     valor = 0
-    return render_template('/financeiro/listar_cobrancas.html', result=result, form=form, id=id, nome=nome, soma=soma, valor=valor, mes_ano=mes_ano, letra=letra)
+    return render_template('/financeiro/listar_cobrancas.html', result=result, form=form, id=id, nome=nome, soma=soma, valor=valor, ano=ano, mes=mes, letra=letra)
 
 
 @app.route('/incluir_cobranca/<int:id>/<string:nome>/<string:letra>', methods=["GET", "POST"])

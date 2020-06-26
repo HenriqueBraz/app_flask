@@ -1,4 +1,6 @@
-from pygal.style import CleanStyle
+from math import ceil
+
+from pygal.style import CleanStyle, Style
 from app.models.graficos_model import GraficoModel
 from werkzeug.utils import redirect
 from app import app
@@ -22,8 +24,6 @@ def favicon():
 @app.route('/index', methods=["GET"])
 def index():
     user_id = session.get('user_id')
-    user_name = session.get('username')
-    email = session.get('email')
     form = login_form.LoginForm()
     db = GraficoModel()
     now = datetime.now()
@@ -35,7 +35,7 @@ def index():
         numero_clientes = "0"
 
     total_clientes = result[1]
-    porcentagem = int((numero_clientes * 100) / total_clientes)
+    porcentagem = int(ceil((numero_clientes * 100) / total_clientes))
     porcentagem = porcentagem - (porcentagem % 10)
 
     result = db.get_tributacao('SIMPLES NACIONAL', 'PRESUMIDO', 'REAL', user_id)
@@ -48,13 +48,14 @@ def index():
     graph_data = chart.render_data_uri()
 
     result = db.get_ocorrencias(user_id)
-    print(result)
-    chart = pygal.Bar(style=CleanStyle)
+    custom_style = Style(
+        colors=('#9e0808', '#041e70', '#04753c'))
+    chart = pygal.Bar(style=custom_style)
     chart.force_uri_protocol = 'http'
     chart.title = 'Ocorrências em Aberto / Fechado / Andamento'
     chart.add('Aberto', result[0])
-    chart.add('Fechado', result[1])
     chart.add('Andamento', result[2])
+    chart.add('Fechado', result[1])
     graph_data2 = chart.render_data_uri()
 
     result1 = db.get_cobrancas('Continuo')
@@ -68,7 +69,7 @@ def index():
     graph_data3 = chart.render_data_uri()
 
     return render_template('index/index.html', form=form, graph_data=graph_data,
-                           graph_data2=graph_data2, graph_data3=graph_data3, numero_clientes=numero_clientes,
+                           graph_data2=graph_data2, graph_data3=graph_data3, total_clientes=total_clientes, numero_clientes=numero_clientes,
                            porcentagem=porcentagem)
 
 

@@ -49,7 +49,7 @@
     {% if result %}
     {% for row in result %}
     <tr>
-        <td align=center> {{ row[2] + '/' + mes_ano}} </td>
+        <td align=center> {{ row[2] + '/' + mes + '/' + ano}} </td>
         <td> {{ row[3] }} </td>
         <td> {{ 'R$ ' + row[4] }} </td>
         {% if row[6] == "Continuo"%}

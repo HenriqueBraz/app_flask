@@ -2,7 +2,6 @@
 <html lang="ptbr">
 <head>
     <meta charset="UTF-8">
-
     <title>Novo Rumo</title>
 
     <!--CSS Customizado-->
@@ -60,8 +59,6 @@
                                     </div>
                                 </li>
                                 <li role="separator" class="dropdown-divider"></li>
-                                <li class="user-list"><a class="px-3 py-2" href="#"><i class="ti-user"></i> &nbsp;Perfil</a></li>
-                                <li class="user-list"><a class="px-3 py-2" href="#"><i class="ti-wallet"></i> &nbsp;Status</a></li>
                                 <li class="user-list"><a class="px-3 py-2" href="#"><i class="ti-email"></i> &nbsp;Caixa Entrada</a></li>
                                 <li role="separator" class="dropdown-divider"></li>
                                 <li class="user-list"><a class="px-3 py-2" href="{{ url_for('edita_usuario', id = g.id ) }}"><i class="ti-settings"></i> &nbsp;Dados da Conta</a></li>
@@ -75,58 +72,59 @@
         </nav>
     </header>
 
-    <!--End Navigation-->
+    <div class="conteudo">
 
-    <form method="post">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-    </form>
+        <!--End Navigation-->
 
-    <!--Content -->
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        </form>
 
-    {% include "base/sidebar.html" %}
+        <!--Content -->
 
-    <div class="page-wrapper">
-        <div class="row page-titles">
-            {% block page %}{% endblock %}
-        </div>
+        {% include "base/sidebar.html" %}
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    {% block content %}{% endblock %}
-                    <br><br><br>
-                </div>
+        <div class="page-wrapper">
+            <div class="row page-titles">
+                {% block page %}{% endblock %}
             </div>
-            <footer class="footer bottom">
-                <div class="container">
-                    <div class="copyright text-center">
-                        <span>Copyright &copy; KGRNet 2020</span>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        {% block content %}{% endblock %}
+                        <br><br><br>
                     </div>
                 </div>
-            </footer>
+                <footer class="footer bottom">
+                    <div class="container">
+                        <div class="copyright text-center">
+                            <span>Copyright &copy; KGRNet 2020</span>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
+        <!-- End Content -->
+        <!-- apps -->
+        <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+        <script src="../../dist/js/app.init.js"></script>
+        <script src="../../dist/js/app-style-switcher.js"></script>
+        <!--Custom JavaScript -->
+        <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+        <!--Wave Effects -->
+        <script src="{{ url_for('static', filename='js/waves.js') }}"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script src="{{ url_for('static', filename='libs/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/pages/sparkline/sparkline.js') }}"></script>
+        <!-- chartist chart -->
+        <script src="{{ url_for('static', filename='js/chartist.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chartist-plugin-tooltip.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/echarts-en.min.js') }}"></script>
+
     </div>
-
-    <!-- End Content -->
-
-    <!-- apps -->
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-    <script src="../../dist/js/app.init.js"></script>
-    <script src="../../dist/js/app-style-switcher.js"></script>
-    <!--Custom JavaScript -->
-    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
-    <!--Wave Effects -->
-    <script src="{{ url_for('static', filename='js/waves.js') }}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="{{ url_for('static', filename='libs/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/pages/sparkline/sparkline.js') }}"></script>
-    <!-- chartist chart -->
-    <script src="{{ url_for('static', filename='js/chartist.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/chartist-plugin-tooltip.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/echarts-en.min.js') }}"></script>
-
 </div>
 </body>
 </html>

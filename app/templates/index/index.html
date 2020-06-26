@@ -6,14 +6,81 @@
 
 {% block content %}
 
+{% if g.group == "Administrador" %}
+
 <div class="row">
-    <div class="col-md-8 col-lg-3">
+    <div class="col-md-6 col-lg-2">
         <div class="card card-body">
             <div class="row">
                 <!-- Column -->
                 <div class="col pr-0 align-self-center">
-                    <h2 class="font-weight-light mb-0 ">{{numero_clientes}}</h2>
-                    <h6 class="text-muted">Clientes</h6>
+                    <h6>Total Clientes:</h6>
+                    <h2>{{total_clientes}}</h2>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <!-- Column -->
+                <div class="col pr-0 align-self-center">
+                    <h6>Clientes Cadastrados:</h6>
+                    <h2>{{numero_clientes}}</h2>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <!-- Column -->
+                <div class="col pr-0 align-self-center">
+                    <div data-label={{porcentagem}}% class="css-bar mb-0 css-bar-info css-bar-{{porcentagem}}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col pr-0 align-self-center">
+        <embed type="image/svg+xml" src={{graph_data|safe}} style='max-width:500px'/>
+    </div>
+    <br>
+    <div class="col pr-0 align-self-center">
+        <embed type="image/svg+xml" src={{graph_data3|safe}} style='max-width:500px'/>
+    </div>
+</div>
+<br><br><br><br><br>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-0">
+        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_clientes') }}" ><font color=black>Ir para Listar Clientes</font></a></button>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-0">
+        <div class="dropdown">
+            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Ir para Faturamentos
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{{ url_for('faturamento_individual_sn') }}">Simples Nacional</a>
+                <a class="dropdown-item" href="{{ url_for('faturamento_individual_lp') }}">Lucro Presumido</a>
+                <a class="dropdown-item" href="{{ url_for('faturamento_individual_r') }}">Lucro Real</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-0">
+        <button class="btn btn-primary" type="button"><a href="{{ url_for('selecionar_clientes') }}" ><font color=black>Ir para Listar Cobranças</font></a></button>
+    </div>
+</div>
+
+{% else %}
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-md-6 col-lg-2">
+        <div class="card card-body">
+            <div class="row">
+                <!-- Column -->
+                <div class="col pr-0 align-self-center">
+                    <h2 class="font-weight-light mb-0">{{numero_clientes}}</h2>
+                    <h6 class="text-muted">Cliente(s) Cadastrado(s)</h6>
+                    <br><br><br>
                 </div>
                 <!-- Column -->
                 <div class="col text-right align-self-center">
@@ -22,27 +89,30 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="row text-center">
+    <div class="col-1"></div>
     <div class="col pr-0 align-self-center">
         <embed type="image/svg+xml" src={{graph_data2|safe}} style='max-width:500px'/>
     </div>
-    <div class="col pr-0 align-self-center">
-        <embed type="image/svg+xml" src={{graph_data|safe}} style='max-width:500px'/>
-    </div>
 </div>
 <br>
-<div class="row text-center">
-    <div class="col pr-0 align-self-center">
-        <embed type="image/svg+xml" src={{graph_data3|safe}} style='max-width:500px'/>
-    </div>
-    <div class="col-sm">
+<div class="row">
+    <div class="col-6"></div>
+    <div class="col-0">
+        <div class="dropdown">
+            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Ir para Ocorrências
+            </a>
 
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                <a class="dropdown-item" href="{{ url_for('listar_ocorrencias_sn') }}">Simples Nacional</a>
+                <a class="dropdown-item" href="{{ url_for('listar_ocorrencias_lp') }}">Lucro Presumido</a>
+                <a class="dropdown-item" href="{{ url_for('listar_ocorrencias_r') }}">Lucro Real</a>
+            </div>
+        </div>
     </div>
 </div>
-<br>
+
+{% endif %}
 
 {% endblock %}
 

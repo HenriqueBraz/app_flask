@@ -24,7 +24,6 @@ def register():
             error = 'Username {} já existe. Por favor escolha outro Username!'.format(username)
             flash(error)
         if error is None:
-            print('Estou inserindo no banco')
             db.insert_user(username, generate_password_hash(password), name, email)
             message = 'Cadastro efetuado com sucesso!'
             flash(message)
@@ -59,7 +58,6 @@ def login(flag):
                         flash(error)
 
                     if error is None:
-                        print(result)
                         session.clear()
                         session['user_id'] = result[0]
                         session['group'] = result[9]
@@ -94,6 +92,7 @@ def before_request():
         g.user = session['username']
         g.id = session['user_id']
         g.email = session['email']
+        g.group = session['group']
     except Exception:
         pass
     now = datetime.datetime.now()
