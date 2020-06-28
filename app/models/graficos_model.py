@@ -95,3 +95,13 @@ class GraficoModel(object):
             return result
         except Exception as e:
             logging.error('Erro em  GraficoModel, método get_numero_empresas: ' + str(e) + '\n')
+
+
+    def get_levyings_sum(self, mes):
+        try:
+            self.cur.execute("SELECT SUM(c.valor)  FROM  cobrancas c WHERE MONTH(c.updated) = '{}' AND c.status='Ativo';".format(mes))
+            result = self.cur.fetchone()
+            return result
+        except Exception as e:
+            logging.error('Erro em  FinanceiroModel, método get_levyings_sum, flag == 0: ' + str(e) + '\n')
+

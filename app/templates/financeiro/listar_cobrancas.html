@@ -57,6 +57,11 @@
         {% else %}
         <td> {{ "Não Contínuo" }}</td>
         {% endif %}
+        {% if g.group == 'Administrador' %}
+        <td>
+            <a class="btn btn-link" type="button"  href="{{ url_for('editar_cobranca', id = row[0], nome = row[1], id_cobranca = row[5], letra=letra) }}">Editar</a>
+        </td>
+        {% endif %}
 
 
     </tr>

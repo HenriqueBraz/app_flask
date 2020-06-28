@@ -3,8 +3,8 @@
 {% block page %}
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Index</a>
 <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Financeiro</a>
-<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro') }}">Listar Clientes</a>
-<li class="breadcrumb-item"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome) }}">Listar Cobranças</a></li>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_financeiro', letra=letra) }}">Listar Clientes</a>
+<li class="breadcrumb-item"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome, letra=letra) }}">Listar Cobranças</a></li>
 <li class="breadcrumb-item active" aria-current="page">Editar Cobrança</li>
 {% endblock %}
 
@@ -88,7 +88,7 @@
                 <div class="row">
                     <div class="col-8"></div>
                     <div class="col-4">
-                        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome) }}" ><font color=white>voltar</font></a></button>
+                        <button class="btn btn-primary" type="button"><a href="{{ url_for('listar_cobrancas', id=id, nome=nome, letra=letra) }}" ><font color=white>voltar</font></a></button>
                         &nbsp;&nbsp;&nbsp;<button class="btn btn-primary"  type="submit">Enviar</button>
                     </div>
                 </div>
@@ -102,32 +102,12 @@
 {% endif %}
 
 <!-- Datepicker -->
+<script type=text/javascript src="{{url_for('static', filename='js/scripts.js') }}"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
 
 
-
-<script>
-
-
-    jQuery.noConflict();
-
-(function( $ ) {
-    $('#data').datepicker({
-    monthNames: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julio", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
-    minDate: "0",
-    dateFormat: 'dd/mm/yy',
-    dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb" ],
-    locales: 'pt-br',
-    });
-})( jQuery );
-
-(function( $ ) {
-$('.dinheiro').mask('#.##0,00', {reverse: true});
-})( jQuery );
-
-</script>
 
 {% endblock %}

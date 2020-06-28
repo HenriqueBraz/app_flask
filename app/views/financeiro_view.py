@@ -8,11 +8,12 @@ from app.models.financeiro_model import FinanceiroModel
 
 def real_br_money_mask(my_value):
     a = '{:,.2f}'.format(float(my_value))
-    b = a.replace(',','v')
-    c = b.replace('.',',')
-    return c.replace('v','.')
+    b = a.replace(',', 'v')
+    c = b.replace('.', ',')
+    return c.replace('v', '.')
 
-@app.route('/selecionar_clientes', methods=["GET","POST"])
+
+@app.route('/selecionar_clientes', methods=["GET", "POST"])
 def selecionar_clientes():
     form = finantial_forms.FinantialForms()
     if request.method == 'POST':
@@ -38,8 +39,9 @@ def listar_financeiro(letra):
 def select_financeiro(id, nome, letra):
     db = FinanceiroModel()
     now = datetime.now()
-    data = now.strftime('%m')
-    result = db.get_levyings(id, data)
+    mes = now.strftime('%m')
+    ano = now.strftime('%Y')
+    result = db.get_levyings(id, mes, ano)
     if result:
         return redirect(url_for('listar_cobrancas', id=id, nome=nome, letra=letra))
 
@@ -59,64 +61,86 @@ def listar_cobrancas(id, nome, letra):
     if request.method == 'POST':
         mes = request.form['mes']
 
-    result = db.get_levyings(id, mes)
-    soma1 = db.get_levyings_sum(id, mes, 1)
-    soma1 = soma1[0]
-    if not soma1:
-        soma1 = 0
+    result = db.get_levyings(id, mes, ano)
+    soma1 = db.get_levyings_sum(id, mes, ano)
+    soma2 = []
+    for i in range(len(soma1)):
+        if soma1[i] is None:
+            soma2.append(0.0)
+        else:
+            soma2.append(soma1[i])
 
-    soma2 = db.get_levyings_sum(id, mes, 0)
-    soma2 = soma2[0]
-    if not soma2:
-        soma2 = 0
-
-    soma = soma1 + soma2
-    soma = real_br_money_mask(soma)
-    valor = 0
-    return render_template('/financeiro/listar_cobrancas.html', result=result, form=form, id=id, nome=nome, soma=soma, valor=valor, ano=ano, mes=mes, letra=letra)
+    soma2 = soma2[0] + soma2[1]
+    soma = real_br_money_mask(soma2)
+    return render_template('/financeiro/listar_cobrancas.html', result=result, form=form, id=id, nome=nome, soma=soma,
+                           ano=ano, mes=mes, letra=letra)
 
 
 @app.route('/incluir_cobranca/<int:id>/<string:nome>/<string:letra>', methods=["GET", "POST"])
 def incluir_cobranca(id, nome, letra):
+    servico, data, valor, tipo_cobranca = None, None, None, None
     flag = 0
     db = FinanceiroModel()
     form = finantial_forms.FinantialForms()
     if request.method == 'POST':
-        if (request.form['valor']):
+        if request.form['valor']:
             valor = request.form['valor']
             valor = valor.replace('.', '')
             valor = valor.replace(',', '.')
             flag += 1
 
-        if (request.form['tipo_cobranca']):
+        if request.form['tipo_cobranca']:
             tipo_cobranca = request.form['tipo_cobranca']
             flag += 1
 
-        if (request.form['data']):
+        if request.form['data']:
             data = request.form['data']
             data = datetime.strptime(data, '%d/%m/%Y').date()
             flag += 1
 
-        if (request.form['servico']):
+        if request.form['servico']:
             servico = request.form['servico']
             flag += 1
 
         if flag == 4:
-            if db.insert_finantal_levying(id, data, servico, valor, tipo_cobranca):
-                flash('Cobrança cadastrada com sucesso!')
-                return redirect(url_for('listar_cobrancas', id=id, nome=nome, letra=letra))
+            if tipo_cobranca == 'Continuo':
+                mes = data.strftime('%m')
+                ano = data.strftime('%Y')
+                dia = data.strftime('%d')
+                for i in range(int(mes), 13):
+                    data2 = ano + '-' + str(i) + '-' + dia
+                    data2 = datetime.strptime(data2, '%Y-%m-%d').date()
+                    if db.insert_finantal_levying(id, data2, servico, valor, tipo_cobranca):
+                        flag = True
+
+                    else:
+                        flag = False
+
+                if flag:
+                    flash('Cobrança(s) cadastrada(s) com sucesso!')
+                    return redirect(url_for('listar_cobrancas', id=id, nome=nome, letra=letra))
+                else:
+                    flash('Houve um erro ao inserir a(a) cobrança(s), contate o administrador do sistema')
+                    return redirect(url_for('listar_cobrancas', id=id, nome=nome, letra=letra))
+
 
             else:
-                flash('Houve um erro ao inserir a cobrança, contate o administrador do sistema')
+                if db.insert_finantal_levying(id, data, servico, valor, tipo_cobranca):
+                    flash('Cobrança cadastrada com sucesso!')
+                    return redirect(url_for('listar_cobrancas', id=id, nome=nome, letra=letra))
+
+                else:
+                    flash('Houve um erro ao inserir a cobrança, contate o administrador do sistema')
+
 
         else:
             flash('Escolha uma data!')
 
     return render_template('/financeiro/incluir_cobranca.html', form=form, id=id, nome=nome, letra=letra)
 
-@app.route('/editar_cobranca/<int:id>/<string:nome>/<id_cobranca>', methods=["GET", "POST"])
-def editar_cobranca(id, nome, id_cobranca):
-    print(id_cobranca)
+
+@app.route('/editar_cobranca/<int:id>/<string:nome>/<id_cobranca>/<string:letra>', methods=["GET", "POST"])
+def editar_cobranca(id, nome, id_cobranca, letra):
     flag = 0
     db = FinanceiroModel()
     result = db.get_levying(id_cobranca)
@@ -139,11 +163,11 @@ def editar_cobranca(id, nome, id_cobranca):
             valor_input = valor_input.replace(',', '.')
             flag = 1
 
-        if(request.form['tipo_cobranca'] != tipo_cobranca):
+        if (request.form['tipo_cobranca'] != tipo_cobranca):
             tipo_cobranca = request.form['tipo_cobranca']
             flag = 1
 
-        if(request.form['data']) :
+        if (request.form['data']):
             data = request.form['data']
             data = datetime.strptime(data, '%d/%m/%Y').date()
             flag = 1
@@ -155,16 +179,17 @@ def editar_cobranca(id, nome, id_cobranca):
         if flag == 1:
             if db.update_finantal_levying(data, servico, valor_input, tipo_cobranca, id_cobranca):
                 flash('Cobrança editada com sucesso!')
-                return redirect(url_for('listar_cobrancas', id=id, nome=nome))
+                return redirect(url_for('listar_cobrancas', id=id, nome=nome, letra=letra))
 
             else:
                 message = 'Houve um erro ao editar a cobrança, contate o administrador do sistema'
                 flash(message)
         else:
             flash('Nenhum campo foi modificado, cobrança não alterada!')
-            return redirect(url_for('editar_cobranca', id=id, nome=nome, id_cobranca=id_cobranca))
+            return redirect(url_for('editar_cobranca', id=id, nome=nome, id_cobranca=id_cobranca, letra=letra))
 
-    return render_template('/financeiro/editar_cobranca.html', form=form, id=id, nome=nome, data_place_holder=data_place_holder, tipo_cobranca=tipo_cobranca, valor=valor)
+    return render_template('/financeiro/editar_cobranca.html', form=form, id=id, nome=nome,
+                           data_place_holder=data_place_holder, tipo_cobranca=tipo_cobranca, valor=valor, letra=letra)
 
 
 @app.route('/inativar_financeiro', methods=["GET"])
@@ -176,7 +201,6 @@ def inativar_financeiro():
 def excluir_cobranca(id, nome, id_cobranca):
     db = FinanceiroModel()
     result = db.get_levying(id_cobranca)
-    print(result)
     flag = 1
     if request.method == 'POST':
         if request.form['submit_button'] == 'Excluir Cobrança':

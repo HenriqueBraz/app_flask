@@ -1,12 +1,14 @@
 from math import ceil
 
 from pygal.style import CleanStyle, Style
+
+from app.models.financeiro_model import FinanceiroModel
 from app.models.graficos_model import GraficoModel
 from werkzeug.utils import redirect
 from app import app
 from datetime import datetime
 from app.forms.auth_forms import login_form
-from flask import render_template, url_for, session
+from flask import render_template, url_for, session, g
 import pygal
 
 
@@ -28,6 +30,18 @@ def index():
     db = GraficoModel()
     now = datetime.now()
     ano = now.strftime('%Y')
+    mes = now.strftime('%m')
+
+    este_mes = "150,00"
+    ultimo_mes = "100,00"
+    if este_mes > ultimo_mes:
+        this_month = "monthchart"
+        last_month = "lastmonthchart"
+    else:
+        this_month = "lastmonthchart"
+        last_month = "monthchart"
+
+
 
     result = db.get_numero_empresas(user_id)
     numero_clientes = result[0]
@@ -70,7 +84,7 @@ def index():
 
     return render_template('index/index.html', form=form, graph_data=graph_data,
                            graph_data2=graph_data2, graph_data3=graph_data3, total_clientes=total_clientes, numero_clientes=numero_clientes,
-                           porcentagem=porcentagem)
+                           porcentagem=porcentagem, este_mes=este_mes, ultimo_mes=ultimo_mes, flag_index=1)
 
 
 @app.route('/ping')
