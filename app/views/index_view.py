@@ -1,8 +1,5 @@
 from math import ceil
-
 from pygal.style import CleanStyle, Style
-
-from app.models.financeiro_model import FinanceiroModel
 from app.models.graficos_model import GraficoModel
 from werkzeug.utils import redirect
 from app import app
@@ -10,6 +7,13 @@ from datetime import datetime
 from app.forms.auth_forms import login_form
 from flask import render_template, url_for, session, g
 import pygal
+
+
+def real_br_money_mask(my_value):
+    a = '{:,.2f}'.format(float(my_value))
+    b = a.replace(',', 'v')
+    c = b.replace('.', ',')
+    return c.replace('v', '.')
 
 
 @app.route("/")
@@ -32,16 +36,35 @@ def index():
     ano = now.strftime('%Y')
     mes = now.strftime('%m')
 
-    este_mes = "150,00"
-    ultimo_mes = "100,00"
-    if este_mes > ultimo_mes:
+    este_mes = db.get_levyings_sum(mes)
+    if este_mes[0]:
+        este_mes2 = este_mes[0]
+        este_mes = real_br_money_mask(este_mes[0])
+    else:
+        este_mes = '0'
+        este_mes2 = 0.0
+
+    if mes != 1:
+        mes = str(int(mes) - 1)
+        ultimo_mes = db.get_levyings_sum(mes)
+        if ultimo_mes[0]:
+            ultimo_mes2 = ultimo_mes[0]
+            ultimo_mes = real_br_money_mask(ultimo_mes[0])
+        else:
+            ultimo_mes = '0'
+            ultimo_mes2 = 0.0
+
+    else:
+        ultimo_mes = db.get_levyings_sum(mes)
+        ultimo_mes = real_br_money_mask(ultimo_mes[0])
+        ultimo_mes2 = ultimo_mes[0]
+
+    if este_mes2 > ultimo_mes2:
         this_month = "monthchart"
         last_month = "lastmonthchart"
     else:
         this_month = "lastmonthchart"
         last_month = "monthchart"
-
-
 
     result = db.get_numero_empresas(user_id)
     numero_clientes = result[0]
@@ -83,8 +106,10 @@ def index():
     graph_data3 = chart.render_data_uri()
 
     return render_template('index/index.html', form=form, graph_data=graph_data,
-                           graph_data2=graph_data2, graph_data3=graph_data3, total_clientes=total_clientes, numero_clientes=numero_clientes,
-                           porcentagem=porcentagem, este_mes=este_mes, ultimo_mes=ultimo_mes, flag_index=1)
+                           graph_data2=graph_data2, graph_data3=graph_data3, total_clientes=total_clientes,
+                           numero_clientes=numero_clientes,
+                           porcentagem=porcentagem, este_mes=este_mes, ultimo_mes=ultimo_mes, flag_index=1,
+                           this_month=this_month, last_month=last_month)
 
 
 @app.route('/ping')
