@@ -60,11 +60,11 @@ def index():
         ultimo_mes2 = ultimo_mes[0]
 
     if este_mes2 > ultimo_mes2:
-        this_month = "monthchart"
-        last_month = "lastmonthchart"
+        monthchart = "monthchart"
+        lastmonthchart = "lastmonthchart"
     else:
-        this_month = "lastmonthchart"
-        last_month = "monthchart"
+        monthchart = "lastmonthchart"
+        lastmonthchart = "monthchart"
 
     result = db.get_numero_empresas(user_id)
     numero_clientes = result[0]
@@ -109,7 +109,7 @@ def index():
                            graph_data2=graph_data2, graph_data3=graph_data3, total_clientes=total_clientes,
                            numero_clientes=numero_clientes,
                            porcentagem=porcentagem, este_mes=este_mes, ultimo_mes=ultimo_mes, flag_index=1,
-                           this_month=this_month, last_month=last_month)
+                           monthchart=monthchart, lastmonthchart=lastmonthchart)
 
 
 @app.route('/ping')
