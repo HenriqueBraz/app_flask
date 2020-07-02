@@ -59,12 +59,17 @@ def index():
         ultimo_mes = real_br_money_mask(ultimo_mes[0])
         ultimo_mes2 = ultimo_mes[0]
 
+    print(este_mes2)
+    print(type(este_mes2))
+    print(ultimo_mes2)
+    print(type(ultimo_mes2))
+
     if este_mes2 > ultimo_mes2:
-        monthchart = "monthchart"
-        lastmonthchart = "lastmonthchart"
+        text_info = "text-info"
+        text_primary = "text-primary"
     else:
-        monthchart = "lastmonthchart"
-        lastmonthchart = "monthchart"
+        text_info = "text-primary"
+        text_primary = "text-info"
 
     result = db.get_numero_empresas(user_id)
     numero_clientes = result[0]
@@ -109,7 +114,7 @@ def index():
                            graph_data2=graph_data2, graph_data3=graph_data3, total_clientes=total_clientes,
                            numero_clientes=numero_clientes,
                            porcentagem=porcentagem, este_mes=este_mes, ultimo_mes=ultimo_mes, flag_index=1,
-                           monthchart=monthchart, lastmonthchart=lastmonthchart)
+                           text_info =text_info , text_primary=text_primary)
 
 
 @app.route('/ping')
