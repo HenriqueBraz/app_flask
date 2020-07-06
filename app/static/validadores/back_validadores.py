@@ -108,43 +108,18 @@ class Validadores(object):
             return True
         return False
 
-
-    def valida_cnae(self, link, cnae1, cnae2):
+    def valida_cnae(self, link, cnae_list):
         '''
         Método que verifica se uma cnae é válida
         Retorna 1 ou 2 significa que uma das cnae é inválida
         Caso não exista a cnae2, verifica só a cnae1
         '''
-        print(cnae1)
-        print(cnae2)
-        cnae1 = cnae1.replace("-", "")
-        cnae1 = cnae1.replace("/", "")
-        cnae1 = get(link + cnae1)
-        cnae1.raise_for_status()
-        cnae1 = cnae1.json()
-        if cnae2 != None:
-            cnae2 = cnae2.replace("-", "")
-            cnae2 = cnae2.replace("/", "")
-            cnae2 = get(link + cnae2)
-            cnae2.raise_for_status()
-            cnae2 = cnae2.json()
+        for i in range(len(cnae_list)):
+            retorno = get(link + cnae_list[i])
+            if retorno.json():
+                pass
 
-        else:
-            #Não existe a cnae 2 para ser validada
-            cnae2 = 0
-
-        if cnae2 != 0:
-            if cnae1 and cnae2:
-                return (7)
-
-            elif cnae2:
-                return (2)
-
-            elif cnae1:
-                return (1)
-
-        elif cnae2 == 0:
-            if cnae1:
-                return (7)
             else:
-                return (1)
+                return [0, str(cnae_list[i])]
+
+        return [1, cnae_list]

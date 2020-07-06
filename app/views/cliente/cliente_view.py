@@ -47,8 +47,7 @@ def cadastrar_cliente():
         inscricao_estadual = request.form['inscricao_estadual']
         ccm = request.form['ccm']
         tributacao = request.form['tributacao']
-        cnae_principal = request.form['cnae_principal']
-        cnae_secundaria = request.form['cnae_secundaria']
+        cnae_principal = request.form.getlist('cnae[]')
         dia_faturamento = request.form['dia_faturamento']
         folha_pagamento = request.form['folha_pagamento']
         certificado_digital = request.form['certificado_digital']
@@ -56,22 +55,21 @@ def cadastrar_cliente():
         observacoes = request.form['observacoes']
         id_responsavel = int(nome_responsavel)
         validadores = Validadores()
-        cnae = validadores.valida_cnae("https://servicodados.ibge.gov.br/api/v2/cnae/subclasses/", cnae_principal,cnae_secundaria)
+        cnaes = validadores.valida_cnae("https://servicodados.ibge.gov.br/api/v2/cnae/subclasses/", cnae_principal)
 
-        if cnae == 1:
-            flash('Erro de CNAE Secundário! Entre com um CNAE Secundário válido.')
+        if cnaes[0] == 0:
+            flash('Erro de CNAE! O(s) CNAE(s) precisam ser válidos.')
             return render_template('cliente/cadastrar_cliente.html', form=form)
 
-        elif cnae == 2:
-            flash('Erro de CNAE Primário! Entre com um CNAE Primário válido.')
-            return render_template('cliente/cadastrar_cliente.html', form=form)
+        print(cnaes[1])
         if db.search_cnpj(cnpj) == 0:
             if validadores.validar_cnpj(cnpj):
-                if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco, bairro,
-                                 cep, cidade, numero, complemento, estado,
-                                 capital_social, nire, cnpj, inscricao_estadual, ccm, cnae_principal, cnae_secundaria,
-                                 tributacao, dia_faturamento, folha_pagamento, certificado_digital, impugnacao, observacoes, nome,
-                                 telefone, email, celular):
+                if db.insert_company(nome_responsavel, natureza_juridica, porte, id_responsavel, empresa, endereco,
+                                     bairro,
+                                     cep, cidade, numero, complemento, estado,
+                                     capital_social, nire, cnpj, inscricao_estadual, ccm, str(cnaes[1]),
+                                     tributacao, dia_faturamento, folha_pagamento, certificado_digital, impugnacao,
+                                     observacoes, nome, telefone, email, celular):
 
                     flash('Empresa cadastrada com sucesso!')
                     return redirect(url_for('listar_clientes', form=form))
@@ -175,7 +173,8 @@ def editar_cliente(id):
         telefone = request.form['telefone']
         celular = request.form['celular']
         validadores = Validadores()
-        cnae = validadores.valida_cnae("https://servicodados.ibge.gov.br/api/v2/cnae/subclasses/", cnae_principal, cnae_secundaria)
+        cnae = validadores.valida_cnae("https://servicodados.ibge.gov.br/api/v2/cnae/subclasses/", cnae_principal,
+                                       cnae_secundaria)
         if cnae == 1:
             flash('Erro de CNAE Secundário! Entre com um CNAE Secundário válido.')
             return redirect(url_for('editar_cliente', id=id))
@@ -185,10 +184,12 @@ def editar_cliente(id):
             return redirect(url_for('editar_cliente', id=id))
 
         if validadores.validar_cnpj(cnpj):
-            if db.update_company(empresa, natureza_juridica, porte, cep, endereco, numero, complemento, cidade, bairro, estado, capital_social, nire,
-                             cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria,
-                             dia_faturamento, folha_pagamento, certificado_digital, impugnacao, observacoes, id_responsavel, id,
-                             nome, email, telefone, celular):
+            if db.update_company(empresa, natureza_juridica, porte, cep, endereco, numero, complemento, cidade, bairro,
+                                 estado, capital_social, nire,
+                                 cnpj, inscricao_estadual, ccm, tributacao, cnae_principal, cnae_secundaria,
+                                 dia_faturamento, folha_pagamento, certificado_digital, impugnacao, observacoes,
+                                 id_responsavel, id,
+                                 nome, email, telefone, celular):
 
                 flash('Alterações salvas com sucesso!')
 
@@ -197,7 +198,7 @@ def editar_cliente(id):
         else:
             flash('Erro de CNPJ! Entre com um CNPJ válido.')
 
-    return render_template('cliente/editar_cliente.html', form=form )
+    return render_template('cliente/editar_cliente.html', form=form)
 
 
 @app.route('/excluir_cliente/<int:id>"', methods=["GET", "POST"])

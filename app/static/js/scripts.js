@@ -37,8 +37,8 @@ $(document).ready( function () {
 	    });
 	});
     $('.cnpj').mask('00.000.000/0000-00');
-    $('.cnae_principal').mask('0000-0/00');
-    $('.cnae_secundaria').mask('0000-0/00');
+    $('.cnaes_x').mask('  0000-0/00');
+    $('.cnaes_x1').mask('  0000-0/00');
     $('.nire').mask('00000000000');
     $('.ccm').mask('0.000.000.0');
     $('.cpf').mask('000-000.000-00');

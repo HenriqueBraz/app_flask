@@ -59,11 +59,6 @@ def index():
         ultimo_mes = real_br_money_mask(ultimo_mes[0])
         ultimo_mes2 = ultimo_mes[0]
 
-    print(este_mes2)
-    print(type(este_mes2))
-    print(ultimo_mes2)
-    print(type(ultimo_mes2))
-
     if este_mes2 > ultimo_mes2:
         text_info = "text-info"
         text_primary = "text-primary"

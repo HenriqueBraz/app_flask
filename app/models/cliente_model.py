@@ -83,7 +83,7 @@ class ClienteModel(object):
 
     def insert_company(self, nome_responsavel, id_natureza_juridica, id_porte_empresa, id_responsavel, empresa,
                        endereco,
-                       bairro, cep, cidade, numero, complemento, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, cnaeSecundaria,
+                       bairro, cep, cidade, numero, complemento, estado, capitalSocial, nire, cnpj, ie, ccm, cnaes,
                        tributacao, diaFaturamento, folhaPagamento, certificadoDigital, impugnacao,  observacoes, nome, telefone,
                        email, celular):
         try:
@@ -91,14 +91,14 @@ class ClienteModel(object):
             data = now.strftime('%Y-%m-%d %H:%M:%S')
             sql_data = (
                 id_natureza_juridica, id_porte_empresa, id_responsavel, data, empresa, cep, endereco, numero, complemento, bairro,
-                cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, cnaeSecundaria, tributacao,
+                cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaes, tributacao,
                 diaFaturamento,
                 folhaPagamento, certificadoDigital, impugnacao, observacoes, data, data, 'Ativo')
             sql = "INSERT INTO empresas ( id_natureza_juridica, id_porte_empresa, id_responsavel, dataResponsavel, " \
-                  "empresa, cep, endereco, numero, complemento, bairro, cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaePrincipal, " \
-                  "cnaeSecundaria,tributacao, diaFaturamento, folhaPagamento, certificadoDigital, impugnacao,  observacoes, " \
-                  "created, updated,status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, " \
-                  "%s, %s, %s, %s, %s, %s, %s, %s)"
+                  "empresa, cep, endereco, numero, complemento, bairro, cidade, estado, capitalSocial, nire, cnpj, ie, ccm, cnaes, " \
+                  "tributacao, diaFaturamento, folhaPagamento, certificadoDigital, impugnacao,  observacoes, " \
+                  "created, updated, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, " \
+                  "%s, %s, %s, %s, %s, %s, %s)"
             self.cur.execute(sql, sql_data)
             self.con.commit()
             self.cur.execute("SELECT MAX(id) FROM empresas;")

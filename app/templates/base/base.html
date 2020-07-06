@@ -45,7 +45,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ url_for('static', filename='images/users/2.jpg') }}" alt="teste" width="60" class="profile-pic rounded-circle" />
+                            <img src="{{ url_for('static', filename='images/users/2.jpg') }}" alt="teste" width="45" class="profile-pic rounded-circle" />
                         </a>
                         <div class="dropdown-menu mailbox dropdown-menu-right scale-up">
                             <ul class="dropdown-user list-style-none">
@@ -58,8 +58,6 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li role="separator" class="dropdown-divider"></li>
-                                <li class="user-list"><a class="px-3 py-2" href="#"><i class="ti-email"></i> &nbsp;Caixa Entrada</a></li>
                                 <li role="separator" class="dropdown-divider"></li>
                                 <li class="user-list"><a class="px-3 py-2" href="{{ url_for('edita_usuario', id = g.id ) }}"><i class="ti-settings"></i> &nbsp;Dados da Conta</a></li>
                                 <li role="separator" class="dropdown-divider"></li>
@@ -117,7 +115,6 @@
                 </div>
                   {% endif %}
             </div>
-
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">

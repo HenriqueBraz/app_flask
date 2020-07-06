@@ -25,11 +25,12 @@
         {{ form.hidden_tag() }}
         <div class="card">
             <div class="card-header">
-                Adicionar Cliente
+                <h4>Dados Principais</h4>
             </div>
-
+            <br>
+            <h4>Responsável pelo cliente</h4>
             <div class="form-group">
-                <h4>Responsável pelo cliente</h4>
+                <br>
                 <div class="row">
                     <label class="control-label col-2 text-right">Nome</label>
                     <div class="col-3">
@@ -75,7 +76,7 @@
                         {{form.endereco(class=" endereco form-control")}} {{form.errors.endereco}}
                     </div>
 
-                     <label class="control-label col-1 text-right">N°</label>
+                    <label class="control-label col-1 text-right">N°</label>
                     <div class="col-1">
                         {{form.numero(class="numero form-control")}} {{form.errors.numero}}
                     </div>
@@ -135,88 +136,90 @@
             </div>
         </div>
         </br>
-        <h4>Dados Financeiros</h4>
-        <div class="form-group">
-            <div class="row">
-                <label class="control-label col-2 text-right">Capital Social</label>
-                <div class="col-4">
-                    {{form.capital_social(class="capital_social form-control")}} {{form.errors.capital_social}}
-                </div>
-
-                <label class="control-label col-1 text-right">NIRE</label>
-                <div class="col-5">
-                    {{form.nire(class="nire form-control")}} {{form.errors.nire}}
-                </div>
+        <div class="card">
+            <div class="card-header">
+                <h4>Dados Financeiros</h4>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label class="control-label col-2 text-right">CNPJ</label>
-                <div class="col-4">
-                    {{form.cnpj(class="cnpj form-control")}} {{form.errors.cnpj}}
-                </div>
-
-                <label class="control-label col-1 text-right">I/E</label>
-                <div class="col-4">
-                    {{form.inscricao_estadual(class="inscricao_estadual form-control")}} {{form.errors.inscricao_estadual}}
-                </div>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="row">
-                <label class="control-label col-2 text-right">CCM</label>
-                <div class="col-4">
-                    {{form.ccm(class="ccm form-control")}} {{form.errors.ccm}}
-                </div>
-
-                <label class="control-label col-1 text-right">Tributacao</label>
-                <div class="col-4">
-                    {{form.tributacao(class="form-control")}} {{form.errors.tributacao}}
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                <label class="control-label col-2 text-right">CNAE</label>
-                <div class="col-4">
-                    {{form.cnae_principal(class="cnae_principal form-control")}} {{form.errors.cnae_principal}}
-                </div>
-
-                <label class="control-label col-1 text-right">CNAE</label>
-                <div class="col-4">
-                    {{form.cnae_secundaria(class="cnae_secundaria form-control")}} {{form.errors.cnae_secundaria}}
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label class="control-label col-2 text-right">Dia Faturamento</label>
-                <div class="col-2">
-                    {{form.dia_faturamento(class="form-control")}} {{form.errors.dia_faturamento}}
-                </div>
-
-                <label class="control-label col-2 text-right">Folha Pagamento</label>
-                <div class="col-2">
-                    {{form.folha_pagamento(class="form-control")}} {{form.errors.folha_pagamento}}
-                </div>
-
-                <label class="control-label col-2 text-right">Certificado Digital</label>
-                <div class="col-2">
-                    {{form.certificado_digital(class="form-control")}} {{form.errors.certificado_digital}}
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
+            <br>
+            <div class="form-group">
                 <div class="row">
-                    <label class="control-label col-2 text-right">Impugnação</label>
+                    <label class="control-label col-2 text-right">Capital Social</label>
                     <div class="col-4">
-                        {{form.impugnacao(class="form-control")}} {{form.errors.impugnacao}}
+                        {{form.capital_social(class="capital_social form-control")}} {{form.errors.capital_social}}
+                    </div>
+
+                    <label class="control-label col-1 text-right">NIRE</label>
+                    <div class="col-5">
+                        {{form.nire(class="nire form-control")}} {{form.errors.nire}}
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">CNPJ</label>
+                    <div class="col-4">
+                        {{form.cnpj(class="cnpj form-control")}} {{form.errors.cnpj}}
+                    </div>
+
+                    <label class="control-label col-1 text-right">I/E</label>
+                    <div class="col-4">
+                        {{form.inscricao_estadual(class="inscricao_estadual form-control")}} {{form.errors.inscricao_estadual}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">CCM</label>
+                    <div class="col-4">
+                        {{form.ccm(class="ccm form-control")}} {{form.errors.ccm}}
+                    </div>
+
+                    <label class="control-label col-1 text-right">Tributacao</label>
+                    <div class="col-4">
+                        {{form.tributacao(class="form-control")}} {{form.errors.tributacao}}
+                    </div>
+                </div>
+            </div>
+            <div id="id_cnaes">
+                <div class="cnaes">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="control-label col-2 text-right">Impugnação</label>
+                            <div class="col-4">
+                                {{form.impugnacao(class="form-control")}} {{form.errors.impugnacao}}
+                            </div>
+                            <label class="control-label col-1 text-right">CNAE</label>
+                            <div class="col-4">
+                                <input type="text"  class="form-control cnaes_x" id="cnae"  name="cnae[]" placeholder="  Digite o CNAE"  multiple='multiple' value="" maxlength="18"/>
+                            </div>
+                            <div>
+                            <button class="btn btn-primary" id="add_cnae" title="Adicionar CNAEs" > + </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label col-2 text-right">Dia Faturamento</label>
+                    <div class="col-2">
+                        {{form.dia_faturamento(class="form-control")}} {{form.errors.dia_faturamento}}
+                    </div>
+
+                    <label class="control-label col-2 text-right">Folha Pagamento</label>
+                    <div class="col-2">
+                        {{form.folha_pagamento(class="form-control")}} {{form.errors.folha_pagamento}}
+                    </div>
+
+                    <label class="control-label col-2 text-right">Certificado Digital</label>
+                    <div class="col-2">
+                        {{form.certificado_digital(class="form-control")}} {{form.errors.certificado_digital}}
+                    </div>
+                </div>
+            </div>
+        </div>
         <br>
         <h4>Observações</h4>
         <div class="form-group">
@@ -241,6 +244,86 @@
 
 <script src="{{ url_for('static', filename='jquery-mask-plugin/src/jquery.mask.js') }}"></script>
 <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+<script>
+
+
+    $(document).ready(function () {
+        var num = 1;
+
+        $('#add_cnae').on('keydown', function (e) {
+            if (e.keyCode == 9) {
+                $(this).next().focus();
+                return true;
+            }
+
+            e.preventDefault();
+            if (e.keyCode == 13 || e.keyCode == 32) {
+                $('#add_cnae').trigger('click');
+            }
+        });
+
+        $("#add_cnae").on("click", function (e) {
+            e.preventDefault();
+
+            if (num > 6) {
+                return false;
+            }
+
+            var str = '';
+            str += '<div id="id_cnaes">';
+            str +=     '<div class="cnaes">';
+            str +=         '<div class="form-group">';
+            str +=            '<div class="row">';
+            str +=     '<label class="control-label col-2 text-right"></label>';
+            str +=                 '<div class="col-4">';
+            str +=                     '';
+            str +=                 '</div>';
+            str +=               '<label class="control-label col-1 text-right">CNAE</label>';
+            str +=                  '<div class="col-4">';
+               if (num === 1) {
+                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 2 " />';
+            }
+                if (num === 2) {
+                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 3 " />';
+            }
+                if (num === 3) {
+                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 4 " />';
+            }
+                 if (num === 4) {
+                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 5 " />';
+            }
+                    if (num === 5) {
+                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 6 " />';
+            }
+                        if (num === 6) {
+                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 7 " />';
+            }
+            str +=                   '</div>';
+
+            str +=                   '<div>';
+            str +=                     ' <button class="btn btn-primary deltel" title="Remover Anexo"> - </button>';
+            str +=                   '</div>';
+            str +=                  '</div>';
+            str +=             '</div>';
+            str +=          '</div>';
+            str +=      '</div>';
+            str += '</div>';
+
+
+            var objfields = $(str);
+            $('#id_cnaes').append(objfields);
+            num++;
+        });
+
+
+        $(document).on('click', '.deltel', function(e) {
+            e.preventDefault();
+            $(this).parents('.cnaes').remove();
+            num--;
+        });
+    });
+</script>
 
 
 
