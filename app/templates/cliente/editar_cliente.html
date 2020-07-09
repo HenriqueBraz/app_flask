@@ -135,10 +135,10 @@
                 </div>
             </div>
         </div>
-        </br>
+        <br>
         <div class="card">
-             <div class="card-header">
-                 <h4>Dados Financeiros</h4>
+            <div class="card-header">
+                <h4>Dados Financeiros</h4>
             </div>
             <br>
             <div class="form-group">
@@ -167,8 +167,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="form-group">
                 <div class="row">
                     <label class="control-label col-2 text-right">CCM</label>
@@ -182,20 +180,42 @@
                     </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <div class="row">
-                    <label class="control-label col-2 text-right">CNAE</label>
-                    <div class="col-4">
-                        {{form.cnae_principal(class="cnae_principal form-control")}} {{form.errors.cnae_principal}}
-                    </div>
-
-                    <label class="control-label col-1 text-right">CNAE</label>
-                    <div class="col-4">
-                        {{form.cnae_secundaria(class="cnae_secundaria form-control")}} {{form.errors.cnae_secundaria}}
+            <input type="hidden" id="tamanho" name="tamanho" value={{tamanho}}>
+            {% for cnae in cnaes  %}
+            <div id="id_cnaes">
+                <div class="cnaes">
+                    <div class="form-group">
+                        <div class="row">
+                            {% if loop.index == 1 %}
+                            <label class="control-label col-2 text-right">Impugnação</label>
+                            <div class="col-4">
+                                {{form.impugnacao(class="form-control")}} {{form.errors.impugnacao}}
+                            </div>
+                            {% else %}
+                            <label class="control-label col-2 text-right"></label>
+                            <div class="col-4">
+                            </div>
+                            {% endif %}
+                            <label class="control-label col-1 text-right">CNAE</label>
+                            <div class="col-4">
+                                <input type="text"  class="form-control cnaes_x" id="cnae"  name="cnae[]" placeholder="  {{cnae}}"  multiple='multiple' value="" maxlength="18"/>
+                            </div>
+                            {% if loop.index == 1 %}
+                            <div>
+                                <button class="btn btn-primary" id="add_cnae" title="Adicionar CNAEs" > + </button>
+                            </div>
+                            {% else %}
+                            <div>
+                                <button class="btn btn-primary deltel" title="Remover Anexo"> - </button>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
+            <div id="id_cnaes2"></div>
+            <br>
             <div class="form-group">
                 <div class="row">
                     <label class="control-label col-2 text-right">Dia Faturamento</label>
@@ -212,15 +232,6 @@
                     <div class="col-2">
                         {{form.certificado_digital(class="form-control")}} {{form.errors.certificado_digital}}
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <label class="control-label col-2 text-right">Impugnação</label>
-                    <div class="col-4">
-                        {{form.impugnacao(class="form-control")}} {{form.errors.impugnacao}}
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -248,6 +259,103 @@
 
 <script src="{{ url_for('static', filename='jquery-mask-plugin/src/jquery.mask.js') }}"></script>
 <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+<script>
+
+    $(document).ready(function () {
+        var num = 1;
+        var tamanho = 0;
+        tamanho = document.getElementById('tamanho').value;
+        console.log(tamanho)
+        tamanho = parseInt(tamanho)
+        num = (tamanho)
+        console.log(num)
+
+        $('#add_cnae').on('keydown', function (e) {
+            if (e.keyCode == 9) {
+                $(this).next().focus();
+                return true;
+            }
+
+            e.preventDefault();
+            if (e.keyCode == 13 || e.keyCode == 32) {
+                $('#add_cnae').trigger('click');
+            }
+        });
+
+        $("#add_cnae").on("click", function (e) {
+            e.preventDefault();
+
+            if (num > 6) {
+                return false;
+            }
+
+            var str = '';
+            str += '<div id="id_cnaes">';
+            str +=     '<div class="cnaes">';
+            str +=         '<div class="form-group">';
+            str +=            '<div class="row">';
+            str +=     '<label class="control-label col-2 text-right"></label>';
+            str +=                 '<div class="col-4">';
+            str +=                     '';
+            str +=                 '</div>';
+            str +=               '<label class="control-label col-1 text-right">CNAE</label>';
+            str +=                  '<div class="col-4">';
+               if (num === 1) {
+                 str +=                     '<input type="text" id="cnae1"  class="form-control cnaes_x1" name="cnae[]"  placeholder="  Digite o CNAE 2 " />';
+            }
+                if (num === 2) {
+                 str +=                     '<input type="text" id="cnae2"  class="form-control cnaes_x2" name="cnae[]"  placeholder="  Digite o CNAE 3 " />';
+            }
+                if (num === 3) {
+                 str +=                     '<input type="text" id="cnae3"  class="form-control cnaes_x3" name="cnae[]"  placeholder="  Digite o CNAE 4 " />';
+            }
+                 if (num === 4) {
+                 str +=                     '<input type="text" id="cnae4"  class="form-control cnaes_x4" name="cnae[]"  placeholder="  Digite o CNAE 5 " />';
+            }
+                    if (num === 5) {
+                 str +=                     '<input type="text" id="cnae5"  class="form-control cnaes_x5" name="cnae[]"  placeholder="  Digite o CNAE 6 " />';
+            }
+                        if (num === 6) {
+                 str +=                     '<input type="text" id="cnae6"  class="form-control cnaes_x6" name="cnae[]"  placeholder="  Digite o CNAE 7 " />';
+            }
+            str +=                   '</div>';
+
+            str +=                   '<div>';
+            str +=                     ' <button class="btn btn-primary deltel" title="Remover Anexo"> - </button>';
+            str +=                   '</div>';
+            str +=                  '</div>';
+            str +=             '</div>';
+            str +=          '</div>';
+            str +=      '</div>';
+            str += '</div>';
+
+
+
+
+
+
+            var objfields = $(str);
+            $('#id_cnaes2').append(objfields);
+            $('.cnaes_x1').mask('0000-0/00');
+            $('.cnaes_x2').mask('0000-0/00');
+            $('.cnaes_x3').mask('0000-0/00');
+            $('.cnaes_x4').mask('0000-0/00');
+            $('.cnaes_x5').mask('0000-0/00');
+            $('.cnaes_x6').mask('0000-0/00');
+            num++;
+        });
+
+
+        $(document).on('click', '.deltel', function(e) {
+            e.preventDefault();
+            $(this).parents('.cnaes').remove();
+            num--;
+        });
+    });
+</script>
+
+
 
 
 

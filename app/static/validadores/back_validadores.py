@@ -114,8 +114,13 @@ class Validadores(object):
         Retorna 1 ou 2 significa que uma das cnae é inválida
         Caso não exista a cnae2, verifica só a cnae1
         '''
+        print(cnae_list)
+
         for i in range(len(cnae_list)):
-            retorno = get(link + cnae_list[i])
+            cnae = cnae_list[i]
+            cnae = cnae.replace('-', '')
+            cnae = cnae.replace('/', '')
+            retorno = get(link + cnae)
             if retorno.json():
                 pass
 

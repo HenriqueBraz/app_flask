@@ -247,7 +247,6 @@
 
 <script>
 
-
     $(document).ready(function () {
         var num = 1;
 
@@ -282,22 +281,22 @@
             str +=               '<label class="control-label col-1 text-right">CNAE</label>';
             str +=                  '<div class="col-4">';
                if (num === 1) {
-                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 2 " />';
+                 str +=                     '<input type="text" id="cnae1"  class="form-control cnaes_x1" name="cnae[]"  placeholder="  Digite o CNAE 2 " />';
             }
                 if (num === 2) {
-                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 3 " />';
+                 str +=                     '<input type="text" id="cnae2"  class="form-control cnaes_x2" name="cnae[]"  placeholder="  Digite o CNAE 3 " />';
             }
                 if (num === 3) {
-                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 4 " />';
+                 str +=                     '<input type="text" id="cnae3"  class="form-control cnaes_x3" name="cnae[]"  placeholder="  Digite o CNAE 4 " />';
             }
                  if (num === 4) {
-                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 5 " />';
+                 str +=                     '<input type="text" id="cnae4"  class="form-control cnaes_x4" name="cnae[]"  placeholder="  Digite o CNAE 5 " />';
             }
                     if (num === 5) {
-                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 6 " />';
+                 str +=                     '<input type="text" id="cnae5"  class="form-control cnaes_x5" name="cnae[]"  placeholder="  Digite o CNAE 6 " />';
             }
                         if (num === 6) {
-                 str +=                     '<input type="text" id="cnae"  class="form-control cnaes_x" name="cnae[]"  placeholder="  Digite o CNAE 7 " />';
+                 str +=                     '<input type="text" id="cnae6"  class="form-control cnaes_x6" name="cnae[]"  placeholder="  Digite o CNAE 7 " />';
             }
             str +=                   '</div>';
 
@@ -313,6 +312,12 @@
 
             var objfields = $(str);
             $('#id_cnaes').append(objfields);
+            $('.cnaes_x1').mask('0000-0/00');
+            $('.cnaes_x2').mask('0000-0/00');
+            $('.cnaes_x3').mask('0000-0/00');
+            $('.cnaes_x4').mask('0000-0/00');
+            $('.cnaes_x5').mask('0000-0/00');
+            $('.cnaes_x6').mask('0000-0/00');
             num++;
         });
 
@@ -324,6 +329,8 @@
         });
     });
 </script>
+
+
 
 
 
