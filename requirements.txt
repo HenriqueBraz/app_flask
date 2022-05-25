@@ -19,7 +19,7 @@ lxml==4.5.1
 MarkupSafe==1.1.1
 phonenumbers==8.11.4
 pygal==2.4.0
-PyJWT==1.7.1
+PyJWT==2.4.0
 PyMySQL==0.9.3
 pytz==2019.3
 requests==2.23.0
